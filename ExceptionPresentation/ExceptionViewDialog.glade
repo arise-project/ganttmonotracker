@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
+<glade-interface>
+  <widget class="GtkDialog" id="ExceptionViewDialog">
+    <child internal-child="vbox">
+      <widget class="GtkVBox" id="vbox2">
+        <child>
+          <widget class="GtkVBox" id="vbox2">
+            <child>
+              <widget class="GtkHBox" id="hbox1">
+                <child>
+                  <widget class="GtkLabel" id="lbExceptionDescription">
+                    <property name="label">Exception Type :</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">12</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="GtkLabel" id="lbExceptionType">
+                    <property name="label">[ExceptionType]</property>
+                  </widget>
+                  <packing>
+                    <property name="padding">12</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="lbExceptionMessage">
+                <property name="label">[ExceptionMessage]</property>
+              </widget>
+              <packing>
+                <property name="padding">12</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkTextView" id="tvExceptionDescription">
+                <child>
+                  <placeholder/>
+                </child>
+              </widget>
+              <packing>
+                <property name="padding">12</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkLabel" id="lbCommentDesctiption">
+            <property name="label">Comment action for exception :</property>
+          </widget>
+          <packing>
+            <property name="padding">12</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkTextView" id="tvComment">
+            <child>
+              <placeholder/>
+            </child>
+          </widget>
+          <packing>
+            <property name="padding">12</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="GtkTextView" id="tvButtonDescription">
+            <property name="editable">False</property>
+            <property name="cursor_visible">False</property>
+            <property name="accepts_tab">False</property>
+            <child>
+              <placeholder/>
+            </child>
+          </widget>
+          <packing>
+            <property name="fill">False</property>
+            <property name="padding">12</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child internal-child="action_area">
+          <widget class="GtkHButtonBox" id="hbuttonbox2">
+            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <child>
+              <widget class="GtkButton" id="btnContinue">
+                <property name="label">gtk-undo</property>
+                <property name="use_stock">True</property>
+                <property name="response_id">0</property>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkButton" id="btnExit">
+                <property name="label">gtk-quit</property>
+                <property name="use_stock">True</property>
+                <property name="response_id">0</property>
+              </widget>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkButton" id="btnSend">
+                <property name="label">gtk-apply</property>
+                <property name="use_stock">True</property>
+                <property name="response_id">0</property>
+              </widget>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="expand">False</property>
+            <property name="padding">12</property>
+            <property name="pack_type">GTK_PACK_END</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+</glade-interface>

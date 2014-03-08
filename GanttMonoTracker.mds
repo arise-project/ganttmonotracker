@@ -1,0 +1,20 @@
+<Combine fileversion="2.0">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="GanttMonoTracker" configuration="Debug" />
+      <Entry build="True" name="TrackerManagerInterfase" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="GanttMonoTracker" configuration="Release" />
+      <Entry build="True" name="TrackerManagerInterfase" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="GanttMonoTracker" single="True">
+    <Execute type="None" entry="GanttMonoTracker" />
+    <Execute type="None" entry="TrackerManagerInterfase" />
+  </StartMode>
+  <Entries>
+    <Entry filename="GanttMonoTracker.mdp" />
+    <Entry filename="..\TrackerManagerInterfase\TrackerManagerInterfase.mdp" />
+  </Entries>
+</Combine>

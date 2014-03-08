@@ -1,0 +1,117 @@
+<Project name="GanttMonoTracker" fileversion="2.0" DefaultNamespace="GanttMonoTracker" language="C#" targetFramework="4.5" ctype="DotNetProject">
+  <Configurations active="Debug">
+    <Configuration name="Debug" ctype="DotNetProjectConfiguration">
+      <Output directory="bin\Debug" assembly="GanttMonoTracker" />
+      <Build debugmode="True" target="Exe" />
+      <Execution consolepause="True" runwithwarnings="True" runtime="MsNet" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" definesymbols="DEBUG" ctype="CSharpCompilerParameters" />
+    </Configuration>
+    <Configuration name="Release" ctype="DotNetProjectConfiguration">
+      <Output directory="bin\Release" assembly="GanttMonoTracker" />
+      <Build debugmode="False" target="Exe" />
+      <Execution consolepause="True" runwithwarnings="True" runtime="MsNet" />
+      <CodeGeneration compiler="Mcs" warninglevel="4" optimize="False" unsafecodeallowed="False" generateoverflowchecks="False" ctype="CSharpCompilerParameters" />
+    </Configuration>
+  </Configurations>
+  <Contents>
+    <File subtype="Code" buildaction="EmbedAsResource" name="gtk-gui\gui.stetic" />
+    <File subtype="Code" buildaction="Compile" name="gtk-gui\generated.cs" />
+    <File subtype="Code" buildaction="Compile" name="MainWindow.cs" />
+    <File subtype="Code" buildaction="Compile" name="gtk-gui\MainWindow.cs" />
+    <File subtype="Code" buildaction="Compile" name="AssemblyInfo.cs" />
+    <File subtype="Directory" buildaction="Compile" name="CommentManager" />
+    <File subtype="Directory" buildaction="Compile" name="DrawingPresentation" />
+    <File subtype="Directory" buildaction="Compile" name="ExceptionPresentation" />
+    <File subtype="Directory" buildaction="Compile" name="GuiPresentatuion" />
+    <File subtype="Directory" buildaction="Compile" name="ProjectManager" />
+    <File subtype="Directory" buildaction="Compile" name="Screenshots" />
+    <File subtype="Directory" buildaction="Compile" name="StateManager" />
+    <File subtype="Directory" buildaction="Compile" name="TaskManager" />
+    <File subtype="Code" buildaction="Compile" name="CommentManager\Comment.cs" />
+    <File subtype="Code" buildaction="Compile" name="CommentManager\CommentCore.cs" />
+    <File subtype="Code" buildaction="Compile" name="CommentManager\CommentFactory.cs" />
+    <File subtype="Code" buildaction="Compile" name="DrawingPresentation\AssigmentDiagram.cs" />
+    <File subtype="Code" buildaction="Compile" name="DrawingPresentation\DiagramFactory.cs" />
+    <File subtype="Code" buildaction="Compile" name="DrawingPresentation\GanttDiagramm.cs" />
+    <File subtype="Code" buildaction="Compile" name="ExceptionPresentation\ExceptionView.cs" />
+    <File subtype="Code" buildaction="Compile" name="ExceptionPresentation\ExceptionViewDialog.cs" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="ExceptionPresentation\ExceptionViewDialog.glade" />
+    <File subtype="Code" buildaction="Compile" name="ExceptionPresentation\MessageFactory.cs" />
+    <File subtype="Code" buildaction="Compile" name="ExceptionPresentation\MessageView.cs" />
+    <File subtype="Code" buildaction="Compile" name="ExceptionPresentation\MessageViewDialog.cs" />
+    <File subtype="Code" buildaction="Compile" name="ExceptionPresentation\WarningView.cs" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="ExceptionPresentation\WarningView.glade" />
+    <File subtype="Code" buildaction="Compile" name="GuiPresentatuion\AboutDialog.cs" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="GuiPresentatuion\GMTAboutDialog.glade" />
+    <File subtype="Code" buildaction="Compile" name="GuiPresentatuion\GuiFactory.cs" />
+    <File subtype="Code" buildaction="Compile" name="GuiPresentatuion\LogoForm.cs" />
+    <File subtype="Code" buildaction="Compile" name="GuiPresentatuion\MainForm.cs" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="GuiPresentatuion\MainForm.glade" />
+    <File subtype="Code" buildaction="Compile" name="GuiPresentatuion\ViewActorDialog.cs" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="GuiPresentatuion\ViewActorDialog.glade" />
+    <File subtype="Code" buildaction="Compile" name="GuiPresentatuion\ViewConnectionDialog.cs" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="GuiPresentatuion\ViewConnectionDialog.glade" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="GuiPresentatuion\ViewLogoForm.glade" />
+    <File subtype="Code" buildaction="Compile" name="GuiPresentatuion\ViewSingleStateDialog.cs" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="GuiPresentatuion\ViewSingleStateDialog.glade" />
+    <File subtype="Code" buildaction="Compile" name="GuiPresentatuion\ViewStateDialog.cs" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="GuiPresentatuion\ViewStateDialog.glade" />
+    <File subtype="Code" buildaction="Compile" name="GuiPresentatuion\ViewTaskAssign.cs" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="GuiPresentatuion\ViewTaskAssign.glade" />
+    <File subtype="Code" buildaction="Compile" name="GuiPresentatuion\ViewTaskDialog.cs" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="GuiPresentatuion\ViewTaskDialog.glade" />
+    <File subtype="Code" buildaction="Compile" name="ProjectManager\ProjectHistory.cs" />
+    <File subtype="Code" buildaction="Nothing" name="Screenshots\ABOUTDIALOG.PNG" />
+    <File subtype="Code" buildaction="Nothing" name="Screenshots\ACTORSCREEN.PNG" />
+    <File subtype="Code" buildaction="Nothing" name="Screenshots\ASSIGMENTSCREEN.PNG" />
+    <File subtype="Code" buildaction="Nothing" name="Screenshots\CRATEACTOR.PNG" />
+    <File subtype="Code" buildaction="Nothing" name="Screenshots\CRATETASK.PNG" />
+    <File subtype="Code" buildaction="Nothing" name="Screenshots\CRATETASKSTATE.PNG" />
+    <File subtype="Code" buildaction="Nothing" name="Screenshots\GANTTSCREEN.PNG" />
+    <File subtype="Code" buildaction="Nothing" name="Screenshots\TASKASSIGN.PNG" />
+    <File subtype="Code" buildaction="Nothing" name="Screenshots\TASKSCREEN.PNG" />
+    <File subtype="Code" buildaction="Nothing" name="Screenshots\WARNINGIMPLEMENTATIONEXCEPT.PNG" />
+    <File subtype="Code" buildaction="Compile" name="StateManager\Connection.cs" />
+    <File subtype="Code" buildaction="Compile" name="StateManager\State.cs" />
+    <File subtype="Code" buildaction="Compile" name="StateManager\StateCore.cs" />
+    <File subtype="Code" buildaction="Compile" name="StateManager\StateFactory.cs" />
+    <File subtype="Directory" buildaction="Compile" name="TaskManager\ManagerException" />
+    <File subtype="Directory" buildaction="Compile" name="TaskManager\TaskStorage" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\ManagerException\ImplementationException.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\ManagerException\KeyNotFoundException.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\ManagerException\NotAllowedException.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\ManagerException\NotRequiredException.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\ManagerException\ValidationException.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\TaskStorage\CommandFactory.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\TaskStorage\DeleteCommand.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\TaskStorage\InsertCommand.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\TaskStorage\SelectCommand.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\TaskStorage\StorageDealer.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\TaskStorage\UpdateCommand.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\Actor.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\EmptyTaskManaegr.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\ManagerFactory.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\Task.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\TrackerCore.cs" />
+    <File subtype="Code" buildaction="Compile" name="TaskManager\XmlTaskManager.cs" />
+    <File subtype="Code" buildaction="Compile" name="Main.cs" />
+    <File subtype="Code" buildaction="Nothing" name="readme.txt" />
+    <File subtype="Directory" buildaction="Compile" name="Lib" />
+    <File subtype="Code" buildaction="Nothing" name="Lib\arise.dll" />
+    <File subtype="Code" buildaction="EmbedAsResource" name="Screenshots\GMTLogo.bmp" />
+  </Contents>
+  <References>
+    <ProjectReference type="Package" localcopy="True" refto="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Package" localcopy="True" refto="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <ProjectReference type="Package" localcopy="True" refto="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Package" localcopy="True" refto="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Package" localcopy="True" refto="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Package" localcopy="True" refto="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Package" localcopy="True" refto="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <ProjectReference type="Project" localcopy="True" refto="TrackerManagerInterfase" />
+    <ProjectReference type="Package" localcopy="True" refto="System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Assembly" specificVersion="False" localcopy="True" refto="Lib\arise.dll" />
+    <ProjectReference type="Package" localcopy="True" refto="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <ProjectReference type="Package" localcopy="False" refto="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+  </References>
+</Project>

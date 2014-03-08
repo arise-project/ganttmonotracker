@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{991D9B6D-5D35-4FA6-8B0E-48A8FA84EF30}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GanttMonoTracker</RootNamespace>
+    <AssemblyName>GanttMonoTracker</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExceptionPresentation\ExceptionViewDialog.glade">
+      <LogicalName>ExceptionViewDialog.glade</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExceptionPresentation\WarningView.glade">
+      <LogicalName>WarningView.glade</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screenshots\GMTLogo.bmp">
+      <LogicalName>GMTLogo.bmp</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiPresentation\GMTAboutDialog.glade">
+      <LogicalName>GMTAboutDialog.glade</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiPresentation\MainForm.glade">
+      <LogicalName>MainForm.glade</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiPresentation\ViewActorDialog.glade">
+      <LogicalName>ViewActorDialog.glade</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiPresentation\ViewConnectionDialog.glade">
+      <LogicalName>ViewConnectionDialog.glade</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiPresentation\ViewLogoForm.glade">
+      <LogicalName>ViewLogoForm.glade</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiPresentation\ViewSingleStateDialog.glade">
+      <LogicalName>ViewSingleStateDialog.glade</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiPresentation\ViewStateDialog.glade">
+      <LogicalName>ViewStateDialog.glade</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiPresentation\ViewTaskAssign.glade">
+      <LogicalName>ViewTaskAssign.glade</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GuiPresentation\ViewTaskDialog.glade">
+      <LogicalName>ViewTaskDialog.glade</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="MainWindow.cs" />
+    <Compile Include="gtk-gui\MainWindow.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="CommentManager\Comment.cs" />
+    <Compile Include="CommentManager\CommentCore.cs" />
+    <Compile Include="CommentManager\CommentFactory.cs" />
+    <Compile Include="DrawingPresentation\AssigmentDiagram.cs" />
+    <Compile Include="DrawingPresentation\DiagramFactory.cs" />
+    <Compile Include="DrawingPresentation\GanttDiagramm.cs" />
+    <Compile Include="ExceptionPresentation\ExceptionView.cs" />
+    <Compile Include="ExceptionPresentation\ExceptionViewDialog.cs" />
+    <Compile Include="ExceptionPresentation\MessageFactory.cs" />
+    <Compile Include="ExceptionPresentation\MessageView.cs" />
+    <Compile Include="ExceptionPresentation\MessageViewDialog.cs" />
+    <Compile Include="ExceptionPresentation\WarningView.cs" />
+    <Compile Include="ProjectManager\ProjectHistory.cs" />
+    <Compile Include="StateManager\Connection.cs" />
+    <Compile Include="StateManager\State.cs" />
+    <Compile Include="StateManager\StateCore.cs" />
+    <Compile Include="StateManager\StateFactory.cs" />
+    <Compile Include="TaskManager\ManagerException\ImplementationException.cs" />
+    <Compile Include="TaskManager\ManagerException\KeyNotFoundException.cs" />
+    <Compile Include="TaskManager\ManagerException\NotAllowedException.cs" />
+    <Compile Include="TaskManager\ManagerException\NotRequiredException.cs" />
+    <Compile Include="TaskManager\ManagerException\ValidationException.cs" />
+    <Compile Include="TaskManager\TaskStorage\CommandFactory.cs" />
+    <Compile Include="TaskManager\TaskStorage\DeleteCommand.cs" />
+    <Compile Include="TaskManager\TaskStorage\InsertCommand.cs" />
+    <Compile Include="TaskManager\TaskStorage\SelectCommand.cs" />
+    <Compile Include="TaskManager\TaskStorage\StorageDealer.cs" />
+    <Compile Include="TaskManager\TaskStorage\UpdateCommand.cs" />
+    <Compile Include="TaskManager\Actor.cs" />
+    <Compile Include="TaskManager\EmptyTaskManaegr.cs" />
+    <Compile Include="TaskManager\ManagerFactory.cs" />
+    <Compile Include="TaskManager\Task.cs" />
+    <Compile Include="TaskManager\TrackerCore.cs" />
+    <Compile Include="TaskManager\XmlTaskManager.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="interface\IActorView.cs" />
+    <Compile Include="interface\ICommentView.cs" />
+    <Compile Include="interface\IConnectionView.cs" />
+    <Compile Include="interface\IGuiActorView.cs" />
+    <Compile Include="interface\IGuiAssigment.cs" />
+    <Compile Include="interface\IGuiConnection.cs" />
+    <Compile Include="interface\IGuiCore.cs" />
+    <Compile Include="interface\IGuiGantt.cs" />
+    <Compile Include="interface\IGuiMessageDialog.cs" />
+    <Compile Include="interface\IGuiState.cs" />
+    <Compile Include="interface\IGuiTaskView.cs" />
+    <Compile Include="interface\IGuiTracker.cs" />
+    <Compile Include="interface\IManagerEntity.cs" />
+    <Compile Include="interface\IManagerExstension.cs" />
+    <Compile Include="interface\IManagerFactory.cs" />
+    <Compile Include="interface\ISingleStateView.cs" />
+    <Compile Include="interface\IStateManager.cs" />
+    <Compile Include="interface\IStateView.cs" />
+    <Compile Include="interface\IStorageCommand.cs" />
+    <Compile Include="interface\IStorageCommandFactory.cs" />
+    <Compile Include="interface\IStorageDealler.cs" />
+    <Compile Include="interface\IStorageMannager.cs" />
+    <Compile Include="interface\ITaskManager.cs" />
+    <Compile Include="interface\ITaskView.cs" />
+    <Compile Include="GuiPresentation\AboutDialog.cs" />
+    <Compile Include="GuiPresentation\GuiFactory.cs" />
+    <Compile Include="GuiPresentation\LogoForm.cs" />
+    <Compile Include="GuiPresentation\MainForm.cs" />
+    <Compile Include="GuiPresentation\ViewActorDialog.cs" />
+    <Compile Include="GuiPresentation\ViewConnectionDialog.cs" />
+    <Compile Include="GuiPresentation\ViewSingleStateDialog.cs" />
+    <Compile Include="GuiPresentation\ViewStateDialog.cs" />
+    <Compile Include="GuiPresentation\ViewTaskAssign.cs" />
+    <Compile Include="GuiPresentation\ViewTaskDialog.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CommentManager\" />
+    <Folder Include="DrawingPresentation\" />
+    <Folder Include="ExceptionPresentation\" />
+    <Folder Include="ProjectManager\" />
+    <Folder Include="Screenshots\" />
+    <Folder Include="StateManager\" />
+    <Folder Include="TaskManager\" />
+    <Folder Include="TaskManager\ManagerException\" />
+    <Folder Include="TaskManager\TaskStorage\" />
+    <Folder Include="Lib\" />
+    <Folder Include="GuiPresentation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Screenshots\ABOUTDIALOG.PNG" />
+    <None Include="Screenshots\ACTORSCREEN.PNG" />
+    <None Include="Screenshots\ASSIGMENTSCREEN.PNG" />
+    <None Include="Screenshots\CRATEACTOR.PNG" />
+    <None Include="Screenshots\CRATETASK.PNG" />
+    <None Include="Screenshots\CRATETASKSTATE.PNG" />
+    <None Include="Screenshots\GANTTSCREEN.PNG" />
+    <None Include="Screenshots\TASKASSIGN.PNG" />
+    <None Include="Screenshots\TASKSCREEN.PNG" />
+    <None Include="Screenshots\WARNINGIMPLEMENTATIONEXCEPT.PNG" />
+    <None Include="readme.txt" />
+    <None Include="Lib\arise.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Mono.Posix" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Arise">
+      <HintPath>Lib\arise.dll</HintPath>
+    </Reference>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
