@@ -2,6 +2,7 @@
 // http://eric.extremeboredom.net/projects/gladesharpcodegenerator/
 
 using System;
+using System.Threading;
 using System.Collections;
 using System.IO;
 using System.Reflection;
@@ -15,12 +16,16 @@ namespace GanttMonoTracker.GuiPresentation
 	public class ViewSingleStateDialog : IStateView, IGuiMessageDialog,IDisposable
 	{
 		private Gtk.Dialog thisDialog;
+
 		[Widget]
 		private Gtk.Label lbStateAction;
+
 		[Widget]
 		private Gtk.Entry entName;
+
 		[Widget]
 		private Gtk.ColorButton cbtnColor;
+
 		private string fName;
 
 		public ViewSingleStateDialog (Window parent)
@@ -42,12 +47,13 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog.ShowAll ();
 			
 			int result = 0;
-			for (
-			; true;) {
+			for (; true;) 
+			{
 				result = thisDialog.Run ();
 				if ((result != ((int)(Gtk.ResponseType.None)))) {
 					break;
 				}
+				Thread.Sleep(500);
 			}
 			thisDialog.Destroy ();
 			return result;
@@ -55,11 +61,14 @@ namespace GanttMonoTracker.GuiPresentation
 
 		#region IStateView Implementation
 
-		public string Name {
-			get {
+		public string Name 
+		{
+			get 
+			{
 				return fName;
 			}
-			set {
+			set 
+			{
 				fName = value;
 				entName.Text = value;
 			}
@@ -67,39 +76,48 @@ namespace GanttMonoTracker.GuiPresentation
 
 		private byte fColorRed;
 
-		public byte ColorRed {
-			get {
+		public byte ColorRed 
+		{
+			get 
+			{
 				fColorRed = (byte)(cbtnColor.Color.Red >> 8);
 				return (byte)(cbtnColor.Color.Red >> 8);
 			}
 			
-			set {
+			set 
+			{
 				fColorRed = value;
 			}
 		}
 
 		private byte fColorGreen;
 
-		public byte ColorGreen {
-			get {
+		public byte ColorGreen 
+		{
+			get 
+			{
 				fColorGreen = (byte)(cbtnColor.Color.Green >> 8);
 				return (byte)(cbtnColor.Color.Green >> 8);
 			}
 			
-			set {
+			set 
+			{
 				fColorGreen = value;
 			}
 		}
 
 		private byte fColorBlue;
 
-		public byte ColorBlue {
-			get {
+		public byte ColorBlue 
+		{
+			get 
+			{
 				fColorBlue = (byte)(cbtnColor.Color.Blue >> 8);
 				return (byte)(cbtnColor.Color.Blue >> 8);
 			}
 			
-			set {
+			set 
+			{
 				fColorBlue = value;
 			}
 		}
@@ -111,28 +129,25 @@ namespace GanttMonoTracker.GuiPresentation
 
 		private int fMappingID;
 
-		public int MappingID {
-			get {
+		public int MappingID 
+		{
+			get 
+			{
 				if (!IsMapped)
 					throw new NotAllowedException ("State not mapped");
 				return fMappingID;
 			}
 			
-			set {
+			set 
+			{
 				IsMapped = true;
 				fMappingID = value;
 			}
 		}
 
-		public bool IsMapped {
-			get;
-			set;
-		}
+		public bool IsMapped { get;set; }
 
-		public Hashtable Connections {
-			get;
-			set;
-		}
+		public Hashtable Connections { get;	set; }
 
 		public void Connect (IManagerEntity stateEntry, string connectionName)
 		{
@@ -163,7 +178,8 @@ namespace GanttMonoTracker.GuiPresentation
 			return Run ();
 		}
 
-		public string Title {
+		public string Title 
+		{
 			get {
 				return thisDialog.Title;
 			}

@@ -1,15 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TaskManager\TrackerCore.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation/ViewSingleStateDialog.cs">
     <Files>
-      <File FileName="GuiPresentation\ViewTaskDialog.cs" Line="204" Column="16" />
-      <File FileName="GuiPresentation\GuiFactory.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\TrackerCore.cs" Line="21" Column="38" />
-      <File FileName="interface\IGuiTracker.cs" Line="1" Column="1" />
-      <File FileName="GuiPresentation\MainForm.cs" Line="1" Column="1" />
-      <File FileName="ExceptionPresentation\ExceptionViewDialog.cs" Line="1" Column="1" />
-      <File FileName="interface\IGuiTaskView.cs" Line="1" Column="1" />
-      <File FileName="interface\ITaskView.cs" Line="1" Column="1" />
+      <File FileName="GuiPresentation/ViewTaskDialog.cs" Line="196" Column="5" />
+      <File FileName="GuiPresentation/GuiFactory.cs" Line="1" Column="1" />
+      <File FileName="TaskManager/TrackerCore.cs" Line="1" Column="1" />
+      <File FileName="interface/IGuiTracker.cs" Line="1" Column="1" />
+      <File FileName="GuiPresentation/MainForm.cs" Line="1" Column="1" />
+      <File FileName="ExceptionPresentation/ExceptionViewDialog.cs" Line="1" Column="1" />
+      <File FileName="interface/IGuiTaskView.cs" Line="1" Column="1" />
+      <File FileName="interface/ITaskView.cs" Line="1" Column="1" />
+      <File FileName="GuiPresentation/AboutDialog.cs" Line="1" Column="1" />
+      <File FileName="GuiPresentation/ViewSingleStateDialog.cs" Line="11" Column="29" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

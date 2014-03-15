@@ -1,5 +1,4 @@
 // created on 10.02.2006 at 18:13
-
 using System;
 using System.Data;
 using System.IO;
@@ -12,14 +11,17 @@ namespace GanttMonoTracker.GuiPresentation
 {	
 	public class AboutDialog : IGuiMessageDialog,IDisposable
 	{
-		
 		private Gtk.Dialog thisDialog;	
-		
+	
+
+			
 		public AboutDialog(Window parent)
 		{
 		    Initialize(parent);
 		}
-		
+
+
+
 		private void Initialize(Window parent)
 		{		 
 			Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("GMTAboutDialog.glade");
@@ -28,11 +30,13 @@ namespace GanttMonoTracker.GuiPresentation
 			glade.Autoconnect(this);
 			thisDialog = ((Gtk.Dialog)(glade.GetWidget("GMTAboutDialog")));
 			thisDialog.Modal = true;
-			thisDialog.TransientFor = parent;									
+			thisDialog.TransientFor = parent;
 		}
+
+
 		
 		public int Run()
-		{			
+		{
 			thisDialog.ShowAll();
 			
 			int result = 0;
@@ -56,7 +60,9 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			return Run();
 		}
-		
+
+
+
 		public string Title
 		{
 			get
@@ -66,7 +72,7 @@ namespace GanttMonoTracker.GuiPresentation
 			set
 			{
 				thisDialog.Title = value;
-			}			
+			}
 		}
 		
 		#endregion
@@ -79,6 +85,5 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 		
 		#endregion
-		
-	}	
+	}
 }

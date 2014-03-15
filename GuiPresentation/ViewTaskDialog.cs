@@ -2,6 +2,7 @@
 // http://eric.extremeboredom.net/projects/gladesharpcodegenerator/
 
 using System;
+using System.Threading;
 using System.Linq;
 using System.Data;
 using System.IO;
@@ -15,36 +16,55 @@ namespace GanttMonoTracker.GuiPresentation
 	
 	public class ViewTaskDialog : IGuiTaskView, IGuiTracker
 	{
-		
 		private Gtk.Dialog thisDialog;
-		
+
+
+
 		[Glade.Widget()]
 		private Gtk.ComboBoxEntry cbActor;
-		
+
+
+
 		[Glade.Widget()]
 		private Gtk.TextView tvDescription;
-		
+
+
+
 		[Glade.Widget()]
 		private Gtk.Calendar calStartTime;
-		
+
+
+
 		[Glade.Widget()]
 		private Gtk.Calendar calEndTime;
-		
+
+
+
 		[Glade.Widget()]
 		private Gtk.ComboBoxEntry cbState;
-		
+
+
+
 		[Glade.Widget()]
 		private Gtk.TextView tvComment;	
-		
+
+
+
 		[Glade.Widget()]
 		private Gtk.ScrolledWindow swComment;
-		
+
+
+
 		[Glade.Widget()]
 		private Gtk.Label lbCommentDescription;
 
 
+
+
 		private string fDescription;
-		
+
+
+
 		public ViewTaskDialog(Window parent, bool isTaskInit)
 		{
 			Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("ViewTaskDialog.glade");
@@ -57,16 +77,12 @@ namespace GanttMonoTracker.GuiPresentation
 			
 			cbActor.Entry.IsEditable = false;
 			cbActor.Changed += new EventHandler(OnCbActorChanged);
-			
 			calStartTime.Date = DateTime.Now.Date;
-			
 			calEndTime.Date = DateTime.Now.Date;
-			
 			cbState.Entry.IsEditable = false;
 			cbState.Changed += new EventHandler(OnCbStateChanged);
 
 			IsTaskInit = isTaskInit;
-
 			tvDescription.KeyReleaseEvent += HandleKeyReleaseEvent;
 		}
 
@@ -76,9 +92,8 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 		public int Run()
-		{			
+		{
 			thisDialog.Show();
-
 
 			if (IsTaskInit)
 			{
@@ -92,15 +107,14 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 
 			int result = 0;
-			for (
-			; true; 
-			) 
+			for (; true;) 
 			{
 				result = thisDialog.Run();
 				if ((result != ((int)(Gtk.ResponseType.None))))
 				{
 					break;
 				}
+				Thread.Sleep(500);
 			}
 			thisDialog.Destroy();
 			return result;
@@ -164,11 +178,7 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			get
 			{
-				DateTime startTime = calStartTime.Date;
-//				startTime.AddHours(-startTime.Hour);
-//				startTime.AddMinutes(-startTime.Minute);
-//				startTime.AddSeconds(-startTime.Second);
-//				startTime.AddMilliseconds(-startTime.Millisecond);
+				DateTime startTime = calStartTime.Date.Date;
 				return startTime;
 			}
 						
@@ -182,11 +192,7 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			get
 			{
-				DateTime endTime = calEndTime.Date;
-//				endTime.AddHours(23-endTime.Hour);
-//				endTime.AddMinutes(59-endTime.Minute);
-//				endTime.AddSeconds(59-endTime.Second);
-//				endTime.AddMilliseconds(99-endTime.Millisecond); 
+				DateTime endTime = calEndTime.Date.Date;
 				return endTime;
 			}
 			

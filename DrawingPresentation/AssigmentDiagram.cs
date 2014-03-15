@@ -14,249 +14,111 @@ namespace GanttMonoTracker.DrawingPresentation
 	public class AssigmentDiagramm : IGuiAssigment 
 	{
 		public AssigmentDiagramm()
-		{			
+		{
 		}
 		
-		private Gdk.Window fDrawingArea;
-		public Gdk.Window DrawingArea
-		{
-			get
-			{
-				return fDrawingArea;
-			}
-			set
-			{
-				fDrawingArea = value;
-			}
-		}
+		public Gdk.Window DrawingArea  { get;set; }
 		
-		private Pango.Context fPangoContext;
-		public Pango.Context PangoContext
-		{
-			get
-			{
-				return fPangoContext;
-			}
-			set
-			{
-				fPangoContext = value;
-			}			
-		}
+		public Pango.Context PangoContext {	get;set; }
 		
-		private Gdk.GC fAxisGC;
-		public Gdk.GC AxisGC
-		{
-			get
-			{
-				return fAxisGC;
-			}
-			set
-			{
-				fAxisGC = value;
-			}
-		}
+		public Gdk.GC AxisGC { get;set; }
 		
-		private Gdk.GC fActorLabelGC;
-		public Gdk.GC ActorLabelGC
-		{
-			get
-			{
-				return fActorLabelGC;
-			}
-			set
-			{
-				fActorLabelGC = value;
-			}
-		}
+		public Gdk.GC ActorLabelGC { get;set; }
 		
-		private Gdk.GC fDateLabelGC;
-		public Gdk.GC DateLabelGC
-		{
-			get
-			{
-				return fDateLabelGC;
-			}
-			set
-			{
-				fDateLabelGC = value;
-			}
-		}
+		public Gdk.GC DateLabelGC { get;set; }
 		
-		private Gdk.GC fTaskLabelGC;
-		public Gdk.GC TaskLabelGC
-		{
-			get
-			{
-				return fTaskLabelGC;
-			}
-			set
-			{
-				fTaskLabelGC = value;
-			}
-		}
+		public Gdk.GC TaskLabelGC { get;set; }
 		
-		private Gdk.GC fDateNowGC;
-		public Gdk.GC DateNowGC
-		{
-			get
-			{
-				return fDateNowGC;
-			}
-			set
-			{
-				fDateNowGC = value;
-			}
-		}			
+		public Gdk.GC DateNowGC { get;set; }
 		
-		private int fX;
-		public int X
-		{
-			get
-			{
-				return fX;
-			}
-			set
-			{
-				throw new ImplementationException();
-			}
-		}
+		public int X { get;private set; }
 		
-		private int fY;
-		public int Y
-		{
-			get
-			{
-				return fY;
-			}
-			set
-			{
-				throw new ImplementationException();
-			}
-		}
+		public int Y { get;private set; }
 		
-		private int fWidth;
-		public int Width
-		{
-			get
-			{
-				return fWidth;
-			}
-			set
-			{
-				throw new ImplementationException();
-			}
-		}
+		public int Width { get;private set; }
 		
-		private int fHeight;
-		public int Height
-		{
-			get
-			{
-				return fHeight;
-			}
-			set
-			{
-				throw new ImplementationException();
-			}
-		}
+		public int Height { get;private set; }
 		
-		private int fDepth;
-		public int Depth
-		{
-			get
-			{
-				return fDepth;
-			}
-			set
-			{
-				throw new ImplementationException();
-			}
-		}		
+		public int Depth { get;private set; }
 		
 		public void CreateDiagramm(Gdk.Window drawingArea)
-		{			
-			fDrawingArea = drawingArea;					
-			BindDrawingArea();	
-			ResetAxisGC();		
+		{
+			DrawingArea = drawingArea;
+			BindDrawingArea();
+			ResetAxisGC();
 			ResetActorLabelGC();
 			ResetDateLabelGC();
 			ResetTaskLabelGC();
 			ResetDateNowGC();
-			BindAssigment();	 
-		}	
+			BindAssigment();
+		}
 		
 		public void UpdateGepmetry()
 		{
-			fDrawingArea.GetGeometry(out fX,out fY,out fWidth,out fHeight,out fDepth);
-			fWidth -= 3;
-			fHeight -= 3;
+			int fX, fY, fWidth, fHeight, fDepth;
+			DrawingArea.GetGeometry(out fX,out fY,out fWidth,out fHeight,out fDepth);
+			X = fX;
+			Y = fY;
+			Width = fWidth;
+			Height = fHeight;
+			Depth = fDepth;
+			Width -= 3;
+			Height -= 3;
 		}
 		
 		public void ResetAxisGC()
 		{
-			fAxisGC = new Gdk.GC((Drawable)fDrawingArea);
+			AxisGC = new Gdk.GC((Drawable)DrawingArea);
 			Gdk.Color foregroundColor = new Gdk.Color(0xff, 0, 0);
 			Colormap colormap = Colormap.System;
 			colormap.AllocColor(ref foregroundColor,true,true);
-			fAxisGC.Foreground = foregroundColor;   
+			AxisGC.Foreground = foregroundColor;
 		}
 		
 		public void ResetActorLabelGC()
-		{			 
-			fActorLabelGC = new Gdk.GC((Drawable)fDrawingArea);
+		{
+			ActorLabelGC = new Gdk.GC((Drawable)DrawingArea);
 			Gdk.Color foregroundColor = new Gdk.Color(0, 0, 0xff);
 			Colormap colormap = Colormap.System;
 			colormap.AllocColor(ref foregroundColor,true,true);
-			fActorLabelGC.Foreground = foregroundColor;   
+			ActorLabelGC.Foreground = foregroundColor;
 		}
 		
 		public void ResetDateLabelGC()
-		{			 
-			fDateLabelGC = new Gdk.GC((Drawable)fDrawingArea);
+		{
+			DateLabelGC = new Gdk.GC((Drawable)DrawingArea);
 			Gdk.Color foregroundColor = new Gdk.Color(0, 0, 0xff);
 			Colormap colormap = Colormap.System;
 			colormap.AllocColor(ref foregroundColor,true,true);
-			fDateLabelGC.Foreground = foregroundColor;   
+			DateLabelGC.Foreground = foregroundColor;   
 		}
 		
 		public void ResetTaskLabelGC()
-		{			 
-			fTaskLabelGC = new Gdk.GC((Drawable)fDrawingArea);
+		{
+			TaskLabelGC = new Gdk.GC((Drawable)DrawingArea);
 			Gdk.Color foregroundColor = new Gdk.Color(0xff, 0xff, 0xff);
 			Colormap colormap = Colormap.System;
 			colormap.AllocColor(ref foregroundColor,true,true);
-			fTaskLabelGC.Foreground = foregroundColor;   
+			TaskLabelGC.Foreground = foregroundColor;
 		}
 		
 		public void ResetDateNowGC()
-		{			 
-			fDateNowGC = new Gdk.GC((Drawable)fDrawingArea);
+		{
+			DateNowGC = new Gdk.GC((Drawable)DrawingArea);
 			Gdk.Color foregroundColor = new Gdk.Color(0, 0, 0);
 			Colormap colormap = Colormap.System;
 			colormap.AllocColor(ref foregroundColor,true,true);
-			fDateNowGC.Foreground = foregroundColor;   
-		}		
+			DateNowGC.Foreground = foregroundColor;
+		}
 		
 		public void BindDrawingArea()
 		{
 			UpdateGepmetry();
 		}
 		
-		#region IGuiAssigment Implementation	
+		#region IGuiAssigment Implementation
 		
-		private DataSet fAssigmentSource;
-		public DataSet AssigmentSource
-		{
-			get
-			{
-				return fAssigmentSource;
-			}
-			
-			set
-			{
-				fAssigmentSource = value;
-			}
-		}
+		public DataSet AssigmentSource { get;set; }
 		
 		public void BindAssigment()
 		{
@@ -265,7 +127,7 @@ namespace GanttMonoTracker.DrawingPresentation
 			DrawTasks();
 			DrawActorAxis();
 			DrawDateAxis();
-			DrawDateNow();			
+			DrawDateNow();
 		}
 		
 		#endregion
@@ -274,56 +136,56 @@ namespace GanttMonoTracker.DrawingPresentation
 		private int fBorderMarginV = 2;
 		
 		private void DrawBorder()
-		{			
-			fDrawingArea.DrawRectangle(fAxisGC, false, fBorderMarginH, fBorderMarginV, fWidth - fBorderMarginH, fHeight - fBorderMarginV);			
+		{
+			DrawingArea.DrawRectangle(AxisGC, false, fBorderMarginH, fBorderMarginV, Width - fBorderMarginH, Height - fBorderMarginV);
 		}
 		
 		private void DrawActorAxis()
-		{			
-			int delta =	(fAssigmentSource.Tables["Actor"].Rows.Count > 0) ? (fHeight - 2 * fBorderMarginV) / fAssigmentSource.Tables["Actor"].Rows.Count : fHeight - 2 * fBorderMarginV;
+		{
+			int delta =	(AssigmentSource.Tables["Actor"].Rows.Count > 0) ? (Height - 2 * fBorderMarginV) / AssigmentSource.Tables["Actor"].Rows.Count : Height - 2 * fBorderMarginV;
 			int offset = fBorderMarginV; 
 			
-			foreach(DataRow row in fAssigmentSource.Tables["Actor"].Rows)
+			foreach(DataRow row in AssigmentSource.Tables["Actor"].Rows)
 			{
-				Pango.Layout layout = new Pango.Layout(fPangoContext);
+				Pango.Layout layout = new Pango.Layout(PangoContext);
 				layout.Wrap = Pango.WrapMode.Word;
 				layout.FontDescription = FontDescription.FromString("Tahoma 10");
-				layout.SetMarkup((string)row["Name"]);				
+				layout.SetMarkup((string)row["Name"]);
 				
-				fDrawingArea.DrawLayout(fActorLabelGC, fBorderMarginH,offset - fBorderMarginV,layout);
-				fDrawingArea.DrawLine(fAxisGC, fBorderMarginH, offset, fWidth - fBorderMarginH, offset);
+				DrawingArea.DrawLayout(ActorLabelGC, fBorderMarginH,offset - fBorderMarginV,layout);
+				DrawingArea.DrawLine(AxisGC, fBorderMarginH, offset, Width - fBorderMarginH, offset);
 				offset += delta; 
-			}						
+			}
 		} 
 		
 		private void DrawDateAxis()
 		{
 
-			DateTime firstDate = (DateTime)fAssigmentSource.Tables["DataRange"].Rows[0]["MinDate"];
-			DateTime lastDate = (DateTime)fAssigmentSource.Tables["DataRange"].Rows[0]["MaxDate"];
-			TimeSpan deltaSpan = lastDate.Subtract(firstDate); 			 
-			int delta = (deltaSpan.Days > 0) ? (fWidth - 2 * fBorderMarginH) / deltaSpan.Days : (fWidth - 2 * fBorderMarginH);  	
+			DateTime firstDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MinDate"];
+			DateTime lastDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MaxDate"];
+			TimeSpan deltaSpan = lastDate.Subtract(firstDate);
+			int delta = (deltaSpan.Days > 0) ? (Width - 2 * fBorderMarginH) / deltaSpan.Days : (Width - 2 * fBorderMarginH);
 			int offset = fBorderMarginH; 
 			
 			DateTime labelDate = firstDate;
 			for (int i = 0; i < deltaSpan.Days; i++)
 			{
-				Pango.Layout layout = new Pango.Layout(fPangoContext);
+				Pango.Layout layout = new Pango.Layout(PangoContext);
 				layout.Wrap = Pango.WrapMode.Word;
 				layout.FontDescription = FontDescription.FromString("Tahoma 10");
-				layout.SetMarkup(labelDate.ToString("dd/MM"));				
+				layout.SetMarkup(labelDate.ToString("dd/MM"));
 				
-				fDrawingArea.DrawLayout(fDateLabelGC, offset + fBorderMarginH,fHeight -2 * fBorderMarginV - this.fTaskHeight,layout);
+				DrawingArea.DrawLayout(DateLabelGC, offset + fBorderMarginH,Height -2 * fBorderMarginV - this.fTaskHeight,layout);
 							
-				fDrawingArea.DrawLine(fAxisGC,offset, fBorderMarginV, offset, fHeight - fBorderMarginV);				
+				DrawingArea.DrawLine(AxisGC,offset, fBorderMarginV, offset, Height - fBorderMarginV);
 				offset += delta;
-				labelDate = labelDate.AddDays(1);				 
-			}			 
+				labelDate = labelDate.AddDays(1);
+			}
 		}
 		
 		private int GetRowIndex(DataTable table, DataRow searchRow)
 		{
-			int index = 0;			
+			int index = 0;
 			foreach(DataRow row in table.Rows)
 			{
 				if (searchRow == row)
@@ -336,12 +198,12 @@ namespace GanttMonoTracker.DrawingPresentation
 		private int fTaskHeight = 14;
 		private void DrawTasks()
 		{
-			int deltaActor = (fAssigmentSource.Tables["Actor"].Rows.Count > 0) ? (fHeight - 2 * fBorderMarginV) / fAssigmentSource.Tables["Actor"].Rows.Count : fHeight - 2 * fBorderMarginV;
+			int deltaActor = (AssigmentSource.Tables["Actor"].Rows.Count > 0) ? (Height - 2 * fBorderMarginV) / AssigmentSource.Tables["Actor"].Rows.Count : Height - 2 * fBorderMarginV;
 			deltaActor -= fTaskHeight; 
-			DateTime firstDate = (DateTime)fAssigmentSource.Tables["DataRange"].Rows[0]["MinDate"];
-			DateTime lastDate = (DateTime)fAssigmentSource.Tables["DataRange"].Rows[0]["MaxDate"];
-			TimeSpan deltaSpan = lastDate.Subtract(firstDate); 			 
-			int delta = (deltaSpan.Days > 0) ? (fWidth - 2 * fBorderMarginH) / deltaSpan.Days : (fWidth - 2 * fBorderMarginH);
+			DateTime firstDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MinDate"];
+			DateTime lastDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MaxDate"];
+			TimeSpan deltaSpan = lastDate.Subtract(firstDate);
+			int delta = (deltaSpan.Days > 0) ? (Width - 2 * fBorderMarginH) / deltaSpan.Days : (Width - 2 * fBorderMarginH);
 			
 			int maxTaskCout = 0;
 			foreach(DataRow row in this.AssigmentSource.Tables["AssigmentSource"].Rows)
@@ -353,54 +215,54 @@ namespace GanttMonoTracker.DrawingPresentation
 			}		
 			
 			int actorIndex = 0;
-			foreach(DataRow row in fAssigmentSource.Tables["Actor"].Rows)
+			foreach(DataRow row in AssigmentSource.Tables["Actor"].Rows)
 			{
 				DateTime labelDate = firstDate;
-				int offset = fBorderMarginH;				
+				int offset = fBorderMarginH;
 				for (int i = 0; i < deltaSpan.Days; i++)
-				{																				
+				{
 					int taskCount = 0;
-					if (fAssigmentSource.Tables["AssigmentSource"].Select("ActorID = " + row["ID"] + " and Date = '" +labelDate.ToShortDateString() + "'").Length > 0)
-						taskCount = (int)(fAssigmentSource.Tables["AssigmentSource"].Select("ActorID = " + row["ID"] + "and Date = '" +labelDate.ToShortDateString() + "'")[0]["TaskCount"]);
+					if (AssigmentSource.Tables["AssigmentSource"].Select("ActorID = " + row["ID"] + " and Date = '" +labelDate.ToShortDateString() + "'").Length > 0)
+						taskCount = (int)(AssigmentSource.Tables["AssigmentSource"].Select("ActorID = " + row["ID"] + "and Date = '" +labelDate.ToShortDateString() + "'")[0]["TaskCount"]);
 					if (taskCount > 0)
 					{
-						fDrawingArea.DrawRectangle(fAxisGC, true,offset, fBorderMarginV + (int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,delta,(int)(deltaActor*((double)taskCount / maxTaskCout)) - fBorderMarginV);
+						DrawingArea.DrawRectangle(AxisGC, true,offset, fBorderMarginV + (int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,delta,(int)(deltaActor*((double)taskCount / maxTaskCout)) - fBorderMarginV);
 
-						Pango.Layout layout = new Pango.Layout(fPangoContext);
+						Pango.Layout layout = new Pango.Layout(PangoContext);
 						layout.Wrap = Pango.WrapMode.Word;
 						layout.FontDescription = FontDescription.FromString("Tahoma 10");
 						layout.SetMarkup(taskCount.ToString());
 						
-						fDrawingArea.DrawLayout(fTaskLabelGC, offset, (int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,layout);
-					}				
+						DrawingArea.DrawLayout(TaskLabelGC, offset, (int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,layout);
+					}
 					offset += delta;
-					labelDate = labelDate.AddDays(1);				 
+					labelDate = labelDate.AddDays(1);
 				}
-				actorIndex++;				
+				actorIndex++;
 			}
 		}
 		
 		private void DrawDateNow()
 		{
-			DateTime firstDate = (DateTime)fAssigmentSource.Tables["DataRange"].Rows[0]["MinDate"];
-			DateTime lastDate = (DateTime)fAssigmentSource.Tables["DataRange"].Rows[0]["MaxDate"];
+			DateTime firstDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MinDate"];
+			DateTime lastDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MaxDate"];
 			TimeSpan deltaSpan = lastDate.Subtract(firstDate);
-			TimeSpan nowSpan = DateTime.Now.Subtract(firstDate);			
+			TimeSpan nowSpan = DateTime.Now.Subtract(firstDate);
 			 			 
-			int delta = (deltaSpan.Days > 0) ? (fWidth - 2 * fBorderMarginH) / deltaSpan.Days : (fWidth - 2 * fBorderMarginH);  	
+			int delta = (deltaSpan.Days > 0) ? (Width - 2 * fBorderMarginH) / deltaSpan.Days : (Width - 2 * fBorderMarginH);  	
 			int offset = fBorderMarginH + (int)(delta*(double)nowSpan.Ticks / TimeSpan.TicksPerDay);
 			
-			fDrawingArea.DrawLine(fDateNowGC,offset, fBorderMarginV, offset, fHeight - fBorderMarginV);			
-			fDrawingArea.DrawPolygon(fDateNowGC,true,new Gdk.Point [] {new Gdk.Point(offset,fHeight - 5), new Gdk.Point(offset + 5,fHeight), new Gdk.Point(offset - 5,fHeight) });
-		} 		
+			DrawingArea.DrawLine(DateNowGC,offset, fBorderMarginV, offset, Height - fBorderMarginV);
+			DrawingArea.DrawPolygon(DateNowGC,true,new Gdk.Point [] {new Gdk.Point(offset,Height - 5), new Gdk.Point(offset + 5,Height), new Gdk.Point(offset - 5,Height) });
+		}
 		
 		public void Clear()
 		{
-			if (fDrawingArea != null)
+			if (DrawingArea != null)
 			{
-				fDrawingArea.ClearArea(fX,fY,fWidth,fHeight);
-				fDrawingArea.Show();
-			}			
+				DrawingArea.ClearArea(X,Y,Width,Height);
+				DrawingArea.Show();
+			}
 		}
 	}
 }

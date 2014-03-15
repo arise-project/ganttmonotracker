@@ -2,6 +2,7 @@
 // http://eric.extremeboredom.net/projects/gladesharpcodegenerator/
 
 using System;
+using System.Threading;
 using System.Data;
 using System.IO;
 using Gtk;
@@ -17,37 +18,13 @@ namespace GanttMonoTracker.GuiPresentation
 	{
 		
 		private Gtk.Dialog thisDialog;
-		
-		[Glade.Widget()]
-		private Gtk.VBox vbox1;
-		
-		[Glade.Widget()]
-		private Gtk.HButtonBox hbuttonbox1;
-		
-		[Glade.Widget()]
-		private Gtk.Button btnCancel;
-		
-		[Glade.Widget()]
-		private Gtk.Button btnOk;
-		
-		[Glade.Widget()]
-		private Gtk.VBox vbox2;
-		
+
 		[Glade.Widget()]
 		private Gtk.Label lbAssignAction;
-		
-		[Glade.Widget()]
-		private Gtk.HBox hbox1;
-		
-		[Glade.Widget()]
-		private Gtk.Label lbActorDescription;
-		
+
 		[Glade.Widget()]
 		private Gtk.ComboBoxEntry cbActor;
-		
-		[Glade.Widget()]
-		private Gtk.Label lbCommentDescription;
-		
+
 		[Glade.Widget()]
 		private Gtk.TextView tvComment;
 		
@@ -63,7 +40,7 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog.TransientFor = parent;
 			thisDialog.SetDefaultSize(200,450);
 			
-			cbActor.Entry.Editable = false;
+			cbActor.Entry.IsEditable = false;
 			cbActor.Changed += new EventHandler(OnCbActorChanged);
 		}
 		
@@ -72,15 +49,14 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog.ShowAll();
 			
 			int result = 0;
-			for (
-			; true; 
-			)
+			for (; true;)
 			{
 				result = thisDialog.Run();
 				if ((result != ((int)(Gtk.ResponseType.None))))
 				{
 					break;
 				}
+				Thread.Sleep(500);
 			}
 			thisDialog.Destroy();
 			return result;
