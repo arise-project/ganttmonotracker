@@ -1,9 +1,7 @@
 // created on 18.11.2005 at 23:03
 
-using TaskManagerInterface;
-
 using System;
-
+using TaskManagerInterface;
 using GanttTracker.TaskManager.ManagerException;
 
 namespace GanttTracker.TaskManager
@@ -16,162 +14,76 @@ namespace GanttTracker.TaskManager
 		
 		public Task(ITaskManager parent)
 		{
-			fParent = parent;
+			Parent = parent;
 		}
 		
 		public Task(ITaskManager parent, int id)
 		{
-			fID = id;
-			fParent = parent;
-			fParent.BindTask(this);
+			ID = id;
+			Parent = parent;
+			Parent.BindTask(this);
 		}
 		
 		#region Data
 		
-		private string fDescription;
-		public string Description
-		{
-			get
-			{
-				return fDescription;
-			}
-			
-			set
-			{
-				fDescription = value;
-			}			
-		}
+		public string Description {	get;set; }
 		
-		private bool fActorPresent;
-		public bool ActorPresent
-		{
-			get
-			{
-				return fActorPresent;
-			}
-			set
-			{
-				fActorPresent = value;
-			}
-		}
+		public bool ActorPresent { get;set; }
 		
 		private int fActorID;
 		public int ActorID
 		{
 			get
 			{
-				if (!fActorPresent)
+				if (!ActorPresent)
 					throw new NotAllowedException("Actor not present");
 					
 				return fActorID;
 			}
 			set
 			{
-				fActorPresent = true;
+				ActorPresent = true;
 				fActorID = value;
 			}
 		}
 		
-		private bool fStatePresent;
-		public bool StatePresent
-		{
-			get
-			{
-				return fStatePresent;
-			}
-			set
-			{
-				fStatePresent = value;
-			}
-		}	
+		public bool StatePresent {	get;set; }
 		
 		private int fStateID;
 		public int StateID
 		{
 			get
 			{
-				if (!fStatePresent)
+				if (!StatePresent)
 					throw new NotAllowedException("State not present");
 				return fStateID;
 			}
 			
 			set
 			{
-				fStatePresent = true;
+				StatePresent = true;
 				fStateID = value;
 			}
 		}
 		
-		private DateTime fStartTime;
-		public DateTime StartTime
-		{
-			get
-			{
-				return fStartTime;
-			}
-			
-			set
-			{
-				fStartTime = value;
-			}
-		}
+		public DateTime StartTime {	get;set; }
 		
-		private DateTime fEndTime;
-		public DateTime EndTime
-		{
-			get
-			{
-				return fEndTime;
-			}
-			
-			set
-			{
-				fEndTime = value;
-			}
-		}
+		public DateTime EndTime	{ get;set; }
 		
-		private TimeSpan fEstimatedTime;
-		public TimeSpan EstimatedTime
-		{
-			get
-			{
-				return fEstimatedTime;
-			}
-			
-			set
-			{
-				fEstimatedTime = value;
-			}
-		}
+		public TimeSpan EstimatedTime {	get;set; }
 		
 		#endregion
 	
 	
 		#region IManagerEntity Implementation
 		
-		private int fID;
-		public int ID
-		{
-			get
-			{
-				return fID;
-			}
-			set
-			{
-				throw new NotAllowedException("Can not set ID for managed entity");
-			}
-		}	
+		public int ID {	get;set; }
 		
 		public bool isNew
 		{
 			get
 			{
-				return (fID == 0);
-			}
-			
-			set
-			{
-				throw new NotAllowedException("Can not set isNew for managed entity");
+				return (ID == 0);
 			}
 		}
 		
@@ -179,44 +91,30 @@ namespace GanttTracker.TaskManager
 		{
 			get
 			{
-				return fParent.isUpdatedTask(this);
-			}
-			set
-			{
-				throw new NotAllowedException("Can not set isUpdated for managed entity");
+				return Parent.isUpdatedTask(this);
 			}
 		}
 			
-		private ITaskManager fParent;
-		public ITaskManager Parent
-		{
-			get
-			{
-				return fParent;			
-			}
-			
-			set
-			{
-				throw new NotAllowedException("Can not set Parent for managed entity");
-			}
-		}
+		public ITaskManager Parent {get;set; }
+
+
+		public string Comment {	get;set; }
 		
 		public void BindData()
 		{
-			fParent.BindTask(this);
+			Parent.BindTask(this);
 		}
 			
 		public void Save()
 		{
-			fParent.UpdateTask(this);
+			Parent.UpdateTask(this);
 		}
 		
 		public void Delete()
 		{
-			fParent.DeleteTask(this.ID);
+			Parent.DeleteTask(this.ID);
 		}
 			
 		#endregion
-		
 	}
 }

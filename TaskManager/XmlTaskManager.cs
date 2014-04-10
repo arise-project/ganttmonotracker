@@ -7,7 +7,7 @@ using System.Collections;
 using GanttTracker.TaskManager.TaskStorage;
 using GanttTracker.TaskManager.ManagerException;
 using GanttTracker.StateManager;
-using GanttTracker.CommentManager;
+//using GanttTracker.CommentManager;
 using TaskManagerInterface;
 
 namespace GanttTracker.TaskManager
@@ -250,8 +250,8 @@ namespace GanttTracker.TaskManager
 			
 			DataRow actorRow = actorTable.Rows[0]; 
 			
-			actor.Name = (string)actorRow["Name"];
-			actor.Email = (string)actorRow["Email"];		
+			actor.Name = (string)actorRow["Name"].ToString();
+			actor.Email = actorRow["Email"].ToString();		
 		}
 		
 		public void UpdateActor(IManagerEntity actorEntity)
@@ -317,11 +317,6 @@ namespace GanttTracker.TaskManager
 				CalculateGanttSource();	
 				return fGanttSource; 
 			}
-			
-			set
-			{
-				throw new ImplementationException("No implementation for change GanttSource");
-			}			
 		}
 		
 		private void CalculateGanttSource()
@@ -362,10 +357,12 @@ namespace GanttTracker.TaskManager
 				if (taskTable.Rows.Count == 0)
 					return DateTime.Now;
 				Task task = (Task)GetTask((int)taskTable.Rows[0]["ID"]);
+				if(task == null) return DateTime.Now;
 				firstDate = task.StartTime; 
 				foreach(DataRow row in taskTable.Rows)
 				{
 					task = (Task)GetTask((int)row["ID"]);
+					if(task == null) return DateTime.Now;
 					if (firstDate > task.StartTime)
 						firstDate = task.StartTime;
 				}
@@ -400,10 +397,12 @@ namespace GanttTracker.TaskManager
 				if (taskTable.Rows.Count == 0)
 					return DateTime.Now;
 				Task task = (Task)GetTask((int)taskTable.Rows[0]["ID"]);
+				if(task == null) return DateTime.Now;
 				lastDate = task.EndTime; 
 				foreach(DataRow row in taskTable.Rows)
 				{
 					task = (Task)GetTask((int)row["ID"]);
+					if(task == null) return DateTime.Now;
 					if (lastDate < task.EndTime)
 						lastDate = task.EndTime;
 				}
@@ -425,15 +424,9 @@ namespace GanttTracker.TaskManager
 		{
 			get
 			{
-				//if (fAssigmentSource == null)
 				CalculateAssigmentSource();
 				return fAssigmentSource;
 			}
-			
-			set
-			{
-				throw new ImplementationException("No implementation for change AssigmentSource");
-			}			
 		}
 		
 		private void CalculateAssigmentSource()
@@ -460,11 +453,12 @@ namespace GanttTracker.TaskManager
 			foreach(DataRow actorRow in ActorSource.Tables["Actor"].Rows)
 			{
 				Actor actor = (Actor)GetActor((int)actorRow["ID"]);
+				if(actor == null) return;
 							
 				foreach(DataRow taskRow in TaskSource.Tables["Task"].Rows)
 				{								 
 					Task task = (Task)GetTask((int)taskRow["ID"]);
-					
+					if(task == null) return;
 					if (actor.ID == task.ActorID)
 					{
 						for(DateTime day =  task.StartTime.Date; day <= task.EndTime.Date; day = day.AddDays(1))
@@ -624,11 +618,49 @@ namespace GanttTracker.TaskManager
 				foreach(DataRow row in stateConnectionTable.Rows)
 				{
 					State connectedState = (State)GetTaskStateConnection((int)row["ID"]);
-					state.Connect(connectedState,connectedState.Name);											 
+					state.Connect(connectedState,connectedState.Name);
 				}
-			}		
+			}
 		}
-		
+
+		/*
+		public void BindTaskComment(IManagerEntity parent)
+		{
+			IStorageCommand commentCommand = fDealer.CommandFactory.CreateSelectCommand(fDealer);
+
+			commentCommand.SetParam("EntityName","Comment");
+
+			Hashtable rules = new Hashtable();
+			rules.Add("TaskID","ID = " + parent.ID);
+
+			commentCommand.SetParam("Rules",rules);
+
+			DataTable commentTable = fDealer.ExecuteDataSet(commentCommand).Tables[0];
+			if (commentTable.Rows.Count > 1)
+			{
+				throw new ValidationException("more when one comment for task id " + parent.ID);
+			}
+
+			if (commentTable.Rows.Count == 0)
+			{
+				//todo create comment on the fly
+			}
+			else
+			{
+				//todo: fill comment
+				DataRow commentRow = commentTable.Rows[0];
+				Comment comment = new Comment 
+				{
+					Description = (string)commentRow["Description"],
+					Date = (DateTime)commentRow["Description"],
+					ID = commentRow["ID"],
+
+				};
+			}
+
+		}
+		*/
+
 		public void UpdateTaskState(IManagerEntity stateEntity)
 		{
 			State state = (State)stateEntity;
@@ -869,14 +901,14 @@ namespace GanttTracker.TaskManager
 				throw new NotAllowedException("No changes in source");
 			}
 		}
-		
+
+		/*
 		public IManagerEntity GetComment(int id)
 		{
 			Comment comment = new Comment(this, id);
 			BindComment(comment);			
 			return comment;
-		}
-		
+		}*/
 		public IManagerEntity CreateComment(IManagerEntity commentedEntity)
 		{
 			IStorageCommand createCommentCommand = fDealer.CommandFactory.CreateInsertCommand(fDealer);			
@@ -889,20 +921,21 @@ namespace GanttTracker.TaskManager
 			values.Add("Date",DateTime.Now);
 			if (commentedEntity != null)
 			{
-				if (!(commentedEntity is Task))
-					throw new ImplementationException("Comments only addd to Tasks");			
-				values.Add("EntryID",commentedEntity.ID);				
+				if (commentedEntity is Task)
+					values.Add("EntryID",commentedEntity.ID);				
 			}
 			else
 				values.Add("EntryID",DBNull.Value);			
 			
 			createCommentCommand.SetParam("Values",values);			
 			int id = (int)fDealer.ExecuteScalar(createCommentCommand);					 
-			Comment comment = new Comment(this, id);
-			BindComment(comment);			
-			return comment;
+			//Comment comment = new Comment(this, id);
+			//BindComment(comment);			
+			return null;
 		}
 				
+
+		/*
 		public void BindComment(IManagerEntity commentEntity)
 		{
 			Comment comment = (Comment)commentEntity;
@@ -936,7 +969,8 @@ namespace GanttTracker.TaskManager
 			else
 				comment.CommentedEntryPresent = false;
 		}
-		
+		*/
+		/*
 		public void UpdateComment(IManagerEntity commentEntity)
 		{
 			Comment comment = (Comment)commentEntity;
@@ -963,7 +997,9 @@ namespace GanttTracker.TaskManager
 			
 			fDealer.ExecuteNonQuery(updateCommentCommand);
 		}
-		
+		*/
+
+		/*
 		public bool isUpdatedComment(IManagerEntity commentEntity)
 		{
 			Comment newComment = (Comment)commentEntity;
@@ -980,6 +1016,7 @@ namespace GanttTracker.TaskManager
 						
 			return result;
 		}
+		*/
 		
 		public void DeleteComment(int id)
 		{

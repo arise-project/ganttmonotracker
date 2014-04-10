@@ -1,6 +1,7 @@
 // created on 21.12.2005 at 23:16
 
 using System;
+using System.Threading;
 using Gtk;
 using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
@@ -11,45 +12,32 @@ namespace GanttMonoTracker.ExceptionPresentation
 	{
 		public WarningView(Exception exception, Window parent) : base (parent,  DialogFlags.DestroyWithParent , Gtk.MessageType.Warning,Gtk.ButtonsType.Ok, "Warning : " + Environment.NewLine +Environment.NewLine+exception.Message)
 		{
-			Modal = true;						
-		}		
+			Modal = true;
+		}
 		
 		protected override void OnResponse(ResponseType responseType)
 		{
-			fResult = responseType;
+			Result = responseType;
 		}
 		
-		private ResponseType fResult;
-		public ResponseType Result
-		{
-			get
-			{
-				return fResult;
-			}
-			
-			set
-			{
-				fResult = value;
-			}
-		}
+		public ResponseType Result { get;set; }
 		
 		public int ShowDialog()
 		{
 			Show();
 			
 			int result = 0;
-			for (
-			; true; 
-			) 
+			for (; true; ) 
 			{
 				result = Run();
 				if ((result != ((int)(Gtk.ResponseType.None))))
 				{
 					break;
 				}
+				Thread.Sleep(500);
 			}
-			fResult = (Gtk.ResponseType)result; 
+			Result = (Gtk.ResponseType)result; 
 			return result;
-		}		
+		}
 	}
 }

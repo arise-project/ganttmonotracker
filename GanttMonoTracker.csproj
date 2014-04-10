@@ -73,12 +73,7 @@
     <Compile Include="MainWindow.cs" />
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="CommentManager\Comment.cs" />
-    <Compile Include="CommentManager\CommentCore.cs" />
-    <Compile Include="CommentManager\CommentFactory.cs" />
     <Compile Include="DrawingPresentation\AssigmentDiagram.cs" />
-    <Compile Include="DrawingPresentation\DiagramFactory.cs" />
-    <Compile Include="DrawingPresentation\GanttDiagramm.cs" />
     <Compile Include="ExceptionPresentation\ExceptionView.cs" />
     <Compile Include="ExceptionPresentation\ExceptionViewDialog.cs" />
     <Compile Include="ExceptionPresentation\MessageFactory.cs" />
@@ -90,7 +85,6 @@
     <Compile Include="StateManager\State.cs" />
     <Compile Include="StateManager\StateCore.cs" />
     <Compile Include="StateManager\StateFactory.cs" />
-    <Compile Include="TaskManager\ManagerException\ImplementationException.cs" />
     <Compile Include="TaskManager\ManagerException\KeyNotFoundException.cs" />
     <Compile Include="TaskManager\ManagerException\NotAllowedException.cs" />
     <Compile Include="TaskManager\ManagerException\NotRequiredException.cs" />
@@ -142,9 +136,11 @@
     <Compile Include="GuiPresentation\ViewStateDialog.cs" />
     <Compile Include="GuiPresentation\ViewTaskAssign.cs" />
     <Compile Include="GuiPresentation\ViewTaskDialog.cs" />
+    <Compile Include="ProjectManager\GanttDiagram.cs" />
+    <Compile Include="DrawingPresentation\GanttDiagrammFactory.cs" />
+    <Compile Include="TaskManager\FSLocations.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CommentManager\" />
     <Folder Include="DrawingPresentation\" />
     <Folder Include="ExceptionPresentation\" />
     <Folder Include="ProjectManager\" />
@@ -155,6 +151,7 @@
     <Folder Include="TaskManager\TaskStorage\" />
     <Folder Include="Lib\" />
     <Folder Include="GuiPresentation\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Screenshots\ABOUTDIALOG.PNG" />
@@ -167,8 +164,8 @@
     <None Include="Screenshots\TASKASSIGN.PNG" />
     <None Include="Screenshots\TASKSCREEN.PNG" />
     <None Include="Screenshots\WARNINGIMPLEMENTATIONEXCEPT.PNG" />
-    <None Include="readme.txt" />
     <None Include="Lib\arise.dll" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -184,10 +181,14 @@
       <HintPath>Lib\arise.dll</HintPath>
     </Reference>
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System.Configuration" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Content Include="ViewActorDialog.glade">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

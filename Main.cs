@@ -21,7 +21,9 @@ namespace GanttTracker
 
 		public GanttTrackerApp (string[] args) 
 		{	
-			AppDomain.CurrentDomain.UnhandledException += HandleAppDomainCurrentDomainUnhandledException;
+			AppDomain.CurrentDomain.UnhandledException += (object sender, UnhandledExceptionEventArgs e) =>  {
+				ShowError(e.ExceptionObject as Exception);
+			};
 
 			try
 			{	
@@ -48,6 +50,11 @@ namespace GanttTracker
 		void ShowError(Exception ex)
 		{
 			Console.WriteLine("--------------------------Appication Exception-----------------");
+			if(ex == null)
+			{
+				 Console.WriteLine("unknown");
+				return;
+			}
 			Console.WriteLine("Type : "+ex.GetType().Name );
 			Console.WriteLine("Message : ");
 			Console.WriteLine(ex.Message);
@@ -63,18 +70,9 @@ namespace GanttTracker
 			Console.WriteLine("Stack Trace : ");
 			Console.WriteLine(ex.StackTrace);
 
-			IGuiMessageDialog dialog = MessageFactory.Instance.CreateErrorDialog(ex,mainForm);
+			IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,mainForm);
 			dialog.ShowDialog();
 		}
 
-		void HandleAppDomainCurrentDomainUnhandledException (object sender, UnhandledExceptionEventArgs e)
-		{
-			
-		}		
-		
-		public static void ExitProgramm()
-		{
-									
-		}
 	}
 }

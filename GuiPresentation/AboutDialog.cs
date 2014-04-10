@@ -1,5 +1,6 @@
 // created on 10.02.2006 at 18:13
 using System;
+using System.Threading;
 using System.Data;
 using System.IO;
 using Gtk;
@@ -11,7 +12,7 @@ namespace GanttMonoTracker.GuiPresentation
 {	
 	public class AboutDialog : IGuiMessageDialog,IDisposable
 	{
-		private Gtk.Dialog thisDialog;	
+		private Gtk.Dialog thisDialog;
 	
 
 			
@@ -23,7 +24,7 @@ namespace GanttMonoTracker.GuiPresentation
 
 
 		private void Initialize(Window parent)
-		{		 
+		{
 			Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("GMTAboutDialog.glade");
 			Glade.XML glade = new Glade.XML(stream, "GMTAboutDialog", null);
 			stream.Close();
@@ -40,15 +41,14 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog.ShowAll();
 			
 			int result = 0;
-			for (
-			; true; 
-			) 
+			for (; true; ) 
 			{
-				result = thisDialog.Run();				
+				result = thisDialog.Run();
 				if ((result != ((int)(Gtk.ResponseType.None))) && result != ((int)(Gtk.ResponseType.Apply)))
 				{
 					break;
 				}
+				Thread.Sleep(500);
 			}
 			thisDialog.Destroy();
 			return result;

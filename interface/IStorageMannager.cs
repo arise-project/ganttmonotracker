@@ -5,6 +5,7 @@ namespace TaskManagerInterface
 	public interface IStorageManager
 	{
 		void Update(IStorageDealer updateDealer);
+
 		void Save();
 	}
 }

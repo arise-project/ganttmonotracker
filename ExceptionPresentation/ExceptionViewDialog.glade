@@ -92,8 +92,8 @@
             <property name="layout_style">GTK_BUTTONBOX_END</property>
             <child>
               <widget class="GtkButton" id="btnContinue">
-                <property name="label">gtk-undo</property>
-                <property name="use_stock">True</property>
+                <property name="label">Ignore</property>
+                <property name="use_stock">False</property>
                 <property name="response_id">0</property>
               </widget>
             </child>
@@ -101,7 +101,7 @@
               <widget class="GtkButton" id="btnExit">
                 <property name="label">gtk-quit</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
+                <property name="response_id">1</property>
               </widget>
               <packing>
                 <property name="position">1</property>
@@ -109,9 +109,9 @@
             </child>
             <child>
               <widget class="GtkButton" id="btnSend">
-                <property name="label">gtk-apply</property>
-                <property name="use_stock">True</property>
-                <property name="response_id">0</property>
+                <property name="label">Send blocker</property>
+                <property name="use_stock">False</property>
+                <property name="response_id">2</property>
               </widget>
               <packing>
                 <property name="position">2</property>

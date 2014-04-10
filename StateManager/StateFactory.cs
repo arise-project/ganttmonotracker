@@ -34,7 +34,7 @@ namespace GanttTracker.StateManager
 		{
 			if (fParent == null)
 				throw new ValidationException("Parent no set to instance for factory"); 
-			return (State)fParent.CreateTaskState();			 
+			return (State)fParent.CreateTaskState();
 		}
 		
 //		public IManagerEntity CreateTaskState(string connectionName, IManagerEntity connectedStateEntity)

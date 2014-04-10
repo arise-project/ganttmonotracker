@@ -10,20 +10,25 @@ namespace GanttTracker.TaskManager
 {
 	public class EmptyTaskManager : ITaskManager
 	{
-		
 		private IStorageDealer fDealer;
+
+
 		private string fConnectionString;
+
+
 		public EmptyTaskManager( )
 		{
 			Initialize();
 		}
-		
+
+
 		public EmptyTaskManager(string connectionString)
 		{
 			fConnectionString = connectionString;
 			Initialize();
 		}
-		
+
+
 		private void Initialize()
 		{
 			fDealer = new  StorageDealer(fConnectionString, new CommandFactory());
@@ -38,7 +43,7 @@ namespace GanttTracker.TaskManager
 			{
 				if (fTaskSource == null)
 				{
-					fTaskSource = new DataSet("TaskSource");					
+					fTaskSource = new DataSet("TaskSource");
 					fTaskSource.Tables.Add(fDealer.EmptyStorage.Tables["Task"].Copy());
 				}
 					
@@ -47,38 +52,38 @@ namespace GanttTracker.TaskManager
 			set
 			{
 				
-			}			
+			}
 		}
 		
 		public IManagerEntity GetTask(int id)
 		{
-			throw new ImplementationException();
+			return null;
 		}
 		
 		public IManagerEntity CreateTask()
 		{
-			throw new ImplementationException();
+			return null;
 		}
 		
 		public void BindTask(IManagerEntity taskEntity)
 		{
-			throw new ImplementationException();
+
 		}
 		
 		public void UpdateTask(IManagerEntity taskEntity)
 		{
-			throw new ImplementationException();
+
 		}
 		
 		public bool isUpdatedTask(IManagerEntity taskEntity)
 		{
-			throw new ImplementationException();
+			return false;
 		}
 		
 		public void DeleteTask(int id)
 		{
-			throw new ImplementationException();
-		}		
+
+		}
 		
 		#endregion
 		
@@ -94,7 +99,7 @@ namespace GanttTracker.TaskManager
 					fActorSource = new DataSet("ActorSource");
 					fActorSource.Tables.Add(fDealer.EmptyStorage.Tables["Actor"].Copy());
 				}
-				return fActorSource; 				
+				return fActorSource;
 			}
 			
 			set
@@ -106,97 +111,51 @@ namespace GanttTracker.TaskManager
 		
 		public IManagerEntity GetActor(int id)
 		{
-			throw new ImplementationException();
+			return null;
 		}
 		
 		public IManagerEntity CreateActor()
 		{
-			throw new ImplementationException();
+			return null;
 		}
 		
 		public void BindActor(IManagerEntity actorEntity)
 		{
-			throw new ImplementationException();
+
 		}
 		
 		public void UpdateActor(IManagerEntity actorEntity)
 		{
-			throw new ImplementationException();
+
 		}
 		
 		public bool isUpdatedActor(IManagerEntity actorEntity)
 		{
-			throw new ImplementationException();
+			return false;
 		}
 		
 		public void DeleteActor(int id)
 		{
-			throw new ImplementationException();
-		}		
+
+		}
 		
 		#endregion
 		
 		#region Gantt
 				
 		private DataSet fGanttSource;
-		public DataSet GanttSource
-		{
-			get
-			{
-				throw new ImplementationException(); 
-			}
-			
-			set
-			{
-				throw new ImplementationException();
-			}		
-		}		
+
+		public DataSet GanttSource { get;set; }
 		
-		public DateTime GanttFirstDate
-		{
-			get
-			{
-				throw new ImplementationException();
-			}
-			
-			set
-			{
-				throw new ImplementationException();
-			}
-			
-		}		
+		public DateTime GanttFirstDate	{get;set; }
 		
-		public DateTime GanttLastDate
-		{
-			get
-			{
-				throw new ImplementationException(); 
-			}
-			
-			set
-			{
-				throw new ImplementationException();
-			}
-		
-		}
+		public DateTime GanttLastDate { get; set; }
 		
 		#endregion
 		
-		#region Assigment		
+		#region Assigment
 		
-		public DataSet AssigmentSource
-		{
-			get
-			{
-				throw new ImplementationException();
-			}
-			
-			set
-			{
-				throw new ImplementationException();
-			}
-			
-		}		
+		public DataSet AssigmentSource {get;set; }
 		
 		#endregion
 		
@@ -217,161 +176,102 @@ namespace GanttTracker.TaskManager
 			
 			set
 			{
-				throw new ImplementationException();
+
 			}
 		}
 		
 		public DataSet GetInitialTaskStateSource()
 		{
-			throw new ImplementationException();
+			return null;
 		}
 		
 		public DataSet GetTaskStateSource(IManagerEntity state)
 		{
-			throw new ImplementationException();
+			return null;
 		}
 		
 		public IManagerEntity GetTaskState(int id)
 		{
-			throw new ImplementationException();
+			return null;
 		}
 		
 		public IManagerEntity CreateTaskState()
 		{
-			throw new ImplementationException();
+			return null;
 		}
 		
 		public void BindTaskState(IManagerEntity stateEntity)
 		{
-			throw new ImplementationException();
+
 		}
-		
+
+		public void BindTaskComment(IManagerEntity stateEntity)
+		{
+
+		}
+				
 		public void UpdateTaskState(IManagerEntity stateEntity)
 		{
-			throw new ImplementationException();
+
 		}
 		
 		public bool isUpdatedTaskState(IManagerEntity stateEntity)
 		{
-			throw new ImplementationException();
+			return false;
 		}
 		
 		public void DeleteTaskState(int id)
 		{
-			throw new ImplementationException();
+
 		}
 		
 		#endregion
 		
-		#region Task State Connection		
+		#region Task State Connection
 		
-		public DataSet TaskStateConnectionsSource
-		{
-			get
-			{
-				throw new ImplementationException();
-			}
-			
-			set
-			{
-				throw new ImplementationException();
-			}
-		}
+		public DataSet TaskStateConnectionsSource {get;set;	}
 		
 		public IManagerEntity GetTaskStateConnection(int id)
 		{
-			throw new ImplementationException();
+			return null;
 		}
 		
 		public IManagerEntity CreateTaskStateConnection(IManagerEntity stateEntity, IManagerEntity connectedStateEntity)
 		{
-			throw new ImplementationException();
+			return null;
 		}
 		
 		public void BindTaskStateConnection(IManagerEntity stateConnectionEntity)
 		{
-			throw new ImplementationException();
+
 		}
 		
 		public void UpdateTaskStateConnection(IManagerEntity stateConnectionEntity)
 		{
-			throw new ImplementationException();
+
 		}
 		
 		public bool isUpdatedTaskStateConnection(IManagerEntity stateConnectionEntity)
 		{
-			throw new ImplementationException();
+			return false;
 		}
 		
 		public void DeleteTaskStateConnection(int id)
 		{
-			throw new ImplementationException();
+
 		}
 		
-		#endregion		
+		#endregion
 		
 		public void Save()
 		{			
-			if (fConnectionString == null)
-					throw new ImplementationException();
-			fDealer.Create();
+			if (fConnectionString != null)
+					fDealer.Create();
 		}
 		
 		public void Update(IStorageDealer updateDealer)
 		{
-			throw new ImplementationException();
+
 		}
-		
-		#region Comment
-		
-		private DataSet fCommentSource;		
-		public DataSet CommentSource
-		{
-			get
-			{
-				if (fCommentSource == null)
-				{
-					fCommentSource = new DataSet("CommentSource");					
-					fCommentSource.Tables.Add(fDealer.EmptyStorage.Tables["Comment"].Copy());
-				}
-				return fCommentSource;
-			}
-			
-			set
-			{
-			}
-		}
-		
-		public IManagerEntity GetComment(int id)
-		{
-			throw new ImplementationException();
-		}
-		
-		public IManagerEntity CreateComment(IManagerEntity commentedEntity)
-		{
-			throw new ImplementationException();
-		}
-				
-		public void BindComment(IManagerEntity commentEntity)
-		{
-			throw new ImplementationException();
-		}
-		
-		public void UpdateComment(IManagerEntity commentEntity)
-		{
-			throw new ImplementationException();
-		}
-		
-		public bool isUpdatedComment(IManagerEntity commentEntity)
-		{
-			throw new ImplementationException();
-		}
-		
-		public void DeleteComment(int id)
-		{
-			throw new ImplementationException();
-		}	
-		
-		#endregion
-	}			
+	}
 }

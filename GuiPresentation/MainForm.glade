@@ -56,7 +56,7 @@
 			  <child>
 			    <widget class="GtkMenuItem" id="miCreateProject">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Create Project</property>
+			      <property name="label" translatable="yes">Create</property>
 			      <property name="use_underline">True</property>
 			    </widget>
 			  </child>
@@ -66,9 +66,17 @@
 		  </child>
 
 		  <child>
+		    <widget class="GtkMenuItem" id="miRecentProject">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Recent</property>
+		      <property name="use_underline">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
 		    <widget class="GtkMenuItem" id="miOpenProject">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Open Project</property>
+		      <property name="label" translatable="yes">Open</property>
 		      <property name="use_underline">True</property>
 		    </widget>
 		  </child>
@@ -76,7 +84,7 @@
 		  <child>
 		    <widget class="GtkMenuItem" id="miSaveProject">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Save Project</property>
+		      <property name="label" translatable="yes">Save</property>
 		      <property name="use_underline">True</property>
 		    </widget>
 		  </child>
@@ -84,7 +92,7 @@
 		  <child>
 		    <widget class="GtkMenuItem" id="miCloseProject">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Close Project</property>
+		      <property name="label" translatable="yes">Close</property>
 		      <property name="use_underline">True</property>
 		    </widget>
 		  </child>
@@ -229,7 +237,13 @@
 	      </child>
 	    </widget>
 	  </child>
-
+	  <child>
+	    <widget class="GtkMenuItem" id="miPreferences">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Preferences</property>
+	      <property name="use_underline">True</property>
+	      </widget>
+	  </child>
 	  <child>
 	    <widget class="GtkMenuItem" id="miHelp">
 	      <property name="visible">True</property>
@@ -527,7 +541,7 @@
 	      <property name="type">tab</property>
 	    </packing>
 	  </child>
-
+	  <!--Assigment-->
 	  <child>
 	    <widget class="GtkVBox" id="vbox4">
 	      <property name="border_width">12</property>

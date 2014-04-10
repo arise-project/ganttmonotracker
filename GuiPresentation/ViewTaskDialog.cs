@@ -13,9 +13,11 @@ using GanttTracker.TaskManager.ManagerException;
 
 namespace GanttMonoTracker.GuiPresentation
 {
-	
 	public class ViewTaskDialog : IGuiTaskView, IGuiTracker
 	{
+		private string fComment;
+
+
 		private Gtk.Dialog thisDialog;
 
 
@@ -84,12 +86,21 @@ namespace GanttMonoTracker.GuiPresentation
 
 			IsTaskInit = isTaskInit;
 			tvDescription.KeyReleaseEvent += HandleKeyReleaseEvent;
+			tvComment.KeyReleaseEvent += CommentKeyReleaseEvent;
 		}
 
 		void HandleKeyReleaseEvent (object o, KeyReleaseEventArgs args)
 		{
 			fDescription = tvDescription.Buffer.Text;
 		}
+
+
+
+		void CommentKeyReleaseEvent (object o, KeyReleaseEventArgs args)
+		{
+			fComment = tvComment.Buffer.Text;
+		}
+
 
 		public int Run()
 		{
@@ -119,6 +130,27 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog.Destroy();
 			return result;
 		}
+
+
+
+		public string Comment 
+		{
+			get
+			{
+				return tvComment.Buffer.Text;
+			} 
+			set
+			{
+				tvComment.Buffer.Text = value;
+			}
+		}
+
+
+		private void SetComment()
+		{
+
+		}
+
 		
 		#region ITaskView Implementation
 		
@@ -162,8 +194,8 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			get
 			{
-				//string.Join(",",textview1.PangoContext.Data.AsQueriable().Select((data, key) =>data.ToString()));
-				return fDescription;
+
+				return string.IsNullOrWhiteSpace(fComment) ? fDescription : fDescription + Environment.NewLine + fComment;
 			}
 			
 			set

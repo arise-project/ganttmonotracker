@@ -53,11 +53,11 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			ValidateCore(core);
 			
-			ViewTaskDialog taskDialog = new ViewTaskDialog(parent, true);			 
+			ViewTaskDialog taskDialog = new ViewTaskDialog(parent, true);
 			taskDialog.Title ="Create Task";
 			taskDialog.ActorSource = core.TaskManager.ActorSource;
 			taskDialog.StateSource = core.TaskManager.GetInitialTaskStateSource();
-						
+			if(taskDialog.StateSource == null) return taskDialog;
 			taskDialog.BindActor();
 			taskDialog.BindState();
 			
@@ -70,46 +70,53 @@ namespace GanttMonoTracker.GuiPresentation
 			
 			Task task = (Task)core.TaskManager.GetTask(taskID);
 			ViewTaskDialog taskDialog = new ViewTaskDialog(parent, false);
+			if(task == null) return taskDialog;
 			if (task.StatePresent)
 			{
 				State state = (State)core.TaskManager.GetTaskState(task.StateID);
+				if(state == null) return taskDialog;
 				taskDialog.StateSource = core.TaskManager.GetTaskStateSource(state);
+				if(taskDialog.StateSource == null) return taskDialog;
 				taskDialog.BindState();
 				taskDialog.StateID = task.StateID;
 			}
 			else
 			{
 				taskDialog.StateSource = core.TaskManager.GetInitialTaskStateSource();
+				if(taskDialog.StateSource == null) return taskDialog;
 				taskDialog.BindState();
-			}	
-						 
+			}
+
 			taskDialog.Title ="Edit Task";
 			taskDialog.ActorSource = core.TaskManager.ActorSource;
-					  
+
 			taskDialog.BindActor();
 			if (task.ActorPresent)
 				taskDialog.ActorID = task.ActorID;
 			taskDialog.Description = task.Description;
 			taskDialog.EndTime = task.EndTime;
 			taskDialog.StartTime = task.StartTime;
-			 
+			taskDialog.Comment = task.Comment; 
 			return taskDialog; 
 		}
+
 		
 		public ViewTaskAssign CreateTaskAssign(Window parent, IGuiCore core, int taskID)
 		{
 			ValidateCore(core);
 			Task task = (Task)core.TaskManager.GetTask(taskID);
-			ViewTaskAssign assignDialog = new ViewTaskAssign(parent);			
+			ViewTaskAssign assignDialog = new ViewTaskAssign(parent);
+			if(task == null) return assignDialog;
 			assignDialog.ActorSource = core.TaskManager.ActorSource;
 			assignDialog.BindActor();
 			if (task.ActorPresent)
 				assignDialog.ActorID = task.ActorID;
 			assignDialog.Title = "Assign Task";
-			assignDialog.AssignAction = "Assign task " + task.ID + " to Actor";			
+			assignDialog.AssignAction = "Assign task " + task.ID + " to Actor";
 			
 			return  assignDialog;
 		}
+
 		
 		public ViewStateDialog CreateStateView (Window parent, IGuiCore guiCore)
 		{
@@ -140,8 +147,8 @@ namespace GanttMonoTracker.GuiPresentation
 			if (state.IsMapped)
 				stateView.MappingID = state.MappingID;
 			else
-				stateView.IsMapped = false;			
-			return stateView;			
+				stateView.IsMapped = false;
+			return stateView;
 		}
 		
 		public ViewConnectionDialog CreateConnectionView (Window parent, DataSet taskStateSource)
@@ -149,8 +156,8 @@ namespace GanttMonoTracker.GuiPresentation
 			ViewConnectionDialog connectionView = new ViewConnectionDialog(parent,taskStateSource);
 			connectionView.Title = "New Connection";
 			connectionView.BindStateIn();
-			connectionView.BindStateOut();			
-			return connectionView;			
+			connectionView.BindStateOut();
+			return connectionView;
 		}
 		
 		public AboutDialog CreateAboutDialog(Window parent)

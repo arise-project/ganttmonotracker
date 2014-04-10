@@ -13,13 +13,11 @@ namespace TaskManagerInterface
 		bool isNew
 		{
 			get;
-			set;
 		}
 		
 		bool isUpdated
 		{
 			get;
-			set;
 		}
 		
 		ITaskManager Parent
@@ -28,8 +26,8 @@ namespace TaskManagerInterface
 			set;
 		}
 		
-		void BindData();		
+		void BindData();
 		void Save();
-		void Delete();			
+		void Delete();
 	}
 }

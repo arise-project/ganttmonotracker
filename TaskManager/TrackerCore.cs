@@ -9,6 +9,7 @@ using Gtk;
 using GanttTracker.TaskManager;
 using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
+using GanttMonoTracker;
 using GanttMonoTracker.GuiPresentation;
 using GanttMonoTracker.ExceptionPresentation;
 using GanttMonoTracker.DrawingPresentation;
@@ -22,68 +23,59 @@ namespace GanttTracker
 	{
 		private Window window;
 
+
+
+		private static TrackerCore fInstance;
+
+
+
 		private TrackerCore()
 		{
 		}
 		
-		private static TrackerCore fInstance;
+
 		public static TrackerCore Instance
 		{
 			get
 			{
-				if (fInstance == null)
-				{					
-					fInstance = new TrackerCore(); 
-				}				
+				fInstance = fInstance == null ? new TrackerCore() : fInstance; 
 				return fInstance;
-			}			
+			}
 		}
+
 			
-		public IGuiTracker Tracker
+		public IGuiTracker Tracker { get;set; }
+
+
+		public GuiFactory GuiSource { get;set; }
+
+
+		public string Recent 
 		{
-			get;
-			set;
-		}
-		
-		public GuiFactory GuiSource
-		{
-			get;
-			set;		
-		}		
+			 get
+			{
+				 return File.ReadAllText(FSLocations.GetPath ("recent.txt")); 
+			}
+		 }
 		
 		#region IGuiCore Implementation
 		
-		public CoreState State
-		{
-			get;
-			set;
-		}
-		
-		public ITaskManager TaskManager
-		{
-			get;
-			set;
-		}
-		
-		public IStorageManager StorageManager
-		{
-			get;
-			set;
-		}
-		
-		public IStateManager StateManager
-		{
-			get;
-			set;
-		}
+		public CoreState State { get;set; }
+
+
+		public ITaskManager TaskManager	{ get;set; }
+
+
+		public IStorageManager StorageManager { get;set; }
+
+
+		public IStateManager StateManager {	get;set; }
 		
 		#endregion
-		public string ProjectFileName
-		{
-			get;
-			set;
-		}
-		
+
+		public string ProjectFileName {	get;set; }
+
+
 		public void BindProject()
 		{
 			switch(State)
@@ -101,17 +93,13 @@ namespace GanttTracker
 					
 					TaskManager = new EmptyTaskManager(ProjectFileName);
 					TaskManager.Save();
-					
 					TaskManager = new XmlTaskManager(ProjectFileName);
-					
 					break;
 				case CoreState.OpenProject :
 					if (ProjectFileName == null)
 						throw new NotAllowedException("Set filename for create project");
 					TaskManager = new XmlTaskManager(ProjectFileName);
 					break;
-				default :
-					throw new ImplementationException("Bind with state " + State.ToString() + " not implemented");
 			}
 			StorageManager = TaskManager;
 			Tracker.TaskSource = TaskManager.TaskSource;
@@ -124,93 +112,59 @@ namespace GanttTracker
 		
 		public void SaveProject()
 		{
-			try
-			{
-				StorageManager.Save();
-			}
-			catch(ImplementationException ex)
-			{
-				IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,window);
-				dialog.Title = "Not Implemented";
-				dialog.ShowDialog();
-			}
+			StorageManager.Save();
 		}
 		
 		public void CreateActor()
 		{
-			try
-			{			
-				IGuiActorView actorView = GuiSource.CreateActorView(window);
-				if (actorView.ShowDialog() == (int)Gtk.ResponseType.Ok)
-				{
-					Actor newActor = (Actor)TaskManager.CreateActor();
-					newActor.Name = actorView.ActorName;
-					newActor.Email = actorView.ActorEmail;
-					newActor.Save();	
-					Tracker.ActorSource = TaskManager.ActorSource;
-					Tracker.BindActor();
-				}				
-			}
-			catch(ImplementationException ex)
+			IGuiActorView actorView = GuiSource.CreateActorView(window);
+			if (actorView.ShowDialog() == (int)Gtk.ResponseType.Ok)
 			{
-				IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,window);
-				dialog.Title = "Not Implemented";
-				dialog.ShowDialog();
-			}						
+				Actor newActor = (Actor)TaskManager.CreateActor();
+				if(newActor == null) return;
+				newActor.Name = actorView.ActorName;
+				newActor.Email = actorView.ActorEmail;
+				newActor.Save();
+				Tracker.ActorSource = TaskManager.ActorSource;
+				Tracker.BindActor();
+			}
 		}
 		
 		public void EditActor(int actorID)
 		{	
-			try
+			Actor actor = (Actor)TaskManager.GetActor(actorID);
+			if(actor == null) return;
+			IGuiActorView actorView = GuiSource.CreateActorView(window,TaskManager, actor);
+			if (actorView.ShowDialog() == (int)Gtk.ResponseType.Ok)
 			{
-				Actor actor = (Actor)TaskManager.GetActor(actorID);
-				IGuiActorView actorView = GuiSource.CreateActorView(window,TaskManager, actor);
-				if (actorView.ShowDialog() == (int)Gtk.ResponseType.Ok)
-				{
-					actor.Name = actorView.ActorName;
-					actor.Email = actorView.ActorEmail;
-					actor.Save();	
-					Tracker.ActorSource = TaskManager.ActorSource;
-					Tracker.BindActor();
-				}
-			}
-			catch(ImplementationException ex)
-			{
-				IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,window);
-				dialog.Title = "Not Implemented";
-				dialog.ShowDialog();
+				actor.Name = actorView.ActorName;
+				actor.Email = actorView.ActorEmail;
+				actor.Save();	
+				Tracker.ActorSource = TaskManager.ActorSource;
+				Tracker.BindActor();
 			}
 		}
 		
 		public void DeleteActor(int actorID)
 		{
-			try
-			{
-				Actor actor = (Actor)TaskManager.GetActor(actorID);
-				actor.Delete();
-				Tracker.ActorSource = TaskManager.ActorSource;
-				Tracker.BindActor();
-			}
-			catch(ImplementationException ex)
-			{
-				IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,window);
-				dialog.Title = "Not Implemented";
-				dialog.ShowDialog();
-			}
+			Actor actor = (Actor)TaskManager.GetActor(actorID);
+			if(actor == null) return;
+			actor.Delete();
+			Tracker.ActorSource = TaskManager.ActorSource;
+			Tracker.BindActor();
 		}
 		
 		public void CreateTask()
 		{
-			try
-			{		
-				IGuiTaskView taskView = null;
+			IGuiTaskView taskView = null;
 				try
 				{
 					taskView = GuiSource.CreateTaskView(window,(IGuiCore)this);
+					if(taskView == null) return;
 				}
 				catch(NotAllowedException ex)
 				{
-					IGuiMessageDialog dialog = MessageFactory.Instance.CreateMessageDialog(ex.Message,window);
+					IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,window);
 					dialog.Title = "Create Task";
 					dialog.ShowDialog();
 					return;
@@ -221,6 +175,7 @@ namespace GanttTracker
 				if (taskView.ShowDialog() == (int)Gtk.ResponseType.Ok)
 				{
 					Task newTask = 	(Task)TaskManager.CreateTask();
+					if(newTask == null) return;
 					if (taskView.ActorPresent)
 						newTask.ActorID = taskView.ActorID;
 					else
@@ -235,26 +190,17 @@ namespace GanttTracker
 					Tracker.TaskSource = TaskManager.TaskSource;
 					Tracker.BindTask();
 				}
-			}
-			catch(ImplementationException ex)
-			{
-				IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,window);
-				dialog.Title = "Not Implemented";
-				dialog.ShowDialog();
-			}
 		}
 		public void AssignTask(int taskID)
 		{
-			try
-			{
-				ViewTaskAssign assignView = null;
+			ViewTaskAssign assignView = null;
 				try
 				{			
 					assignView = GuiSource.CreateTaskAssign(window,(IGuiCore)this, taskID);
 				}
 				catch(NotAllowedException ex)
 				{
-					IGuiMessageDialog dialog = MessageFactory.Instance.CreateMessageDialog(ex.Message,window);
+					IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,window);
 					dialog.Title = "Task Assign";
 					dialog.ShowDialog();
 					return;
@@ -263,24 +209,17 @@ namespace GanttTracker
 				if (assignView.ShowDialog() == (int)Gtk.ResponseType.Ok)
 				{
 					Task task =	(Task)TaskManager.GetTask(taskID);
+					if(task == null) return;
 					task.ActorID = assignView.ActorID;
 					task.Save();
 					Tracker.TaskSource = TaskManager.TaskSource;
 					Tracker.BindTask();
-				}			
-			}
-			catch(ImplementationException ex)
-			{
-				IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,window);
-				dialog.Title = "Not Implemented";
-				dialog.ShowDialog();
-			}
+				}
+
 		}
 		
 		public void UpdateTaskState(int taskID)
 		{
-			try
-			{
 				IGuiTaskView taskView = null;
 				try
 				{
@@ -288,7 +227,7 @@ namespace GanttTracker
 				}
 				catch(NotAllowedException ex)
 				{
-					IGuiMessageDialog dialog = MessageFactory.Instance.CreateMessageDialog(ex.Message,window);
+					IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,window);
 					dialog.Title = "Change Task State";
 					dialog.ShowDialog();
 					return;
@@ -297,6 +236,7 @@ namespace GanttTracker
 				if (taskView.ShowDialog() == (int)Gtk.ResponseType.Ok)
 				{
 					Task task = (Task)TaskManager.GetTask(taskID);
+					if(task == null) return;
 					if (taskView.ActorPresent)
 						task.ActorID = taskView.ActorID;
 					task.Description = taskView.Description;
@@ -307,42 +247,16 @@ namespace GanttTracker
 					Tracker.TaskSource = TaskManager.TaskSource;
 					Tracker.BindTask();
 				}
-			}
-			catch(ImplementationException ex)
-			{
-				IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,window);
-				dialog.Title = "Not Implemented";
-				dialog.ShowDialog();
-			}
 		}
 		
 		public void StateEdit()
 		{
 			ViewStateDialog stateView = null;
-			try
-			{
-				stateView = GuiSource.CreateStateView(window, (IGuiCore)this);
-			}
-			catch(ImplementationException ex)
-			{
-				IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,window);
-				dialog.Title = "Not Implemented";
-				dialog.ShowDialog();
-				return;
-			}
-			
+			stateView = GuiSource.CreateStateView(window, (IGuiCore)this);
+
 			if (Gtk.ResponseType.Ok == (Gtk.ResponseType)stateView.ShowDialog())
 			{
-				try
-				{
-					StorageManager.Save();
-				}
-				catch(ImplementationException ex)
-				{
-					IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,window);
-					dialog.Title = "Not Implemented";
-					dialog.ShowDialog();
-				}
+				StorageManager.Save();
 			}	
 		}	
 		
@@ -364,16 +278,9 @@ namespace GanttTracker
 			if (GanttPresentation == null)
 				GanttPresentation = new GanttDiagramm();
 			GanttPresentation.PangoContext = drawingarea.PangoContext;
-			try
-			{
-				GanttPresentation.GanttSource = TaskManager.GanttSource;
-				GanttPresentation.DateNowVisible = true;
-				GanttPresentation.CreateDiagramm(parent);
-			}
-			catch(ImplementationException)
-			{
-				GanttPresentation.Clear();
-			}
+			GanttPresentation.GanttSource = TaskManager.GanttSource;
+			GanttPresentation.DateNowVisible = true;
+			GanttPresentation.CreateDiagramm(parent);
 		}
 		
 		public void DrawAssigment(Gtk.DrawingArea drawingarea)
@@ -382,15 +289,8 @@ namespace GanttTracker
 			if (AssigmentPresentation == null)
 				AssigmentPresentation = new AssigmentDiagramm();
 			AssigmentPresentation.PangoContext = drawingarea.PangoContext;
-			try
-			{
-				AssigmentPresentation.AssigmentSource = TaskManager.AssigmentSource;
-				AssigmentPresentation.CreateDiagramm(parent);
-			}
-			catch(ImplementationException)
-			{
-				AssigmentPresentation.Clear();
-			}
+			AssigmentPresentation.AssigmentSource = TaskManager.AssigmentSource;
+			AssigmentPresentation.CreateDiagramm(parent);
 		}
 		
 		public void ShowAboutDialog()

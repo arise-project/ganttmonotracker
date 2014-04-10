@@ -16,10 +16,9 @@ using TaskManagerInterface;
 using Arise.Logic;
 
 namespace GanttMonoTracker.GuiPresentation
-{	
+{
 	public class ViewStateDialog : IGuiState, IGuiMessageDialog,IDisposable
 	{
-		
 		private Gtk.Dialog thisDialog;
 		
 		[Glade.Widget()]
@@ -281,10 +280,10 @@ namespace GanttMonoTracker.GuiPresentation
 			{
 				stateId = (int)model.GetValue(iter,0);
 			}
-			catch(Exception)
+			catch(Exception ex)
 			{
 				stateRequired = false;
-				IGuiMessageDialog dialog = MessageFactory.Instance.CreateMessageDialog("Select state to edit" ,thisDialog);
+				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex ,thisDialog);
 				dialog.Title = "State Edit";
 				dialog.ShowDialog();
 			}
@@ -305,10 +304,10 @@ namespace GanttMonoTracker.GuiPresentation
 			{
 				stateId = (int)model.GetValue(iter,0);
 			}
-			catch(Exception)
+			catch(Exception ex)
 			{
 				stateRequired = false;
-				IGuiMessageDialog dialog = MessageFactory.Instance.CreateMessageDialog("Select state to edit" ,thisDialog);
+				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,thisDialog);
 				dialog.Title = "State Edit";
 				dialog.ShowDialog();
 			}
@@ -329,10 +328,10 @@ namespace GanttMonoTracker.GuiPresentation
 			{
 				stateId = (int)model.GetValue(iter,0);
 			}
-			catch(Exception)
+			catch(Exception ex)
 			{
 				stateRequired = false;
-				IGuiMessageDialog dialog = MessageFactory.Instance.CreateMessageDialog("Select state to edit" ,thisDialog);
+				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex ,thisDialog);
 				dialog.Title = "State Edit";
 				dialog.ShowDialog();
 			}

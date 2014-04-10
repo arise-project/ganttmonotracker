@@ -148,55 +148,37 @@ namespace GanttTracker.StateManager
 			ViewSingleStateDialog stateView = fGuiFactory.CreateSingleStateView(fMainForm);
 			if (Gtk.ResponseType.Ok == (Gtk.ResponseType)stateView.ShowDialog())
 			{
-				try
-				{
-					State newState = (State)fStateFactory.CreateTaskState();
+				State newState = (State)fStateFactory.CreateTaskState();
+				if(newState == null) return;
+				newState.Name = stateView.Name;
 					
-					newState.Name = stateView.Name;
-					
-					newState.ColorRed = stateView.ColorRed;
-					newState.ColorGreen = stateView.ColorGreen;
-					newState.ColorBlue = stateView.ColorBlue;
+				newState.ColorRed = stateView.ColorRed;
+				newState.ColorGreen = stateView.ColorGreen;
+				newState.ColorBlue = stateView.ColorBlue;
 							
-					newState.Save();
-					fControledGui.StateSource =	TaskManager.TaskStateSource;
-					fControledGui.BindStates();
-
-				}
-				catch(ImplementationException ex)
-				{
-					IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,fMainForm);
-					dialog.Title = "Not Implemented";
-					dialog.ShowDialog();
-				}				
+				newState.Save();
+				fControledGui.StateSource =	TaskManager.TaskStateSource;
+				fControledGui.BindStates();
 			}
 		}
 		
 		public void EditTaskState(int stateID)
 		{
 			State state = (State)TaskManager.GetTaskState(stateID); 
+			if(state == null) return;
 			ViewSingleStateDialog stateView = fGuiFactory.CreateSingleStateView(fMainForm, state);						
 			if (Gtk.ResponseType.Ok == (Gtk.ResponseType)stateView.ShowDialog())
 			{
-				try
-				{				
-					state.Name = stateView.Name;
+				state.Name = stateView.Name;
 					
-					state.ColorRed = stateView.ColorRed;
-					state.ColorGreen = stateView.ColorGreen;
-					state.ColorBlue = stateView.ColorBlue;
+				state.ColorRed = stateView.ColorRed;
+				state.ColorGreen = stateView.ColorGreen;
+				state.ColorBlue = stateView.ColorBlue;
 					
-					state.Save();
-					fControledGui.StateSource =	TaskManager.TaskStateSource;
-					fControledGui.BindStates();									
-				}
-				catch(ImplementationException ex)
-				{
-					IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,fMainForm);
-					dialog.Title = "Not Implemented";
-					dialog.ShowDialog();
-				}				
-			}			
+				state.Save();
+				fControledGui.StateSource =	TaskManager.TaskStateSource;
+				fControledGui.BindStates();
+			}
 		}
 		
 		public void DeleteTaskState(int stateID)
@@ -209,24 +191,16 @@ namespace GanttTracker.StateManager
 		public void CreateTaskStateConnection(int stateID)
 		{
 			State state = (State)TaskManager.GetTaskState(stateID); 
+			if(state == null) return;
 			ViewConnectionDialog connectionView = fGuiFactory.CreateConnectionView(fMainForm,TaskManager.TaskStateSource);						
 			if (Gtk.ResponseType.Ok == (Gtk.ResponseType)connectionView.ShowDialog())
 			{
-				try
-				{
-					State connectedState = (State)TaskManager.GetTaskState(connectionView.StateID);
-					Connection connection = (Connection)TaskManager.CreateTaskStateConnection(state,connectedState);
-					connection.Name = connectionView.Name;
-														
-					connection.Save();
-					fControledGui.BindConnections(state);									
-				}
-				catch(ImplementationException ex)
-				{
-					IGuiMessageDialog dialog = MessageFactory.Instance.CreateWarningDialog(ex,fMainForm);
-					dialog.Title = "Not Implemented";
-					dialog.ShowDialog();
-				}				
+				State connectedState = (State)TaskManager.GetTaskState(connectionView.StateID);
+				if(connectedState == null) return;
+				Connection connection = (Connection)TaskManager.CreateTaskStateConnection(state,connectedState);
+				connection.Name = connectionView.Name;
+				connection.Save();
+				fControledGui.BindConnections(state);
 			}
 		}
 		

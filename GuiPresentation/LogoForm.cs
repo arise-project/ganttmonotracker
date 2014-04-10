@@ -15,131 +15,88 @@ namespace GanttMonoTracker.GuiPresentation
 {	
 	public class LogoForm: IGuiMessageDialog
 	{
-		private DataSet fEmptyStorage;
-
 		private DataSet fGanttSource;
 
 		private Gtk.Window thisWindow;
 		
 		[Glade.Widget()]
-		private Gtk.VBox vbox1;
-		
-		[Glade.Widget()]
-		private Gtk.Label label1;
-		
-		[Glade.Widget()]
 		private Gtk.DrawingArea dwLogo;
-		
-		[Glade.Widget()]
-		private Gtk.TreeView tvLastProject;
-		
+
 		[Glade.Widget()]
 		private Gtk.TextView tvReleaseNews;
 		
 		private GanttDiagramm fLogoDiagram;
 
 		public LogoForm()
-		{			
+		{
 			Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("ViewLogoForm.glade");
 			Glade.XML glade = new Glade.XML(stream, "LogoMindow", null);
 			stream.Close();
 			glade.Autoconnect(this);
 			thisWindow = ((Gtk.Window)(glade.GetWidget("LogoMindow")));
 			thisWindow.WindowPosition = WindowPosition.Center;
-			thisWindow.SetDefaultSize(480,320);
-			thisWindow.KeyPressEvent += new Gtk.KeyPressEventHandler(OnKeyPress); 
-			try
-			{
-				StreamReader sr = new StreamReader("readme.txt");
-				if (sr != null)
-				{
-					tvReleaseNews.Buffer.Text = sr.ReadToEnd();
-					sr.Close();			
-				}
-			}
-			catch(FileNotFoundException)
-			{
-			} 
-			
-			fLogoDiagram = new GanttDiagramm { ReadOnly = true, DateNowVisible = false };
+			thisWindow.SetDefaultSize(480,460);
+			thisWindow.KeyReleaseEvent += (o, args) => {
+				this.thisWindow.HideAll();
+			};
+			ReadMe();
+			fLogoDiagram = new GanttDiagramm { ReadOnly = true };
 			fLogoDiagram.GanttSource = GetLogoSource();
 			dwLogo.ExposeEvent += new Gtk.ExposeEventHandler(OnLogoExpose);
 		}
 		
 
+		private void ReadMe()
+		{
+			var readme =  FSLocations.GetPath ("Resources");
+			readme =  Path.Combine(readme,"readme.txt");
+			if(File.Exists(readme))
+				using(var sr = new StreamReader(readme))
+				{
+					var text = sr.ReadToEnd().Substring(0,256);
+					text = text.Substring(0, text.LastIndexOf("\n"));
+					tvReleaseNews.Buffer.Text = text;
+					sr.Close();
+				}
+		}
 
 		private void OnLogoExpose(object sender, ExposeEventArgs args)
 		{
 			if (dwLogo.GdkWindow != null)
 			{
-				Thread.Sleep(2000);
 				fLogoDiagram.CreateDiagramm(dwLogo.GdkWindow);
 			}
-		}	
+		}
 
 
 			
 		private DataSet GetLogoSource()
 		{
-					fEmptyStorage = new DataSet("Track");
-					DataTable taskTable = new DataTable("Task");
-					DataTable actorTable = new DataTable("Actor");
-					DataTable taskStateTable = new DataTable("TaskState");
-					DataTable taskStateConnectionTable = new DataTable("TaskStateConnection");
+			fGanttSource = GanttDiagramFactory.Create();
+			var actors = fGanttSource.Tables["Actor"];
+			actors.Rows.Add(new object [] {1, "Eugene Pirogov","pirogov.e@gmail.com"});
+			var tasks = fGanttSource.Tables["Task"];
+			var taskStates = fGanttSource.Tables["TaskState"];
+			taskStates.Rows.Add(new object [] {0,"Open",0x80,0,0xFF,0xFF}); // logo color
+
+			// breaks
+			tasks.Rows.Add(new object [] {0,1,"Actors [Name, Email]",DateTime.Now.AddDays(-5),DateTime.Now.AddDays(3),0});
+			tasks.Rows.Add(new object [] {1,1,"Tasks [Description, Start Time, End Time, State]",DateTime.Now.AddDays(-3),DateTime.Now.AddDays(2),0});
+			tasks.Rows.Add(new object [] {2,1,"Gantt Diagramm",DateTime.Now.AddDays(-7),DateTime.Now.AddDays(4),0});
+			tasks.Rows.Add(new object [] {3,1,"Assigment Diagramm",DateTime.Now.AddDays(0),DateTime.Now.AddDays(4),0});
+
+
+			fGanttSource.Tables.Add("DataRange");
+			fGanttSource.Tables["DataRange"].Columns.Add("MinDate",typeof(DateTime));
+			fGanttSource.Tables["DataRange"].Columns.Add("MaxDate",typeof(DateTime));
 					
-					actorTable.Columns.Add("ID",typeof(int));
-					actorTable.Columns.Add("Name",typeof(string));
-					actorTable.Columns.Add("Email",typeof(string));
-						
-					taskTable.Columns.Add("ID",typeof(int));
-					taskTable.Columns.Add("ActorID",typeof(int));
-					taskTable.Columns.Add("Description",typeof(string));
-					taskTable.Columns.Add("StartTime",typeof(DateTime));
-					taskTable.Columns.Add("EndTime",typeof(DateTime));
-					taskTable.Columns.Add("StateID",typeof(int));
+			DataRow rangeRow = fGanttSource.Tables["DataRange"].NewRow();
+			rangeRow["MinDate"] = DateTime.Now.AddDays(-5);
+			rangeRow["MaxDate"] = DateTime.Now.AddDays(4);
 					
-					taskStateTable.Columns.Add("ID",typeof(int));
-					taskStateTable.Columns.Add("Name",typeof(string));
-					taskStateTable.Columns.Add("ColorBlue",typeof(int));
-					taskStateTable.Columns.Add("ColorRed",typeof(int));
-					taskStateTable.Columns.Add("ColorGreen",typeof(int));
-					taskStateTable.Columns.Add("MappingID",typeof(int));
+			fGanttSource.Tables["DataRange"].Rows.Add(rangeRow);
 					
-					taskStateConnectionTable.Columns.Add("ID",typeof(int));
-					taskStateConnectionTable.Columns.Add("Name",typeof(string));
-					taskStateConnectionTable.Columns.Add("MappingID",typeof(int));
-					taskStateConnectionTable.Columns.Add("StateID",typeof(int));
-					
-					actorTable.Rows.Add(new object [] {1, "Eugene Pirogov","pirogov.e@gmail.com"});
-					
-					taskTable.Rows.Add(new object [] {0,1,"Actors [Name, Email]",DateTime.Now.AddDays(-5),DateTime.Now.AddDays(3),0});
-					taskTable.Rows.Add(new object [] {1,1,"Tasks [Description, Start Time, End Time, State]",DateTime.Now.AddDays(-3),DateTime.Now.AddDays(2),0});
-					taskTable.Rows.Add(new object [] {2,1,"Gantt Diagramm",DateTime.Now.AddDays(-7),DateTime.Now.AddDays(4),0});
-					taskTable.Rows.Add(new object [] {3,1,"Assigment Diagramm",DateTime.Now.AddDays(0),DateTime.Now.AddDays(4),0});
-					
-					taskStateTable.Rows.Add(new object [] {0,"Open",0,0xff,0,0});
-					
-					fEmptyStorage.Tables.Add(actorTable);
-					fEmptyStorage.Tables.Add(taskTable);
-					fEmptyStorage.Tables.Add(taskStateTable);
-					fEmptyStorage.Tables.Add(taskStateConnectionTable);
-					
-					fGanttSource = new DataSet("GanttSource");
-					fGanttSource.Tables.Add(fEmptyStorage.Tables["Actor"].Copy());
-					fGanttSource.Tables.Add(fEmptyStorage.Tables["Task"].Copy());
-					fGanttSource.Tables.Add(fEmptyStorage.Tables["TaskState"].Copy());
-			
-					fGanttSource.Tables.Add("DataRange");			
-					fGanttSource.Tables["DataRange"].Columns.Add("MinDate",typeof(DateTime));
-					fGanttSource.Tables["DataRange"].Columns.Add("MaxDate",typeof(DateTime));
-					
-					DataRow rangeRow = fGanttSource.Tables["DataRange"].NewRow();
-					rangeRow["MinDate"] = DateTime.Now.AddDays(-5);
-					rangeRow["MaxDate"] = DateTime.Now.AddDays(4);
-					
-					fGanttSource.Tables["DataRange"].Rows.Add(rangeRow);	
-					
-					return fGanttSource; 
+			return fGanttSource; 
 		}
 
 
@@ -177,7 +134,7 @@ namespace GanttMonoTracker.GuiPresentation
 			set
 			{
 				thisWindow.Title = value;
-			}			
+			}
 		}
 		
 		#endregion
@@ -191,14 +148,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 		
 		#endregion
-		
-		private void OnKeyPress(object sender, Gtk.KeyPressEventArgs args)
-		{
-			if (args.Event.Key == Gdk.Key.Escape)
-			{
-				this.thisWindow.HideAll();
-			}
-		}		
-	}	
+
+	}
 	
 }

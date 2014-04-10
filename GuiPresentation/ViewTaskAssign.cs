@@ -13,10 +13,11 @@ using GanttMonoTracker.ExceptionPresentation;
 using TaskManagerInterface;
 
 namespace GanttMonoTracker.GuiPresentation
-{	
+{
 	public class ViewTaskAssign : IGuiMessageDialog,IDisposable
 	{
-		
+		private string fComment;
+
 		private Gtk.Dialog thisDialog;
 
 		[Glade.Widget()]
@@ -42,8 +43,14 @@ namespace GanttMonoTracker.GuiPresentation
 			
 			cbActor.Entry.IsEditable = false;
 			cbActor.Changed += new EventHandler(OnCbActorChanged);
+			tvComment.KeyReleaseEvent += CommentKeyReleaseEvent;
 		}
-		
+
+		void CommentKeyReleaseEvent (object o, KeyReleaseEventArgs args)
+		{
+			fComment = tvComment.Buffer.Text;
+		}
+
 		public int Run()
 		{
 			thisDialog.ShowAll();
@@ -139,19 +146,19 @@ namespace GanttMonoTracker.GuiPresentation
 			cbActor.Clear();
 			foreach (DataRow row in fActorSource.Tables["Actor"].Rows)
 			{
-				fActorStore.AppendValues((int)row["ID"],(string)row["Name"]);				
-			}		
-			cbActor.Model = fActorStore;			
-			Gtk.CellRendererText actorText = new Gtk.CellRendererText();		
+				fActorStore.AppendValues((int)row["ID"],(string)row["Name"]);
+			}
+			cbActor.Model = fActorStore;
+			Gtk.CellRendererText actorText = new Gtk.CellRendererText();
 			actorText.Style = Pango.Style.Oblique;
 			//actorText.BackgroundGdk = new Gdk.Color(0x63,0,0);
 			cbActor.PackStart(actorText,true);
-			cbActor.AddAttribute(actorText,"text",1);			 
+			cbActor.AddAttribute(actorText,"text",1);
 			TreeIter iter;
 			if (fActorStore.GetIterFirst(out iter))
 			{
 				cbActor.SetActiveIter(iter);
-				fActorID = (int)ActorSource.Tables["Actor"].Rows[0]["ID"];				
+				fActorID = (int)ActorSource.Tables["Actor"].Rows[0]["ID"];
 			}
 		}
 		

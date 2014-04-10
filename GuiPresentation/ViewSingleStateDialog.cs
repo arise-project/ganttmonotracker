@@ -147,26 +147,28 @@ namespace GanttMonoTracker.GuiPresentation
 
 		public bool IsMapped { get;set; }
 
+
 		public Hashtable Connections { get;	set; }
+
 
 		public void Connect (IManagerEntity stateEntry, string connectionName)
 		{
-			throw new ImplementationException ();
+
 		}
 
 		public void Disconnect (IManagerEntity stateEntry)
 		{
-			throw new ImplementationException ();
+
 		}
 
 		public bool IsConnected (IManagerEntity stateEntry)
 		{
-			throw new ImplementationException ();
+			return false;
 		}
 
 		public void ClearConnections ()
 		{
-			throw new ImplementationException ();
+
 		}
 
 		#endregion
