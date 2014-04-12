@@ -1,3 +1,7 @@
+//author:Eugene Pirogov
+//email:eugene.intalk@gmail.com
+//license:GPLv3.0
+//date:4/12/2014
 // created on 10.02.2006 at 18:13
 using System;
 using System.Threading;

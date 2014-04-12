@@ -1,0 +1,2 @@
+#/bin/bash
+export OXIGEN_DISABLE_INNER_SHADOWS_HACK=1
