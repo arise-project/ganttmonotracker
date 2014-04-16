@@ -86,7 +86,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 			}
 			
 			if (entityTable == null)
-				throw new KeyNotFoundException("Table with name " + fParams["EntityName"].ToString() + " Not Found", fParams["EntityName"]);
+				throw new KeyNotFoundException(string.Format("Table with name {0} Not Found {1}", fParams["EntityName"], fParams["EntityName"]));
 			
 			string rule = "";
 			

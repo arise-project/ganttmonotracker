@@ -158,7 +158,7 @@ namespace GanttMonoTracker.GuiPresentation
 		
 		#region IGuiCore Implementation
 		
-		public CoreState State {get; set;}
+		public CoreState State { get; set; }
 		
 		#endregion
 		

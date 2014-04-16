@@ -70,7 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="MainWindow.cs" />
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="DrawingPresentation\AssigmentDiagram.cs" />
@@ -141,6 +140,7 @@
     <Compile Include="TaskManager\FSLocations.cs" />
     <Compile Include="Palette\GdkPalette.cs" />
     <Compile Include="Palette\ColorEnum.cs" />
+    <Compile Include="MainWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DrawingPresentation\" />

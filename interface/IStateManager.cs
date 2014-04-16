@@ -7,7 +7,6 @@
 namespace TaskManagerInterface
 {
 	public interface IStateManager
-	{
-		
+	{		
 	}
 }

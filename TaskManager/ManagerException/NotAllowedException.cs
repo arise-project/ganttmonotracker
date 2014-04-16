@@ -27,10 +27,6 @@ namespace GanttTracker.TaskManager.ManagerException
 			{
 				return IdentityManager.Instance.CreateTypeIdentity(this.GetType());
 			}
-			set
-			{
-				
-			}
 		}
 	}
 }

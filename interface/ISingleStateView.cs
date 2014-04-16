@@ -8,10 +8,6 @@ namespace TaskManagerInterface
 {
 	public interface ISingleStateView
 	{
-		string Name
-		{
-			get;
-			set;
-		}		
+		string Name	{ get;set; }		
 	}
 }

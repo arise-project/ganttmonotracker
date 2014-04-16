@@ -9,11 +9,11 @@ using System.Runtime.CompilerServices;
 // Change them to the values specific to your project.
 
 [assembly: AssemblyTitle("GanttMonoTracker")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Gantt tool written on mono by Eugene Pirogov")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("arise-project.org.ua")]
 [assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("arise-project.org.ua")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

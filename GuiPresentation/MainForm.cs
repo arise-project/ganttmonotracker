@@ -376,21 +376,27 @@ namespace GanttMonoTracker.GuiPresentation
 		
 		private void OnKeyPress(object sender, Gtk.KeyPressEventArgs args)
 		{
-			if (args.Event.Key == Gdk.Key.F2|| args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) && args.Event.Key == Gdk.Key.o)
+			if (args.Event.Key == Gdk.Key.F2|| 
+				args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) && 
+				args.Event.Key == Gdk.Key.o)
 			{
 				OnOpenProject(this, new EventArgs());
 			}
-			if (args.Event.Key == Gdk.Key.F3|| args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) && args.Event.Key == Gdk.Key.s)
+			if (args.Event.Key == Gdk.Key.F3|| 
+				args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) && 
+				args.Event.Key == Gdk.Key.s)
 			{
 				OnSaveProject(this, new EventArgs());
 			}
 			
-			if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) && args.Event.Key == Gdk.Key.q)
+			if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
+				args.Event.Key == Gdk.Key.q)
 			{
 				OnExitProgramm(this, new EventArgs());
 			}
 			
-			if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) && args.Event.Key == Gdk.Key.e)
+			if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) && 
+				args.Event.Key == Gdk.Key.e)
 			{
 				OnCloseProject(this, new EventArgs());
 			}
@@ -440,11 +446,7 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}
 		
-		public DataSet ActorSource
-		{
-			get;
-			set;
-		}	
+		public DataSet ActorSource { get; set; }	
 		
 		public void BindActor()
 		{
@@ -456,11 +458,7 @@ namespace GanttMonoTracker.GuiPresentation
 			tvActorTree.Model = fActorStore;
 		}
 		
-		public DataSet StateSource
-		{
-			get;
-			set;
-		}
+		public DataSet StateSource { get; set;	}
 		
 		public void BindState()
 		{
@@ -471,11 +469,7 @@ namespace GanttMonoTracker.GuiPresentation
 		
 		#region IGuiGantt Implementation
 		
-		public DataSet GanttSource
-		{
-			get;
-			set;
-		}
+		public DataSet GanttSource { get; set; }
 		
 		public void BindGantt()
 		{

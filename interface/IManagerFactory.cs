@@ -9,7 +9,9 @@ namespace TaskManagerInterface
 	public interface IManagerFactory
 	{
 		ITaskManager CreateEmptyManager();
+
 		ITaskManager CreateNewManager(IStorageDealer dealer);
+
 		ITaskManager CreateManager(IStorageDealer dealer);				
 	}
 }

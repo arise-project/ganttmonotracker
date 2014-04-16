@@ -54,6 +54,7 @@ namespace GanttTracker.TaskManager
 		public bool StatePresent {	get;set; }
 		
 		private int fStateID;
+
 		public int StateID
 		{
 			get
@@ -99,7 +100,7 @@ namespace GanttTracker.TaskManager
 			}
 		}
 			
-		public ITaskManager Parent {get;set; }
+		public ITaskManager Parent { get;set; }
 
 
 		public string Comment {	get;set; }

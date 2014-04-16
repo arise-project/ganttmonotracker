@@ -17,28 +17,16 @@ namespace GanttTracker.StateManager
 		
 		public StateFactory(ITaskManager parent)
 		{
-			fParent = parent;
+			Parent = parent;
 		}
 		
-		private ITaskManager fParent;
-		public ITaskManager Parent
-		{
-			get
-			{
-				return fParent;
-			}
-				
-			set
-			{
-				fParent = value;
-			}
-		}
+		public ITaskManager Parent { get;set; }
 		
 		public IManagerEntity CreateTaskState()
 		{
-			if (fParent == null)
+			if (Parent == null)
 				throw new ValidationException("Parent no set to instance for factory"); 
-			return (State)fParent.CreateTaskState();
+			return (State)Parent.CreateTaskState();
 		}
 		
 //		public IManagerEntity CreateTaskState(string connectionName, IManagerEntity connectedStateEntity)

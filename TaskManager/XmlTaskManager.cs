@@ -11,7 +11,6 @@ using System.Collections;
 using GanttTracker.TaskManager.TaskStorage;
 using GanttTracker.TaskManager.ManagerException;
 using GanttTracker.StateManager;
-//using GanttTracker.CommentManager;
 using TaskManagerInterface;
 
 namespace GanttTracker.TaskManager
@@ -890,7 +889,6 @@ namespace GanttTracker.TaskManager
 		
 		#region Comment
 		
-		private DataSet fCommentSource;		
 		public DataSet CommentSource
 		{
 			get

@@ -13,7 +13,15 @@ namespace GanttMonoTracker.ExceptionPresentation
 {
 	public class ExceptionView : MessageDialog, IGuiMessageDialog
 	{
-		public ExceptionView(Exception exception, Window parent) : base (parent, DialogFlags.DestroyWithParent, Gtk.MessageType.Error,Gtk.ButtonsType.YesNo, "Application fail with exception : " + Environment.NewLine +Environment.NewLine+exception.Message + Environment.NewLine +Environment.NewLine+ "Send it to develop team?")
+		public ExceptionView(Exception exception, Window parent) 
+			: base (parent, 
+				DialogFlags.DestroyWithParent, 
+				Gtk.MessageType.Error,Gtk.ButtonsType.YesNo, 
+				string.Format("Application fail with exception : {0}{1}{2}{3} Send it to develop team?", 
+					Environment.NewLine, 
+					Environment.NewLine+exception.Message, 
+					Environment.NewLine, 
+					Environment.NewLine))
 		{
 			Modal = true;
 		}
@@ -23,7 +31,7 @@ namespace GanttMonoTracker.ExceptionPresentation
 			Result = responseType;
 		}
 
-		public ResponseType Result { get;set; }
+		public ResponseType Result { get; set; }
 		
 		public int ShowDialog()
 		{

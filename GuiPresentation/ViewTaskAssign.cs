@@ -104,18 +104,8 @@ namespace GanttMonoTracker.GuiPresentation
 		#endregion	
 		
 		private ListStore fActorStore;
-		private DataSet fActorSource;
-		public DataSet ActorSource
-		{
-			get
-			{
-				return fActorSource;
-			}
-			set
-			{
-				fActorSource = value;
-			}
-		}
+
+		public DataSet ActorSource { get; set; }
 		
 		private int fActorID;
 		public int ActorID
@@ -127,10 +117,10 @@ namespace GanttMonoTracker.GuiPresentation
 		 	
 		 	set
 		 	{
-		 		if (fActorSource == null)
+		 		if (ActorSource == null)
 					throw new NotAllowedException("Bind combo before with BindActor method");
 				int index = 0;
-				foreach(DataRow row in fActorSource.Tables["Actor"].Rows)
+				foreach(DataRow row in ActorSource.Tables["Actor"].Rows)
 				{
 					if ((int)row["ID"] == 	value)
 					{
@@ -148,7 +138,7 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			fActorStore = new ListStore(typeof(int),typeof(string));
 			cbActor.Clear();
-			foreach (DataRow row in fActorSource.Tables["Actor"].Rows)
+			foreach (DataRow row in ActorSource.Tables["Actor"].Rows)
 			{
 				fActorStore.AppendValues((int)row["ID"],(string)row["Name"]);
 			}
@@ -194,8 +184,8 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			if (cbActor.Active != -1)
 			{
-				ActorID = (int)fActorSource.Tables["Actor"].Rows[cbActor.Active]["ID"];
-				cbActor.Entry.Text = (string)fActorSource.Tables["Actor"].Rows[cbActor.Active]["Name"];				
+				ActorID = (int)ActorSource.Tables["Actor"].Rows[cbActor.Active]["ID"];
+				cbActor.Entry.Text = (string)ActorSource.Tables["Actor"].Rows[cbActor.Active]["Name"];				
 			}
 		}
 		

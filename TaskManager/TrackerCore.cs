@@ -264,17 +264,9 @@ namespace GanttTracker
 			}	
 		}	
 		
-		public GanttDiagramm GanttPresentation
-		{
-			get;
-			set;
-		}
+		public GanttDiagramm GanttPresentation { get;set; }
 		
-		public AssigmentDiagramm AssigmentPresentation
-		{
-			get;
-			set;
-		}	
+		public AssigmentDiagramm AssigmentPresentation { get;set; }	
 				
 		public void DrawGantt(Gtk.DrawingArea drawingarea)
 		{

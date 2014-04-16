@@ -14,7 +14,11 @@ namespace GanttMonoTracker.ExceptionPresentation
 {
 	public class  WarningView : MessageDialog, IGuiMessageDialog
 	{
-		public WarningView(Exception exception, Window parent) : base (parent,  DialogFlags.DestroyWithParent , Gtk.MessageType.Warning,Gtk.ButtonsType.Ok, "Warning : " + Environment.NewLine +Environment.NewLine+exception.Message)
+		public WarningView(Exception exception, Window parent) 
+			: base (parent,  
+				DialogFlags.DestroyWithParent,
+				Gtk.MessageType.Warning,Gtk.ButtonsType.Ok,
+				string.Format("Warning : {0}{1}", Environment.NewLine, Environment.NewLine+exception.Message))
 		{
 			Modal = true;
 		}

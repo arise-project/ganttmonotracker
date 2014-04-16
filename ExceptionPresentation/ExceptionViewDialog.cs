@@ -52,7 +52,10 @@ namespace GanttMonoTracker.ExceptionPresentation
 			tvButtonDescription.Buffer.Text = "Use Cancel for continue [not recomended], Quit for exit program and Apply for send message to develop team";
 			ExceptionType = exception.GetType().FullName;
 			ExceptionMessage = exception.Message;
-			ExceptionDescription = string.Format("{0} {1} {2}",exception.GetType().ToString(), exception.Message, exception.StackTrace);
+			ExceptionDescription = string.Format("{0} {1} {2}",
+				exception.GetType().ToString(), 
+				exception.Message, 
+				exception.StackTrace);
 			tvButtonDescription.Sensitive = false;
 		}
 		
@@ -151,7 +154,9 @@ namespace GanttMonoTracker.ExceptionPresentation
 				var rows = new List<string>();
 				while (value.Length > 0)
 				{
-					var len = value.Length > 100 ? 100 : value.Length;
+					var len = value.Length > 100 ? 
+						100 : 
+						value.Length;
 					rows.Add( value.Substring(0, len));
 					value = value.Substring(len);
 				}

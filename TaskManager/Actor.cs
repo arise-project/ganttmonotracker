@@ -18,67 +18,32 @@ namespace GanttTracker.TaskManager
 		
 		public Actor(ITaskManager parent)
 		{
-			fParent = parent;
+			Parent = parent;
 		}
 		
 		public Actor(ITaskManager parent, int id)
 		{
-			fID = id;
-			fParent = parent;
+			ID = id;
+			Parent = parent;
 		}
 		
 		#region Data
 		
-		private string fName;
-		public string Name
-		{
-			get
-			{
-				return fName;
-			}
-			
-			set
-			{
-				fName = value;
-			}			
-		}
+		public string Name { get;set; }
 		
-		private string fEmail;
-		public string Email
-		{
-			get
-			{
-				return fEmail;
-			}
-			
-			set
-			{
-				fEmail = value;
-			}			
-		}	
+		public string Email { get; set; }	
 		
 		#endregion
 	
 		#region IManagerEntity Implementation
 	
-		private int fID = 0;
-		public int ID
-		{
-			get
-			{
-				return fID;
-			}
-			set
-			{
-				throw new NotAllowedException("Can not set ID for managed entity");
-			}
-		}	
+		public int ID {	get;set; }	
 		
 		public bool isNew
 		{
 			get
 			{
-				return (fID == 0);
+				return (ID == 0);
 			}
 			
 			set
@@ -91,7 +56,7 @@ namespace GanttTracker.TaskManager
 		{
 			get
 			{
-				return fParent.isUpdatedActor(this);
+				return Parent.isUpdatedActor(this);
 			}
 			set
 			{
@@ -99,33 +64,21 @@ namespace GanttTracker.TaskManager
 			}
 		}
 			
-		private ITaskManager fParent = null;
-		public ITaskManager Parent
-		{
-			get
-			{
-				return fParent;			
-			}
-			
-			set
-			{
-				throw new InvalidOperationException("Can not set Parent for managed entity");
-			}
-		}
+		public ITaskManager Parent { get;set; }
 		
 		public void BindData()
 		{
-			fParent.BindActor(this);			
+			Parent.BindActor(this);			
 		}
 			
 		public void Save()
 		{
-			fParent.UpdateActor(this);
+			Parent.UpdateActor(this);
 		}
 		
 		public void Delete()
 		{
-			fParent.DeleteActor(this.ID);
+			Parent.DeleteActor(this.ID);
 		}
 		
 		#endregion		

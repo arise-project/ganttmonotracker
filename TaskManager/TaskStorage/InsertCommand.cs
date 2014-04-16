@@ -87,12 +87,12 @@ namespace GanttTracker.TaskManager.TaskStorage
 			}
 			
 			if (entityTable == null)
-				throw new KeyNotFoundException("Table with name " + fParams["EntityName"].ToString() + " Not Found");
+				throw new KeyNotFoundException(string.Format("Table with name {0} Not Found", fParams["EntityName"]));
 			 
 			 foreach (object coumn in values.Keys)
 			 {
 			 	if (!entityTable.Columns.Contains(coumn.ToString()	) )
-			 		throw new KeyNotFoundException("Column with name " + coumn.ToString()	+ " Not Found for table " + entityTable.TableName );			 	
+					throw new KeyNotFoundException(string.Format("Column with name {0} Not Found for table {1}", coumn, entityTable.TableName ));			 	
 			 }
 			 
 			 DataRow entity = entityTable.NewRow();

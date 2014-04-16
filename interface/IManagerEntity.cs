@@ -8,30 +8,18 @@ namespace TaskManagerInterface
 {
 	public interface IManagerEntity
 	{
-		int ID
-		{
-			get;
-			set;
-		}
+		int ID { get;set; }
 		
-		bool isNew
-		{
-			get;
-		}
+		bool isNew { get; }
 		
-		bool isUpdated
-		{
-			get;
-		}
+		bool isUpdated	{ get; }
 		
-		ITaskManager Parent
-		{
-			get;
-			set;
-		}
+		ITaskManager Parent	{ get;set;	}
 		
 		void BindData();
+
 		void Save();
+
 		void Delete();
 	}
 }

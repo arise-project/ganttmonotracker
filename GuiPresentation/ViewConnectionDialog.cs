@@ -19,7 +19,15 @@ namespace GanttMonoTracker.GuiPresentation
 	
 	public class ViewConnectionDialog : IGuiConnection
 	{
-		
+
+		private int fStateInID = -1;
+
+		private int fStateOutID = -1;
+
+		private ListStore fStateInStore;
+
+		private ListStore fStateOutStore;
+
 		private Gtk.Dialog thisDialog;
 		
 		[Glade.Widget()]
@@ -76,11 +84,11 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog = ((Gtk.Dialog)(glade.GetWidget("ViewConnectionDialog")));
 			thisDialog.TransientFor = parent;
 			thisDialog.Modal = true;
-			fTaskStateSource = taskStateSource;
+			TaskStateSource = taskStateSource;
 			
 			cbStateIn.Sensitive = false;
 			lbConnectionAction.Text = "Create Connection";
-			cbStateOut.Entry.Editable = false;
+			cbStateOut.Entry.IsEditable = false;
 			cbStateIn.Changed += new EventHandler(OnCbStateInChanged);
 			cbStateOut.Changed += new EventHandler(OnCbStateOutChanged);			
 		}
@@ -149,61 +157,23 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}
 		
-		private int fMappingID;
-		public int MappingID
-		{
-			get
-			{
-				return fMappingID;
-			}
-			
-			set
-			{
-				fMappingID = value;
-			}
-		}
+		public int MappingID { get; set; }
 		
-		private int fStateID;
-		public int StateID
-		{
-			get
-			{
-				return fStateID;
-			}
-			
-			set
-			{
-				fStateID = value;
-			}			
-		}
+		public int StateID { get; set; }
 		
 		#endregion
 		
 		#region IGuiConnection interface
 	
-		private ListStore fStateInStore;
-		private ListStore fStateOutStore;
-		private DataSet fTaskStateSource;
-		public DataSet TaskStateSource
-		{
-			get
-			{
-				return fTaskStateSource;
-			}
-			
-			set
-			{
-				fTaskStateSource = value;
-			}
-		}
+		public DataSet TaskStateSource { get; set; }
 		
 		public void BindStateIn()
 		{
-			if (fTaskStateSource != null)
+			if (TaskStateSource != null)
 			{
 				fStateInStore = new ListStore(typeof(int),typeof(string));
 				cbStateIn.Clear();
-				foreach (DataRow row in fTaskStateSource.Tables["TaskState"].Rows)
+				foreach (DataRow row in TaskStateSource.Tables["TaskState"].Rows)
 				{
 					fStateInStore.AppendValues((int)row["ID"],(string)row["Name"]);				
 				}		
@@ -225,11 +195,11 @@ namespace GanttMonoTracker.GuiPresentation
 		
 		public void BindStateOut()
 		{
-			if (fTaskStateSource != null)
+			if (TaskStateSource != null)
 			{
 				fStateOutStore = new ListStore(typeof(int),typeof(string));
 				cbStateOut.Clear();
-				foreach (DataRow row in fTaskStateSource.Tables["TaskState"].Rows)
+				foreach (DataRow row in TaskStateSource.Tables["TaskState"].Rows)
 				{
 					fStateOutStore.AppendValues((int)row["ID"],(string)row["Name"]);								
 				}		
@@ -250,23 +220,23 @@ namespace GanttMonoTracker.GuiPresentation
 		
 		#endregion
 		
-		private int fStateInID = -1;
+
 		private void OnCbStateInChanged(object sender, EventArgs args)
 		{
 			if (cbStateIn.Active != -1)
 			{
-				fStateInID = (int)fTaskStateSource.Tables["TaskState"].Rows[cbStateIn.Active]["ID"];
-				cbStateIn.Entry.Text = (string)fTaskStateSource.Tables["TaskState"].Rows[cbStateIn.Active]["Name"];				
+				fStateInID = (int)TaskStateSource.Tables["TaskState"].Rows[cbStateIn.Active]["ID"];
+				cbStateIn.Entry.Text = (string)TaskStateSource.Tables["TaskState"].Rows[cbStateIn.Active]["Name"];				
 			}
 		}
 		
-		private int fStateOutID = -1;
+
 		private void OnCbStateOutChanged(object sender, EventArgs args)
 		{
 			if (cbStateOut.Active != -1)
 			{
-				fStateOutID = (int)fTaskStateSource.Tables["TaskState"].Rows[cbStateOut.Active]["ID"];
-				cbStateOut.Entry.Text = (string)fTaskStateSource.Tables["TaskState"].Rows[cbStateOut.Active]["Name"];				
+				fStateOutID = (int)TaskStateSource.Tables["TaskState"].Rows[cbStateOut.Active]["ID"];
+				cbStateOut.Entry.Text = (string)TaskStateSource.Tables["TaskState"].Rows[cbStateOut.Active]["Name"];				
 			}
 		}	
 	}

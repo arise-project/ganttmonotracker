@@ -16,7 +16,11 @@ namespace GanttMonoTracker.ExceptionPresentation
 {
 	public class  MessageView : MessageDialog, IGuiMessageDialog
 	{
-		public MessageView(string message, Window parent) : base (parent,  DialogFlags.DestroyWithParent , Gtk.MessageType.Info ,Gtk.ButtonsType.Ok, message)
+		public MessageView(string message, Window parent) 
+			: base (parent, 
+				DialogFlags.DestroyWithParent, 
+				Gtk.MessageType.Info,
+				Gtk.ButtonsType.Ok, message)
 		{
 			Modal = true;
 		}

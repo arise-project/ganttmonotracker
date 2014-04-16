@@ -8,16 +8,8 @@ namespace TaskManagerInterface
 {
 	public interface IActorView
 	{
-		string ActorName
-		{
-			get;
-			set;
-		}
+		string ActorName { get;	set; }
 		
-		string ActorEmail
-		{
-			get;
-			set;
-		}
+		string ActorEmail { get; set; }
 	}
 }

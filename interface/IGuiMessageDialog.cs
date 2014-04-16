@@ -11,10 +11,6 @@ namespace TaskManagerInterface
 	{
 		int ShowDialog();
 		
-		string Title
-		{
-			get;
-			set;
-		}		
+		string Title { get;set;	}		
 	}
 }

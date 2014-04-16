@@ -147,8 +147,6 @@ namespace GanttTracker.TaskManager
 		
 		#region Gantt
 				
-		private DataSet fGanttSource;
-
 		public DataSet GanttSource { get;set; }
 		
 		public DateTime GanttFirstDate	{get;set; }

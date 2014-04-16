@@ -11,28 +11,12 @@ namespace TaskManagerInterface
 	public interface ICommentView
 	{
 	
-		bool CommentedEntryPresent
-		{
-			get;
-			set;
-		}
+		bool CommentedEntryPresent { get; set; }
 		
-		int CommentedEntryID
-		{
-			get;
-			set;
-		}
+		int CommentedEntryID { get; set; }
 		
-		string Description
-		{
-			get;
-			set;
-		}
+		string Description { get; set; }
 		
-		DateTime Date
-		{
-			get;
-			set;
-		}	
+		DateTime Date {	get; set; }	
 	}
 }

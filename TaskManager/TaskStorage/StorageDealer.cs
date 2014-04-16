@@ -5,6 +5,8 @@
 // created on 28.11.2005 at 0:58
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
@@ -16,33 +18,13 @@ namespace GanttTracker.TaskManager.TaskStorage
 {
 	public class StorageDealer : IStorageDealer
 	{
-		private string fConnectionString;
-		public string ConnectionString
-		{
-			get
-			{
-				return fConnectionString;
-			}
-			
-			set
-			{
-				fConnectionString = value;
-			}
-		}	
+		public string ConnectionString { get;set; }	
 		
-		private DataSet fStorage;
-		public DataSet Storage
-		{
-			get
-			{
-				return fStorage;
-			}
-			set
-			{
-				fStorage = value;
-			}
-		}
-		
+		public DataSet Storage { get;set; }
+
+
+		public IStorageCommandFactory CommandFactory { get;	set; }
+
 		private DataSet fEmptyStorage;
 		public DataSet EmptyStorage
 		{
@@ -56,6 +38,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 					DataTable taskStateTable = new DataTable("TaskState");
 					DataTable taskStateConnectionTable = new DataTable("TaskStateConnection");
 					DataTable commentTable = new DataTable("Comment");
+					var tables = new List<DataTable>{ taskTable, actorTable, taskStateTable, taskStateConnectionTable, commentTable };
 					
 					actorTable.Columns.Add("ID",typeof(int));								
 					actorTable.Columns.Add("Name",typeof(string));
@@ -84,13 +67,9 @@ namespace GanttTracker.TaskManager.TaskStorage
 					commentTable.Columns.Add("EntryID",typeof(int));
 					commentTable.Columns.Add("Description",typeof(string));
 					commentTable.Columns.Add("Date",typeof(DateTime));					
-					
-					fEmptyStorage.Tables.Add(actorTable);
-					fEmptyStorage.Tables.Add(taskTable);
-					fEmptyStorage.Tables.Add(taskStateTable);
-					fEmptyStorage.Tables.Add(taskStateConnectionTable);
-					fEmptyStorage.Tables.Add(commentTable);
-					
+
+					tables.ForEach (fEmptyStorage.Tables.Add);
+
 					fEmptyStorage.Relations.Add("Relation_Actor_Task_ActorID", actorTable.Columns["ID"],taskTable.Columns["ActorID"]);
 					fEmptyStorage.Relations.Add("Relation_TaskState_Task_ActorID",taskStateTable.Columns["ID"],taskTable.Columns["StateID"]);
 					fEmptyStorage.Relations.Add("Relation_TaskState_TaskStateConnection_ActorID",taskStateTable.Columns["MappingID"],taskStateConnectionTable.Columns["MappingID"]);
@@ -98,32 +77,27 @@ namespace GanttTracker.TaskManager.TaskStorage
 					
 				}
 				return fEmptyStorage;			
-			}
-			
-			set
-			{
-				
-			}			
+			}		
 		}
 		
 		public StorageDealer(string connectionString,IStorageCommandFactory commandFactory)
 		{
-			fConnectionString = connectionString;
-			fCommandFactory = commandFactory;
+			ConnectionString = connectionString;
+			CommandFactory = commandFactory;
 		}
 		
 		public void Create()
 		{
-			if (File.Exists(fConnectionString))
+			if (File.Exists(ConnectionString))
 				throw new NotAllowedException();	
 			
-			EmptyStorage.WriteXml(fConnectionString, System.Data.XmlWriteMode.WriteSchema);
-			EmptyStorage.WriteXmlSchema(fConnectionString + ".xsd");		 			 
+			EmptyStorage.WriteXml(ConnectionString, System.Data.XmlWriteMode.WriteSchema);
+			EmptyStorage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));		 			 
 		}	
 		
 		public void Load()
 		{
-			XmlTextReader reader = new XmlTextReader(fConnectionString);
+			XmlTextReader reader = new XmlTextReader(ConnectionString);
 			/*XmlValidatingReader validator = new XmlValidatingReader(reader);
 			validator.ValidationType = ValidationType.Schema; 
 			validator.ValidationEventHandler += new ValidationEventHandler(ValidationHandler);
@@ -138,25 +112,25 @@ namespace GanttTracker.TaskManager.TaskStorage
 			}
 			validator.Close();
 			*/
-			fStorage = new DataSet();
-			fStorage.ReadXml(fConnectionString);		
+			Storage = new DataSet();
+			Storage.ReadXml(ConnectionString);		
 		}
 		
 		private void ValidationHandler(object sender, ValidationEventArgs args)
 		{			 
-			throw new ValidationException("Validation failed with message " + args.Message);
+			throw new ValidationException(string.Format("Validation failed with message {0}", args.Message));
 		}
 		
 		public void Save()
 		{
-			fStorage.WriteXml(fConnectionString, System.Data.XmlWriteMode.WriteSchema);
-			fStorage.WriteXmlSchema(fConnectionString + ".xsd");		
+			Storage.WriteXml(ConnectionString, System.Data.XmlWriteMode.WriteSchema);
+			Storage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));		
 		}
 		
 		public void Save(string connectionString)
 		{			
-			fStorage.WriteXml(connectionString, System.Data.XmlWriteMode.WriteSchema);
-			fStorage.WriteXmlSchema(connectionString + ".xsd");		
+			Storage.WriteXml(connectionString, System.Data.XmlWriteMode.WriteSchema);
+			Storage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));		
 		}
 				
 		public DataSet ExecuteDataSet(IStorageCommand command)
@@ -176,21 +150,8 @@ namespace GanttTracker.TaskManager.TaskStorage
 		
 		public bool CheckConnection()
 		{
-			return !(fConnectionString == null || !File.Exists(fConnectionString));
+			return !(ConnectionString == null || !File.Exists(ConnectionString));
 		}
-		
-		private IStorageCommandFactory fCommandFactory;
-		public IStorageCommandFactory CommandFactory
-		{
-			get
-			{
-				return fCommandFactory;				
-			}
-			
-			set
-			{
-				fCommandFactory = value;
-			}
-		}
+
 	}
 }

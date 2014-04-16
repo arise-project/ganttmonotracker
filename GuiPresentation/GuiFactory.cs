@@ -116,7 +116,7 @@ namespace GanttMonoTracker.GuiPresentation
 			if (task.ActorPresent)
 				assignDialog.ActorID = task.ActorID;
 			assignDialog.Title = "Assign Task";
-			assignDialog.AssignAction = "Assign task " + task.ID + " to Actor";
+			assignDialog.AssignAction = string.Format("Assign task {0} to Actor", task.ID);
 			
 			return  assignDialog;
 		}

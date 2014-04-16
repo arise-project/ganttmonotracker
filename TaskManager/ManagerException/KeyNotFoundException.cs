@@ -13,28 +13,16 @@ namespace GanttTracker.TaskManager.ManagerException
 
 	public class KeyNotFoundException : Exception, IManagerException
 	{
-		private object fKey;
-		
-		public object Key
-		{
-			get
-			{
-				return fKey;
-			}
-			set
-			{
-				fKey = value;
-			}
-		}
+		public object Key { get;set; }
 		
 		public KeyNotFoundException(object key) : base (key.ToString()+" key not found")
 		{
-			fKey = key;
+			Key = key;
 		}
 		
 		public KeyNotFoundException(string message,object key) : base (message)
 		{			
-			fKey = key;
+			Key = key;
 		}		
 
 		public int ID
@@ -42,10 +30,6 @@ namespace GanttTracker.TaskManager.ManagerException
 			get
 			{
 				return IdentityManager.Instance.CreateTypeIdentity(this.GetType());
-			}
-			set
-			{
-				
 			}
 		}
 	}

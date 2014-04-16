@@ -10,9 +10,6 @@ namespace GanttMonoTracker
 {
 	public static class GdkPalette
 	{
-		private static readonly Colormap colormap;
-
-
 		public static Gdk.GC CurrentGC { get;set; }
 
 
@@ -44,11 +41,6 @@ namespace GanttMonoTracker
 			{
 				CurrentGC.Dispose();
 				CurrentGC = null;
-			}
-
-			if(colormap != null)
-			{
-				colormap.Dispose();
 			}
 		}
 

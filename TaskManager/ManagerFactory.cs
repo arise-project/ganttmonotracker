@@ -14,10 +14,12 @@ namespace GanttTracker.TaskManager
 		{
 			return new EmptyTaskManager();
 		}
+
 		public ITaskManager CreateNewManager(IStorageDealer dealer)
 		{
 			return null;
 		}
+
 		public ITaskManager CreateManager(IStorageDealer dealer)
 		{
 			return null;

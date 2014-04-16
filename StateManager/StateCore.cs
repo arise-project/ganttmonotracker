@@ -23,136 +23,41 @@ namespace GanttTracker.StateManager
 		
 		private void Initialize(IGuiCore guiCore, IGuiState controledGui)
 		{
-			fStateManager = this;
-			fStorageManager = guiCore.StorageManager;
-			fTaskManager = guiCore.TaskManager;
+			StateManager = this;
+			StorageManager = guiCore.StorageManager;
+			TaskManager = guiCore.TaskManager;
 			
-			fGuiFactory = new GuiFactory();
-			fStateFactory = new StateFactory(fTaskManager);
-			fControledGui =  controledGui;
+			GuiFactory = new GuiFactory();
+			StateFactory = new StateFactory(TaskManager);
+			ControledGui =  controledGui;
 		}	
 		
 		#region IGuiCore Implementation
 		
-		private CoreState fState;
-		public CoreState State
-		{
-			get
-			{
-				return fState;
-			}
-			
-			set
-			{
-				fState = value;
-			}			
-		}
+		public CoreState State { get;set; }
 		
-		private ITaskManager fTaskManager;
-		public ITaskManager TaskManager
-		{
-			get
-			{
-				return fTaskManager;
-			}
-			
-			set
-			{
-				fTaskManager = value;
-			}						
-		}
+		public ITaskManager TaskManager { get;set; }
 		
-		private IStorageManager fStorageManager;
-		public IStorageManager StorageManager
-		{
-			get
-			{
-				return fStorageManager;
-			}
-			
-			set
-			{
-				fStorageManager = value;
-			}						
-		}
+		public IStorageManager StorageManager {	get;set; }
 		
-		private IStateManager fStateManager;
-		public IStateManager StateManager
-		{
-			get
-			{
-				return fStateManager;
-			}
-			
-			set
-			{
-				fStateManager = value;
-			}
-		}		
+		public IStateManager StateManager {	get;set; }		
 		
 		#endregion
 		
-		private Window fMainForm;
-		public Window MainForm
-		{
-			get
-			{
-				return fMainForm;
-			}
-			set
-			{
-				fMainForm = value;
-			}			
-		}
+		public Window MainForm { get;set; }
 		
-		private IGuiState fControledGui;
-		public IGuiState ControledGui
-		{
-			get
-			{
-				return fControledGui;
-			}
-			
-			set
-			{
-				fControledGui = value;
-			}
-			
-		}
+		public IGuiState ControledGui {	get;set; }
 		
-		private GuiFactory fGuiFactory;
-		public GuiFactory GuiFactory
-		{
-			get
-			{
-				return fGuiFactory;
-			}
-			set
-			{
-				fGuiFactory = value;
-			}
-		}
+		public GuiFactory GuiFactory { get;set; }
 		
-		public StateFactory fStateFactory;
-		public StateFactory StateFactory
-		{
-			get
-			{
-				return fStateFactory;
-			}
-			
-			set
-			{
-				fStateFactory = value;
-			}
-		}
+		public StateFactory StateFactory { get;set; }
 		
 		public void CreateTaskState()
 		{			
-			ViewSingleStateDialog stateView = fGuiFactory.CreateSingleStateView(fMainForm);
+			ViewSingleStateDialog stateView = GuiFactory.CreateSingleStateView(MainForm);
 			if (Gtk.ResponseType.Ok == (Gtk.ResponseType)stateView.ShowDialog())
 			{
-				State newState = (State)fStateFactory.CreateTaskState();
+				State newState = (State)StateFactory.CreateTaskState();
 				if(newState == null) return;
 				newState.Name = stateView.Name;
 					
@@ -161,8 +66,8 @@ namespace GanttTracker.StateManager
 				newState.ColorBlue = stateView.ColorBlue;
 							
 				newState.Save();
-				fControledGui.StateSource =	TaskManager.TaskStateSource;
-				fControledGui.BindStates();
+				ControledGui.StateSource =	TaskManager.TaskStateSource;
+				ControledGui.BindStates();
 			}
 		}
 		
@@ -170,7 +75,7 @@ namespace GanttTracker.StateManager
 		{
 			State state = (State)TaskManager.GetTaskState(stateID); 
 			if(state == null) return;
-			ViewSingleStateDialog stateView = fGuiFactory.CreateSingleStateView(fMainForm, state);						
+			ViewSingleStateDialog stateView = GuiFactory.CreateSingleStateView(MainForm, state);						
 			if (Gtk.ResponseType.Ok == (Gtk.ResponseType)stateView.ShowDialog())
 			{
 				state.Name = stateView.Name;
@@ -180,23 +85,23 @@ namespace GanttTracker.StateManager
 				state.ColorBlue = stateView.ColorBlue;
 					
 				state.Save();
-				fControledGui.StateSource =	TaskManager.TaskStateSource;
-				fControledGui.BindStates();
+				ControledGui.StateSource =	TaskManager.TaskStateSource;
+				ControledGui.BindStates();
 			}
 		}
 		
 		public void DeleteTaskState(int stateID)
 		{			
 			TaskManager.DeleteTaskState(stateID);
-			fControledGui.StateSource =	TaskManager.TaskStateSource;
-			fControledGui.BindStates();
+			ControledGui.StateSource =	TaskManager.TaskStateSource;
+			ControledGui.BindStates();
 		}
 		
 		public void CreateTaskStateConnection(int stateID)
 		{
 			State state = (State)TaskManager.GetTaskState(stateID); 
 			if(state == null) return;
-			ViewConnectionDialog connectionView = fGuiFactory.CreateConnectionView(fMainForm,TaskManager.TaskStateSource);						
+			ViewConnectionDialog connectionView = GuiFactory.CreateConnectionView(MainForm,TaskManager.TaskStateSource);						
 			if (Gtk.ResponseType.Ok == (Gtk.ResponseType)connectionView.ShowDialog())
 			{
 				State connectedState = (State)TaskManager.GetTaskState(connectionView.StateID);
@@ -204,7 +109,7 @@ namespace GanttTracker.StateManager
 				Connection connection = (Connection)TaskManager.CreateTaskStateConnection(state,connectedState);
 				connection.Name = connectionView.Name;
 				connection.Save();
-				fControledGui.BindConnections(state);
+				ControledGui.BindConnections(state);
 			}
 		}
 		

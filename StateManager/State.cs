@@ -16,137 +16,65 @@ namespace GanttTracker.StateManager
 	{
 		public State()
 		{
-			fNew = true;
+			isNew = true;
 			Initialize(null);
 		}
 		
 		public State(ITaskManager parent)
 		{
-			fNew = true;
+			isNew = true;
 			Initialize(parent);
 		}
 		
 		public State(ITaskManager parent, int ID)
 		{
-			fNew = false;
+			isNew = false;
 			Initialize(parent);
-			fID = ID;
+			ID = ID;
 		}
 		
 		private void Initialize(ITaskManager parent)
 		{
-			fParent = parent;
-			fConnections = new Hashtable();
+			Parent = parent;
+			Connections = new Hashtable();
 		}
 		
 		#region IStateView Implementation
 		
-		private string fName;
-		public string Name
-		{
-			get
-			{
-				return fName;
-			}
-			
-			set
-			{
-				fName = value;
-			}
-		}
+		public string Name { get;set; }
 		
-		private byte fColorRed;
-		public byte ColorRed
-		{
-			get
-			{
-				return fColorRed;
-			}
-			
-			set
-			{
-				fColorRed = value;
-			}
-		}
+		public byte ColorRed {	get;set; }
 		
-		private byte fColorGreen;
-		public byte ColorGreen
-		{
-			get
-			{
-				return fColorGreen;
-			}
-			
-			set
-			{
-				fColorGreen = value;
-			}
-		}
+		public byte ColorGreen { get;set; }
 		
-		private byte fColorBlue;
-		public byte ColorBlue
-		{
-			get
-			{
-				return fColorBlue;
-			}
-			
-			set
-			{
-				fColorBlue = value;
-			}
-		}
+		public byte ColorBlue {	get;set; }
 		
 		private int fMappingID;
 		public int MappingID
 		{
 			get
 			{
-				if (!fIsMapped)
+				if (!IsMapped)
 					throw new NotAllowedException("State not mapped");
 				return fMappingID;
 			}
 			set
 			{
-				fIsMapped = true;
+				IsMapped = true;
 				fMappingID = value;				 
 			}
 		}
 		
-		private bool fIsMapped;
-		public bool IsMapped
-		{
-			get
-			{
-				return fIsMapped;
-			}
-			
-			set
-			{
-				fIsMapped = value;
-			}
-		}
+		public bool IsMapped { get;set; }
 		
-		private Hashtable fConnections;
-		public Hashtable Connections
-		{
-			get
-			{
-				return fConnections;
-			}
-			
-			set
-			{
-				throw new NotAllowedException("Use Connect, Disconnect methods for change connections");
-			}
-		}
+		public Hashtable Connections { get;set; }
 		
 		public void Connect(IManagerEntity stateEntry, string connectionName)
 		{		 
 			State state = (State)stateEntry;
-			if (!fConnections.ContainsKey(state.ID))
+			if (!Connections.ContainsKey(state.ID))
 			{
-				fConnections.Add(state.ID,connectionName);				
+				Connections.Add(state.ID,connectionName);				
 			}	
 			else
 				throw new NotRequiredException("Connection to state with ID "+stateEntry.ID+" already added");
@@ -154,9 +82,9 @@ namespace GanttTracker.StateManager
 		
 		public void Disconnect(IManagerEntity stateEntry)
 		{
-			if (fConnections.ContainsKey(stateEntry.ID))
+			if (Connections.ContainsKey(stateEntry.ID))
 			{
-				fConnections.Remove(stateEntry.ID);
+				Connections.Remove(stateEntry.ID);
 			}	
 			else
 				throw new KeyNotFoundException(stateEntry.ID);
@@ -164,51 +92,27 @@ namespace GanttTracker.StateManager
 		
 		public bool IsConnected(IManagerEntity stateEntry)
 		{
-			return fConnections.ContainsKey(stateEntry.ID);
+			return Connections.ContainsKey(stateEntry.ID);
 		}
 		
 		public void ClearConnections()
 		{
-			fConnections.Clear();
+			Connections.Clear();
 		}
 		
 		#endregion
 		
 		#region IManagerEntity Implementation
 		
-		public int fID;
-		public int ID
-		{
-			get
-			{
-				return fID;
-			}
-			
-			set
-			{
-				throw new NotAllowedException("Can not set ID for managed entity");
-			}
-		}
+		public int ID {	get;set; }
 		
-		private bool fNew;
-		public bool isNew
-		{
-			get
-			{
-				return fNew;
-			}
-			
-			set
-			{
-				throw new NotAllowedException("Change state for managed entity not allowed");
-			}
-		}
+		public bool isNew {	get;set; }
 		
 		public bool isUpdated
 		{
 			get
 			{
-				return fParent.isUpdatedTaskState(this);
+				return Parent.isUpdatedTaskState(this);
 			}
 			
 			set
@@ -217,34 +121,22 @@ namespace GanttTracker.StateManager
 			}
 		}
 		
-		private ITaskManager fParent;
-		public ITaskManager Parent
-		{
-			get
-			{
-				return fParent;
-			}
-			
-			set
-			{
-				fParent = value;
-			}
-		}
+		public ITaskManager Parent { get;set; }
 		
 		public void BindData()
 		{
-			fParent.BindTaskState(this);
+			Parent.BindTaskState(this);
 		}
 				
 		public void Save()
 		{
-			fNew = false;
-			fParent.UpdateTaskState(this);
+			isNew = false;
+			Parent.UpdateTaskState(this);
 		}
 		
 		public void Delete()
 		{
-			fParent.DeleteTaskState(ID);
+			Parent.DeleteTaskState(ID);
 		}
 		
 		#endregion

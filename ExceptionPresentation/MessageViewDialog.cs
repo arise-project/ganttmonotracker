@@ -96,6 +96,7 @@ namespace GanttMonoTracker.ExceptionPresentation
 			thisDialog.Destroy();
 			return result;
 		}
+
 		public string WarningType
 		{
 			get

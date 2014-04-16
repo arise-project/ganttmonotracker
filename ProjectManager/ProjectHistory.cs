@@ -17,7 +17,7 @@ namespace GanttTracker.ProjectManager
 	{
 		private ProjectHistory()
 		{
-			fProjects = new Hashtable();
+			Projects = new Hashtable();
 		}
 		
 		private static ProjectHistory fInstance;
@@ -28,38 +28,23 @@ namespace GanttTracker.ProjectManager
 				if (fInstance == null)
 					fInstance = new ProjectHistory();
 				return fInstance;
-			}
-			
-			set
-			{
-			}			
+			}	
 		}
 		
-		private Hashtable fProjects;
-		public Hashtable Projects
-		{
-			get
-			{
-				return fProjects;
-			}
-			set
-			{
-				fProjects = value;
-			}
-		}
+		public Hashtable Projects {	get;set; }
 		
 		public void SaveProject(string fileName)
 		{					 
-			if (fProjects != null)
+			if (Projects != null)
 			{
 				XmlDocument doc = new XmlDocument();
 				XmlElement mainTeg = (XmlElement)doc.CreateElement("projectHistory");			
 				
-				foreach (string path in fProjects.Keys)
+				foreach (string path in Projects.Keys)
 				{
 					XmlElement projectTeg = (XmlElement)doc.CreateElement("project");
 					projectTeg.SetAttribute("path",path);
-					projectTeg.SetAttribute("name",(string)fProjects[path]);
+					projectTeg.SetAttribute("name",(string)Projects[path]);
 					mainTeg.AppendChild(projectTeg);					
 				}
 				doc.AppendChild(mainTeg);
@@ -71,7 +56,7 @@ namespace GanttTracker.ProjectManager
 		
 		public void OpenProject(string fileName)
 		{
-			if (fProjects != null)
+			if (Projects != null)
 			{
 				StreamReader r = new StreamReader(fileName);
 				XmlDocument doc = new XmlDocument();
@@ -80,9 +65,10 @@ namespace GanttTracker.ProjectManager
 				XmlNodeList list = doc.SelectNodes(@"projectHistory\project");
 				foreach (XmlNode projectNode in list)
 				{
-					if (!fProjects.ContainsKey(((XmlElement)projectNode).GetAttribute("path")))
+					var node = (XmlElement)projectNode;
+					if (!Projects.ContainsKey(node.GetAttribute("path")))
 					{
-						fProjects.Add(((XmlElement)projectNode).GetAttribute("path"),((XmlElement)projectNode).GetAttribute("name"));
+						Projects.Add(node.GetAttribute("path"), node.GetAttribute("name"));
 					}
 				}
 			}			

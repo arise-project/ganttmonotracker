@@ -89,12 +89,12 @@ namespace GanttTracker.TaskManager.TaskStorage
 			}
 			
 			if (entityTable == null)
-				throw new KeyNotFoundException("Table with name " + fParams["EntityName"].ToString() + "Not Found");
+				throw new KeyNotFoundException(string.Format("Table with name {0} Not Found", fParams["EntityName"]));
 			 
-			 foreach (object coumn in values.Keys)
+			foreach (object column in values.Keys)
 			 {
-			 	if (!entityTable.Columns.Contains(coumn.ToString()	) )
-			 		throw new KeyNotFoundException("Column with name " + coumn.ToString()	+ "Not Found for table " + entityTable.TableName );			 	
+			 	if (!entityTable.Columns.Contains(column.ToString()	) )
+					throw new KeyNotFoundException(string.Format("Column with name {0} Not Found for table {1}", column, entityTable.TableName ));			 	
 			 }
 			 
 			 string rule = "";
