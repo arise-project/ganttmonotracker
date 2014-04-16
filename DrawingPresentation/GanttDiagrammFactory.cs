@@ -10,7 +10,8 @@ using Gdk;
 using Pango; 
 
 using GanttTracker.TaskManager.ManagerException;
-using TaskManagerInterface; 
+using TaskManagerInterface;
+using System.Configuration; 
 
 namespace GanttMonoTracker.DrawingPresentation
 {
@@ -185,6 +186,18 @@ namespace GanttMonoTracker.DrawingPresentation
 
 			DateTime firstDate = (DateTime)GanttSource.Tables["DataRange"].Rows[0]["MinDate"];
 			DateTime lastDate = (DateTime)GanttSource.Tables["DataRange"].Rows[0]["MaxDate"];
+
+			int weeks;
+			if (int.TryParse (ConfigurationManager.AppSettings ["weekslimit"], out weeks)) {
+				if ((DateTime.Now - firstDate).Days > weeks * 7 / 2) {
+					firstDate = DateTime.Now.AddDays (-weeks * 7 / 2);
+				}
+
+				if ((lastDate - DateTime.Now).Days > weeks * 7 / 2) {
+					lastDate = DateTime.Now.AddDays (weeks * 7 / 2);
+				}
+			}
+
 			TimeSpan deltaSpan = lastDate.Subtract(firstDate);
 
 			int delta = (deltaSpan.Days > 0) ? 
