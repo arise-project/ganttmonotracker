@@ -49,10 +49,7 @@
 	</packing>
       </child>
 
-      <child>
-	<widget class="GtkDrawingArea" id="dwLogo">
-	  <property name="visible">True</property>
-	</widget>
+      <child>	
 	<packing>
 	  <property name="padding">0</property>
 	  <property name="expand">True</property>

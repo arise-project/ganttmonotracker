@@ -11,7 +11,5 @@ namespace TaskManagerInterface
 	public interface IGuiGantt
 	{
 		DataSet GanttSource	{ get;set; }
-		
-		void BindGantt();
 	}
 }

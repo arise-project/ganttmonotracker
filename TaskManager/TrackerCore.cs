@@ -273,10 +273,7 @@ namespace GanttTracker
 			Gdk.Window parent = drawingarea.GdkWindow;
 			if (GanttPresentation == null)
 				GanttPresentation = new GanttDiagramm();
-			GanttPresentation.PangoContext = drawingarea.PangoContext;
-			GanttPresentation.GanttSource = TaskManager.GanttSource;
 			GanttPresentation.DateNowVisible = true;
-			GanttPresentation.CreateDiagramm(parent);
 		}
 
 		

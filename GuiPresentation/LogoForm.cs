@@ -21,15 +21,26 @@ namespace GanttMonoTracker.GuiPresentation
 	{
 		private DataSet fGanttSource;
 
+
 		private Gtk.Window thisWindow;
-		
-		[Glade.Widget()]
-		private Gtk.DrawingArea dwLogo;
+
 
 		[Glade.Widget()]
 		private Gtk.TextView tvReleaseNews;
-		
+
+
 		private GanttDiagramm fLogoDiagram;
+
+
+		/// <summary>
+		/// The drwAssigment container.
+		/// </summary>
+		[Glade.Widget()]
+		private Gtk.VBox vbox1;
+
+
+		private Gtk.DrawingArea dwLogo;
+
 
 		public LogoForm()
 		{
@@ -44,9 +55,16 @@ namespace GanttMonoTracker.GuiPresentation
 				this.thisWindow.HideAll();
 			};
 			ReadMe();
-			fLogoDiagram = new GanttDiagramm { ReadOnly = true };
-			fLogoDiagram.GanttSource = GetLogoSource();
-			dwLogo.ExposeEvent += new Gtk.ExposeEventHandler(OnLogoExpose);
+
+			// Assigment
+			dwLogo = new GanttDiagramm () { ReadOnly = true, GanttSource = GetLogoSource(), DateNowVisible = false };
+			var readme = vbox1.Children [1];
+			var readme1 = vbox1.Children [2];
+			vbox1.Remove (readme1);
+			vbox1.Add (dwLogo);
+			vbox1.Add (readme);
+			vbox1.Add (readme1);
+			dwLogo.Show ();
 		}
 		
 
@@ -62,14 +80,6 @@ namespace GanttMonoTracker.GuiPresentation
 					tvReleaseNews.Buffer.Text = text;
 					sr.Close();
 				}
-		}
-
-		private void OnLogoExpose(object sender, ExposeEventArgs args)
-		{
-			if (dwLogo.GdkWindow != null)
-			{
-				fLogoDiagram.CreateDiagramm(dwLogo.GdkWindow);
-			}
 		}
 
 

@@ -93,16 +93,24 @@ namespace GanttMonoTracker.GuiPresentation
 		 
 		[Glade.WidgetAttribute]
 		private Gtk.TreeView tvTaskTree;
-		 
-		[Glade.WidgetAttribute]
+
+
+		/// <summary>
+		/// Gantt.
+		/// </summary>
+		[Glade.Widget()]
+		private Gtk.VBox vbox3;
+
+
 		private Gtk.DrawingArea drwGantt;
 		 
 
 		/// <summary>
-		/// The drwAssigment container.
+		/// Assigment.
 		/// </summary>
 		[Glade.Widget()]
 		private Gtk.VBox vbox4;
+
 
 		private Gtk.DrawingArea drwAssigment;
 		 
@@ -172,13 +180,15 @@ namespace GanttMonoTracker.GuiPresentation
 			tvTaskTree.AppendColumn("End Time",new CellRendererText(), "text", 3);
 			tvTaskTree.AppendColumn("Actor",new CellRendererText(), "text", 4);
 			tvTaskTree.AppendColumn("State",new CellRendererText(), "text", 5);
-			
-			drwGantt.ExposeEvent += new Gtk.ExposeEventHandler(OnGanttExpose);
 
-			// todo : restore Assigment
+			// Assigment
 			drwAssigment = new AssigmentDiagramm ();
 			vbox4.Add (drwAssigment);
 			drwAssigment.Show ();
+
+			drwGantt = new GanttDiagramm ();
+			vbox3.Add (drwGantt);
+			drwGantt.Show ();
 				
 		}
 		
