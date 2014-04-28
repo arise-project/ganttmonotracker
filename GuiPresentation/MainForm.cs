@@ -25,8 +25,11 @@ namespace GanttMonoTracker.GuiPresentation
 	{
 		// id, description, start time, end time, actor, status
 		private TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string),typeof(string), typeof(string),typeof(string),typeof(string));
+
 		private TreeStore fActorStore = new TreeStore(typeof(int),typeof(string),typeof(string));
+
 		private FileSelection fFileSelection; // todo : FileChooserWidget
+
 		private string selectedFile;
 
 		#region Widgets
@@ -94,7 +97,13 @@ namespace GanttMonoTracker.GuiPresentation
 		[Glade.WidgetAttribute]
 		private Gtk.DrawingArea drwGantt;
 		 
-		[Glade.WidgetAttribute]
+
+		/// <summary>
+		/// The drwAssigment container.
+		/// </summary>
+		[Glade.Widget()]
+		private Gtk.VBox vbox4;
+
 		private Gtk.DrawingArea drwAssigment;
 		 
 		#endregion
@@ -111,6 +120,8 @@ namespace GanttMonoTracker.GuiPresentation
 			TrackerCore.Instance.State = CoreState.EmptyProject;
 			TrackerCore.Instance.BindProject();
 			TrackerCore.Instance.GuiSource = new GuiFactory();
+
+
 		}
 		
 		private void InitializeComponents()
@@ -165,7 +176,9 @@ namespace GanttMonoTracker.GuiPresentation
 			drwGantt.ExposeEvent += new Gtk.ExposeEventHandler(OnGanttExpose);
 
 			// todo : restore Assigment
-			//drwAssigment.ExposeEvent += new Gtk.ExposeEventHandler(OnAssigmentExpose);
+			drwAssigment = new AssigmentDiagramm ();
+			vbox4.Add (drwAssigment);
+			drwAssigment.Show ();
 				
 		}
 		
@@ -361,18 +374,12 @@ namespace GanttMonoTracker.GuiPresentation
 			TrackerCore.Instance.ShowAboutDialog();
 		}
 		
-		Pango.Layout layout;
-		
-		
+
 		private void OnGanttExpose(object sender, ExposeEventArgs args)
 		{
 			TrackerCore.Instance.DrawGantt(drwGantt);
 		}
 
-		private void OnAssigmentExpose(object sender, ExposeEventArgs args)
-		{
-			TrackerCore.Instance.DrawAssigment(drwAssigment);
-		}
 		
 		private void OnKeyPress(object sender, Gtk.KeyPressEventArgs args)
 		{

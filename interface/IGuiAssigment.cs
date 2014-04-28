@@ -11,7 +11,5 @@ namespace TaskManagerInterface
 	public interface IGuiAssigment
 	{
 		DataSet AssigmentSource	{ get; set; }
-		
-		void BindAssigment();
 	}
 }

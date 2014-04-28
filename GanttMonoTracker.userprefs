@@ -1,37 +1,15 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Common.targets">
     <Files>
-      <File FileName="ProjectManager\GanttDiagram.cs" Line="1" Column="1" />
-      <File FileName="ProjectManager\ProjectHistory.cs" Line="1" Column="1" />
-      <File FileName="StateManager\Connection.cs" Line="1" Column="1" />
-      <File FileName="StateManager\State.cs" Line="1" Column="1" />
-      <File FileName="StateManager\StateCore.cs" Line="1" Column="1" />
-      <File FileName="StateManager\StateFactory.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\ManagerException\KeyNotFoundException.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\ManagerException\NotAllowedException.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\ManagerException\NotRequiredException.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\ManagerException\ValidationException.cs" Line="1" Column="1" />
-      <File FileName="interface\IManagerExstension.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\TaskStorage\CommandFactory.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\TaskStorage\DeleteCommand.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\TaskStorage\InsertCommand.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\TaskStorage\SelectCommand.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\TaskStorage\StorageDealer.cs" Line="1" Column="1" />
-      <File FileName="interface\IStorageDealler.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\TaskStorage\UpdateCommand.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\Actor.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\EmptyTaskManaegr.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\FSLocations.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\ManagerFactory.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\Task.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\TrackerCore.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\XmlTaskManager.cs" Line="1" Column="1" />
-      <File FileName="AssemblyInfo.cs" Line="1" Column="1" />
-      <File FileName="Main.cs" Line="1" Column="1" />
-      <File FileName="ViewActorDialog.glade" Line="19" Column="27" />
-      <File FileName="gtk-gui\MainWindow.cs" Line="1" Column="1" />
-      <File FileName="MainWindow.cs" Line="1" Column="1" />
+      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="211" Column="3" />
+      <File FileName="interface\IGuiAssigment.cs" Line="13" Column="1" />
+      <File FileName="TaskManager\TrackerCore.cs" Line="282" Column="3" />
+      <File FileName="GuiPresentation\MainForm.cs" Line="180" Column="2" />
+      <File FileName="GuiPresentation\GMTAboutDialog.glade" Line="1" Column="1" />
+      <File FileName="GuiPresentation\MainForm.glade" Line="555" Column="1" />
+      <File FileName="ExceptionPresentation\MessageViewDialog.cs" Line="25" Column="26" />
+      <File FileName="..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Common.targets" Line="3377" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -40,6 +18,8 @@
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/DrawingPresentation/AssigmentDiagram.cs" line="292" column="1" />
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/GuiPresentation/GuiFactory.cs" line="69" column="5" />
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/StateManager/StateCore.cs" line="187" column="14" />
+      <Breakpoint file="C:\Users\Eugene\Documents\GitHub\ganttmonotracker\GuiPresentation\MainForm.cs" line="179" column="8" />
+      <Breakpoint file="C:\Users\Eugene\Documents\GitHub\ganttmonotracker\DrawingPresentation\AssigmentDiagram.cs" line="56" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

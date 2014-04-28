@@ -278,16 +278,7 @@ namespace GanttTracker
 			GanttPresentation.DateNowVisible = true;
 			GanttPresentation.CreateDiagramm(parent);
 		}
-		
-		public void DrawAssigment(Gtk.DrawingArea drawingarea)
-		{
-			Gdk.Window parent = drawingarea.GdkWindow;
-			if (AssigmentPresentation == null)
-				AssigmentPresentation = new AssigmentDiagramm();
-			AssigmentPresentation.PangoContext = drawingarea.PangoContext;
-			AssigmentPresentation.AssigmentSource = TaskManager.AssigmentSource;
-			AssigmentPresentation.CreateDiagramm(parent);
-		}
+
 		
 		public void ShowAboutDialog()
 		{
