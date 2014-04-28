@@ -10,8 +10,10 @@ using System.Data;
 using Gdk;
 using Pango; 
 
+using GanttTracker;
 using GanttTracker.TaskManager.ManagerException;
-using TaskManagerInterface; 
+using TaskManagerInterface;
+using Cairo; 
 
 namespace GanttMonoTracker.DrawingPresentation
 {
@@ -54,6 +56,8 @@ namespace GanttMonoTracker.DrawingPresentation
 		protected override bool OnExposeEvent(Gdk.EventExpose args)
 		{
 			base.OnExposeEvent (args);
+
+			AssigmentSource = TrackerCore.Instance.TaskManager.AssigmentSource;
 			// Insert drawing code here.
 			Cairo.Context grw = Gdk.CairoHelper.Create (this.GdkWindow);
 
@@ -74,16 +78,16 @@ namespace GanttMonoTracker.DrawingPresentation
 
 			//DrawBorder
 			grw.SetSourceRGB(0xff, 0, 0);
-			grw.Rectangle(fBorderMarginH, 
-				fBorderMarginV, 
-				Width - fBorderMarginH, 
-				Height - fBorderMarginV);
-			grw.Clip();
-			grw.Paint();
-			grw.ResetClip();
+
+			grw.MoveTo(fBorderMarginH, fBorderMarginV);
+			grw.LineTo(Width - fBorderMarginH, fBorderMarginV);    
+			grw.LineTo(Width - fBorderMarginH, Height - fBorderMarginV);    
+			grw.LineTo(fBorderMarginH, Height - fBorderMarginV);    
+			grw.LineTo(fBorderMarginH, fBorderMarginV);    
+			grw.Stroke();
 
 			//DrawTasks
-			/*
+
 			int deltaActor = (AssigmentSource.Tables["Actor"].Rows.Count > 0) ? 
 				(Height - 2 * fBorderMarginV) / AssigmentSource.Tables["Actor"].Rows.Count : 
 				Height - 2 * fBorderMarginV;
@@ -134,6 +138,21 @@ namespace GanttMonoTracker.DrawingPresentation
 						layout.FontDescription = FontDescription.FromString("Tahoma 10");
 						layout.SetMarkup(taskCount.ToString());
 
+						/*
+						grw.SetSourceRGB(0xff, 0xff, 0xff);
+						grw.SetFontSize (10.0);
+						grw.SetContextFontFace ( "Tahoma 10", 
+							FontSlant.Normal, FontWeight.Normal);
+						grw.MoveTo (offset,
+							(int)(deltaActor * (1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex);
+
+						grw.ShowText (taskCount.ToString());
+						*/
+						Gdk.Color foregroundColor3 = new Gdk.Color(0xff, 0xff, 0xff);
+						Gdk.GC TaskLabelGC = new Gdk.GC (this.GdkWindow);
+						Colormap colormap = Colormap.System;
+						colormap.AllocColor(ref foregroundColor3,true,true);
+						TaskLabelGC.Foreground = foregroundColor3;
 						this.GdkWindow.DrawLayout(TaskLabelGC, 
 							offset,
 							(int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,layout);
@@ -144,6 +163,7 @@ namespace GanttMonoTracker.DrawingPresentation
 				actorIndex++;
 			}
 
+			/*
 			//DrawActorAxis
 			int offsetActor = fBorderMarginV; 
 

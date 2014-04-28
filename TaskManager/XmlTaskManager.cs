@@ -113,7 +113,11 @@ namespace GanttTracker.TaskManager
 				task.ActorID = (int)taskRow["ActorID"];
 			else
 				task.ActorPresent = false;
-			task.Description = (string)taskRow["Description"];		
+
+			task.Description = taskRow["Description"] as string;		
+			if(task.Description == null)
+				task.Description = string.Empty;
+
 			 
 			task.StartTime = (DateTime)taskRow["StartTime"];
 			task.EndTime = (DateTime)taskRow["EndTime"];

@@ -1,15 +1,17 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Common.targets">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DrawingPresentation\AssigmentDiagram.cs">
     <Files>
-      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="211" Column="3" />
-      <File FileName="interface\IGuiAssigment.cs" Line="13" Column="1" />
-      <File FileName="TaskManager\TrackerCore.cs" Line="282" Column="3" />
-      <File FileName="GuiPresentation\MainForm.cs" Line="180" Column="2" />
+      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="123" Column="19" />
+      <File FileName="interface\IGuiAssigment.cs" Line="1" Column="1" />
+      <File FileName="TaskManager\TrackerCore.cs" Line="24" Column="23" />
+      <File FileName="GuiPresentation\MainForm.cs" Line="180" Column="9" />
       <File FileName="GuiPresentation\GMTAboutDialog.glade" Line="1" Column="1" />
-      <File FileName="GuiPresentation\MainForm.glade" Line="555" Column="1" />
-      <File FileName="ExceptionPresentation\MessageViewDialog.cs" Line="25" Column="26" />
-      <File FileName="..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Common.targets" Line="3377" Column="35" />
+      <File FileName="GuiPresentation\MainForm.glade" Line="555" Column="15" />
+      <File FileName="ExceptionPresentation\MessageViewDialog.cs" Line="1" Column="1" />
+      <File FileName="StateManager\StateCore.cs" Line="19" Column="15" />
+      <File FileName="GuiPresentation\ViewStateDialog.cs" Line="62" Column="10" />
+      <File FileName="GuiPresentation\GuiFactory.cs" Line="125" Column="36" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -18,8 +20,6 @@
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/DrawingPresentation/AssigmentDiagram.cs" line="292" column="1" />
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/GuiPresentation/GuiFactory.cs" line="69" column="5" />
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/StateManager/StateCore.cs" line="187" column="14" />
-      <Breakpoint file="C:\Users\Eugene\Documents\GitHub\ganttmonotracker\GuiPresentation\MainForm.cs" line="179" column="8" />
-      <Breakpoint file="C:\Users\Eugene\Documents\GitHub\ganttmonotracker\DrawingPresentation\AssigmentDiagram.cs" line="56" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
