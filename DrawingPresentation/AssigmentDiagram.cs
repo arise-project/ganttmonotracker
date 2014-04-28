@@ -58,6 +58,12 @@ namespace GanttMonoTracker.DrawingPresentation
 			base.OnExposeEvent (args);
 
 			AssigmentSource = TrackerCore.Instance.TaskManager.AssigmentSource;
+
+			DateTime firstDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MinDate"];
+			DateTime lastDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MaxDate"];
+			TimeSpan deltaSpan = lastDate.Subtract(firstDate);
+
+
 			// Insert drawing code here.
 			Cairo.Context grw = Gdk.CairoHelper.Create (this.GdkWindow);
 
@@ -72,6 +78,10 @@ namespace GanttMonoTracker.DrawingPresentation
 			Depth = fDepth;
 			Width -= 3;
 			Height -= 3;
+
+			int delta = (deltaSpan.Days > 0) ? 
+				(Width - 2 * fBorderMarginH) / deltaSpan.Days :
+				(Width - 2 * fBorderMarginH);
 
 			base.GdkWindow.ClearArea(X,Y,Width,Height);
 			base.Show();
@@ -92,12 +102,8 @@ namespace GanttMonoTracker.DrawingPresentation
 				(Height - 2 * fBorderMarginV) / AssigmentSource.Tables["Actor"].Rows.Count : 
 				Height - 2 * fBorderMarginV;
 			deltaActor -= fTaskHeight; 
-			DateTime firstDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MinDate"];
-			DateTime lastDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MaxDate"];
-			TimeSpan deltaSpan = lastDate.Subtract(firstDate);
-			int delta = (deltaSpan.Days > 0) ? 
-				(Width - 2 * fBorderMarginH) / deltaSpan.Days :
-				(Width - 2 * fBorderMarginH);
+
+
 
 			int maxTaskCout = 0;
 			foreach(DataRow row in this.AssigmentSource.Tables["AssigmentSource"].Rows)
@@ -109,6 +115,12 @@ namespace GanttMonoTracker.DrawingPresentation
 			}		
 
 			int actorIndex = 0;
+			Gdk.Color foregroundColor3 = new Gdk.Color(0xff, 0xff, 0xff);
+			Gdk.GC TaskLabelGC = new Gdk.GC (this.GdkWindow);
+			Colormap colormap = Colormap.System;
+			colormap.AllocColor(ref foregroundColor3,true,true);
+			TaskLabelGC.Foreground = foregroundColor3;
+
 			foreach(DataRow row in AssigmentSource.Tables["Actor"].Rows)
 			{
 				DateTime labelDate = firstDate;
@@ -138,34 +150,29 @@ namespace GanttMonoTracker.DrawingPresentation
 						layout.FontDescription = FontDescription.FromString("Tahoma 10");
 						layout.SetMarkup(taskCount.ToString());
 
-						/*
-						grw.SetSourceRGB(0xff, 0xff, 0xff);
-						grw.SetFontSize (10.0);
-						grw.SetContextFontFace ( "Tahoma 10", 
-							FontSlant.Normal, FontWeight.Normal);
-						grw.MoveTo (offset,
-							(int)(deltaActor * (1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex);
 
-						grw.ShowText (taskCount.ToString());
-						*/
-						Gdk.Color foregroundColor3 = new Gdk.Color(0xff, 0xff, 0xff);
-						Gdk.GC TaskLabelGC = new Gdk.GC (this.GdkWindow);
-						Colormap colormap = Colormap.System;
-						colormap.AllocColor(ref foregroundColor3,true,true);
-						TaskLabelGC.Foreground = foregroundColor3;
 						this.GdkWindow.DrawLayout(TaskLabelGC, 
 							offset,
 							(int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,layout);
+
 					}
 					offset += delta;
 					labelDate = labelDate.AddDays(1);
 				}
 				actorIndex++;
 			}
+			TaskLabelGC.Dispose ();
 
-			/*
+
 			//DrawActorAxis
 			int offsetActor = fBorderMarginV; 
+			Gdk.Color foregroundColor = new Gdk.Color(0xff, 0, 0);
+			Gdk.Color foregroundColor1 = new Gdk.Color(0, 0, 0xff);
+			Gdk.GC ActorLabelGC = new Gdk.GC (this.GdkWindow);
+			Gdk.GC AxisGC = new Gdk.GC (this.GdkWindow);
+			colormap.AllocColor(ref foregroundColor,true,true);
+			TaskLabelGC.Foreground = foregroundColor;
+			AxisGC.Foreground = foregroundColor1;
 
 			foreach(DataRow row in AssigmentSource.Tables["Actor"].Rows)
 			{
@@ -184,6 +191,9 @@ namespace GanttMonoTracker.DrawingPresentation
 				offsetActor += deltaActor; 
 			}
 
+
+			AxisGC.Dispose ();
+
 			//DrawDateAxis
 
 			var labelDate1 = firstDate;
@@ -195,7 +205,7 @@ namespace GanttMonoTracker.DrawingPresentation
 				layout.FontDescription = FontDescription.FromString("Tahoma 10");
 				layout.SetMarkup(labelDate1.ToString("dd/MM"));
 
-				this.GdkWindow.DrawLayout(DateLabelGC, 
+				this.GdkWindow.DrawLayout(ActorLabelGC, 
 					offset1 + fBorderMarginH,
 					Height -2 * fBorderMarginV - this.fTaskHeight,
 					layout);
@@ -209,16 +219,27 @@ namespace GanttMonoTracker.DrawingPresentation
 				labelDate1 = labelDate1.AddDays(1);
 			}
 
+			ActorLabelGC.Dispose ();
+
 			//DrawDateNow
 			TimeSpan nowSpan = DateTime.Now.Subtract(firstDate);
 
 			int offsetDate = fBorderMarginH + (int)(delta*(double)nowSpan.Ticks / TimeSpan.TicksPerDay);
 
-			this.GdkWindow.DrawLine(DateNowGC,
-				offsetDate, 
-				fBorderMarginV, 
-				offsetDate, 
+			grw.SetSourceRGB(0, 0, 0);
+			grw.MoveTo(offsetDate, 
+				fBorderMarginV);
+			grw.LineTo (offsetDate, 
 				Height - fBorderMarginV);
+			grw.RelLineTo (new Distance{ Dx = -3, Dy = 0 });
+			grw.RelLineTo (new Distance{ Dx = 3, Dy = -3 });
+			grw.RelLineTo (new Distance{ Dx = 3, Dy = 3 });
+			grw.RelLineTo (new Distance{ Dx = -3, Dy = 0 });
+			grw.Stroke();
+
+
+
+			/*
 			this.GdkWindow.DrawPolygon(DateNowGC,
 				true,
 				new Gdk.Point [] 
@@ -227,8 +248,9 @@ namespace GanttMonoTracker.DrawingPresentation
 					new Gdk.Point(offsetDate + 5,Height), 
 					new Gdk.Point(offsetDate - 5,Height) 
 				});
+				*/
 
-*/
+
 			return true;
 		}
 		
