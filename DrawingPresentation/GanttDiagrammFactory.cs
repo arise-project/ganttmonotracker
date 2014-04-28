@@ -12,12 +12,17 @@ using Pango;
 using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
 using System.Configuration;
-using GanttTracker; 
+using GanttTracker;
+using Cairo; 
 
 namespace GanttMonoTracker.DrawingPresentation
 {
 	public class GanttDiagramm : Gtk.DrawingArea, IGuiGantt
 	{
+		public GanttDiagramm() : base()
+		{
+			DateNowVisible = true;
+		}
 		int fTaskHeight = 14;
 
 
@@ -66,11 +71,6 @@ namespace GanttMonoTracker.DrawingPresentation
 			Width = fWidth - 3;
 			Height = fHeight - 3;
 			Depth = fDepth;
-
-			if (!ReadOnly) {
-				this.GdkWindow.ClearArea(X,Y,Width,Height);
-				this.GdkWindow.Show();
-			}
 
 			// Insert drawing code here.
 			Cairo.Context grw = Gdk.CairoHelper.Create (this.GdkWindow);
@@ -189,108 +189,83 @@ namespace GanttMonoTracker.DrawingPresentation
 				}
 			}
 
+
 			//DrawActorAxis
+			Gdk.GC TaskLabelGC = new Gdk.GC (this.GdkWindow);
 			if (DateNowVisible) {
-				int delta =	(GanttSource.Tables ["Actor"].Rows.Count > 0) ? 
-				(Height - 2 * fBorderMarginV) / GanttSource.Tables ["Actor"].Rows.Count : 
-				Height - 2 * fBorderMarginV;
+				//DrawActorAxis
+				int offsetActor = fBorderMarginV; 
+				Gdk.Color foregroundColor = new Gdk.Color(0xff, 0, 0);
+				Gdk.Color foregroundColor1 = new Gdk.Color(0, 0, 0xff);
+				Gdk.GC ActorLabelGC = new Gdk.GC (this.GdkWindow);
+				Gdk.GC AxisGC = new Gdk.GC (this.GdkWindow);
 
-				int offset = fBorderMarginV; 
+				Colormap.System.AllocColor(ref foregroundColor,true,true);
+				TaskLabelGC.Foreground = foregroundColor;
+				AxisGC.Foreground = foregroundColor1;
 
-				foreach (DataRow row in GanttSource.Tables["Actor"].Rows) {
-					Pango.Layout layout = new Pango.Layout (PangoContext) {
-						Wrap = Pango.WrapMode.Word,
-						FontDescription = FontDescription.FromString ("Tahoma 10")
-					};
+				foreach(DataRow row in GanttSource.Tables["Actor"].Rows)
+				{
+					Pango.Layout layout = new Pango.Layout(PangoContext);
+					layout.Wrap = Pango.WrapMode.Word;
+					layout.FontDescription = FontDescription.FromString("Tahoma 10");
+					layout.SetMarkup((string)row["Name"]);
 
-					layout.SetMarkup ((string)row ["Name"]);
-
-					this.GdkWindow.DrawLayout (
-						GdkPalette.InitColor (this.GdkWindow, ColorEnum.ActorLabel), 
-						fBorderMarginH, offset - fBorderMarginV,
-						layout);
-
-					GdkPalette.DestroyColor ();
-
-					this.GdkWindow.DrawLine (
-						GdkPalette.InitColor (this.GdkWindow, ColorEnum.Axis), 
+					this.GdkWindow.DrawLayout(ActorLabelGC, 
 						fBorderMarginH,
-						offset,
-						Width - fBorderMarginH, 
-						offset);
-
-					GdkPalette.DestroyColor ();
-					offset += delta;
+						offsetActor - fBorderMarginV,layout);
+					this.GdkWindow.DrawLine(AxisGC, 
+						fBorderMarginH, 
+						offsetActor, 
+						Width - fBorderMarginH, offsetActor);
+					offsetActor += deltaActor; 
 				}
+
+
+				AxisGC.Dispose ();
 
 				//DrawDateAxis
 
-				int weeks;
-				if (int.TryParse (ConfigurationManager.AppSettings ["weekslimit"], out weeks)) {
-					if ((DateTime.Now - firstDate).Days > weeks * 7 / 2) {
-						firstDate = DateTime.Now.AddDays (-weeks * 7 / 2);
-					}
+				var labelDate1 = firstDate;
+				int offset1 = fBorderMarginH;
+				for (int i = 0; i < deltaSpan.Days; i++)
+				{
+					Pango.Layout layout = new Pango.Layout(PangoContext);
+					layout.Wrap = Pango.WrapMode.Word;
+					layout.FontDescription = FontDescription.FromString("Tahoma 10");
+					layout.SetMarkup(labelDate1.ToString("dd/MM"));
 
-					if ((lastDate - DateTime.Now).Days > weeks * 7 / 2) {
-						lastDate = DateTime.Now.AddDays (weeks * 7 / 2);
-					}
-				}
-
-				int delta1 = (deltaSpan.Days > 0) ? 
-				(Width - 2 * fBorderMarginH) / deltaSpan.Days :
-				(Width - 2 * fBorderMarginH);
-				int offset2 = fBorderMarginH; 
-
-				DateTime labelDate = firstDate;
-				for (int i = 0; i < deltaSpan.Days; i++) {
-					Pango.Layout layout = new Pango.Layout (PangoContext) {
-						Wrap = Pango.WrapMode.Word,
-						FontDescription = FontDescription.FromString ("Tahoma 10")
-					};
-					layout.SetMarkup (labelDate.ToString ("dd/MM"));
-
-					this.GdkWindow.DrawLayout (
-						GdkPalette.InitColor (this.GdkWindow, ColorEnum.DateLabel), 
-						offset2 + fBorderMarginH,
-						Height - 2 * fBorderMarginV - this.fTaskHeight,
+					this.GdkWindow.DrawLayout(ActorLabelGC, 
+						offset1 + fBorderMarginH,
+						Height -2 * fBorderMarginV - this.fTaskHeight,
 						layout);
-					GdkPalette.DestroyColor ();
 
-					this.GdkWindow.DrawLine (
-						GdkPalette.InitColor (this.GdkWindow, ColorEnum.Axis),
-						offset2, 
+					this.GdkWindow.DrawLine(AxisGC,
+						offset1, 
 						fBorderMarginV, 
-						offset2, 
+						offset1, 
 						Height - fBorderMarginV);
-					GdkPalette.DestroyColor ();
-
-					offset2 += delta1;
-
-					labelDate = labelDate.AddDays (1);
+					offset1 += deltaTask;
+					labelDate1 = labelDate1.AddDays(1);
 				}
 
-				if (DateNowVisible) {
-					TimeSpan nowSpan = DateTime.Now.Subtract (firstDate);
+				ActorLabelGC.Dispose ();
 
-					int offset1 = fBorderMarginH + (int)(delta * (double)nowSpan.Ticks / TimeSpan.TicksPerDay);
+				//DrawDateNow
+				TimeSpan nowSpan = DateTime.Now.Subtract(firstDate);
 
-					this.GdkWindow.DrawLine (
-						GdkPalette.InitColor (this.GdkWindow, ColorEnum.DateNow),
-						offset1,
-						fBorderMarginV,
-						offset1,
-						Height - fBorderMarginV);
-					GdkPalette.DestroyColor ();
-					this.GdkWindow.DrawPolygon (
-						GdkPalette.InitColor (this.GdkWindow, ColorEnum.DateNow),
-						true,
-						new Gdk.Point [] {
-							new Gdk.Point (offset1, Height - 5), 
-							new Gdk.Point (offset1 + 5, Height), 
-							new Gdk.Point (offset1 - 5, Height) 
-						});
-					GdkPalette.DestroyColor ();
-				}
+				int offsetDate = fBorderMarginH + (int)(deltaTask*(double)nowSpan.Ticks / TimeSpan.TicksPerDay);
+
+				grw.SetSourceRGB(0, 0, 0);
+				grw.MoveTo(offsetDate, 
+					fBorderMarginV);
+				grw.LineTo (offsetDate, 
+					Height - fBorderMarginV);
+				grw.RelLineTo (new Distance{ Dx = -3, Dy = 0 });
+				grw.RelLineTo (new Distance{ Dx = 3, Dy = -3 });
+				grw.RelLineTo (new Distance{ Dx = 3, Dy = 3 });
+				grw.RelLineTo (new Distance{ Dx = -3, Dy = 0 });
+				grw.Stroke();
 			}
 			return true;
 		}
@@ -308,6 +283,15 @@ namespace GanttMonoTracker.DrawingPresentation
 				index++;
 			}
 			return -1;
+		}
+
+
+		public void Refresh()
+		{
+			if (!ReadOnly) {
+				this.GdkWindow.ClearArea(X,Y,Width,Height);
+				this.GdkWindow.Show();
+			}
 		}
 	}
 }

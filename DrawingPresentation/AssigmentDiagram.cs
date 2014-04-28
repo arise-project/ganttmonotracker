@@ -97,7 +97,6 @@ namespace GanttMonoTracker.DrawingPresentation
 			grw.Stroke();
 
 			//DrawTasks
-
 			int deltaActor = (AssigmentSource.Tables["Actor"].Rows.Count > 0) ? 
 				(Height - 2 * fBorderMarginV) / AssigmentSource.Tables["Actor"].Rows.Count : 
 				Height - 2 * fBorderMarginV;
@@ -236,20 +235,6 @@ namespace GanttMonoTracker.DrawingPresentation
 			grw.RelLineTo (new Distance{ Dx = 3, Dy = 3 });
 			grw.RelLineTo (new Distance{ Dx = -3, Dy = 0 });
 			grw.Stroke();
-
-
-
-			/*
-			this.GdkWindow.DrawPolygon(DateNowGC,
-				true,
-				new Gdk.Point [] 
-				{
-					new Gdk.Point(offsetDate,Height - 5), 
-					new Gdk.Point(offsetDate + 5,Height), 
-					new Gdk.Point(offsetDate - 5,Height) 
-				});
-				*/
-
 
 			return true;
 		}
