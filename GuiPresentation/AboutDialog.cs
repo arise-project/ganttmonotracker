@@ -18,13 +18,11 @@ namespace GanttMonoTracker.GuiPresentation
 	{
 		private Gtk.Dialog thisDialog;
 	
-
 			
 		public AboutDialog(Window parent)
 		{
 		    Initialize(parent);
 		}
-
 
 
 		private void Initialize(Window parent)
@@ -37,7 +35,6 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog.Modal = true;
 			thisDialog.TransientFor = parent;
 		}
-
 
 		
 		public int Run()
@@ -64,7 +61,6 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			return Run();
 		}
-
 
 
 		public string Title

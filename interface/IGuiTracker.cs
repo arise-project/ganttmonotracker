@@ -10,15 +10,20 @@ namespace TaskManagerInterface
 	public interface IGuiTracker
 	{
 		DataSet TaskSource { get;set; }	
+
 		
 		DataSet ActorSource { get;set; }
+
 		
 		DataSet StateSource { get;set; }
+
 		
-		void BindTask();	
+		void BindTask();
+
 
 		void BindActor();
 
+
 		void BindState();
-	}	
+	}
 }

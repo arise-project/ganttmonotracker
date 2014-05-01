@@ -82,7 +82,6 @@ namespace GanttMonoTracker.GuiPresentation
 				}
 		}
 
-
 			
 		private DataSet GetLogoSource()
 		{
@@ -113,20 +112,17 @@ namespace GanttMonoTracker.GuiPresentation
 			return fGanttSource; 
 		}
 
-
 		 
 		public void Destroy()
 		{
 			thisWindow.Destroy();
 		}
 
-
 		
 		public void Show()
 		{
 			thisWindow.ShowAll();
 		}
-
 
 		
 		#region IGuiMessageDialog Implementation
@@ -136,7 +132,6 @@ namespace GanttMonoTracker.GuiPresentation
 			Show();
 			return 0;
 		}
-
 
 		
 		public string Title
@@ -162,7 +157,5 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 		
 		#endregion
-
 	}
-	
 }

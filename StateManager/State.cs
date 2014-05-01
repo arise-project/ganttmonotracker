@@ -9,30 +9,36 @@ using System.Collections;
 
 using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
+using GanttMonoTracker;
 
 namespace GanttTracker.StateManager
 {
 	public class State : IStateView, IManagerEntity
 	{
+		private int fMappingID;
+
 		public State()
 		{
-			isNew = true;
+			IsNew = true;
 			Initialize(null);
 		}
-		
+
+
 		public State(ITaskManager parent)
 		{
-			isNew = true;
+			IsNew = true;
 			Initialize(parent);
 		}
-		
-		public State(ITaskManager parent, int ID)
+
+
+		public State(ITaskManager parent, int Id)
 		{
-			isNew = false;
+			IsNew = false;
 			Initialize(parent);
-			ID = ID;
+			this.Id = Id;
 		}
-		
+
+
 		private void Initialize(ITaskManager parent)
 		{
 			Parent = parent;
@@ -42,58 +48,67 @@ namespace GanttTracker.StateManager
 		#region IStateView Implementation
 		
 		public string Name { get;set; }
-		
+
+
 		public byte ColorRed {	get;set; }
-		
+
+
 		public byte ColorGreen { get;set; }
-		
+
+
 		public byte ColorBlue {	get;set; }
 		
-		private int fMappingID;
+
 		public int MappingID
 		{
 			get
 			{
 				if (!IsMapped)
-					throw new NotAllowedException("State not mapped");
+					throw new ManagementException(ExceptionType.NotAllowed, "State not mapped");
 				return fMappingID;
 			}
 			set
 			{
 				IsMapped = true;
-				fMappingID = value;				 
+				fMappingID = value;
 			}
 		}
+
 		
 		public bool IsMapped { get;set; }
+
 		
 		public Hashtable Connections { get;set; }
+
 		
 		public void Connect(IManagerEntity stateEntry, string connectionName)
-		{		 
+		{
 			State state = (State)stateEntry;
-			if (!Connections.ContainsKey(state.ID))
+			if (!Connections.ContainsKey(state.Id))
 			{
-				Connections.Add(state.ID,connectionName);				
-			}	
+				Connections.Add(state.Id,connectionName);
+			}
 			else
-				throw new NotRequiredException("Connection to state with ID "+stateEntry.ID+" already added");
+				throw new ManagementException(ExceptionType.NotRequired , "Connection to state with ID "+stateEntry.Id+" already added");
 		}
+
 		
 		public void Disconnect(IManagerEntity stateEntry)
 		{
-			if (Connections.ContainsKey(stateEntry.ID))
+			if (Connections.ContainsKey(stateEntry.Id))
 			{
-				Connections.Remove(stateEntry.ID);
+				Connections.Remove(stateEntry.Id);
 			}	
 			else
-				throw new KeyNotFoundException(stateEntry.ID);
+				throw new KeyNotFoundException(stateEntry.Id);
 		}
+
 		
 		public bool IsConnected(IManagerEntity stateEntry)
 		{
-			return Connections.ContainsKey(stateEntry.ID);
+			return Connections.ContainsKey(stateEntry.Id);
 		}
+
 		
 		public void ClearConnections()
 		{
@@ -104,10 +119,12 @@ namespace GanttTracker.StateManager
 		
 		#region IManagerEntity Implementation
 		
-		public int ID {	get;set; }
-		
-		public bool isNew {	get;set; }
-		
+		public int Id {	get;set; }
+
+
+		public bool IsNew {	get;set; }
+
+
 		public bool isUpdated
 		{
 			get
@@ -117,26 +134,30 @@ namespace GanttTracker.StateManager
 			
 			set
 			{
-				throw new NotAllowedException("Change state for managed entity not allowed");
+				throw new ManagementException(ExceptionType.NotAllowed, "Change state for managed entity not allowed");
 			}
 		}
-		
+
+
 		public ITaskManager Parent { get;set; }
-		
+
+
 		public void BindData()
 		{
 			Parent.BindTaskState(this);
 		}
+
 				
 		public void Save()
 		{
-			isNew = false;
+			IsNew = false;
 			Parent.UpdateTaskState(this);
 		}
-		
+
+
 		public void Delete()
 		{
-			Parent.DeleteTaskState(ID);
+			Parent.DeleteTaskState(Id);
 		}
 		
 		#endregion

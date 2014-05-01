@@ -23,50 +23,65 @@ namespace GanttMonoTracker.GuiPresentation
 {
 	public class ViewStateDialog : IGuiState, IGuiMessageDialog,IDisposable
 	{
-		private Gtk.Dialog thisDialog;
+		ListStore fStateSearchDictionaryStore;
+		StateCore stateCore;
+
+		Gtk.Dialog thisDialog;
+
 		
 		[Glade.Widget()]
-		private Gtk.Button btnApply;
+		Gtk.Button btnApply;
+
 		
 		[Glade.Widget()]
-		private Gtk.Entry entStateSearch;
+		Gtk.Entry entStateSearch;
+
 		
 		[Glade.Widget()]
-		private Gtk.Button btnSearch;
+		Gtk.Button btnSearch;
+
 		
 		[Glade.Widget()]
-		private Gtk.TreeView tvState;
+		Gtk.TreeView tvState;
+
 		
 		[Glade.Widget()]
-		private Gtk.Button btnCreateState;
+		Gtk.Button btnCreateState;
+
 		
 		[Glade.Widget()]
-		private Gtk.Button btnEditState;
+		Gtk.Button btnEditState;
+
 		
 		[Glade.Widget()]
-		private Gtk.Button btnDeleteState;
+		Gtk.Button btnDeleteState;
+
 		
 		[Glade.Widget()]
-		private Gtk.TreeView tvStateConnection;
+		Gtk.TreeView tvStateConnection;
+
 		
 		[Glade.Widget()]
-		private Gtk.Button btnCreateConnection;
+		Gtk.Button btnCreateConnection;
+
 		
 		[Glade.Widget()]
-		private Gtk.Button btnEditConnection;
+		Gtk.Button btnEditConnection;
+
 		
 		[Glade.Widget()]
-		private Gtk.Button btnDeleteConnection;
-		
-		
+		Gtk.Button btnDeleteConnection;
+
+
 		public ViewStateDialog(Window parent, IGuiCore guiCore)
 		{
 		    Initialize(parent, guiCore);
 		}
+
 		
 		private void Initialize(Window parent, IGuiCore guiCore)
 		{
-			StateCore = new StateCore(guiCore, this); 
+			stateCore = new StateCore(guiCore, this); 
 			Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("ViewStateDialog.glade");
 			Glade.XML glade = new Glade.XML(stream, "EditStatesDialog", null);
 			stream.Close();
@@ -99,12 +114,13 @@ namespace GanttMonoTracker.GuiPresentation
 			tvStateConnection.AppendColumn("Name",new CellRendererText(), "text", 1);
 			tvStateConnection.GetColumn(0).Visible = false;
 			
-			StateSource = StateCore.TaskManager.TaskStateSource;
+			StateSource = stateCore.TaskManager.TaskStateSource;
 			
 			BindStateSearchDictionary();
 			BindStates();
 			BindStateSearchCompletion();
 		}
+
 		
 		public int Run()
 		{
@@ -131,7 +147,6 @@ namespace GanttMonoTracker.GuiPresentation
 			return Run();
 		}
 
-
 		
 		public string Title
 		{
@@ -142,7 +157,7 @@ namespace GanttMonoTracker.GuiPresentation
 			set
 			{
 				thisDialog.Title = value;
-			}			
+			}
 		}
 		
 		#endregion
@@ -165,7 +180,8 @@ namespace GanttMonoTracker.GuiPresentation
 		#region IGuiState Implementation
 	
 		public DataSet StateSource {get; set;}
-				
+			
+			
 		public void BindStates()
 		{		
 			TaskStateStore.Clear();
@@ -173,7 +189,7 @@ namespace GanttMonoTracker.GuiPresentation
 			{
 				TaskStateStore.AppendValues(row["ID"], row["Name"]);
 				if (StateSearchDictionary == null)
-					throw new NotAllowedException("State Search Dictionary no set to instance of object");
+					throw new ManagementException(ExceptionType.NotAllowed,"State Search Dictionary no set to instance of object");
 				if (!StateSearchDictionary.ContainsKey(row["Name"]))
 					StateSearchDictionary.Add(row["Name"],row["Name"]);
 			}
@@ -188,72 +204,78 @@ namespace GanttMonoTracker.GuiPresentation
 			TaskStateConnectionStore.Clear();
 			foreach (int connectionID in state.Connections.Keys)
 			{
-				State connectedState = (State)StateCore.TaskManager.GetTaskStateConnection(connectionID);
+				State connectedState = (State)stateCore.TaskManager.GetTaskStateConnection(connectionID);
 				TaskStateStore.AppendValues(connectionID, connectedState.Name);
 			}
 			tvStateConnection.Model = TaskStateConnectionStore; 
 		}
+
 		
 		public void CreateConnection(IManagerEntity stateEntry,IManagerEntity connectedEntry)
 		{
 		}
+
 		
 		public void EditConnection(IManagerEntity stateEntry,IManagerEntity connectedEntry)
 		{
 		}
+
 		
 		public void DeleteConnection(IManagerEntity stateEntry,IManagerEntity connectedEntry)
 		{
 		}
+
 		
 		public void ClearConnections(IManagerEntity stateEntry)
 		{
 		}
 		
 		#endregion
-		
-		
+
 		private void BindStateSearchDictionary()
 		{
 			StateSearchDictionary = new Hashtable();  
 		}
+
 		
 		public TreeStore TaskStateStore	{get;set;}
+
 		
 		public TreeStore TaskStateConnectionStore {	get;set; }
-		
-		private StateCore StateCore	{ get; set;	}
+
 		
 		private void OnApply(object sender, EventArgs args)
 		{
-			StateCore.StorageManager.Save();
+			stateCore.StorageManager.Save();
 		}
 		
 		public string StateSearch {	get;set; } 
 		
-		private ListStore fStateSearchDictionaryStore;
+
 		public Hashtable StateSearchDictionary { get; set; }
-		
+
+
 		public void BindStateSearchCompletion()
 		{
 			entStateSearch.Completion = new EntryCompletion();
 			fStateSearchDictionaryStore = new ListStore(typeof(string));
 			if (StateSearchDictionary == null)
-				throw new NotAllowedException("State Search Dictionary no set to instance of object");
+				throw new ManagementException(ExceptionType.NotAllowed,"State Search Dictionary no set to instance of object");
 			foreach (object searchKey in StateSearchDictionary.Keys)
 				fStateSearchDictionaryStore.AppendValues(searchKey);
 			
 			entStateSearch.Completion.Model =fStateSearchDictionaryStore; 
 			entStateSearch.Completion.TextColumn = 0; 
 		}
-		
+
+
 		private void OnStateSearch(object sender, EventArgs args)
 		{
 			StateSearch = entStateSearch.Text;
 			if (StateSearch.Trim().Length > 0)
-			{			
+			{
 				if (StateSearchDictionary == null)
-				  throw new NotAllowedException("State Search Dictionary no set to instance of object");
+					throw new ManagementException(ExceptionType.NotAllowed,"State Search Dictionary no set to instance of object");
 				
 				if (!StateSearchDictionary.ContainsKey(StateSearch))
 				{
@@ -264,14 +286,16 @@ namespace GanttMonoTracker.GuiPresentation
 				//fStateSource = Arise.Logic.DataSearch.GetFilteredDataSet(fStateCore.TaskManager.TaskStateSource, fStateSearch);				
 			}
 			else
-				StateSource = StateCore.TaskManager.TaskStateSource;
+				StateSource = stateCore.TaskManager.TaskStateSource;
 			BindStates();
 		}
+
 		
 		private void OnCreateState(object sender, EventArgs args)
 		{
-			StateCore.CreateTaskState();
-		}		
+			stateCore.CreateTaskState();
+		}
+
 		
 		private void OnEditState(object sender, EventArgs args)
 		{
@@ -293,9 +317,10 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 			if (stateRequired && stateId != -1)
 			{
-				StateCore.EditTaskState(stateId);
+				stateCore.EditTaskState(stateId);
 			}
 		}
+
 		
 		private void OnDeleteState(object sender, EventArgs args)
 		{
@@ -317,9 +342,10 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 			if (stateRequired && stateId != -1)
 			{
-				StateCore.DeleteTaskState(stateId);
+				stateCore.DeleteTaskState(stateId);
 			}
 		}
+
 		
 		private void OnCreateConnection(object sender, EventArgs args)
 		{
@@ -340,14 +366,16 @@ namespace GanttMonoTracker.GuiPresentation
 				dialog.ShowDialog();
 			}
 			if (stateRequired && stateId != -1)
-			{				
-				StateCore.CreateTaskStateConnection(stateId);
-			}			
+			{
+				stateCore.CreateTaskStateConnection(stateId);
+			}
 		}
+
 		
 		private void OnEditConnection(object sender, EventArgs args)
 		{
 		}
+
 		
 		private void OnDeleteConnection(object sender, EventArgs args)
 		{

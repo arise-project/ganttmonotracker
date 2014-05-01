@@ -20,6 +20,7 @@ namespace GanttMonoTracker.GuiPresentation
 		public GuiFactory()
 		{
 		}
+
 		
 		public IGuiActorView CreateActorView(Window parent)
 		{
@@ -27,7 +28,6 @@ namespace GanttMonoTracker.GuiPresentation
 			actorDialog.Title = "Create Actor";
 			return actorDialog; 
 		}
-
 
 
 		public IGuiActorView CreateActorView(Window parent,ITaskManager taskManager, Actor actor)
@@ -40,19 +40,19 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
-
 		private void ValidateCore(IGuiCore core)
 		{
 			if (core.TaskManager.ActorSource.Tables["Actor"].Rows.Count == 0)
 			{
-				throw new NotAllowedException("Create actors before create tasks");
+				throw new ManagementException(ExceptionType.NotAllowed,"Create actors before create tasks");
 			}
 			if (core.TaskManager.TaskStateSource.Tables["TaskState"].Rows.Count == 0)
 			{
-				throw new NotAllowedException("Create states before create tasks");
+				throw new ManagementException(ExceptionType.NotAllowed,"Create states before create tasks");
 			}
 		}
-		
+
+
 		public IGuiTaskView CreateTaskView(Window parent, IGuiCore core)
 		{
 			ValidateCore(core);
@@ -67,7 +67,8 @@ namespace GanttMonoTracker.GuiPresentation
 			
 			return taskDialog; 
 		}
-		
+
+
 		public IGuiTaskView CreateTaskView(Window parent, IGuiCore core, int taskID)
 		{
 			ValidateCore(core);
@@ -116,7 +117,7 @@ namespace GanttMonoTracker.GuiPresentation
 			if (task.ActorPresent)
 				assignDialog.ActorID = task.ActorID;
 			assignDialog.Title = "Assign Task";
-			assignDialog.AssignAction = string.Format("Assign task {0} to Actor", task.ID);
+			assignDialog.AssignAction = string.Format("Assign task {0} to Actor", task.Id);
 			
 			return  assignDialog;
 		}
@@ -128,14 +129,16 @@ namespace GanttMonoTracker.GuiPresentation
 			stateView.Title = "Edit States";
 			return stateView;
 		}
-		
+
+
 		public ViewSingleStateDialog CreateSingleStateView (Window parent)
 		{
 			ViewSingleStateDialog stateView = new ViewSingleStateDialog(parent);
 			stateView.Title = "New State";
 			return stateView;
 		}
-		
+
+
 		public ViewSingleStateDialog CreateSingleStateView (Window parent, State state)
 		{
 			ViewSingleStateDialog stateView = new ViewSingleStateDialog(parent);
@@ -154,7 +157,8 @@ namespace GanttMonoTracker.GuiPresentation
 				stateView.IsMapped = false;
 			return stateView;
 		}
-		
+
+
 		public ViewConnectionDialog CreateConnectionView (Window parent, DataSet taskStateSource)
 		{
 			ViewConnectionDialog connectionView = new ViewConnectionDialog(parent,taskStateSource);
@@ -163,7 +167,8 @@ namespace GanttMonoTracker.GuiPresentation
 			connectionView.BindStateOut();
 			return connectionView;
 		}
-		
+
+
 		public AboutDialog CreateAboutDialog(Window parent)
 		{
 			AboutDialog aboutDialog = new AboutDialog(parent);

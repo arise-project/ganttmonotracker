@@ -11,8 +11,10 @@ namespace TaskManagerInterface
 	public interface IGuiConnection : IConnectionView
 	{
 		DataSet TaskStateSource { get;set; }
-		
+
+
 		void BindStateIn();
+
 
 		void BindStateOut();
 	}	

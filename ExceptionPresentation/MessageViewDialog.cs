@@ -13,40 +13,38 @@ using TaskManagerInterface;
 
 namespace GanttMonoTracker.ExceptionPresentation
 {
-
 	public class MessageViewDialog : IGuiMessageDialog
 	{
 		private Gtk.Dialog thisDialog;
-		
-		[Glade.Widget()]
-		private Gtk.VBox vbox1;
-		
-		[Glade.Widget()]
-		private Gtk.VBox vbox2;
-		
-		[Glade.Widget()]
-		private Gtk.HBox hbox1;
+
 		
 		[Glade.Widget()]
 		private Gtk.Label lbWarningDescription;
+
 		
 		[Glade.Widget()]
 		private Gtk.Label lbWarning;
+
 		
 		[Glade.Widget()]
 		private Gtk.Label lbSubject;
+
 		
 		[Glade.Widget()]
 		private Gtk.TextView tvDescription;
+
 		
 		[Glade.Widget()]
 		private Gtk.HButtonBox hbuttonbox1;
+
 		
 		[Glade.Widget()]
 		private Gtk.Button btnOk;
+
 		
 		[Glade.Widget()]
 		private Gtk.Label label1;
+
 		
 		public MessageViewDialog(string type, string subject, string description, Window parent)
 		{
@@ -62,6 +60,7 @@ namespace GanttMonoTracker.ExceptionPresentation
 			this.WarningSubject = subject;
 			this.WarningDescription = description;
 		}
+
 		
 		public MessageViewDialog(string subject,Window parent)
 		{
@@ -78,6 +77,7 @@ namespace GanttMonoTracker.ExceptionPresentation
 			lbWarning.Text = "";
 			tvDescription.Sensitive = false;
 		}
+
 		
 		public int Run()
 		{
@@ -97,6 +97,7 @@ namespace GanttMonoTracker.ExceptionPresentation
 			return result;
 		}
 
+
 		public string WarningType
 		{
 			get
@@ -108,7 +109,8 @@ namespace GanttMonoTracker.ExceptionPresentation
 				lbWarning.Text = value; 
 			}
 		}
-		
+
+
 		public string WarningSubject
 		{
 			get
@@ -121,7 +123,8 @@ namespace GanttMonoTracker.ExceptionPresentation
 				lbSubject.Text = value;
 			}
 		}
-		
+
+
 		public string WarningDescription
 		{
 			get
@@ -141,6 +144,7 @@ namespace GanttMonoTracker.ExceptionPresentation
 		{
 			return Run();
 		}
+
 		
 		public string Title
 		{

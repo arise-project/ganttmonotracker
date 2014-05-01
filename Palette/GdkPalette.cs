@@ -2,6 +2,7 @@
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
+
 using System;
 using Gdk;
 using Pango; 
@@ -34,7 +35,6 @@ namespace GanttMonoTracker
 		}
 
 
-
 		public static void DestroyColor()
 		{
 			if(CurrentGC != null)
@@ -43,7 +43,6 @@ namespace GanttMonoTracker
 				CurrentGC = null;
 			}
 		}
-
 
 
 		/// <summary>

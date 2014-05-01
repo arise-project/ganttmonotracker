@@ -12,21 +12,25 @@ using Gtk;
 using TaskManagerInterface;
 
 namespace GanttMonoTracker.GuiPresentation
-{	
+{
 	public class ViewActorDialog : IGuiActorView
 	{
-		
 		private Gtk.Dialog thisDialog;
+
 
 		[Widget]
 		private Gtk.Entry entName;
 
+
 		[Widget]
 		private Gtk.Entry entEmail;
 
+
 		private string fActorName;
 
+
 		private string fActorEmail;
+
 
 		public ViewActorDialog(Window parent)
 		{
@@ -39,7 +43,8 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog = ((Gtk.Dialog)(glade.GetWidget("ViewActorDialog")));
 			thisDialog.Modal = true;
 			thisDialog.TransientFor = parent;
-		}	
+		}
+
 		
 		public int Run()
 		{
@@ -66,6 +71,7 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			return Run();
 		}
+
 		
 		public string Title
 		{
@@ -76,7 +82,7 @@ namespace GanttMonoTracker.GuiPresentation
 			set
 			{
 				thisDialog.Title = value;
-			}			
+			}
 		}
 		
 		#endregion
@@ -106,7 +112,8 @@ namespace GanttMonoTracker.GuiPresentation
 				entName.Text = value;
 			}
 		}
-		
+
+
 		public string ActorEmail
 		{
 			get
@@ -128,7 +135,6 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			ActorName = (sender as Entry).Text;
 		}
-
 
 
 		private void OnChangeEmail(object sender, EventArgs e)

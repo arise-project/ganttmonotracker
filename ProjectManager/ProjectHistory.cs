@@ -15,12 +15,14 @@ namespace GanttTracker.ProjectManager
 {
 	public class ProjectHistory
 	{
-		private ProjectHistory()
+		static ProjectHistory fInstance;
+
+		ProjectHistory()
 		{
 			Projects = new Hashtable();
 		}
 		
-		private static ProjectHistory fInstance;
+
 		public static ProjectHistory Instance
 		{
 			get
@@ -30,11 +32,13 @@ namespace GanttTracker.ProjectManager
 				return fInstance;
 			}	
 		}
+
 		
 		public Hashtable Projects {	get;set; }
-		
+
+
 		public void SaveProject(string fileName)
-		{					 
+		{
 			if (Projects != null)
 			{
 				XmlDocument doc = new XmlDocument();
@@ -53,6 +57,7 @@ namespace GanttTracker.ProjectManager
 				s.Close();
 			}
 		}
+
 		
 		public void OpenProject(string fileName)
 		{
@@ -71,7 +76,7 @@ namespace GanttTracker.ProjectManager
 						Projects.Add(node.GetAttribute("path"), node.GetAttribute("name"));
 					}
 				}
-			}			
+			}
 		} 
 	}
 }

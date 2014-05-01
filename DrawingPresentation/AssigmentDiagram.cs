@@ -9,50 +9,38 @@ using System.Collections;
 using System.Data;
 using Gdk;
 using Pango; 
+using Cairo; 
 
 using GanttTracker;
 using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
-using Cairo; 
 
 namespace GanttMonoTracker.DrawingPresentation
 {
-	// TODO : for run this Pando and Cairo understanding are required.
-	// Disabled for now
 	public class AssigmentDiagramm : Gtk.DrawingArea, IGuiAssigment
 	{
-		public AssigmentDiagramm() : base()
-		{
-		}
+		#region Constants.
+
+		const int fBorderMarginH = 2;
 
 
-		int Depth;
+		const int fBorderMarginV = 2;
 
 
-		private int fBorderMarginH = 2;
+		const int fTaskHeight = 14;
 
+		#endregion
 
-		private int fBorderMarginV = 2;
-
-
-		private int fTaskHeight = 14;
-
-
-		private int X;
-
-
-		private int Y;
-
-
-		private int Width;
-
-
-		private int Height;
+		public AssigmentDiagramm() : base()	{ }
 
 		#region IGuiAssigment Implementation
 		
 		public DataSet AssigmentSource { get;set; }
-		
+				
+		#endregion
+
+		#region Protected methods
+
 		protected override bool OnExposeEvent(Gdk.EventExpose args)
 		{
 			base.OnExposeEvent (args);
@@ -71,35 +59,30 @@ namespace GanttMonoTracker.DrawingPresentation
 
 			base.GdkWindow.GetGeometry(out fX,out fY,out fWidth,out fHeight,out fDepth);
 
-			X = fX;
-			Y = fY;
-			Width = fWidth;
-			Height = fHeight;
-			Depth = fDepth;
-			Width -= 3;
-			Height -= 3;
+			fWidth -= 3;
+			fHeight -= 3;
 
 			int delta = (deltaSpan.Days > 0) ? 
-				(Width - 2 * fBorderMarginH) / deltaSpan.Days :
-				(Width - 2 * fBorderMarginH);
+			            (fWidth - 2 * fBorderMarginH) / deltaSpan.Days :
+			            (fWidth - 2 * fBorderMarginH);
 
-			base.GdkWindow.ClearArea(X,Y,Width,Height);
+			base.GdkWindow.ClearArea(fX,fY,fWidth,fHeight);
 			base.Show();
 
 			//DrawBorder
 			grw.SetSourceRGB(0xff, 0, 0);
 
 			grw.MoveTo(fBorderMarginH, fBorderMarginV);
-			grw.LineTo(Width - fBorderMarginH, fBorderMarginV);    
-			grw.LineTo(Width - fBorderMarginH, Height - fBorderMarginV);    
-			grw.LineTo(fBorderMarginH, Height - fBorderMarginV);    
+			grw.LineTo(fWidth - fBorderMarginH, fBorderMarginV);    
+			grw.LineTo(fWidth - fBorderMarginH, fHeight - fBorderMarginV);    
+			grw.LineTo(fBorderMarginH, fHeight - fBorderMarginV);    
 			grw.LineTo(fBorderMarginH, fBorderMarginV);    
 			grw.Stroke();
 
 			//DrawTasks
 			int deltaActor = (AssigmentSource.Tables["Actor"].Rows.Count > 0) ? 
-				(Height - 2 * fBorderMarginV) / AssigmentSource.Tables["Actor"].Rows.Count : 
-				Height - 2 * fBorderMarginV;
+			                 (fHeight - 2 * fBorderMarginV) / AssigmentSource.Tables["Actor"].Rows.Count : 
+			                 fHeight - 2 * fBorderMarginV;
 			deltaActor -= fTaskHeight; 
 
 
@@ -186,7 +169,7 @@ namespace GanttMonoTracker.DrawingPresentation
 				this.GdkWindow.DrawLine(AxisGC, 
 					fBorderMarginH, 
 					offsetActor, 
-					Width - fBorderMarginH, offsetActor);
+					fWidth - fBorderMarginH, offsetActor);
 				offsetActor += deltaActor; 
 			}
 
@@ -206,14 +189,14 @@ namespace GanttMonoTracker.DrawingPresentation
 
 				this.GdkWindow.DrawLayout(ActorLabelGC, 
 					offset1 + fBorderMarginH,
-					Height -2 * fBorderMarginV - this.fTaskHeight,
+					fHeight -2 * fBorderMarginV - fTaskHeight,
 					layout);
 
 				this.GdkWindow.DrawLine(AxisGC,
 					offset1, 
 					fBorderMarginV, 
 					offset1, 
-					Height - fBorderMarginV);
+					fHeight - fBorderMarginV);
 				offset1 += delta;
 				labelDate1 = labelDate1.AddDays(1);
 			}
@@ -229,7 +212,7 @@ namespace GanttMonoTracker.DrawingPresentation
 			grw.MoveTo(offsetDate, 
 				fBorderMarginV);
 			grw.LineTo (offsetDate, 
-				Height - fBorderMarginV);
+				fHeight - fBorderMarginV);
 			grw.RelLineTo (new Distance{ Dx = -3, Dy = 0 });
 			grw.RelLineTo (new Distance{ Dx = 3, Dy = -3 });
 			grw.RelLineTo (new Distance{ Dx = 3, Dy = 3 });
@@ -238,22 +221,7 @@ namespace GanttMonoTracker.DrawingPresentation
 
 			return true;
 		}
-		
+
 		#endregion
-
-
-
-		private int GetRowIndex(DataTable table, DataRow searchRow)
-		{
-			int index = 0;
-			foreach(var row in table.Rows)
-			{
-				if (searchRow == row) return index;
-				index++;
-			}
-			return -1;
-		}
-
-
 	}
 }

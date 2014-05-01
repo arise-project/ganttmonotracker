@@ -10,6 +10,7 @@ namespace TaskManagerInterface
 	{
 		void Update(IStorageDealer updateDealer);
 
+
 		void Save();
 	}
 }

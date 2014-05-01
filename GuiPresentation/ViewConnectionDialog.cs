@@ -19,61 +19,80 @@ namespace GanttMonoTracker.GuiPresentation
 	
 	public class ViewConnectionDialog : IGuiConnection
 	{
+		int fStateInID = -1;
 
-		private int fStateInID = -1;
 
-		private int fStateOutID = -1;
+		int fStateOutID = -1;
 
-		private ListStore fStateInStore;
 
-		private ListStore fStateOutStore;
+		ListStore fStateInStore;
 
-		private Gtk.Dialog thisDialog;
+
+		ListStore fStateOutStore;
+
+
+		Gtk.Dialog thisDialog;
+
 		
 		[Glade.Widget()]
-		private Gtk.VBox vbox2;
+		Gtk.VBox vbox2;
+
 		
 		[Glade.Widget()]
-		private Gtk.VBox vbox1;
+		Gtk.VBox vbox1;
+
 		
 		[Glade.Widget()]
-		private Gtk.Label lbConnectionAction;
+		Gtk.Label lbConnectionAction;
+
 		
 		[Glade.Widget()]
-		private Gtk.HBox hbox1;
+		Gtk.HBox hbox1;
+
 		
 		[Glade.Widget()]
-		private Gtk.Label lbNameDescription;
+		Gtk.Label lbNameDescription;
+
 		
 		[Glade.Widget()]
-		private Gtk.Entry entName;
+		Gtk.Entry entName;
+
 		
 		[Glade.Widget()]
-		private Gtk.HBox hbox2;
+		Gtk.HBox hbox2;
+
 		
 		[Glade.Widget()]
-		private Gtk.Label lbStateInDescription;
+		Gtk.Label lbStateInDescription;
+
 		
 		[Glade.Widget()]
-		private Gtk.ComboBoxEntry cbStateIn;
+		Gtk.ComboBoxEntry cbStateIn;
+
 		
 		[Glade.Widget()]
-		private Gtk.HBox hbox3;
+		Gtk.HBox hbox3;
+
 		
 		[Glade.Widget()]
-		private Gtk.Label lbStateOutDescription;
+		Gtk.Label lbStateOutDescription;
+
 		
 		[Glade.Widget()]
-		private Gtk.ComboBoxEntry cbStateOut;
+		Gtk.ComboBoxEntry cbStateOut;
+
 		
 		[Glade.Widget()]
-		private Gtk.HButtonBox hbuttonbox2;
+		Gtk.HButtonBox hbuttonbox2;
+
 		
 		[Glade.Widget()]
-		private Gtk.Button btnCancel;
+		Gtk.Button btnCancel;
+
 		
 		[Glade.Widget()]
-		private Gtk.Button btnOk;
+		Gtk.Button btnOk;
+
 		
 		public ViewConnectionDialog(Window parent, DataSet taskStateSource)
 		{
@@ -90,8 +109,9 @@ namespace GanttMonoTracker.GuiPresentation
 			lbConnectionAction.Text = "Create Connection";
 			cbStateOut.Entry.IsEditable = false;
 			cbStateIn.Changed += new EventHandler(OnCbStateInChanged);
-			cbStateOut.Changed += new EventHandler(OnCbStateOutChanged);			
+			cbStateOut.Changed += new EventHandler(OnCbStateOutChanged);
 		}
+
 		
 		public int Run()
 		{
@@ -118,6 +138,7 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			return Run();
 		}
+
 		
 		public string Title
 		{
@@ -128,7 +149,7 @@ namespace GanttMonoTracker.GuiPresentation
 			set
 			{
 				thisDialog.Title = value;
-			}			
+			}
 		}
 		
 		#endregion
@@ -156,8 +177,10 @@ namespace GanttMonoTracker.GuiPresentation
 				entName.Text = value;
 			}
 		}
+
 		
 		public int MappingID { get; set; }
+
 		
 		public int StateID { get; set; }
 		
@@ -166,7 +189,8 @@ namespace GanttMonoTracker.GuiPresentation
 		#region IGuiConnection interface
 	
 		public DataSet TaskStateSource { get; set; }
-		
+
+
 		public void BindStateIn()
 		{
 			if (TaskStateSource != null)
@@ -175,22 +199,22 @@ namespace GanttMonoTracker.GuiPresentation
 				cbStateIn.Clear();
 				foreach (DataRow row in TaskStateSource.Tables["TaskState"].Rows)
 				{
-					fStateInStore.AppendValues((int)row["ID"],(string)row["Name"]);				
-				}		
-				cbStateIn.Model = fStateInStore;			
-				Gtk.CellRendererText stateText = new Gtk.CellRendererText();		
+					fStateInStore.AppendValues((int)row["ID"],(string)row["Name"]);
+				}
+				cbStateIn.Model = fStateInStore;
+				Gtk.CellRendererText stateText = new Gtk.CellRendererText();
 				stateText.Style = Pango.Style.Oblique;
-				stateText.ForegroundGdk = new Gdk.Color(0x63,0,0);				
+				stateText.ForegroundGdk = new Gdk.Color(0x63,0,0);
 				cbStateIn.PackStart(stateText,true);
-				cbStateIn.AddAttribute(stateText,"text",1);							 
+				cbStateIn.AddAttribute(stateText,"text",1);
 				TreeIter iter;
 				if (fStateInStore.GetIterFirst(out iter))
 				{
-					cbStateIn.SetActiveIter(iter);				
+					cbStateIn.SetActiveIter(iter);
 				}
 			}
 			else
-				throw new NotAllowedException("TaskStateSource not set to instance");
+				throw new ManagementException(ExceptionType.NotAllowed,"TaskStateSource not set to instance");
 		}
 		
 		public void BindStateOut()
@@ -201,21 +225,21 @@ namespace GanttMonoTracker.GuiPresentation
 				cbStateOut.Clear();
 				foreach (DataRow row in TaskStateSource.Tables["TaskState"].Rows)
 				{
-					fStateOutStore.AppendValues((int)row["ID"],(string)row["Name"]);								
-				}		
-				cbStateOut.Model = fStateOutStore;			
-				Gtk.CellRendererText stateText = new Gtk.CellRendererText();		
-				stateText.Style = Pango.Style.Oblique;				
+					fStateOutStore.AppendValues((int)row["ID"],(string)row["Name"]);
+				}
+				cbStateOut.Model = fStateOutStore;
+				Gtk.CellRendererText stateText = new Gtk.CellRendererText();
+				stateText.Style = Pango.Style.Oblique;
 				cbStateOut.PackStart(stateText,true);
-				cbStateOut.AddAttribute(stateText,"text",1);			 
+				cbStateOut.AddAttribute(stateText,"text",1);
 				TreeIter iter;
 				if (fStateOutStore.GetIterFirst(out iter))
 				{
-					cbStateOut.SetActiveIter(iter);				
+					cbStateOut.SetActiveIter(iter);
 				}
 			}
 			else
-				throw new NotAllowedException("TaskStateSource not set to instance");
+				throw new ManagementException(ExceptionType.NotAllowed,"TaskStateSource not set to instance");
 		}	
 		
 		#endregion
@@ -238,7 +262,6 @@ namespace GanttMonoTracker.GuiPresentation
 				fStateOutID = (int)TaskStateSource.Tables["TaskState"].Rows[cbStateOut.Active]["ID"];
 				cbStateOut.Entry.Text = (string)TaskStateSource.Tables["TaskState"].Rows[cbStateOut.Active]["Name"];				
 			}
-		}	
+		}
 	}
-	
 }

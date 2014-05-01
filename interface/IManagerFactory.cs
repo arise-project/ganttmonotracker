@@ -10,8 +10,10 @@ namespace TaskManagerInterface
 	{
 		ITaskManager CreateEmptyManager();
 
+
 		ITaskManager CreateNewManager(IStorageDealer dealer);
 
-		ITaskManager CreateManager(IStorageDealer dealer);				
+
+		ITaskManager CreateManager(IStorageDealer dealer);
 	}
 }

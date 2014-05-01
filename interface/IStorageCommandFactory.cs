@@ -10,11 +10,14 @@ namespace TaskManagerInterface
 	{
 		IStorageCommand CreateSelectCommand(IStorageDealer daler);
 
+
 		IStorageCommand CreateInsertCommand(IStorageDealer daler);
+
 
 		IStorageCommand CreateUpdateCommand(IStorageDealer daler);
 
+
 		IStorageCommand CreateDeleteCommand(IStorageDealer daler);				
-	}	
+	}
 }
 

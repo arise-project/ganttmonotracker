@@ -19,56 +19,57 @@ namespace GanttMonoTracker.GuiPresentation
 {
 	public class ViewTaskDialog : IGuiTaskView, IGuiTracker
 	{
-		private string fComment;
+		ListStore fStateStore;
 
 
-		private Gtk.Dialog thisDialog;
+		ListStore fActorStore;
 
 
-
-		[Glade.Widget()]
-		private Gtk.ComboBoxEntry cbActor;
+		int fStateID = -1;
 
 
-
-		[Glade.Widget()]
-		private Gtk.TextView tvDescription;
+		int fActorID = -1;
 
 
+		string fComment;
 
-		[Glade.Widget()]
-		private Gtk.Calendar calStartTime;
 
+		Gtk.Dialog thisDialog;
 
 
 		[Glade.Widget()]
-		private Gtk.Calendar calEndTime;
-
-
-
-		[Glade.Widget()]
-		private Gtk.ComboBoxEntry cbState;
-
+		Gtk.ComboBoxEntry cbActor;
 
 
 		[Glade.Widget()]
-		private Gtk.TextView tvComment;	
-
-
-
-		[Glade.Widget()]
-		private Gtk.ScrolledWindow swComment;
-
+		Gtk.TextView tvDescription;
 
 
 		[Glade.Widget()]
-		private Gtk.Label lbCommentDescription;
+		Gtk.Calendar calStartTime;
 
 
+		[Glade.Widget()]
+		Gtk.Calendar calEndTime;
 
 
-		private string fDescription;
+		[Glade.Widget()]
+		Gtk.ComboBoxEntry cbState;
 
+
+		[Glade.Widget()]
+		Gtk.TextView tvComment;	
+
+
+		[Glade.Widget()]
+		Gtk.ScrolledWindow swComment;
+
+
+		[Glade.Widget()]
+		Gtk.Label lbCommentDescription;
+
+
+		string fDescription;
 
 
 		public ViewTaskDialog(Window parent, bool isTaskInit)
@@ -88,16 +89,16 @@ namespace GanttMonoTracker.GuiPresentation
 			cbState.Entry.IsEditable = false;
 			cbState.Changed += new EventHandler(OnCbStateChanged);
 
-			IsTaskInit = isTaskInit;
+			IsInitTask = isTaskInit;
 			tvDescription.KeyReleaseEvent += HandleKeyReleaseEvent;
 			tvComment.KeyReleaseEvent += CommentKeyReleaseEvent;
 		}
+
 
 		void HandleKeyReleaseEvent (object o, KeyReleaseEventArgs args)
 		{
 			fDescription = tvDescription.Buffer.Text;
 		}
-
 
 
 		void CommentKeyReleaseEvent (object o, KeyReleaseEventArgs args)
@@ -110,7 +111,7 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			thisDialog.Show();
 
-			if (IsTaskInit)
+			if (IsInitTask)
 			{
 				tvComment.Visible = false;
 				fStateID = (int)StateSource.Tables["TaskState"].Rows[0]["ID"];
@@ -136,6 +137,8 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
+		public bool IsInitTask { get; private set; }
+
 
 		public string Comment 
 		{
@@ -150,23 +153,19 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
-		private void SetComment()
-		{
-
-		}
-
+		private void SetComment() {	}
 		
 		#region ITaskView Implementation
 		
 		public bool ActorPresent { get; set; }
-		
-		private int fActorID = -1;
+
+
 		public int ActorID
 		{
 			get
 			{
 				if (!ActorPresent)
-					throw new NotAllowedException("Actor not present");
+					throw new ManagementException(ExceptionType.NotAllowed,"Actor not present");
 				return fActorID;
 			}
 			
@@ -174,7 +173,7 @@ namespace GanttMonoTracker.GuiPresentation
 			{
 				ActorPresent = true;
 				if (ActorSource == null)
-					throw new NotAllowedException("Bind combo before with BindActor method");
+					throw new ManagementException(ExceptionType.NotAllowed,"Bind combo before with BindActor method");
 				int index = 0;
 				foreach(DataRow row in ActorSource.Tables["Actor"].Rows)
 				{
@@ -186,10 +185,11 @@ namespace GanttMonoTracker.GuiPresentation
 					}
 					index++;
 				}
-				throw new NotAllowedException("ActorID not found in Actor Source");
+				throw new ManagementException(ExceptionType.NotAllowed,"ActorID not found in Actor Source");
 			}
-		}	
-		
+		}
+
+
 		public string Description 
 		{
 			get
@@ -204,8 +204,9 @@ namespace GanttMonoTracker.GuiPresentation
 				tvDescription.Buffer.Text = value;
 			
 			}
-		}	
-		
+		}
+
+
 		public DateTime StartTime  
 		{
 			get
@@ -219,7 +220,8 @@ namespace GanttMonoTracker.GuiPresentation
 				calStartTime.Date = value;
 			}
 		}
-		
+
+
 		public DateTime EndTime  
 		{
 			get
@@ -234,7 +236,7 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}
 
-		private int fStateID = -1;
+
 		public int StateID  
 		{
 			get
@@ -245,7 +247,7 @@ namespace GanttMonoTracker.GuiPresentation
 			set
 			{
 				if (StateSource == null)
-					throw new NotAllowedException("Bind combo before with BindState method");
+					throw new ManagementException(ExceptionType.NotAllowed,"Bind combo before with BindState method");
 				int index = 0;
 				foreach(DataRow row in StateSource.Tables["TaskState"].Rows)
 				{
@@ -257,7 +259,7 @@ namespace GanttMonoTracker.GuiPresentation
 					}
 					index++;
 				}
-				throw new NotAllowedException("StateID not found in State Source");
+				throw new ManagementException(ExceptionType.NotAllowed,"StateID not found in State Source");
 			}
 		}
 		
@@ -298,22 +300,17 @@ namespace GanttMonoTracker.GuiPresentation
 		#region TaskManagerInterface.ITaskGui implementation
 		
 		 
-		public DataSet TaskSource {	get;set; }	
+		public DataSet TaskSource {	get;set; }
 		
-		private ListStore fActorStore;
 
 		public DataSet ActorSource { get; set; }
 		
-		private ListStore fStateStore;
-		public DataSet StateSource
-		{
-			get;
-			set;
-		}
+
+		public DataSet StateSource { get; set; }
 			
-		public void BindTask()
-		{
-		}
+
+		public void BindTask()	{ }
+
 			
 		public void BindActor()
 		{
@@ -336,7 +333,8 @@ namespace GanttMonoTracker.GuiPresentation
 				fActorID = (int)ActorSource.Tables["Actor"].Rows[0]["ID"];
 			}
 		}	
-		
+
+
 		public void BindState()
 		{
 			fStateStore = new ListStore(typeof(int),typeof(string));
@@ -359,7 +357,7 @@ namespace GanttMonoTracker.GuiPresentation
 		
 		#endregion	
 		
-		private void OnCbActorChanged(object sender, EventArgs args)
+		void OnCbActorChanged(object sender, EventArgs args)
 		{
 			if (cbActor.Active != -1)
 			{
@@ -368,7 +366,8 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}		
 		
-		private void OnCbStateChanged(object sender, EventArgs args)
+
+		void OnCbStateChanged(object sender, EventArgs args)
 		{
 			if (cbState.Active != -1)
 			{
@@ -377,7 +376,5 @@ namespace GanttMonoTracker.GuiPresentation
 				Console.WriteLine(fStateID.ToString());
 			}
 		}
-		
-		public bool IsTaskInit { get; private set; }
 	}
 }

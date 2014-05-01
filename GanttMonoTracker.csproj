@@ -34,9 +34,6 @@
     <EmbeddedResource Include="ExceptionPresentation\ExceptionViewDialog.glade">
       <LogicalName>ExceptionViewDialog.glade</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExceptionPresentation\WarningView.glade">
-      <LogicalName>WarningView.glade</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Screenshots\GMTLogo.bmp">
       <LogicalName>GMTLogo.bmp</LogicalName>
     </EmbeddedResource>
@@ -73,21 +70,15 @@
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="DrawingPresentation\AssigmentDiagram.cs" />
-    <Compile Include="ExceptionPresentation\ExceptionView.cs" />
     <Compile Include="ExceptionPresentation\ExceptionViewDialog.cs" />
     <Compile Include="ExceptionPresentation\MessageFactory.cs" />
-    <Compile Include="ExceptionPresentation\MessageView.cs" />
     <Compile Include="ExceptionPresentation\MessageViewDialog.cs" />
-    <Compile Include="ExceptionPresentation\WarningView.cs" />
     <Compile Include="ProjectManager\ProjectHistory.cs" />
     <Compile Include="StateManager\Connection.cs" />
     <Compile Include="StateManager\State.cs" />
     <Compile Include="StateManager\StateCore.cs" />
     <Compile Include="StateManager\StateFactory.cs" />
     <Compile Include="TaskManager\ManagerException\KeyNotFoundException.cs" />
-    <Compile Include="TaskManager\ManagerException\NotAllowedException.cs" />
-    <Compile Include="TaskManager\ManagerException\NotRequiredException.cs" />
-    <Compile Include="TaskManager\ManagerException\ValidationException.cs" />
     <Compile Include="TaskManager\TaskStorage\CommandFactory.cs" />
     <Compile Include="TaskManager\TaskStorage\DeleteCommand.cs" />
     <Compile Include="TaskManager\TaskStorage\InsertCommand.cs" />
@@ -141,6 +132,8 @@
     <Compile Include="Palette\GdkPalette.cs" />
     <Compile Include="Palette\ColorEnum.cs" />
     <Compile Include="MainWindow.cs" />
+    <Compile Include="TaskManager\ManagerException\ExceptionType.cs" />
+    <Compile Include="TaskManager\ManagerException\ManagementException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DrawingPresentation\" />
@@ -185,7 +178,7 @@
     </Reference>
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System.Configuration" />
-    <Reference Include="Mono.Cairo, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="Mono.Cairo" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

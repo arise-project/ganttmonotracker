@@ -13,6 +13,7 @@ using System.Xml.Schema;
 using System.Data;
 using TaskManagerInterface;
 using GanttTracker.TaskManager.ManagerException;
+using GanttMonoTracker;
 
 namespace GanttTracker.TaskManager.TaskStorage
 {
@@ -89,7 +90,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 		public void Create()
 		{
 			if (File.Exists(ConnectionString))
-				throw new NotAllowedException();	
+				throw new ManagementException(ExceptionType.NotAllowed);	
 			
 			EmptyStorage.WriteXml(ConnectionString, System.Data.XmlWriteMode.WriteSchema);
 			EmptyStorage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));		 			 
@@ -118,7 +119,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 		
 		private void ValidationHandler(object sender, ValidationEventArgs args)
 		{			 
-			throw new ValidationException(string.Format("Validation failed with message {0}", args.Message));
+			throw new ManagementException(ExceptionType.ValidationFailed, string.Format("Validation failed with message {0}", args.Message));
 		}
 		
 		public void Save()

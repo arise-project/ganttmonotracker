@@ -89,7 +89,7 @@ namespace GanttTracker
 					break;
 				case CoreState.CreateProject :
 					if (ProjectFileName == null)
-						throw new NotAllowedException("Set filename for create project");
+					throw new ManagementException(ExceptionType.NotAllowed, "Set filename for create project");
 					if (File.Exists(ProjectFileName))
 					{
 						File.Delete(ProjectFileName);
@@ -101,7 +101,7 @@ namespace GanttTracker
 					break;
 				case CoreState.OpenProject :
 					if (ProjectFileName == null)
-						throw new NotAllowedException("Set filename for create project");
+					throw new ManagementException(ExceptionType.NotAllowed, "Set filename for create project");
 					TaskManager = new XmlTaskManager(ProjectFileName);
 					break;
 			}
@@ -166,7 +166,7 @@ namespace GanttTracker
 					taskView = GuiSource.CreateTaskView(window,(IGuiCore)this);
 					if(taskView == null) return;
 				}
-				catch(NotAllowedException ex)
+			catch(ManagementException ex)
 				{
 					IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,window);
 					dialog.Title = "Create Task";
@@ -202,7 +202,7 @@ namespace GanttTracker
 				{			
 					assignView = GuiSource.CreateTaskAssign(window,(IGuiCore)this, taskID);
 				}
-				catch(NotAllowedException ex)
+			catch(ManagementException ex)
 				{
 					IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,window);
 					dialog.Title = "Task Assign";
@@ -229,7 +229,7 @@ namespace GanttTracker
 				{
 					taskView = GuiSource.CreateTaskView(window,(IGuiCore)this, taskID);
 				}
-				catch(NotAllowedException ex)
+			catch(ManagementException ex)
 				{
 					IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,window);
 					dialog.Title = "Change Task State";

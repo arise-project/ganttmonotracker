@@ -12,6 +12,7 @@ using GanttTracker.TaskManager.TaskStorage;
 using GanttTracker.TaskManager.ManagerException;
 using GanttTracker.StateManager;
 using TaskManagerInterface;
+using GanttMonoTracker;
 
 namespace GanttTracker.TaskManager
 {
@@ -31,7 +32,7 @@ namespace GanttTracker.TaskManager
 			fDealer = new StorageDealer(fConnectionString,new CommandFactory());
 			if (!fDealer.CheckConnection())
 			{
-				throw new NotAllowedException("Check connection failed for connection string " + fConnectionString);
+				throw new ManagementException(ExceptionType.NotAllowed,"Check connection failed for connection string " + fConnectionString);
 			}			
 			fDealer.Load(); 
 		}
@@ -49,7 +50,7 @@ namespace GanttTracker.TaskManager
 			
 			set
 			{
-				throw new NotAllowedException("No changes in source");				
+				throw new ManagementException(ExceptionType.NotAllowed,"No changes in source");				
 			}			
 		}
 		
@@ -94,18 +95,18 @@ namespace GanttTracker.TaskManager
 			taskCommand.SetParam("EntityName","Task");
 			
 			Hashtable rules = new Hashtable();
-			rules.Add("UniqueID","ID = " + task.ID);
+			rules.Add("UniqueID","ID = " + task.Id);
 			
 			taskCommand.SetParam("Rules",rules);
 			
 			DataTable taskTable = fDealer.ExecuteDataSet(taskCommand).Tables[0];
 			if (taskTable.Rows.Count > 1)
 			{
-				throw new ValidationException("more when one task for id " + task.ID);
+				throw new ManagementException(ExceptionType.ValidationFailed,"more when one task for id " + task.Id);
 			}
 			
 			if (taskTable.Rows.Count == 0)
-					throw new ValidationException("task not found for id " + task.ID);
+				throw new ManagementException(ExceptionType.ValidationFailed,"task not found for id " + task.Id);
 			
 			DataRow taskRow = taskTable.Rows[0]; 
 			
@@ -149,7 +150,7 @@ namespace GanttTracker.TaskManager
 			updateTaskCommand.SetParam("Values",values);
 			
 			Hashtable rules = new Hashtable();
-			rules.Add("UniqueID","ID = " + task.ID);
+			rules.Add("UniqueID","ID = " + task.Id);
 			
 			updateTaskCommand.SetParam("Rules",rules);
 			
@@ -159,7 +160,7 @@ namespace GanttTracker.TaskManager
 		public bool isUpdatedTask(IManagerEntity taskEntity)
 		{
 			Task newTask = (Task)taskEntity;
-			Task oldTask = new Task(this, newTask.ID);
+			Task oldTask = new Task(this, newTask.Id);
 			
 			BindTask(oldTask);
 			
@@ -201,7 +202,7 @@ namespace GanttTracker.TaskManager
 			
 			set
 			{
-				throw new NotAllowedException("No changes in source");
+				throw new ManagementException(ExceptionType.NotAllowed,"No changes in source");
 			}		
 		}
 		
@@ -242,18 +243,18 @@ namespace GanttTracker.TaskManager
 			actorCommand.SetParam("EntityName","Actor");
 			
 			Hashtable rules = new Hashtable();
-			rules.Add("UniqueID","ID = " + actor.ID);
+			rules.Add("UniqueID","ID = " + actor.Id);
 			
 			actorCommand.SetParam("Rules",rules);
 			
 			DataTable actorTable = fDealer.ExecuteDataSet(actorCommand).Tables[0];
 			if (actorTable.Rows.Count > 1)
 			{
-				throw new ValidationException("more when one actor for id " + actor.ID);
+				throw new ManagementException(ExceptionType.ValidationFailed,"more when one actor for id " + actor.Id);
 			}
 			
 			if (actorTable.Rows.Count == 0)
-					throw new ValidationException("Actor not found for id " + actor.ID);
+				throw new ManagementException(ExceptionType.ValidationFailed,"Actor not found for id " + actor.Id);
 			
 			DataRow actorRow = actorTable.Rows[0]; 
 			
@@ -277,7 +278,7 @@ namespace GanttTracker.TaskManager
 			updateActorCommand.SetParam("Values",values);
 			
 			Hashtable rules = new Hashtable();
-			rules.Add("UniqueID","ID = " + actor.ID);
+			rules.Add("UniqueID","ID = " + actor.Id);
 			
 			updateActorCommand.SetParam("Rules",rules);
 			
@@ -287,11 +288,11 @@ namespace GanttTracker.TaskManager
 		public bool isUpdatedActor(IManagerEntity actorEntity)
 		{
 			Actor newActor = (Actor)actorEntity;
-			Actor oldActor = new Actor(this, newActor.ID);
+			Actor oldActor = new Actor(this, newActor.Id);
 			
 			BindActor(oldActor);
 			
-			bool result = 			newActor.ID == oldActor.ID;
+			bool result = 			newActor.Id == oldActor.Id;
 			result = result && 	newActor.Name == oldActor.Name;
 			result = result && 	newActor.Email == oldActor.Email;
 						
@@ -360,7 +361,7 @@ namespace GanttTracker.TaskManager
 				
 				DateTime firstDate;
 				if (taskTable == null)
-					throw new NotAllowedException("Task table not set to instance");
+					throw new ManagementException(ExceptionType.NotAllowed,"Task table not set to instance");
 				if (taskTable.Rows.Count == 0)
 					return DateTime.Now;
 				Task task = (Task)GetTask((int)taskTable.Rows[0]["ID"]);
@@ -379,7 +380,7 @@ namespace GanttTracker.TaskManager
 			
 			set
 			{
-				throw new NotAllowedException("Update for gantt min date not implemented");
+				throw new ManagementException(ExceptionType.NotAllowed,"Update for gantt min date not implemented");
 			}
 			
 		}
@@ -400,7 +401,7 @@ namespace GanttTracker.TaskManager
 				
 				DateTime lastDate;
 				if (taskTable == null)
-					throw new NotAllowedException("Task table not set to instance");
+					throw new ManagementException(ExceptionType.NotAllowed,"Task table not set to instance");
 				if (taskTable.Rows.Count == 0)
 					return DateTime.Now;
 				Task task = (Task)GetTask((int)taskTable.Rows[0]["ID"]);
@@ -418,7 +419,7 @@ namespace GanttTracker.TaskManager
 			
 			set
 			{
-				throw new NotAllowedException("Update for gantt max date not implemented");
+				throw new ManagementException(ExceptionType.NotAllowed,"Update for gantt max date not implemented");
 			}		
 		}
 		
@@ -466,19 +467,19 @@ namespace GanttTracker.TaskManager
 				{								 
 					Task task = (Task)GetTask((int)taskRow["ID"]);
 					if(task == null) return;
-					if (actor.ID == task.ActorID)
+					if (actor.Id == task.ActorID)
 					{
 						for(DateTime day =  task.StartTime.Date; day <= task.EndTime.Date; day = day.AddDays(1))
 						{
-							if ( fAssigmentSource.Tables["AssigmentSource"].Select("ActorID = " + actor.ID + " and Date = '" + day.ToShortDateString() + "'" ).Length > 0)
+							if ( fAssigmentSource.Tables["AssigmentSource"].Select("ActorID = " + actor.Id + " and Date = '" + day.ToShortDateString() + "'" ).Length > 0)
 							{
-								DataRow existAssigmentRow = fAssigmentSource.Tables["AssigmentSource"].Select("ActorID = " + actor.ID + " and Date = '" + day.ToShortDateString()+"'")[0];
+								DataRow existAssigmentRow = fAssigmentSource.Tables["AssigmentSource"].Select("ActorID = " + actor.Id + " and Date = '" + day.ToShortDateString()+"'")[0];
 								existAssigmentRow["TaskCount"] = (int)existAssigmentRow["TaskCount"] + 1;								 
 							}
 							else
 							{
 								DataRow assigmentRow = fAssigmentSource.Tables["AssigmentSource"].NewRow();								
-								assigmentRow["ActorID"] = actor.ID; 
+								assigmentRow["ActorID"] = actor.Id; 
 								assigmentRow["TaskCount"] = 1;
 								assigmentRow["Date"] = day;
 								fAssigmentSource.Tables["AssigmentSource"].Rows.Add(assigmentRow);
@@ -513,7 +514,7 @@ namespace GanttTracker.TaskManager
 			
 			set
 			{
-				throw new NotAllowedException("No changes in source");
+				throw new ManagementException(ExceptionType.NotAllowed,"No changes in source");
 			}
 		}
 		
@@ -578,18 +579,18 @@ namespace GanttTracker.TaskManager
 			stateCommand.SetParam("EntityName","TaskState");
 			
 			Hashtable rules = new Hashtable();
-			rules.Add("UniqueID","ID = " + state.ID);
+			rules.Add("UniqueID","ID = " + state.Id);
 			
 			stateCommand.SetParam("Rules",rules);
 			
 			DataTable stateTable = fDealer.ExecuteDataSet(stateCommand).Tables[0];
 			if (stateTable.Rows.Count > 1)
 			{
-				throw new ValidationException("more when one task state for id " + state.ID);
+				throw new ManagementException(ExceptionType.ValidationFailed,"more when one task state for id " + state.Id);
 			}
 			
 			if (stateTable.Rows.Count == 0)
-					throw new ValidationException("Task state not found for id " + state.ID);
+				throw new ManagementException(ExceptionType.ValidationFailed,"Task state not found for id " + state.Id);
 			
 			DataRow stateRow = stateTable.Rows[0];
 			state.Name = (string)stateRow["Name"];
@@ -688,7 +689,7 @@ namespace GanttTracker.TaskManager
 			{
 				values.Add("MappingID",state.MappingID);
 			}
-			catch(NotAllowedException)
+			catch(ManagementException)
 			{
 				values.Add("MappingID",DBNull.Value);
 			}
@@ -696,7 +697,7 @@ namespace GanttTracker.TaskManager
 			updateStateCommand.SetParam("Values",values);
 			
 			Hashtable rules = new Hashtable();
-			rules.Add("UniqueID","ID = " + state.ID);
+			rules.Add("UniqueID","ID = " + state.Id);
 			
 			updateStateCommand.SetParam("Rules",rules);
 			
@@ -708,17 +709,17 @@ namespace GanttTracker.TaskManager
 		public bool isUpdatedTaskState(IManagerEntity stateEntity)
 		{
 			State newState = (State)stateEntity;
-			State oldState = new State(this, newState.ID);
+			State oldState = new State(this, newState.Id);
 			
 			BindTaskState(oldState);
 			
-			bool result = 			newState.ID == oldState.ID;
+			bool result = 			newState.Id == oldState.Id;
 			result = result && 	newState.Name == oldState.Name;
 			try
 			{
 				result = result && 	newState.MappingID == oldState.MappingID;
 			}
-			catch(NotAllowedException)
+			catch(ManagementException)
 			{
 				result = result && 	newState.IsMapped == oldState.IsMapped;
 			}
@@ -759,7 +760,7 @@ namespace GanttTracker.TaskManager
 			
 			set
 			{
-				throw new NotAllowedException("No changes in source");
+				throw new ManagementException(ExceptionType.NotAllowed,"No changes in source");
 			}
 		}
 		
@@ -797,7 +798,7 @@ namespace GanttTracker.TaskManager
 				
 			}	
 			values.Add("MappingID",state.MappingID);
-			values.Add("StateID",connectedState.ID);
+			values.Add("StateID",connectedState.Id);
 			
 			createTaskStateConnectionCommand.SetParam("Values",values);			
 			int id = (int)fDealer.ExecuteScalar(createTaskStateConnectionCommand);					 
@@ -815,18 +816,18 @@ namespace GanttTracker.TaskManager
 			connectionCommand.SetParam("EntityName","TaskStateConnection");
 			
 			Hashtable rules = new Hashtable();
-			rules.Add("UniqueID","ID = " + connection.ID);
+			rules.Add("UniqueID","ID = " + connection.Id);
 			
 			connectionCommand.SetParam("Rules",rules);
 			
 			DataTable connectionTable = fDealer.ExecuteDataSet(connectionCommand).Tables[0];
 			if (connectionTable.Rows.Count > 1)
 			{
-				throw new ValidationException("more when one task state connection for id " + connection.ID);
+				throw new ManagementException(ExceptionType.ValidationFailed,"more when one task state connection for id " + connection.Id);
 			}
 			
 			if (connectionTable.Rows.Count == 0)
-					throw new ValidationException("Task state Connection not found for id " + connection.ID);
+				throw new ManagementException(ExceptionType.ValidationFailed,"Task state Connection not found for id " + connection.Id);
 			
 			DataRow connectionRow = connectionTable.Rows[0];
 			connection.Name = (string)connectionRow["Name"];		
@@ -851,7 +852,7 @@ namespace GanttTracker.TaskManager
 			updateStateConnectionCommand.SetParam("Values",values);
 			
 			Hashtable rules = new Hashtable();
-			rules.Add("UniqueID","ID = " + connection.ID);
+			rules.Add("UniqueID","ID = " + connection.Id);
 			
 			updateStateConnectionCommand.SetParam("Rules",rules);
 			
@@ -863,14 +864,14 @@ namespace GanttTracker.TaskManager
 		public bool isUpdatedTaskStateConnection(IManagerEntity stateConnectionEntity)
 		{
 			Connection newConnection = (Connection)stateConnectionEntity;
-			Connection oldConnection = new Connection(this, newConnection.ID);
+			Connection oldConnection = new Connection(this, newConnection.Id);
 			
 			BindTaskStateConnection(oldConnection);
 			
-			bool result = 			newConnection.ID == oldConnection.ID;
+			bool result = 			newConnection.Id == oldConnection.Id;
 			result = result && 	newConnection.Name == oldConnection.Name;
 			result = result && 	newConnection.MappingID == oldConnection.MappingID;
-			result = result && 	newConnection.StateID == oldConnection.StateID;		
+			result = result && 	newConnection.StateID == oldConnection.StateID;
 						
 			return result;
 		}
@@ -904,7 +905,7 @@ namespace GanttTracker.TaskManager
 			
 			set
 			{
-				throw new NotAllowedException("No changes in source");
+				throw new ManagementException(ExceptionType.NotAllowed,"No changes in source");
 			}
 		}
 
@@ -928,7 +929,7 @@ namespace GanttTracker.TaskManager
 			if (commentedEntity != null)
 			{
 				if (commentedEntity is Task)
-					values.Add("EntryID",commentedEntity.ID);				
+					values.Add("EntryID",commentedEntity.Id);				
 			}
 			else
 				values.Add("EntryID",DBNull.Value);			
@@ -1050,7 +1051,7 @@ namespace GanttTracker.TaskManager
 		public void Update(IStorageDealer updateDealer)
 		{
 			if (!updateDealer.CheckConnection())
-				throw new ValidationException("Update storage not allowed for ConnectionString " + fDealer.ConnectionString);
+				throw new ManagementException(ExceptionType.ValidationFailed,"Update storage not allowed for ConnectionString " + fDealer.ConnectionString);
 			updateDealer.Load();
 						
 			fDealer.Storage.Merge(updateDealer.Storage,true,System.Data.MissingSchemaAction.Error);			

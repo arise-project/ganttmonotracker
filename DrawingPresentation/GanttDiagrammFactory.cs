@@ -8,53 +8,48 @@ using System.Collections;
 using System.Data;
 using Gdk;
 using Pango; 
+using Cairo; 
 
 using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
 using System.Configuration;
 using GanttTracker;
-using Cairo; 
 
 namespace GanttMonoTracker.DrawingPresentation
 {
 	public class GanttDiagramm : Gtk.DrawingArea, IGuiGantt
 	{
+		#region Constants
+
+		const int fTaskHeight = 14;
+
+
+		const int fBorderMarginH = 2;
+
+
+		const int fBorderMarginV = 2;
+
+		#endregion
+
 		public GanttDiagramm() : base()
 		{
 			DateNowVisible = true;
 		}
-		int fTaskHeight = 14;
 
+		#region Public properties.
 
 		public DataSet GanttSource { get;set; }
 
 
-		int fBorderMarginH = 2;
-
-
-		int fBorderMarginV = 2;
-
-
-		int X;
-
-
-		int Y;
-
-
-		int Width;
-
-
-		int Height;
-
-
-		int Depth;
-
-		#region Public properties.
 
 		public bool DateNowVisible	{ get;set; }
 
 
 		public bool ReadOnly { get;set; }
+
+		#endregion
+
+		#region Protected methods
 
 		protected override bool OnExposeEvent(Gdk.EventExpose args)
 		{
@@ -66,11 +61,9 @@ namespace GanttMonoTracker.DrawingPresentation
 			int fX, fY, fWidth,fHeight,fDepth;
 
 			this.GdkWindow.GetGeometry(out fX,out fY,out fWidth,out fHeight,out fDepth);
-			X = fX;
-			Y = fY;
-			Width = fWidth - 3;
-			Height = fHeight - 3;
-			Depth = fDepth;
+			fWidth -= 3;
+			fHeight -= 3;
+
 
 			// Insert drawing code here.
 			Cairo.Context grw = Gdk.CairoHelper.Create (this.GdkWindow);
@@ -79,24 +72,24 @@ namespace GanttMonoTracker.DrawingPresentation
 			grw.SetSourceRGB(0xff, 0, 0);
 
 			grw.MoveTo(fBorderMarginH, fBorderMarginV);
-			grw.LineTo(Width - fBorderMarginH, fBorderMarginV);    
-			grw.LineTo(Width - fBorderMarginH, Height - fBorderMarginV);    
-			grw.LineTo(fBorderMarginH, Height - fBorderMarginV);    
+			grw.LineTo(fWidth - fBorderMarginH, fBorderMarginV);    
+			grw.LineTo(fWidth - fBorderMarginH, fHeight - fBorderMarginV);    
+			grw.LineTo(fBorderMarginH, fHeight - fBorderMarginV);    
 			grw.LineTo(fBorderMarginH, fBorderMarginV);    
 			grw.Stroke();
 
 			//DrawTasks
 			int deltaActor = (GanttSource.Tables["Actor"].Rows.Count > 0) ? 
-				(Height - 2 * fBorderMarginV) / GanttSource.Tables["Actor"].Rows.Count : 
-				Height - 2 * fBorderMarginV;
+			                 (fHeight - 2 * fBorderMarginV) / GanttSource.Tables["Actor"].Rows.Count : 
+			                 fHeight - 2 * fBorderMarginV;
 
 			DateTime firstDate = (DateTime)GanttSource.Tables["DataRange"].Rows[0]["MinDate"];
 			DateTime lastDate = (DateTime)GanttSource.Tables["DataRange"].Rows[0]["MaxDate"];
 			TimeSpan deltaSpan = lastDate.Date.Subtract(firstDate.Date);
 
-			int deltaTask = Width; 
+			int deltaTask = fWidth; 
 			if (deltaSpan.Days > 1)
-				deltaTask = Width / deltaSpan.Days;
+				deltaTask = fWidth / deltaSpan.Days;
 
 			Hashtable taskCountHash = new Hashtable(); 
 			foreach(DataRow row in GanttSource.Tables["Task"].Rows)
@@ -161,7 +154,7 @@ namespace GanttMonoTracker.DrawingPresentation
 								actorIndex * deltaActor + fBorderMarginV + fTaskHeight * (tasksCount+1),
 								(endSpan.Days - startSpan.Days) * deltaTask + fBorderMarginH,
 								fTaskHeight);
-						else
+					else
 							this.GdkWindow.DrawRectangle(
 								taskGC,
 								true,(startSpan.Days -1) * deltaTask + fBorderMarginH,
@@ -217,7 +210,7 @@ namespace GanttMonoTracker.DrawingPresentation
 					this.GdkWindow.DrawLine(AxisGC, 
 						fBorderMarginH, 
 						offsetActor, 
-						Width - fBorderMarginH, offsetActor);
+						fWidth - fBorderMarginH, offsetActor);
 					offsetActor += deltaActor; 
 				}
 
@@ -237,14 +230,14 @@ namespace GanttMonoTracker.DrawingPresentation
 
 					this.GdkWindow.DrawLayout(ActorLabelGC, 
 						offset1 + fBorderMarginH,
-						Height -2 * fBorderMarginV - this.fTaskHeight,
+						fHeight -2 * fBorderMarginV - fTaskHeight,
 						layout);
 
 					this.GdkWindow.DrawLine(AxisGC,
 						offset1, 
 						fBorderMarginV, 
 						offset1, 
-						Height - fBorderMarginV);
+						fHeight - fBorderMarginV);
 					offset1 += deltaTask;
 					labelDate1 = labelDate1.AddDays(1);
 				}
@@ -260,7 +253,7 @@ namespace GanttMonoTracker.DrawingPresentation
 				grw.MoveTo(offsetDate, 
 					fBorderMarginV);
 				grw.LineTo (offsetDate, 
-					Height - fBorderMarginV);
+					fHeight - fBorderMarginV);
 				grw.RelLineTo (new Distance{ Dx = -3, Dy = 0 });
 				grw.RelLineTo (new Distance{ Dx = 3, Dy = -3 });
 				grw.RelLineTo (new Distance{ Dx = 3, Dy = 3 });
@@ -269,28 +262,15 @@ namespace GanttMonoTracker.DrawingPresentation
 			}
 			return true;
 		}
-				
+
 		#endregion
 
-		
-		private int GetRowIndex(DataTable table, DataRow searchRow)
-		{
-			int index = 0;
-			foreach(DataRow row in table.Rows)
-			{
-				if (searchRow == row)
-					return index;
-				index++;
-			}
-			return -1;
-		}
-
-
+		// todo : implement refresh
 		public void Refresh()
 		{
 			if (!ReadOnly) {
-				this.GdkWindow.ClearArea(X,Y,Width,Height);
-				this.GdkWindow.Show();
+				//this.GdkWindow.ClearArea(fX,fY,fWidth,fHeight);
+				//this.GdkWindow.Show();
 			}
 		}
 	}

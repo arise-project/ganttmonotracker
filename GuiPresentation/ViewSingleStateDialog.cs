@@ -19,18 +19,28 @@ namespace GanttMonoTracker.GuiPresentation
 {
 	public class ViewSingleStateDialog : IStateView, IGuiMessageDialog,IDisposable
 	{
-		private Gtk.Dialog thisDialog;
+		private byte fColorRed;
+		private byte fColorGreen;
+		private byte fColorBlue;
+		private int fMappingID;
+
+		Gtk.Dialog thisDialog;
+
 
 		[Widget]
-		private Gtk.Label lbStateAction;
+		Gtk.Label lbStateAction;
+
 
 		[Widget]
-		private Gtk.Entry entName;
+		Gtk.Entry entName;
+
 
 		[Widget]
-		private Gtk.ColorButton cbtnColor;
+		Gtk.ColorButton cbtnColor;
 
-		private string fName;
+
+		string fName;
+
 
 		public ViewSingleStateDialog (Window parent)
 		{
@@ -45,6 +55,7 @@ namespace GanttMonoTracker.GuiPresentation
 			
 			lbStateAction.Text = "Create State";
 		}
+
 
 		public int Run ()
 		{
@@ -78,7 +89,6 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}
 
-		private byte fColorRed;
 
 		public byte ColorRed 
 		{
@@ -94,7 +104,6 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}
 
-		private byte fColorGreen;
 
 		public byte ColorGreen 
 		{
@@ -110,7 +119,6 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}
 
-		private byte fColorBlue;
 
 		public byte ColorBlue 
 		{
@@ -126,19 +134,21 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}
 
+
 		public void BindStateColor ()
 		{
 			cbtnColor.Color = new Gdk.Color (fColorRed, fColorGreen, fColorBlue);
 		}
 
-		private int fMappingID;
+
+
 
 		public int MappingID 
 		{
 			get 
 			{
 				if (!IsMapped)
-					throw new NotAllowedException ("State not mapped");
+					throw new ManagementException(ExceptionType.NotAllowed,"State not mapped");
 				return fMappingID;
 			}
 			
@@ -160,20 +170,20 @@ namespace GanttMonoTracker.GuiPresentation
 
 		}
 
+
 		public void Disconnect (IManagerEntity stateEntry)
 		{
 
 		}
+
 
 		public bool IsConnected (IManagerEntity stateEntry)
 		{
 			return false;
 		}
 
-		public void ClearConnections ()
-		{
 
-		}
+		public void ClearConnections ()	{ }
 
 		#endregion
 
@@ -183,6 +193,7 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			return Run ();
 		}
+
 
 		public string Title 
 		{

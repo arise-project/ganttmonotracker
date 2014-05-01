@@ -1,12 +1,26 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Common.targets">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ExceptionPresentation/ExceptionViewDialog.cs">
     <Files>
-      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="234" Column="17" />
-      <File FileName="TaskManager\XmlTaskManager.cs" Line="288" Column="4" />
-      <File FileName="DrawingPresentation\GanttDiagrammFactory.cs" Line="173" Column="22" />
-      <File FileName="Palette\GdkPalette.cs" Line="22" Column="40" />
-      <File FileName="..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Common.targets" Line="3387" Column="21" />
+      <File FileName="StateManager/StateCore.cs" Line="35" Column="3" />
+      <File FileName="StateManager/StateFactory.cs" Line="21" Column="46" />
+      <File FileName="TaskManager/ManagerException/KeyNotFoundException.cs" Line="34" Column="7" />
+      <File FileName="TaskManager/ManagerException/ManagementException.cs" Line="25" Column="4" />
+      <File FileName="TaskManager/ManagerException/ExceptionType.cs" Line="5" Column="14" />
+      <File FileName="StateManager/Connection.cs" Line="71" Column="40" />
+      <File FileName="StateManager/State.cs" Line="78" Column="3" />
+      <File FileName="TaskManager/TaskStorage/StorageDealer.cs" Line="122" Column="14" />
+      <File FileName="TaskManager/Task.cs" Line="64" Column="62" />
+      <File FileName="TaskManager/TrackerCore.cs" Line="232" Column="29" />
+      <File FileName="TaskManager/XmlTaskManager.cs" Line="1054" Column="65" />
+      <File FileName="GuiPresentation/GuiFactory.cs" Line="51" Column="60" />
+      <File FileName="GuiPresentation/ViewConnectionDialog.cs" Line="242" Column="60" />
+      <File FileName="GuiPresentation/ViewSingleStateDialog.cs" Line="151" Column="61" />
+      <File FileName="GuiPresentation/ViewStateDialog.cs" Line="278" Column="61" />
+      <File FileName="GuiPresentation/ViewTaskAssign.cs" Line="145" Column="60" />
+      <File FileName="GuiPresentation/ViewTaskDialog.cs" Line="262" Column="60" />
+      <File FileName="ExceptionPresentation/ExceptionViewDialog.glade" Line="35" Column="1" />
+      <File FileName="ExceptionPresentation/ExceptionViewDialog.cs" Line="62" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

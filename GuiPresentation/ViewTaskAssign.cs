@@ -20,21 +20,32 @@ namespace GanttMonoTracker.GuiPresentation
 {
 	public class ViewTaskAssign : IGuiMessageDialog,IDisposable
 	{
-		private string fComment;
+		int fActorID;
 
-		private Gtk.Dialog thisDialog;
+
+		ListStore fActorStore;
+
+
+		string fComment;
+
+
+		Gtk.Dialog thisDialog;
+
 
 		[Glade.Widget()]
-		private Gtk.Label lbAssignAction;
+		Gtk.Label lbAssignAction;
+
 
 		[Glade.Widget()]
-		private Gtk.ComboBoxEntry cbActor;
+		Gtk.ComboBoxEntry cbActor;
+
 
 		[Glade.Widget()]
-		private Gtk.TextView tvComment;
+		Gtk.TextView tvComment;
+
 		
 		public ViewTaskAssign(Window parent)
-		{			
+		{
 			Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("ViewTaskAssign.glade");	
 			Glade.XML glade = new Glade.XML(stream, "ViewTaskAssign", null);
 			stream.Close();
@@ -50,10 +61,12 @@ namespace GanttMonoTracker.GuiPresentation
 			tvComment.KeyReleaseEvent += CommentKeyReleaseEvent;
 		}
 
+
 		void CommentKeyReleaseEvent (object o, KeyReleaseEventArgs args)
 		{
 			fComment = tvComment.Buffer.Text;
 		}
+
 
 		public int Run()
 		{
@@ -79,6 +92,7 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			return Run();
 		}
+
 		
 		public string Title
 		{
@@ -89,7 +103,7 @@ namespace GanttMonoTracker.GuiPresentation
 			set
 			{
 				thisDialog.Title = value;
-			}			
+			}
 		}
 		
 		#endregion
@@ -101,13 +115,11 @@ namespace GanttMonoTracker.GuiPresentation
 			this.thisDialog.Dispose();
 		}
 		
-		#endregion	
-		
-		private ListStore fActorStore;
+		#endregion
 
 		public DataSet ActorSource { get; set; }
 		
-		private int fActorID;
+
 		public int ActorID
 		{
 		 	get
@@ -118,7 +130,7 @@ namespace GanttMonoTracker.GuiPresentation
 		 	set
 		 	{
 		 		if (ActorSource == null)
-					throw new NotAllowedException("Bind combo before with BindActor method");
+					throw new ManagementException(ExceptionType.NotAllowed,"Bind combo before with BindActor method");
 				int index = 0;
 				foreach(DataRow row in ActorSource.Tables["Actor"].Rows)
 				{
@@ -130,10 +142,11 @@ namespace GanttMonoTracker.GuiPresentation
 					}
 					index++;
 				}
-				throw new NotAllowedException("ActorID not found in Actor Source");
+				throw new ManagementException(ExceptionType.NotAllowed,"ActorID not found in Actor Source");
 			}
 		} 
-		
+
+
 		public void BindActor()
 		{
 			fActorStore = new ListStore(typeof(int),typeof(string));
@@ -155,7 +168,8 @@ namespace GanttMonoTracker.GuiPresentation
 				fActorID = (int)ActorSource.Tables["Actor"].Rows[0]["ID"];
 			}
 		}
-		
+
+
 		public string AssignAction
 		{
 			get
@@ -167,7 +181,8 @@ namespace GanttMonoTracker.GuiPresentation
 				lbAssignAction.Text = value;
 			}
 		}
-		
+
+
 		public string Comment
 		{
 			get
@@ -179,7 +194,8 @@ namespace GanttMonoTracker.GuiPresentation
 				tvComment.Buffer.Text = value;
 			}
 		}
-		
+
+
 		private void OnCbActorChanged(object sender, EventArgs args)
 		{
 			if (cbActor.Active != -1)
@@ -190,5 +206,4 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 		
 	}
-	
 }

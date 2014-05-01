@@ -21,37 +21,42 @@ namespace GanttTracker.StateManager
 			Initialize(guiCore, controledGui);
 		}
 		
-		private void Initialize(IGuiCore guiCore, IGuiState controledGui)
+
+		void Initialize(IGuiCore guiCore, IGuiState controledGui)
 		{
 			StateManager = this;
 			StorageManager = guiCore.StorageManager;
 			TaskManager = guiCore.TaskManager;
 			
 			GuiFactory = new GuiFactory();
-			StateFactory = new StateFactory(TaskManager);
+			StateFactory.Parent = TaskManager;
 			ControledGui =  controledGui;
 		}	
 		
 		#region IGuiCore Implementation
 		
 		public CoreState State { get;set; }
-		
+
+
 		public ITaskManager TaskManager { get;set; }
-		
+
+
 		public IStorageManager StorageManager {	get;set; }
-		
-		public IStateManager StateManager {	get;set; }		
+
+
+		public IStateManager StateManager {	get;set; }
 		
 		#endregion
 		
 		public Window MainForm { get;set; }
+
 		
 		public IGuiState ControledGui {	get;set; }
+
 		
 		public GuiFactory GuiFactory { get;set; }
-		
-		public StateFactory StateFactory { get;set; }
-		
+
+
 		public void CreateTaskState()
 		{			
 			ViewSingleStateDialog stateView = GuiFactory.CreateSingleStateView(MainForm);
@@ -70,7 +75,8 @@ namespace GanttTracker.StateManager
 				ControledGui.BindStates();
 			}
 		}
-		
+
+
 		public void EditTaskState(int stateID)
 		{
 			State state = (State)TaskManager.GetTaskState(stateID); 
@@ -89,14 +95,16 @@ namespace GanttTracker.StateManager
 				ControledGui.BindStates();
 			}
 		}
-		
+
+
 		public void DeleteTaskState(int stateID)
 		{			
 			TaskManager.DeleteTaskState(stateID);
 			ControledGui.StateSource =	TaskManager.TaskStateSource;
 			ControledGui.BindStates();
 		}
-		
+
+
 		public void CreateTaskStateConnection(int stateID)
 		{
 			State state = (State)TaskManager.GetTaskState(stateID); 
@@ -112,10 +120,12 @@ namespace GanttTracker.StateManager
 				ControledGui.BindConnections(state);
 			}
 		}
-		
+
+
 		public void EditTaskStateConnection(int connectionID)
 		{
 		}
+
 		 
 		public void DeleteTaskStateConnection(int connectionID)
 		{

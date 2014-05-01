@@ -6,29 +6,23 @@
 
 using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
+using GanttMonoTracker;
 
 namespace GanttTracker.StateManager
 {
-	public class StateFactory
+	public static class StateFactory
 	{
-		public StateFactory()
-		{			
-		}
-		
-		public StateFactory(ITaskManager parent)
-		{
-			Parent = parent;
-		}
-		
-		public ITaskManager Parent { get;set; }
-		
-		public IManagerEntity CreateTaskState()
+		public static ITaskManager Parent { get; set; }
+
+
+		public static IManagerEntity CreateTaskState()
 		{
 			if (Parent == null)
-				throw new ValidationException("Parent no set to instance for factory"); 
+				throw new ManagementException(ExceptionType.ValidationFailed, "Parent no set to instance for factory"); 
 			return (State)Parent.CreateTaskState();
 		}
-		
+
+
 //		public IManagerEntity CreateTaskState(string connectionName, IManagerEntity connectedStateEntity)
 //		{
 //			if (fParent == null)
@@ -38,19 +32,18 @@ namespace GanttTracker.StateManager
 //			
 //			return state; 			 
 //		}
-//		
+//
+//
 //		public IManagerEntity CreateTaskState(string name, IManagerEntity [] stateEntities)
 //		{
 //			if (fParent == null)
 //				throw new ValidationException("Parent no set to instance for factory");
 //			State state = (State)fParent.CreateTaskState();
 //			foreach(IManagerEntity stateEntity in stateEntities)
-//			{			
+//			{
 //				state.Connect(stateEntity,name);
 //			}
-//			return state; 			 
+//			return state;
 //		} 
-//		
-		 
-	}  
+	}
 }

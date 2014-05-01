@@ -8,6 +8,6 @@ namespace TaskManagerInterface
 {
 	public interface IManagerException
 	{
-		int ID	{ get; }	
+		int Id	{ get; }
 	}
 }

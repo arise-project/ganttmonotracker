@@ -6,6 +6,7 @@
 
 using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
+using GanttMonoTracker;
 
 namespace GanttTracker.StateManager
 {
@@ -13,45 +14,51 @@ namespace GanttTracker.StateManager
 	{
 		public Connection()
 		{
-			isNew = true;
+			IsNew = true;
 			Initialize(null);
 		}
+
 		
 		public Connection(ITaskManager parent)
 		{
-			isNew = true;
+			IsNew = true;
 			Initialize(parent);
 		}
+
 		
-		public Connection(ITaskManager parent, int ID)
+		public Connection(ITaskManager parent, int Id)
 		{
-			isNew = false;
-			ID = ID;
+			IsNew = false;
+			this.Id = Id;
 			Initialize(parent);
-		}		
+		}
+
 		
-		private void Initialize(ITaskManager parent)
-		{				
+		void Initialize(ITaskManager parent)
+		{
 			Parent = parent;
-		}	
-			
+		}
 		
 		#region IConnectionView Implementation
 		
 		public string Name { get; set; }
+
 		
 		public int MappingID { get;set; }
+
 		
 		public int StateID { get;set; }
 		
-		#endregion				
+		#endregion
 		
 		#region IManagerEntity Implementation
 		
-		public int ID {	get;set; }
-		
-		public bool isNew {	get;set; }
-		
+		public int Id {	get;set; }
+
+
+		public bool IsNew {	get;set; }
+
+
 		public bool isUpdated
 		{
 			get
@@ -61,28 +68,32 @@ namespace GanttTracker.StateManager
 			
 			set
 			{
-				throw new NotAllowedException("Change state for managed entity not allowed");
+				throw new ManagementException(ExceptionType.NotAllowed, "Change state for managed entity not allowed");
 			}
 		}
-		
+
+
 		public ITaskManager Parent { get;set; }
-		
+
+
 		public void BindData()
 		{
 			Parent.BindTaskStateConnection(this);
 		}
-				
+
+
 		public void Save()
 		{
-			isNew = false;
+			IsNew = false;
 			Parent.UpdateTaskStateConnection(this);
 		}
-		
+
+
 		public void Delete()
 		{
-			Parent.DeleteTaskStateConnection(ID);
+			Parent.DeleteTaskStateConnection(Id);
 		}
-		
+
 		#endregion
 	}
 }

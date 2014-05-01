@@ -10,7 +10,8 @@ namespace TaskManagerInterface
 	public interface IGuiMessageDialog : IDisposable
 	{
 		int ShowDialog();
-		
-		string Title { get;set;	}		
+
+
+		string Title { get;set;	}
 	}
 }

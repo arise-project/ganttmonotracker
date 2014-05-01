@@ -9,9 +9,11 @@ namespace TaskManagerInterface
 	public interface IConnectionView
 	{
 		string Name { get;set;	}
+
 		
 		int MappingID {	get;set; }
+
 		
-		int StateID	{ get;set; }									
+		int StateID	{ get;set; }
 	}
 }

@@ -10,13 +10,16 @@ namespace TaskManagerInterface
 {
 	public enum CoreState {EmptyProject, CreateProject, OpenProject};
 	public interface IGuiCore
-	{				
+	{
 		CoreState State { get;set; }
-		
+
+
 		ITaskManager TaskManager { get;set; }
-		
+
+
 		IStorageManager StorageManager { get;set; }
-		
+
+
 		IStateManager StateManager { get;set; }
 	}
 }

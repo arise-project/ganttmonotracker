@@ -23,7 +23,7 @@ namespace GanttTracker.TaskManager
 		
 		public Actor(ITaskManager parent, int id)
 		{
-			ID = id;
+			Id = id;
 			Parent = parent;
 		}
 		
@@ -37,13 +37,13 @@ namespace GanttTracker.TaskManager
 	
 		#region IManagerEntity Implementation
 	
-		public int ID {	get;set; }	
+		public int Id {	get;set; }	
 		
-		public bool isNew
+		public bool IsNew
 		{
 			get
 			{
-				return (ID == 0);
+				return (Id == 0);
 			}
 			
 			set
@@ -78,7 +78,7 @@ namespace GanttTracker.TaskManager
 		
 		public void Delete()
 		{
-			Parent.DeleteActor(this.ID);
+			Parent.DeleteActor(this.Id);
 		}
 		
 		#endregion		

@@ -14,16 +14,22 @@ namespace TaskManagerInterface
 		#region Tasks
 		
 		DataSet TaskSource { get;set; }
-		
+
+
 		IManagerEntity GetTask(int id);
+
 
 		IManagerEntity CreateTask();
 
+
 		void BindTask(IManagerEntity taskEntity);
+
 
 		void UpdateTask(IManagerEntity taskEntity);
 
+
 		bool isUpdatedTask(IManagerEntity taskEntity);
+
 
 		void DeleteTask(int id);
 		
@@ -32,16 +38,22 @@ namespace TaskManagerInterface
 		#region Actors
 		
 		DataSet ActorSource	{ get;set; }
-		
+
+
 		IManagerEntity GetActor(int id);
 
+
 		IManagerEntity CreateActor();
-		
+
+
 		void BindActor(IManagerEntity actorEntity);
+
 
 		void UpdateActor(IManagerEntity actorEntity);
 
+
 		bool isUpdatedActor(IManagerEntity actorEntity);
+
 
 		void DeleteActor(int id);
 		
@@ -50,9 +62,11 @@ namespace TaskManagerInterface
 		#region Gantt
 		
 		DataSet GanttSource	{ get; }
-		
+
+
 		DateTime GanttFirstDate	{get;set; }
-		
+
+
 		DateTime GanttLastDate { get;set; }
 		
 		#endregion
@@ -66,18 +80,25 @@ namespace TaskManagerInterface
 		#region Task State
 		
 		DataSet TaskStateSource { get;set; }
-		
+
+
 		IManagerEntity GetTaskState(int id);
 
+
 		IManagerEntity CreateTaskState();
-		
+
+
 		void BindTaskState(IManagerEntity stateEntity);
+
 
 		//void BindTaskComment(IManagerEntity stateEntity);
 
+
 		void UpdateTaskState(IManagerEntity stateEntity);
 
+
 		bool isUpdatedTaskState(IManagerEntity stateEntity);
+
 
 		void DeleteTaskState(int id);
 		
@@ -86,20 +107,28 @@ namespace TaskManagerInterface
 		#region Task State Connection
 		
 		DataSet TaskStateConnectionsSource { get;set; }
-		
+
+
 		IManagerEntity GetTaskStateConnection(int id);
 
+
 		IManagerEntity CreateTaskStateConnection(IManagerEntity stateEntity, IManagerEntity connectedStateEntity);
-		
+
+
 		void BindTaskStateConnection(IManagerEntity stateConnectionEntity);
+
 
 		void UpdateTaskStateConnection(IManagerEntity stateConnectionEntity);
 
+
 		bool isUpdatedTaskStateConnection(IManagerEntity stateConnectionEntity);
 
+
 		void DeleteTaskStateConnection(int id);
-		
+
+
 		DataSet GetInitialTaskStateSource();
+
 
 		DataSet GetTaskStateSource(IManagerEntity state);
 		

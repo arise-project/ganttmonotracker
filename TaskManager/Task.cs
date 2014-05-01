@@ -7,6 +7,7 @@
 using System;
 using TaskManagerInterface;
 using GanttTracker.TaskManager.ManagerException;
+using GanttMonoTracker;
 
 namespace GanttTracker.TaskManager
 {
@@ -23,7 +24,7 @@ namespace GanttTracker.TaskManager
 		
 		public Task(ITaskManager parent, int id)
 		{
-			ID = id;
+			Id = id;
 			Parent = parent;
 			Parent.BindTask(this);
 		}
@@ -40,7 +41,7 @@ namespace GanttTracker.TaskManager
 			get
 			{
 				if (!ActorPresent)
-					throw new NotAllowedException("Actor not present");
+					throw new ManagementException(ExceptionType.NotAllowed, "Actor not present");
 					
 				return fActorID;
 			}
@@ -60,7 +61,7 @@ namespace GanttTracker.TaskManager
 			get
 			{
 				if (!StatePresent)
-					throw new NotAllowedException("State not present");
+					throw new ManagementException(ExceptionType.NotAllowed, "State not present");
 				return fStateID;
 			}
 			
@@ -82,13 +83,13 @@ namespace GanttTracker.TaskManager
 	
 		#region IManagerEntity Implementation
 		
-		public int ID {	get;set; }
+		public int Id {	get;set; }
 		
-		public bool isNew
+		public bool IsNew
 		{
 			get
 			{
-				return (ID == 0);
+				return (Id == 0);
 			}
 		}
 		
@@ -117,7 +118,7 @@ namespace GanttTracker.TaskManager
 		
 		public void Delete()
 		{
-			Parent.DeleteTask(this.ID);
+			Parent.DeleteTask(this.Id);
 		}
 			
 		#endregion
