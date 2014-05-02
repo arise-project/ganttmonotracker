@@ -15,26 +15,31 @@ namespace GanttTracker.TaskManager.TaskStorage
 {
 	public class InsertCommand : IStorageCommand
 	{
+		Hashtable fParams = new Hashtable();
+
+
 		public InsertCommand(DataSet source,string entityName,Hashtable values)
 		{
 			Initialize(source,entityName,values);
 		}		
 		
-		private 	Hashtable fParams = new Hashtable();
+
 		private void Initialize(DataSet source,string entityName,Hashtable values)
 		{
 			fParams.Add("Source",source);
 			fParams.Add("EntityName",entityName);
 			fParams.Add("Values",values);
 		}
+
 		
 		public void SetParam(object key, object value)
 		{
 			if (fParams.ContainsKey(key))
 				fParams[key] = value;
 			else
-				fParams.Add(key,value);				
+				fParams.Add(key,value);
 		}
+
 		
 		public object GetParam(object key)
 		{
@@ -43,21 +48,24 @@ namespace GanttTracker.TaskManager.TaskStorage
 			else
 				throw new KeyNotFoundException(key);
 		}
+
 		
 		public object Contains(object key)
 		{
 			return fParams.ContainsKey(key);
 		}
+
 		
 		public object [] GetParamKeys()
 		{
 			ArrayList keys = new ArrayList();
 			foreach (object key in fParams.Keys)
 			{
-				keys.Add(key);				
+				keys.Add(key);
 			} 
 			return (object [])keys.ToArray(typeof(object)) ;
 		}
+
 		
 		public void CheckParams()
 		{
@@ -68,9 +76,10 @@ namespace GanttTracker.TaskManager.TaskStorage
 			if (!fParams.ContainsKey("Values"))
 				throw new KeyNotFoundException("Values");
 		}
+
 						
 		public object Execute()
-		{			
+		{
 			CheckParams();
 			
 			DataSet source = (DataSet)fParams["Source"];
@@ -83,7 +92,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 				{
 					entityTable = table;
 					break;
-				}					
+				}
 			}
 			
 			if (entityTable == null)
@@ -99,7 +108,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 			 
 			 foreach (object coumn in values.Keys)
 			 {
-			 	entity[coumn.ToString()] = values[coumn];			 				 	
+			 	entity[coumn.ToString()] = values[coumn];
 			 }			 
 			 			 
 			int id = -1;
@@ -108,9 +117,9 @@ namespace GanttTracker.TaskManager.TaskStorage
 				if ((int)row["ID"] > id) id = (int)row["ID"]; 
 			}
 			
-			 entity["ID"] = ++id;		 
+			 entity["ID"] = ++id;
 			 entityTable.Rows.Add(entity);
 			 return id;
-		}				
+		}
 	}
 }

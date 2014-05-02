@@ -1,26 +1,39 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ExceptionPresentation/ExceptionViewDialog.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation/ViewTaskDialog.cs">
     <Files>
-      <File FileName="StateManager/StateCore.cs" Line="35" Column="3" />
-      <File FileName="StateManager/StateFactory.cs" Line="21" Column="46" />
-      <File FileName="TaskManager/ManagerException/KeyNotFoundException.cs" Line="34" Column="7" />
-      <File FileName="TaskManager/ManagerException/ManagementException.cs" Line="25" Column="4" />
-      <File FileName="TaskManager/ManagerException/ExceptionType.cs" Line="5" Column="14" />
-      <File FileName="StateManager/Connection.cs" Line="71" Column="40" />
-      <File FileName="StateManager/State.cs" Line="78" Column="3" />
-      <File FileName="TaskManager/TaskStorage/StorageDealer.cs" Line="122" Column="14" />
-      <File FileName="TaskManager/Task.cs" Line="64" Column="62" />
-      <File FileName="TaskManager/TrackerCore.cs" Line="232" Column="29" />
-      <File FileName="TaskManager/XmlTaskManager.cs" Line="1054" Column="65" />
-      <File FileName="GuiPresentation/GuiFactory.cs" Line="51" Column="60" />
-      <File FileName="GuiPresentation/ViewConnectionDialog.cs" Line="242" Column="60" />
-      <File FileName="GuiPresentation/ViewSingleStateDialog.cs" Line="151" Column="61" />
-      <File FileName="GuiPresentation/ViewStateDialog.cs" Line="278" Column="61" />
-      <File FileName="GuiPresentation/ViewTaskAssign.cs" Line="145" Column="60" />
-      <File FileName="GuiPresentation/ViewTaskDialog.cs" Line="262" Column="60" />
-      <File FileName="ExceptionPresentation/ExceptionViewDialog.glade" Line="35" Column="1" />
-      <File FileName="ExceptionPresentation/ExceptionViewDialog.cs" Line="62" Column="4" />
+      <File FileName="DrawingPresentation/GanttDiagramm.cs" Line="85" Column="4" />
+      <File FileName="interface/IGuiState.cs" Line="32" Column="1" />
+      <File FileName="interface/IGuiTask.cs" Line="9" Column="27" />
+      <File FileName="interface/IGuiTracker.cs" Line="29" Column="2" />
+      <File FileName="TaskManager/ManagerException/KeyNotFoundException.cs" Line="14" Column="3" />
+      <File FileName="TaskManager/ManagerException/ExceptionType.cs" Line="1" Column="1" />
+      <File FileName="TaskManager/ManagerException/ManagementException.cs" Line="28" Column="3" />
+      <File FileName="interface/ISingleStateView.cs" Line="1" Column="1" />
+      <File FileName="interface/IStateManager.cs" Line="1" Column="1" />
+      <File FileName="interface/IState.cs" Line="11" Column="25" />
+      <File FileName="interface/IStorageCommand.cs" Line="1" Column="1" />
+      <File FileName="interface/IStorageCommandFactory.cs" Line="9" Column="26" />
+      <File FileName="interface/IStorageDealler.cs" Line="34" Column="22" />
+      <File FileName="interface/IStorageMannager.cs" Line="1" Column="1" />
+      <File FileName="interface/ITaskManager.cs" Line="1" Column="1" />
+      <File FileName="interface/ITask.cs" Line="12" Column="24" />
+      <File FileName="Palette/ColorEnum.cs" Line="12" Column="3" />
+      <File FileName="Palette/GdkPalette.cs" Line="55" Column="6" />
+      <File FileName="ProjectManager/GanttDiagramFactory.cs" Line="11" Column="34" />
+      <File FileName="ProjectManager/ProjectHistory.cs" Line="82" Column="2" />
+      <File FileName="StateManager/Connection.cs" Line="110" Column="1" />
+      <File FileName="StateManager/State.cs" Line="16" Column="29" />
+      <File FileName="StateManager/StateCore.cs" Line="19" Column="23" />
+      <File FileName="StateManager/StateFactory.cs" Line="49" Column="2" />
+      <File FileName="TaskManager/TaskStorage/DeleteCommand.cs" Line="117" Column="4" />
+      <File FileName="TaskManager/TaskStorage/CommandFactory.cs" Line="37" Column="2" />
+      <File FileName="TaskManager/TaskStorage/InsertCommand.cs" Line="123" Column="4" />
+      <File FileName="TaskManager/TaskStorage/SelectCommand.cs" Line="127" Column="4" />
+      <File FileName="TaskManager/TaskStorage/StorageDealer.cs" Line="168" Column="3" />
+      <File FileName="TaskManager/TaskStorage/UpdateCommand.cs" Line="129" Column="3" />
+      <File FileName="TaskManager/Actor.cs" Line="77" Column="2" />
+      <File FileName="GuiPresentation/ViewTaskDialog.cs" Line="13" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -12,14 +12,11 @@ namespace GanttTracker.TaskManager
 {
 	public class Actor : IManagerEntity
 	{
-		private Actor()
-		{
-		}		
-		
 		public Actor(ITaskManager parent)
 		{
 			Parent = parent;
 		}
+
 		
 		public Actor(ITaskManager parent, int id)
 		{
@@ -30,37 +27,31 @@ namespace GanttTracker.TaskManager
 		#region Data
 		
 		public string Name { get;set; }
-		
-		public string Email { get; set; }	
+
+
+		public string Email { get; set; }
 		
 		#endregion
 	
 		#region IManagerEntity Implementation
 	
-		public int Id {	get;set; }	
-		
+		public int Id {	get;set; }
+
+
 		public bool IsNew
 		{
 			get
 			{
 				return (Id == 0);
 			}
-			
-			set
-			{
-				throw new InvalidOperationException("Can not set isNew for managed entity");
-			}
 		}
-		
+
+
 		public bool isUpdated
 		{
 			get
 			{
 				return Parent.isUpdatedActor(this);
-			}
-			set
-			{
-				throw new InvalidOperationException("Can not set isUpdated for managed entity");
 			}
 		}
 			
@@ -68,7 +59,7 @@ namespace GanttTracker.TaskManager
 		
 		public void BindData()
 		{
-			Parent.BindActor(this);			
+			Parent.BindActor(this);
 		}
 			
 		public void Save()
@@ -81,6 +72,6 @@ namespace GanttTracker.TaskManager
 			Parent.DeleteActor(this.Id);
 		}
 		
-		#endregion		
+		#endregion
 	}
 }

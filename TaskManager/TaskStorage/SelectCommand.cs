@@ -14,26 +14,31 @@ namespace GanttTracker.TaskManager.TaskStorage
 {
 	public class SelectCommand : IStorageCommand
 	{
+		Hashtable fParams = new Hashtable();
+
+
 		public SelectCommand(DataSet source,string entityName,Hashtable rules)
 		{
 			Initialize(source,entityName,rules);
-		}		
+		}
 		
-		private 	Hashtable fParams = new Hashtable();
+
 		private void Initialize(DataSet source,string entityName,Hashtable rules)
 		{
 			fParams.Add("Source",source);
 			fParams.Add("EntityName",entityName);
 			fParams.Add("Rules",rules);
 		}
+
 		
 		public void SetParam(object key, object value)
 		{
 			if (fParams.ContainsKey(key))
 				fParams[key] = value;
 			else
-				fParams.Add(key,value);				
+				fParams.Add(key,value);
 		}
+
 		
 		public object GetParam(object key)
 		{
@@ -42,21 +47,24 @@ namespace GanttTracker.TaskManager.TaskStorage
 			else
 				throw new KeyNotFoundException(key);
 		}
+
 		
 		public object Contains(object key)
 		{
 			return fParams.ContainsKey(key);
 		}
+
 		
 		public object [] GetParamKeys()
 		{
 			ArrayList keys = new ArrayList();
 			foreach (object key in fParams.Keys)
 			{
-				keys.Add(key);				
+				keys.Add(key);
 			} 
 			return (object [])keys.ToArray(typeof(object));
 		}
+
 		
 		public void CheckParams()
 		{
@@ -67,6 +75,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 			if (!fParams.ContainsKey("Rules"))
 				throw new KeyNotFoundException("Rules");
 		}
+
 						
 		public object Execute()
 		{
@@ -82,7 +91,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 				{
 					entityTable = table;
 					break;
-				}					
+				}
 			}
 			
 			if (entityTable == null)
@@ -105,16 +114,16 @@ namespace GanttTracker.TaskManager.TaskStorage
 				ds.Tables[0].TableName = fParams["EntityName"].ToString();
 				DataRow [] selectedRows = entityTable.Select(rule);			  
 				if (selectedRows.Length > 0)
-				{				
+				{
 					foreach(DataRow selectedRow in selectedRows)
-					{						
+					{
 						ds.Tables[0].Rows.Add((object [])selectedRow.ItemArray.Clone());
 					} 	
 				}
 			}
-			else 							
+			else
 				ds.Tables.Add(entityTable.Copy());
 			return ds;
-		}				
+		}
 	}
 }

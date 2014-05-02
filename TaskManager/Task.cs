@@ -11,7 +11,7 @@ using GanttMonoTracker;
 
 namespace GanttTracker.TaskManager
 {
-	public class Task : IManagerEntity, ITaskView
+	public class Task : IManagerEntity, ITask
 	{
 		private Task()
 		{

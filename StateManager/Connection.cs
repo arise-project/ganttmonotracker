@@ -10,7 +10,7 @@ using GanttMonoTracker;
 
 namespace GanttTracker.StateManager
 {
-	public class Connection : IConnectionView, IManagerEntity
+	public class Connection : IGuiConnection, IManagerEntity
 	{
 		public Connection()
 		{
@@ -95,5 +95,17 @@ namespace GanttTracker.StateManager
 		}
 
 		#endregion
+
+		public void BindStateIn ()
+		{
+
+		}
+
+		public void BindStateOut ()
+		{
+
+		}
+
+		public System.Data.DataSet TaskStateSource { get; set; }
 	}
 }

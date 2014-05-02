@@ -49,7 +49,7 @@ namespace GanttTracker.ProjectManager
 					XmlElement projectTeg = (XmlElement)doc.CreateElement("project");
 					projectTeg.SetAttribute("path",path);
 					projectTeg.SetAttribute("name",(string)Projects[path]);
-					mainTeg.AppendChild(projectTeg);					
+					mainTeg.AppendChild(projectTeg);
 				}
 				doc.AppendChild(mainTeg);
 				StreamWriter s = new StreamWriter(fileName); 

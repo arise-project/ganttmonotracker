@@ -10,7 +10,7 @@ using Arise.Logic;
 
 namespace GanttTracker.TaskManager.ManagerException
 {
-	public class KeyNotFoundException : Exception, IManagerException
+	public class KeyNotFoundException : Exception
 	{
 		public object Key { get;set; }
 
@@ -24,15 +24,6 @@ namespace GanttTracker.TaskManager.ManagerException
 		public KeyNotFoundException(string message,object key) : base (message)
 		{
 			Key = key;
-		}
-
-
-		public int Id
-		{
-			get
-			{
-				return IdentityManager.Instance.CreateTypeIdentity(this.GetType());
-			}
 		}
 	}
 }

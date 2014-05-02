@@ -16,7 +16,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 		
 		public IStorageCommand CreateSelectCommand(IStorageDealer daler)
 		{
-			return new SelectCommand(daler.Storage, "",null);			
+			return new SelectCommand(daler.Storage, "",null);
 		}
 				
 		public IStorageCommand CreateInsertCommand(IStorageDealer daler)

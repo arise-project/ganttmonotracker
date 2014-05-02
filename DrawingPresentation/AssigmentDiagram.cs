@@ -17,7 +17,7 @@ using TaskManagerInterface;
 
 namespace GanttMonoTracker.DrawingPresentation
 {
-	public class AssigmentDiagramm : Gtk.DrawingArea, IGuiAssigment
+	public class AssigmentDiagramm : Gtk.DrawingArea, IGuiSource
 	{
 		#region Constants.
 
@@ -35,7 +35,7 @@ namespace GanttMonoTracker.DrawingPresentation
 
 		#region IGuiAssigment Implementation
 		
-		public DataSet AssigmentSource { get;set; }
+		public DataSet Source { get;set; }
 				
 		#endregion
 
@@ -45,10 +45,10 @@ namespace GanttMonoTracker.DrawingPresentation
 		{
 			base.OnExposeEvent (args);
 
-			AssigmentSource = TrackerCore.Instance.TaskManager.AssigmentSource;
+			Source = TrackerCore.Instance.TaskManager.AssigmentSource;
 
-			DateTime firstDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MinDate"];
-			DateTime lastDate = (DateTime)AssigmentSource.Tables["DataRange"].Rows[0]["MaxDate"];
+			DateTime firstDate = (DateTime)Source.Tables["DataRange"].Rows[0]["MinDate"];
+			DateTime lastDate = (DateTime)Source.Tables["DataRange"].Rows[0]["MaxDate"];
 			TimeSpan deltaSpan = lastDate.Subtract(firstDate);
 
 
@@ -80,15 +80,15 @@ namespace GanttMonoTracker.DrawingPresentation
 			grw.Stroke();
 
 			//DrawTasks
-			int deltaActor = (AssigmentSource.Tables["Actor"].Rows.Count > 0) ? 
-			                 (fHeight - 2 * fBorderMarginV) / AssigmentSource.Tables["Actor"].Rows.Count : 
+			int deltaActor = (Source.Tables["Actor"].Rows.Count > 0) ? 
+			                 (fHeight - 2 * fBorderMarginV) / Source.Tables["Actor"].Rows.Count : 
 			                 fHeight - 2 * fBorderMarginV;
 			deltaActor -= fTaskHeight; 
 
 
 
 			int maxTaskCout = 0;
-			foreach(DataRow row in this.AssigmentSource.Tables["AssigmentSource"].Rows)
+			foreach(DataRow row in Source.Tables["AssigmentSource"].Rows)
 			{
 				if (maxTaskCout < (int)row["TaskCount"])
 				{
@@ -103,17 +103,17 @@ namespace GanttMonoTracker.DrawingPresentation
 			colormap.AllocColor(ref foregroundColor3,true,true);
 			TaskLabelGC.Foreground = foregroundColor3;
 
-			foreach(DataRow row in AssigmentSource.Tables["Actor"].Rows)
+			foreach(DataRow row in Source.Tables["Actor"].Rows)
 			{
 				DateTime labelDate = firstDate;
 				int offset = fBorderMarginH;
 				for (int i = 0; i < deltaSpan.Days; i++)
 				{
 					int taskCount = 0;
-					if (AssigmentSource.Tables["AssigmentSource"]
+					if (Source.Tables["AssigmentSource"]
 						.Select("ActorID = " + row["ID"] + " and Date = '" +labelDate.ToShortDateString() + "'")
 						.Length > 0)
-						taskCount = (int)(AssigmentSource.Tables["AssigmentSource"]
+						taskCount = (int)(Source.Tables["AssigmentSource"]
 							.Select("ActorID = " + row["ID"] + "and Date = '" +labelDate.ToShortDateString() + "'")
 							[0]["TaskCount"]);
 					if (taskCount > 0)
@@ -156,7 +156,7 @@ namespace GanttMonoTracker.DrawingPresentation
 			TaskLabelGC.Foreground = foregroundColor;
 			AxisGC.Foreground = foregroundColor1;
 
-			foreach(DataRow row in AssigmentSource.Tables["Actor"].Rows)
+			foreach(DataRow row in Source.Tables["Actor"].Rows)
 			{
 				Pango.Layout layout = new Pango.Layout(PangoContext);
 				layout.Wrap = Pango.WrapMode.Word;

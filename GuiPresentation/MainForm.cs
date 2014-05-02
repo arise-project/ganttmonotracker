@@ -21,7 +21,7 @@ using TaskManagerInterface;
 
 namespace GanttMonoTracker.GuiPresentation
 {
-	public class MainForm : Gtk.Window, IGuiTracker, IGuiGantt
+	public class MainForm : Gtk.Window, IGuiTracker
 	{
 		// id, description, start time, end time, actor, status
 		TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string),typeof(string), typeof(string),typeof(string),typeof(string));
@@ -149,7 +149,6 @@ namespace GanttMonoTracker.GuiPresentation
 			
 			TrackerCore.Instance.State = CoreState.EmptyProject;
 			TrackerCore.Instance.BindProject();
-			TrackerCore.Instance.GuiSource = new GuiFactory();
 		}
 
 		
@@ -473,7 +472,7 @@ namespace GanttMonoTracker.GuiPresentation
 				fTaskStore.SetValue(itemNode,1,row["Description"]);
 				fTaskStore.SetValue(itemNode,2,((DateTime)row["StartTime"]).ToShortDateString());
 				fTaskStore.SetValue(itemNode,3,((DateTime)row["EndTime"]).ToShortDateString());
-				fTaskStore.SetValue(itemNode,4,ActorSource.Tables["Actor"].Select("ID = " + (int)row["ActorID"])[0]["Name"]);
+					fTaskStore.SetValue(itemNode,4,ActorSource.Tables["Actor"].Select("ID = " + (int)row["ActorID"])[0]["Name"]);
 				if (StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"]).Length > 0)
 				{
 					var state = StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"])[0]["Name"];
@@ -508,15 +507,6 @@ namespace GanttMonoTracker.GuiPresentation
 
 		
 		public void BindState()	{ }
-		
-		#endregion
-		
-		#region IGuiGantt Implementation
-		
-		public DataSet GanttSource { get; set; }
-
-		
-		public void BindGantt()	{ }
 		
 		#endregion
 	}

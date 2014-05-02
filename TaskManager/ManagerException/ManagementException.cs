@@ -11,7 +11,7 @@ using GanttMonoTracker;
 
 namespace GanttTracker.TaskManager.ManagerException
 {
-	public class ManagementException : Exception, IManagerException
+	public class ManagementException : Exception
 	{
 		public ManagementException(ExceptionType type) : base ("Operation not allowed") 
 		{
@@ -22,15 +22,6 @@ namespace GanttTracker.TaskManager.ManagerException
 		public ManagementException(ExceptionType type, string message) : base (message) 
 		{
 			Type = type;
-		}
-
-
-		public int Id
-		{
-			get
-			{
-				return IdentityManager.Instance.CreateTypeIdentity(this.GetType());
-			}
 		}
 
 

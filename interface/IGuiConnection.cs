@@ -8,8 +8,16 @@ using System.Data;
 
 namespace TaskManagerInterface
 {	
-	public interface IGuiConnection : IConnectionView
+	public interface IGuiConnection
 	{
+		string Name { get;set;	}
+
+
+		int MappingID {	get;set; }
+
+
+		int StateID	{ get;set; }
+
 		DataSet TaskStateSource { get;set; }
 
 

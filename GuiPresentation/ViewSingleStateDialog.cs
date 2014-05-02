@@ -17,7 +17,7 @@ using TaskManagerInterface;
 
 namespace GanttMonoTracker.GuiPresentation
 {
-	public class ViewSingleStateDialog : IStateView, IGuiMessageDialog,IDisposable
+	public class ViewSingleStateDialog : IState, IGuiMessageDialog,IDisposable
 	{
 		private byte fColorRed;
 		private byte fColorGreen;

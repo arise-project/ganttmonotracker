@@ -19,6 +19,9 @@ namespace GanttTracker.TaskManager.TaskStorage
 {
 	public class StorageDealer : IStorageDealer
 	{
+		DataSet fEmptyStorage;
+
+
 		public string ConnectionString { get;set; }	
 		
 		public DataSet Storage { get;set; }
@@ -26,7 +29,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 
 		public IStorageCommandFactory CommandFactory { get;	set; }
 
-		private DataSet fEmptyStorage;
+
 		public DataSet EmptyStorage
 		{
 			get
@@ -77,15 +80,17 @@ namespace GanttTracker.TaskManager.TaskStorage
 					fEmptyStorage.Relations.Add("Relation_Task_Comment_TaskID",taskTable.Columns["ID"],commentTable.Columns["EntryID"]);				
 					
 				}
-				return fEmptyStorage;			
-			}		
+				return fEmptyStorage;
+			}
 		}
+
 		
 		public StorageDealer(string connectionString,IStorageCommandFactory commandFactory)
 		{
 			ConnectionString = connectionString;
 			CommandFactory = commandFactory;
 		}
+
 		
 		public void Create()
 		{
@@ -95,11 +100,12 @@ namespace GanttTracker.TaskManager.TaskStorage
 			EmptyStorage.WriteXml(ConnectionString, System.Data.XmlWriteMode.WriteSchema);
 			EmptyStorage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));		 			 
 		}	
+
 		
 		public void Load()
 		{
-			XmlTextReader reader = new XmlTextReader(ConnectionString);
-			/*XmlValidatingReader validator = new XmlValidatingReader(reader);
+			/*XmlTextReader reader = new XmlTextReader(ConnectionString);
+			XmlValidatingReader validator = new XmlValidatingReader(reader);
 			validator.ValidationType = ValidationType.Schema; 
 			validator.ValidationEventHandler += new ValidationEventHandler(ValidationHandler);
 			while(validator.Read())
@@ -114,45 +120,51 @@ namespace GanttTracker.TaskManager.TaskStorage
 			validator.Close();
 			*/
 			Storage = new DataSet();
-			Storage.ReadXml(ConnectionString);		
+			Storage.ReadXml(ConnectionString);
 		}
+
 		
 		private void ValidationHandler(object sender, ValidationEventArgs args)
-		{			 
+		{
 			throw new ManagementException(ExceptionType.ValidationFailed, string.Format("Validation failed with message {0}", args.Message));
 		}
+
 		
 		public void Save()
 		{
 			Storage.WriteXml(ConnectionString, System.Data.XmlWriteMode.WriteSchema);
 			Storage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));		
 		}
+
 		
 		public void Save(string connectionString)
-		{			
+		{
 			Storage.WriteXml(connectionString, System.Data.XmlWriteMode.WriteSchema);
 			Storage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));		
 		}
+
 				
 		public DataSet ExecuteDataSet(IStorageCommand command)
-		{			
+		{
 			return (DataSet)command.Execute();
 		}
+
 		
 		public object ExecuteScalar(IStorageCommand command)
 		{
 			return command.Execute();
 		}
+
 		
 		public void ExecuteNonQuery(IStorageCommand command)
 		{
-			command.Execute();			
+			command.Execute();
 		}
+
 		
 		public bool CheckConnection()
 		{
 			return !(ConnectionString == null || !File.Exists(ConnectionString));
 		}
-
 	}
 }

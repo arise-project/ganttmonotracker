@@ -114,7 +114,7 @@ namespace GanttMonoTracker.GuiPresentation
 			tvStateConnection.AppendColumn("Name",new CellRendererText(), "text", 1);
 			tvStateConnection.GetColumn(0).Visible = false;
 			
-			StateSource = stateCore.TaskManager.TaskStateSource;
+			Source = stateCore.TaskManager.TaskStateSource;
 			
 			BindStateSearchDictionary();
 			BindStates();
@@ -179,13 +179,13 @@ namespace GanttMonoTracker.GuiPresentation
 		
 		#region IGuiState Implementation
 	
-		public DataSet StateSource {get; set;}
+		public DataSet Source {get; set;}
 			
 			
 		public void BindStates()
 		{		
 			TaskStateStore.Clear();
-			foreach (DataRow row in StateSource.Tables["TaskState"].Rows)
+			foreach (DataRow row in Source.Tables["TaskState"].Rows)
 			{
 				TaskStateStore.AppendValues(row["ID"], row["Name"]);
 				if (StateSearchDictionary == null)
@@ -286,7 +286,7 @@ namespace GanttMonoTracker.GuiPresentation
 				//fStateSource = Arise.Logic.DataSearch.GetFilteredDataSet(fStateCore.TaskManager.TaskStateSource, fStateSearch);				
 			}
 			else
-				StateSource = stateCore.TaskManager.TaskStateSource;
+				Source = stateCore.TaskManager.TaskStateSource;
 			BindStates();
 		}
 

@@ -6,8 +6,12 @@
 
 namespace TaskManagerInterface
 {
-	public interface IGuiActorView : IActorView, IGuiMessageDialog
+	public interface IGuiActorView : IGuiMessageDialog
 	{
+		string ActorName { get;	set; }
+
+
+		string ActorEmail { get; set; }
 	}
 }
 

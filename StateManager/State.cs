@@ -13,7 +13,7 @@ using GanttMonoTracker;
 
 namespace GanttTracker.StateManager
 {
-	public class State : IStateView, IManagerEntity
+	public class State : IState, IManagerEntity
 	{
 		private int fMappingID;
 

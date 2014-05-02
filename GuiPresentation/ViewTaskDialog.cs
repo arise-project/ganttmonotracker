@@ -17,7 +17,7 @@ using GanttTracker.TaskManager.ManagerException;
 
 namespace GanttMonoTracker.GuiPresentation
 {
-	public class ViewTaskDialog : IGuiTaskView, IGuiTracker
+	public class ViewTaskDialog : IGuiTask, IGuiTracker
 	{
 		ListStore fStateStore;
 

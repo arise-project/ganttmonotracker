@@ -8,12 +8,9 @@ using System;
 using System.Data;
 
 namespace TaskManagerInterface
-{	
-	public interface IGuiState
+{
+	public interface IGuiState : IGuiSource
 	{
-		DataSet StateSource { get; set;	}
-
-
 		void BindStates();
 
 

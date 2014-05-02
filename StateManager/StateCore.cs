@@ -27,8 +27,6 @@ namespace GanttTracker.StateManager
 			StateManager = this;
 			StorageManager = guiCore.StorageManager;
 			TaskManager = guiCore.TaskManager;
-			
-			GuiFactory = new GuiFactory();
 			StateFactory.Parent = TaskManager;
 			ControledGui =  controledGui;
 		}	
@@ -53,12 +51,9 @@ namespace GanttTracker.StateManager
 		
 		public IGuiState ControledGui {	get;set; }
 
-		
-		public GuiFactory GuiFactory { get;set; }
-
 
 		public void CreateTaskState()
-		{			
+		{
 			ViewSingleStateDialog stateView = GuiFactory.CreateSingleStateView(MainForm);
 			if (Gtk.ResponseType.Ok == (Gtk.ResponseType)stateView.ShowDialog())
 			{
@@ -71,7 +66,7 @@ namespace GanttTracker.StateManager
 				newState.ColorBlue = stateView.ColorBlue;
 							
 				newState.Save();
-				ControledGui.StateSource =	TaskManager.TaskStateSource;
+				ControledGui.Source =	TaskManager.TaskStateSource;
 				ControledGui.BindStates();
 			}
 		}
@@ -91,7 +86,7 @@ namespace GanttTracker.StateManager
 				state.ColorBlue = stateView.ColorBlue;
 					
 				state.Save();
-				ControledGui.StateSource =	TaskManager.TaskStateSource;
+				ControledGui.Source =	TaskManager.TaskStateSource;
 				ControledGui.BindStates();
 			}
 		}
@@ -100,7 +95,7 @@ namespace GanttTracker.StateManager
 		public void DeleteTaskState(int stateID)
 		{			
 			TaskManager.DeleteTaskState(stateID);
-			ControledGui.StateSource =	TaskManager.TaskStateSource;
+			ControledGui.Source =	TaskManager.TaskStateSource;
 			ControledGui.BindStates();
 		}
 

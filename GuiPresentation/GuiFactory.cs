@@ -15,14 +15,9 @@ using TaskManagerInterface;
 
 namespace GanttMonoTracker.GuiPresentation
 {
-	public class GuiFactory
+	public static class GuiFactory
 	{
-		public GuiFactory()
-		{
-		}
-
-		
-		public IGuiActorView CreateActorView(Window parent)
+		public static IGuiActorView CreateActorView(Window parent)
 		{
 			ViewActorDialog actorDialog = new ViewActorDialog(parent);
 			actorDialog.Title = "Create Actor";
@@ -30,7 +25,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
-		public IGuiActorView CreateActorView(Window parent,ITaskManager taskManager, Actor actor)
+		public static IGuiActorView CreateActorView(Window parent,ITaskManager taskManager, Actor actor)
 		{
 			ViewActorDialog actorDialog = new ViewActorDialog(parent);
 			actorDialog.ActorName = actor.Name;
@@ -40,7 +35,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
-		private void ValidateCore(IGuiCore core)
+		private static void ValidateCore(IGuiCore core)
 		{
 			if (core.TaskManager.ActorSource.Tables["Actor"].Rows.Count == 0)
 			{
@@ -53,7 +48,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
-		public IGuiTaskView CreateTaskView(Window parent, IGuiCore core)
+		public static IGuiTask CreateTaskView(Window parent, IGuiCore core)
 		{
 			ValidateCore(core);
 			
@@ -69,7 +64,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
-		public IGuiTaskView CreateTaskView(Window parent, IGuiCore core, int taskID)
+		public static IGuiTask CreateTaskView(Window parent, IGuiCore core, int taskID)
 		{
 			ValidateCore(core);
 			
@@ -106,7 +101,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 		
-		public ViewTaskAssign CreateTaskAssign(Window parent, IGuiCore core, int taskID)
+		public static ViewTaskAssign CreateTaskAssign(Window parent, IGuiCore core, int taskID)
 		{
 			ValidateCore(core);
 			Task task = (Task)core.TaskManager.GetTask(taskID);
@@ -123,7 +118,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 		
-		public ViewStateDialog CreateStateView (Window parent, IGuiCore guiCore)
+		public static ViewStateDialog CreateStateView (Window parent, IGuiCore guiCore)
 		{
 			ViewStateDialog stateView = new ViewStateDialog(parent,guiCore);
 			stateView.Title = "Edit States";
@@ -131,7 +126,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
-		public ViewSingleStateDialog CreateSingleStateView (Window parent)
+		public static ViewSingleStateDialog CreateSingleStateView (Window parent)
 		{
 			ViewSingleStateDialog stateView = new ViewSingleStateDialog(parent);
 			stateView.Title = "New State";
@@ -139,7 +134,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
-		public ViewSingleStateDialog CreateSingleStateView (Window parent, State state)
+		public static ViewSingleStateDialog CreateSingleStateView (Window parent, State state)
 		{
 			ViewSingleStateDialog stateView = new ViewSingleStateDialog(parent);
 			stateView.Title = "Edit State";
@@ -159,7 +154,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
-		public ViewConnectionDialog CreateConnectionView (Window parent, DataSet taskStateSource)
+		public static ViewConnectionDialog CreateConnectionView (Window parent, DataSet taskStateSource)
 		{
 			ViewConnectionDialog connectionView = new ViewConnectionDialog(parent,taskStateSource);
 			connectionView.Title = "New Connection";
@@ -169,7 +164,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
-		public AboutDialog CreateAboutDialog(Window parent)
+		public static AboutDialog CreateAboutDialog(Window parent)
 		{
 			AboutDialog aboutDialog = new AboutDialog(parent);
 			return aboutDialog;

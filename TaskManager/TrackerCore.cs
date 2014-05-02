@@ -51,9 +51,6 @@ namespace GanttTracker
 		public IGuiTracker Tracker { get;set; }
 
 
-		public GuiFactory GuiSource { get;set; }
-
-
 		public string Recent 
 		{
 			 get
@@ -121,7 +118,7 @@ namespace GanttTracker
 		
 		public void CreateActor()
 		{
-			IGuiActorView actorView = GuiSource.CreateActorView(window);
+			IGuiActorView actorView = GuiFactory.CreateActorView(window);
 			if (actorView.ShowDialog() == (int)Gtk.ResponseType.Ok)
 			{
 				Actor newActor = (Actor)TaskManager.CreateActor();
@@ -138,7 +135,7 @@ namespace GanttTracker
 		{	
 			Actor actor = (Actor)TaskManager.GetActor(actorID);
 			if(actor == null) return;
-			IGuiActorView actorView = GuiSource.CreateActorView(window,TaskManager, actor);
+			IGuiActorView actorView = GuiFactory.CreateActorView(window,TaskManager, actor);
 			if (actorView.ShowDialog() == (int)Gtk.ResponseType.Ok)
 			{
 				actor.Name = actorView.ActorName;
@@ -160,10 +157,10 @@ namespace GanttTracker
 		
 		public void CreateTask()
 		{
-			IGuiTaskView taskView = null;
+			IGuiTask taskView = null;
 				try
 				{
-					taskView = GuiSource.CreateTaskView(window,(IGuiCore)this);
+				taskView = GuiFactory.CreateTaskView(window,(IGuiCore)this);
 					if(taskView == null) return;
 				}
 			catch(ManagementException ex)
@@ -200,7 +197,7 @@ namespace GanttTracker
 			ViewTaskAssign assignView = null;
 				try
 				{			
-					assignView = GuiSource.CreateTaskAssign(window,(IGuiCore)this, taskID);
+				assignView = GuiFactory.CreateTaskAssign(window,(IGuiCore)this, taskID);
 				}
 			catch(ManagementException ex)
 				{
@@ -224,10 +221,10 @@ namespace GanttTracker
 		
 		public void UpdateTaskState(int taskID)
 		{
-				IGuiTaskView taskView = null;
+				IGuiTask taskView = null;
 				try
 				{
-					taskView = GuiSource.CreateTaskView(window,(IGuiCore)this, taskID);
+				taskView = GuiFactory.CreateTaskView(window,(IGuiCore)this, taskID);
 				}
 			catch(ManagementException ex)
 				{
@@ -256,7 +253,7 @@ namespace GanttTracker
 		public void StateEdit()
 		{
 			ViewStateDialog stateView = null;
-			stateView = GuiSource.CreateStateView(window, (IGuiCore)this);
+			stateView = GuiFactory.CreateStateView(window, (IGuiCore)this);
 
 			if (Gtk.ResponseType.Ok == (Gtk.ResponseType)stateView.ShowDialog())
 			{
@@ -279,7 +276,7 @@ namespace GanttTracker
 		
 		public void ShowAboutDialog()
 		{
-			AboutDialog aboutView = (AboutDialog)GuiSource.CreateAboutDialog(window);
+			AboutDialog aboutView = (AboutDialog)GuiFactory.CreateAboutDialog(window);
 			aboutView.ShowDialog();	
 		}
 	}
