@@ -4,13 +4,16 @@
 //date:4/12/2014
 // project created on 08.11.2005 at 22:11
 using System;
+using System.Linq;
 using Gtk;
 using GLib;
 using Glade;
+
 using GanttMonoTracker;
 using GanttMonoTracker.GuiPresentation;
 using GanttMonoTracker.ExceptionPresentation;
 using TaskManagerInterface;
+using System.Configuration;
 
 namespace GanttTracker
 {
@@ -18,10 +21,12 @@ namespace GanttTracker
 	{
 		MainForm mainForm;
 
+
 		public static void Main (string[] args)
 		{
 			new GanttTrackerApp (args);
 		}
+
 
 		public GanttTrackerApp (string[] args) 
 		{	
@@ -53,6 +58,12 @@ namespace GanttTracker
 
 		void ShowError(Exception ex)
 		{
+			var silentexceptions = ConfigurationManager.AppSettings["silentexceptions"];
+			if(ex != null && silentexceptions.Split(';').Any(s => ex.ToString().IndexOf(s) >= 0 ) )
+			{
+				return;
+			}
+
 			Console.WriteLine("--------------------------Appication Exception-----------------");
 			if(ex == null)
 			{
@@ -77,6 +88,5 @@ namespace GanttTracker
 			IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,mainForm);
 			dialog.ShowDialog();
 		}
-
 	}
 }

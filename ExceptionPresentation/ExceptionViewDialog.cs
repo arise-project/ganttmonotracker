@@ -54,10 +54,7 @@ namespace GanttMonoTracker.ExceptionPresentation
 				"Use ignore for continue, Quit for exit program.";
 			ExceptionType = exception.GetType().FullName;
 			ExceptionMessage = exception.Message;
-			ExceptionDescription = string.Format("{0} {1} {2}",
-				exception.GetType().ToString(), 
-				exception.Message, 
-				exception.StackTrace);
+			ExceptionDescription = exception.ToString();
 			tvButtonDescription.Sensitive = false;
 		}
 

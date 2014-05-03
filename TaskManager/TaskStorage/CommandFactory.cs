@@ -8,28 +8,41 @@ using TaskManagerInterface;
 
 namespace GanttTracker.TaskManager.TaskStorage
 {
-	public class CommandFactory : IStorageCommandFactory
+	public class CommandFactory : IDealerCruid
 	{		
+		IStorageDealer daler;
+
+
 		public CommandFactory()
-		{			
+		{
 		}
+
+
+		public void SetDealer(IStorageDealer daler)
+		{
+			this.daler = daler;
+		}
+
 		
-		public IStorageCommand CreateSelectCommand(IStorageDealer daler)
+		public IStorageCommand GetSelectCommand()
 		{
 			return new SelectCommand(daler.Storage, "",null);
 		}
+
 				
-		public IStorageCommand CreateInsertCommand(IStorageDealer daler)
+		public IStorageCommand GetInsertCommand()
 		{
 			return new InsertCommand(daler.Storage, "",null);
 		}
+
 		
-		public IStorageCommand CreateUpdateCommand(IStorageDealer daler)
+		public IStorageCommand GetUpdateCommand()
 		{
 			return new UpdateCommand(daler.Storage, "",null,null);
 		}
+
 		
-		public IStorageCommand CreateDeleteCommand(IStorageDealer daler)
+		public IStorageCommand GetDeleteCommand()
 		{
 			return new DeleteCommand(daler.Storage, "",null);
 		}

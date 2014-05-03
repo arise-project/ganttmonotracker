@@ -129,7 +129,7 @@ namespace GanttTracker.StateManager
 		{
 			get
 			{
-				return Parent.isUpdatedTaskState(this);
+				return Parent.IsUpdatedTaskState(this);
 			}
 			
 			set

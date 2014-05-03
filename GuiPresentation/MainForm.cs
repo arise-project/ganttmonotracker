@@ -229,7 +229,7 @@ namespace GanttMonoTracker.GuiPresentation
 					case CoreState.OpenProject :
 					TrackerCore.Instance.ProjectFileName = args == null ? selectedFile : ((FileSelection)sender).Filename;
 					TrackerCore.Instance.BindProject();
-					File.WriteAllText(FSLocations.GetPath ("recent.txt"), TrackerCore.Instance.ProjectFileName);
+					File.WriteAllText("recent.txt".GetPath (), TrackerCore.Instance.ProjectFileName);
 					break;
 				}
 			}

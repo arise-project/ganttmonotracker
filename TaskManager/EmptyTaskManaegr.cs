@@ -6,19 +6,29 @@
 
 using System;
 using System.Data;
+
 using TaskManagerInterface;
 using GanttTracker.TaskManager.ManagerException;
 using GanttTracker.TaskManager.TaskStorage;
+using GanttMonoTracker;
 
 namespace GanttTracker.TaskManager
 {
 	public class EmptyTaskManager : ITaskManager
 	{
-		private IStorageDealer fDealer;
+		IStorageDealer fDealer;
 
 
-		private string fConnectionString;
+		string fConnectionString;
 
+
+		DataSet fTaskSource;
+
+
+		DataSet fActorSource;
+
+
+		DataSet fTaskStateSource;
 
 		public EmptyTaskManager( )
 		{
@@ -33,14 +43,13 @@ namespace GanttTracker.TaskManager
 		}
 
 
-		private void Initialize()
+		void Initialize()
 		{
 			fDealer = new  StorageDealer(fConnectionString, new CommandFactory());
 		}
 		
-	   #region Tasks	
-		
-		private DataSet fTaskSource;
+		#region Tasks
+
 		public DataSet TaskSource
 		{
 			get
@@ -58,42 +67,47 @@ namespace GanttTracker.TaskManager
 				
 			}
 		}
+
 		
 		public IManagerEntity GetTask(int id)
 		{
-			return null;
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
 		public IManagerEntity CreateTask()
 		{
-			return null;
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
 		public void BindTask(IManagerEntity taskEntity)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
 		public void UpdateTask(IManagerEntity taskEntity)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
-		public bool isUpdatedTask(IManagerEntity taskEntity)
+		public bool IsUpdatedTask(IManagerEntity taskEntity)
 		{
 			return false;
 		}
+
 		
 		public void DeleteTask(int id)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
 		
 		#endregion
 		
 		#region Actors
-		
-		private DataSet fActorSource;
+
 		public DataSet ActorSource
 		{
 			get
@@ -110,37 +124,42 @@ namespace GanttTracker.TaskManager
 			{
 				
 			}
-			
 		}
+
 		
 		public IManagerEntity GetActor(int id)
 		{
-			return null;
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
 		public IManagerEntity CreateActor()
 		{
-			return null;
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
 		public void BindActor(IManagerEntity actorEntity)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
 		public void UpdateActor(IManagerEntity actorEntity)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
-		public bool isUpdatedActor(IManagerEntity actorEntity)
+		public bool IsUpdatedActor(IManagerEntity actorEntity)
 		{
 			return false;
 		}
+
 		
 		public void DeleteActor(int id)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
 		
 		#endregion
@@ -148,8 +167,10 @@ namespace GanttTracker.TaskManager
 		#region Gantt
 				
 		public DataSet GanttSource { get;set; }
+
 		
 		public DateTime GanttFirstDate	{get;set; }
+
 		
 		public DateTime GanttLastDate { get; set; }
 		
@@ -162,8 +183,7 @@ namespace GanttTracker.TaskManager
 		#endregion
 		
 		#region TaskState
-		
-		public DataSet fTaskStateSource;
+
 		public DataSet TaskStateSource
 		{
 			get
@@ -184,47 +204,54 @@ namespace GanttTracker.TaskManager
 		
 		public DataSet GetInitialTaskStateSource()
 		{
-			return null;
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
 		public DataSet GetTaskStateSource(IManagerEntity state)
 		{
-			return null;
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
 		public IManagerEntity GetTaskState(int id)
 		{
-			return null;
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
 		public IManagerEntity CreateTaskState()
 		{
-			return null;
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 		
 		public void BindTaskState(IManagerEntity stateEntity)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
 
 		public void BindTaskComment(IManagerEntity stateEntity)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
 				
 		public void UpdateTaskState(IManagerEntity stateEntity)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
-		
-		public bool isUpdatedTaskState(IManagerEntity stateEntity)
+
+
+		public bool IsUpdatedTaskState(IManagerEntity stateEntity)
 		{
 			return false;
 		}
-		
+
+
 		public void DeleteTaskState(int id)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
 		
 		#endregion
@@ -232,48 +259,54 @@ namespace GanttTracker.TaskManager
 		#region Task State Connection
 		
 		public DataSet TaskStateConnectionsSource {get;set;	}
-		
+
+
 		public IManagerEntity GetTaskStateConnection(int id)
 		{
-			return null;
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
-		
+
+
 		public IManagerEntity CreateTaskStateConnection(IManagerEntity stateEntity, IManagerEntity connectedStateEntity)
 		{
-			return null;
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
-		
+
+
 		public void BindTaskStateConnection(IManagerEntity stateConnectionEntity)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
-		
+
+
 		public void UpdateTaskStateConnection(IManagerEntity stateConnectionEntity)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
-		
+
+
 		public bool isUpdatedTaskStateConnection(IManagerEntity stateConnectionEntity)
 		{
 			return false;
 		}
-		
+
+
 		public void DeleteTaskStateConnection(int id)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
 		
 		#endregion
 		
 		public void Save()
 		{			
-			if (fConnectionString != null)
-					fDealer.Create();
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
-		
+
+
 		public void Update(IStorageDealer updateDealer)
 		{
-
+			throw new ManagementException(ExceptionType.NotAllowed);
 		}
 	}
 }

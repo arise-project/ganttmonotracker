@@ -11,6 +11,7 @@ public partial class MainWindow: Gtk.Window
 	{
 		Build ();
 	}
+
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 	{

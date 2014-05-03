@@ -13,14 +13,17 @@ namespace GanttTracker.TaskManager
 {
 	public class Task : IManagerEntity, ITask
 	{
-		private Task()
-		{
-		}
-		
+		int fActorID;
+
+
+		int fStateID;
+
+
 		public Task(ITaskManager parent)
 		{
 			Parent = parent;
 		}
+
 		
 		public Task(ITaskManager parent, int id)
 		{
@@ -32,10 +35,11 @@ namespace GanttTracker.TaskManager
 		#region Data
 		
 		public string Description {	get;set; }
+
 		
 		public bool ActorPresent { get;set; }
-		
-		private int fActorID;
+
+
 		public int ActorID
 		{
 			get
@@ -51,10 +55,10 @@ namespace GanttTracker.TaskManager
 				fActorID = value;
 			}
 		}
-		
-		public bool StatePresent {	get;set; }
-		
-		private int fStateID;
+
+
+		public bool StatePresent { get;set; }
+
 
 		public int StateID
 		{
@@ -71,11 +75,14 @@ namespace GanttTracker.TaskManager
 				fStateID = value;
 			}
 		}
-		
+
+
 		public DateTime StartTime {	get;set; }
-		
+
+
 		public DateTime EndTime	{ get;set; }
-		
+
+
 		public TimeSpan EstimatedTime {	get;set; }
 		
 		#endregion
@@ -84,7 +91,8 @@ namespace GanttTracker.TaskManager
 		#region IManagerEntity Implementation
 		
 		public int Id {	get;set; }
-		
+
+
 		public bool IsNew
 		{
 			get
@@ -92,30 +100,35 @@ namespace GanttTracker.TaskManager
 				return (Id == 0);
 			}
 		}
-		
+
+
 		public bool isUpdated
 		{
 			get
 			{
-				return Parent.isUpdatedTask(this);
+				return Parent.IsUpdatedTask(this);
 			}
 		}
+
 			
 		public ITaskManager Parent { get;set; }
 
 
 		public string Comment {	get;set; }
-		
+
+
 		public void BindData()
 		{
 			Parent.BindTask(this);
 		}
+
 			
 		public void Save()
 		{
 			Parent.UpdateTask(this);
 		}
-		
+
+
 		public void Delete()
 		{
 			Parent.DeleteTask(this.Id);

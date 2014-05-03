@@ -6,6 +6,7 @@
 
 using System.Data;
 using System.Collections;
+
 using TaskManagerInterface;
 using GanttTracker.TaskManager.ManagerException;
 
@@ -14,6 +15,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 	public class UpdateCommand : IStorageCommand
 	{
 		Hashtable fParams = new Hashtable();
+
 
 		public UpdateCommand(DataSet source,string entityName,Hashtable values, Hashtable rules)
 		{

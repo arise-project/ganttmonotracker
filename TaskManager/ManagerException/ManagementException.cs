@@ -5,6 +5,7 @@
 // created on 03.12.2005 at 0:19
 
 using System;
+
 using TaskManagerInterface;
 using Arise.Logic;
 using GanttMonoTracker;

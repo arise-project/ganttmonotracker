@@ -6,7 +6,9 @@ namespace GanttMonoTracker
 	{
 		NotAllowed,
 
+
 		NotRequired,
+
 
 		ValidationFailed
 	}

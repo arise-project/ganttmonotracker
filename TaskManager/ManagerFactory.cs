@@ -5,6 +5,7 @@
 // created on 18.11.2005 at 21:49
 
 using TaskManagerInterface;
+using System.IO;
 
 namespace GanttTracker.TaskManager
 {
@@ -15,15 +16,25 @@ namespace GanttTracker.TaskManager
 			return new EmptyTaskManager();
 		}
 
-		public ITaskManager CreateNewManager(IStorageDealer dealer)
+
+		public ITaskManager CreateNewManager(string filename)
 		{
-			return null;
+			/* //remove existing
+			 if(File.Exists(filename))
+			{
+				File.Delete(filename);
+			}
+			*/
+
+			var taskManager = new EmptyTaskManager(filename);
+			taskManager.Save();
+			return new XmlTaskManager(filename);
 		}
 
-		public ITaskManager CreateManager(IStorageDealer dealer)
+
+		public ITaskManager CreateManager(string filename)
 		{
-			return null;
-		}			
+			return new XmlTaskManager(filename);
+		}
 	}
 }
-

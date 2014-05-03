@@ -10,7 +10,7 @@ namespace GanttMonoTracker
 {
 	public static class FSLocations
 	{
-		public static string GetPath (string filename)
+		public static string GetPath (this string filename)
 		{
 			return Path.Combine(Path.GetDirectoryName( Assembly.GetExecutingAssembly().Location), filename);
 		}

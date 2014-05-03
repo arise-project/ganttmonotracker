@@ -11,9 +11,9 @@ namespace TaskManagerInterface
 		ITaskManager CreateEmptyManager();
 
 
-		ITaskManager CreateNewManager(IStorageDealer dealer);
+		ITaskManager CreateNewManager(string filename);
 
 
-		ITaskManager CreateManager(IStorageDealer dealer);
+		ITaskManager CreateManager(string filename);
 	}
 }

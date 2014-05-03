@@ -7,7 +7,6 @@
 using System;
 using System.IO;
 using System.Data;
-
 using Gtk;
 
 using GanttTracker.TaskManager;
@@ -17,8 +16,6 @@ using GanttMonoTracker;
 using GanttMonoTracker.GuiPresentation;
 using GanttMonoTracker.ExceptionPresentation;
 using GanttMonoTracker.DrawingPresentation;
-
- 
 using AboutDialog = GanttMonoTracker.GuiPresentation.AboutDialog;
 
 namespace GanttTracker
@@ -28,15 +25,14 @@ namespace GanttTracker
 		private Window window;
 
 
-
 		private static TrackerCore fInstance;
-
 
 
 		private TrackerCore()
 		{
 		}
 		
+
 
 		public static TrackerCore Instance
 		{
@@ -55,7 +51,7 @@ namespace GanttTracker
 		{
 			 get
 			{
-				 return File.ReadAllText(FSLocations.GetPath ("recent.txt")); 
+				return File.ReadAllText("recent.txt".GetPath ()); 
 			}
 		 }
 		
@@ -79,28 +75,20 @@ namespace GanttTracker
 
 		public void BindProject()
 		{
+			var mgr = new ManagerFactory();
+			if (State != CoreState.EmptyProject && ProjectFileName == null)
+				throw new ManagementException(ExceptionType.NotAllowed, "Set filename for create project");
 			switch(State)
 			{
 				case CoreState.EmptyProject :
-					TaskManager = new EmptyTaskManager();
-					break;
+				TaskManager = mgr.CreateEmptyManager();
+				break;
 				case CoreState.CreateProject :
-					if (ProjectFileName == null)
-					throw new ManagementException(ExceptionType.NotAllowed, "Set filename for create project");
-					if (File.Exists(ProjectFileName))
-					{
-						File.Delete(ProjectFileName);
-					}
-					
-					TaskManager = new EmptyTaskManager(ProjectFileName);
-					TaskManager.Save();
-					TaskManager = new XmlTaskManager(ProjectFileName);
-					break;
+				TaskManager = mgr.CreateNewManager(ProjectFileName);
+				break;
 				case CoreState.OpenProject :
-					if (ProjectFileName == null)
-					throw new ManagementException(ExceptionType.NotAllowed, "Set filename for create project");
-					TaskManager = new XmlTaskManager(ProjectFileName);
-					break;
+				mgr.CreateManager(ProjectFileName);
+				break;
 			}
 			StorageManager = TaskManager;
 			Tracker.TaskSource = TaskManager.TaskSource;
@@ -110,11 +98,13 @@ namespace GanttTracker
 			Tracker.BindActor();
 			window = Tracker as Window;
 		}
+
 		
 		public void SaveProject()
 		{
 			StorageManager.Save();
 		}
+
 		
 		public void CreateActor()
 		{
@@ -130,6 +120,7 @@ namespace GanttTracker
 				Tracker.BindActor();
 			}
 		}
+
 		
 		public void EditActor(int actorID)
 		{	
@@ -140,11 +131,12 @@ namespace GanttTracker
 			{
 				actor.Name = actorView.ActorName;
 				actor.Email = actorView.ActorEmail;
-				actor.Save();	
+				actor.Save();
 				Tracker.ActorSource = TaskManager.ActorSource;
 				Tracker.BindActor();
 			}
 		}
+
 		
 		public void DeleteActor(int actorID)
 		{
@@ -154,6 +146,7 @@ namespace GanttTracker
 			Tracker.ActorSource = TaskManager.ActorSource;
 			Tracker.BindActor();
 		}
+
 		
 		public void CreateTask()
 		{
@@ -192,63 +185,66 @@ namespace GanttTracker
 					Tracker.BindTask();
 				}
 		}
+
+
 		public void AssignTask(int taskID)
 		{
 			ViewTaskAssign assignView = null;
-				try
-				{			
+			try
+			{
 				assignView = GuiFactory.CreateTaskAssign(window,(IGuiCore)this, taskID);
-				}
+			}
 			catch(ManagementException ex)
-				{
+			{
 					IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,window);
 					dialog.Title = "Task Assign";
 					dialog.ShowDialog();
 					return;
-				}
+			}
 				
-				if (assignView.ShowDialog() == (int)Gtk.ResponseType.Ok)
-				{
-					Task task =	(Task)TaskManager.GetTask(taskID);
-					if(task == null) return;
-					task.ActorID = assignView.ActorID;
-					task.Save();
-					Tracker.TaskSource = TaskManager.TaskSource;
-					Tracker.BindTask();
-				}
-
+			if (assignView.ShowDialog() == (int)Gtk.ResponseType.Ok)
+			{
+				Task task =	(Task)TaskManager.GetTask(taskID);
+				if(task == null) return;
+				task.ActorID = assignView.ActorID;
+				task.Save();
+				Tracker.TaskSource = TaskManager.TaskSource;
+				Tracker.BindTask();
+			}
 		}
+
 		
 		public void UpdateTaskState(int taskID)
 		{
-				IGuiTask taskView = null;
-				try
-				{
+			IGuiTask taskView = null;
+			try
+			{
 				taskView = GuiFactory.CreateTaskView(window,(IGuiCore)this, taskID);
-				}
+			}
 			catch(ManagementException ex)
-				{
-					IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,window);
-					dialog.Title = "Change Task State";
-					dialog.ShowDialog();
-					return;
-				}
+			{
+				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,window);
+				dialog.Title = "Change Task State";
+				dialog.ShowDialog();
+				return;
+			}
 				
-				if (taskView.ShowDialog() == (int)Gtk.ResponseType.Ok)
-				{
-					Task task = (Task)TaskManager.GetTask(taskID);
-					if(task == null) return;
-					if (taskView.ActorPresent)
-						task.ActorID = taskView.ActorID;
-					task.Description = taskView.Description;
-					task.EndTime = taskView.EndTime;
-					task.StartTime = taskView.StartTime;
-					task.StateID = taskView.StateID;
-					task.Save();
-					Tracker.TaskSource = TaskManager.TaskSource;
-					Tracker.BindTask();
-				}
+			if (taskView.ShowDialog() == (int)Gtk.ResponseType.Ok)
+			{
+				Task task = (Task)TaskManager.GetTask(taskID);
+				if(task == null) return;
+				if (taskView.ActorPresent)
+				task.ActorID = taskView.ActorID;
+				task.Description = taskView.Description;
+				task.EndTime = taskView.EndTime;
+				task.StartTime = taskView.StartTime;
+				task.StateID = taskView.StateID;
+				task.Save();
+				Tracker.TaskSource = TaskManager.TaskSource;
+				Tracker.BindTask();
+			}
 		}
+
 		
 		public void StateEdit()
 		{
@@ -258,12 +254,15 @@ namespace GanttTracker
 			if (Gtk.ResponseType.Ok == (Gtk.ResponseType)stateView.ShowDialog())
 			{
 				StorageManager.Save();
-			}	
-		}	
+			}
+		}
+
 		
 		public GanttDiagramm GanttPresentation { get;set; }
-		
+
+
 		public AssigmentDiagramm AssigmentPresentation { get;set; }	
+
 				
 		public void DrawGantt(Gtk.DrawingArea drawingarea)
 		{

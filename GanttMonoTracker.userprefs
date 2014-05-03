@@ -1,39 +1,11 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation/ViewTaskDialog.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Main.cs">
     <Files>
-      <File FileName="DrawingPresentation/GanttDiagramm.cs" Line="85" Column="4" />
-      <File FileName="interface/IGuiState.cs" Line="32" Column="1" />
-      <File FileName="interface/IGuiTask.cs" Line="9" Column="27" />
-      <File FileName="interface/IGuiTracker.cs" Line="29" Column="2" />
-      <File FileName="TaskManager/ManagerException/KeyNotFoundException.cs" Line="14" Column="3" />
-      <File FileName="TaskManager/ManagerException/ExceptionType.cs" Line="1" Column="1" />
-      <File FileName="TaskManager/ManagerException/ManagementException.cs" Line="28" Column="3" />
-      <File FileName="interface/ISingleStateView.cs" Line="1" Column="1" />
-      <File FileName="interface/IStateManager.cs" Line="1" Column="1" />
-      <File FileName="interface/IState.cs" Line="11" Column="25" />
-      <File FileName="interface/IStorageCommand.cs" Line="1" Column="1" />
-      <File FileName="interface/IStorageCommandFactory.cs" Line="9" Column="26" />
-      <File FileName="interface/IStorageDealler.cs" Line="34" Column="22" />
-      <File FileName="interface/IStorageMannager.cs" Line="1" Column="1" />
-      <File FileName="interface/ITaskManager.cs" Line="1" Column="1" />
-      <File FileName="interface/ITask.cs" Line="12" Column="24" />
-      <File FileName="Palette/ColorEnum.cs" Line="12" Column="3" />
-      <File FileName="Palette/GdkPalette.cs" Line="55" Column="6" />
-      <File FileName="ProjectManager/GanttDiagramFactory.cs" Line="11" Column="34" />
-      <File FileName="ProjectManager/ProjectHistory.cs" Line="82" Column="2" />
-      <File FileName="StateManager/Connection.cs" Line="110" Column="1" />
-      <File FileName="StateManager/State.cs" Line="16" Column="29" />
-      <File FileName="StateManager/StateCore.cs" Line="19" Column="23" />
-      <File FileName="StateManager/StateFactory.cs" Line="49" Column="2" />
-      <File FileName="TaskManager/TaskStorage/DeleteCommand.cs" Line="117" Column="4" />
-      <File FileName="TaskManager/TaskStorage/CommandFactory.cs" Line="37" Column="2" />
-      <File FileName="TaskManager/TaskStorage/InsertCommand.cs" Line="123" Column="4" />
-      <File FileName="TaskManager/TaskStorage/SelectCommand.cs" Line="127" Column="4" />
-      <File FileName="TaskManager/TaskStorage/StorageDealer.cs" Line="168" Column="3" />
-      <File FileName="TaskManager/TaskStorage/UpdateCommand.cs" Line="129" Column="3" />
-      <File FileName="TaskManager/Actor.cs" Line="77" Column="2" />
-      <File FileName="GuiPresentation/ViewTaskDialog.cs" Line="13" Column="8" />
+      <File FileName="TaskManager/EmptyTaskManaegr.cs" Line="298" Column="3" />
+      <File FileName="Main.cs" Line="62" Column="1" />
+      <File FileName="ExceptionPresentation/MessageFactory.cs" Line="17" Column="51" />
+      <File FileName="ExceptionPresentation/ExceptionViewDialog.cs" Line="61" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -44,5 +16,7 @@
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/StateManager/StateCore.cs" line="187" column="14" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="Main.cs" line="59" offsetX="432" offsetY="1160" expression="ex" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
 </Properties>

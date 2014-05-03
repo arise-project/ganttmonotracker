@@ -103,7 +103,6 @@
     <Compile Include="interface\ISingleStateView.cs" />
     <Compile Include="interface\IStateManager.cs" />
     <Compile Include="interface\IStorageCommand.cs" />
-    <Compile Include="interface\IStorageCommandFactory.cs" />
     <Compile Include="interface\IStorageDealler.cs" />
     <Compile Include="interface\IStorageMannager.cs" />
     <Compile Include="interface\ITaskManager.cs" />
@@ -130,6 +129,7 @@
     <Compile Include="interface\IGuiTask.cs" />
     <Compile Include="ProjectManager\GanttDiagramFactory.cs" />
     <Compile Include="interface\IState.cs" />
+    <Compile Include="interface\IDealerCruid.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DrawingPresentation\" />

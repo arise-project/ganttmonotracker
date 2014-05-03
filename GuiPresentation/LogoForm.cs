@@ -70,7 +70,7 @@ namespace GanttMonoTracker.GuiPresentation
 
 		private void ReadMe()
 		{
-			var readme =  FSLocations.GetPath ("Resources");
+			var readme =  "Resources".GetPath();
 			readme =  Path.Combine(readme,"readme.txt");
 			if(File.Exists(readme))
 				using(var sr = new StreamReader(readme))

@@ -51,7 +51,7 @@ namespace GanttTracker.TaskManager
 		{
 			get
 			{
-				return Parent.isUpdatedActor(this);
+				return Parent.IsUpdatedActor(this);
 			}
 		}
 			

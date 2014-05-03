@@ -28,7 +28,7 @@ namespace TaskManagerInterface
 		void UpdateTask(IManagerEntity taskEntity);
 
 
-		bool isUpdatedTask(IManagerEntity taskEntity);
+		bool IsUpdatedTask(IManagerEntity taskEntity);
 
 
 		void DeleteTask(int id);
@@ -52,7 +52,7 @@ namespace TaskManagerInterface
 		void UpdateActor(IManagerEntity actorEntity);
 
 
-		bool isUpdatedActor(IManagerEntity actorEntity);
+		bool IsUpdatedActor(IManagerEntity actorEntity);
 
 
 		void DeleteActor(int id);
@@ -97,7 +97,7 @@ namespace TaskManagerInterface
 		void UpdateTaskState(IManagerEntity stateEntity);
 
 
-		bool isUpdatedTaskState(IManagerEntity stateEntity);
+		bool IsUpdatedTaskState(IManagerEntity stateEntity);
 
 
 		void DeleteTaskState(int id);

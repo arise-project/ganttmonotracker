@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Schema;
 using System.Data;
+
 using TaskManagerInterface;
 using GanttTracker.TaskManager.ManagerException;
 using GanttMonoTracker;
@@ -23,11 +24,12 @@ namespace GanttTracker.TaskManager.TaskStorage
 
 
 		public string ConnectionString { get;set; }	
+
 		
 		public DataSet Storage { get;set; }
 
 
-		public IStorageCommandFactory CommandFactory { get;	set; }
+		public IDealerCruid CommandFactory { get;	set; }
 
 
 		public DataSet EmptyStorage
@@ -85,10 +87,11 @@ namespace GanttTracker.TaskManager.TaskStorage
 		}
 
 		
-		public StorageDealer(string connectionString,IStorageCommandFactory commandFactory)
+		public StorageDealer(string connectionString,IDealerCruid commandFactory)
 		{
 			ConnectionString = connectionString;
 			CommandFactory = commandFactory;
+			CommandFactory.SetDealer(this);
 		}
 
 		

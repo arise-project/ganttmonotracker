@@ -43,6 +43,6 @@ namespace TaskManagerInterface
 		bool CheckConnection();
 
 
-		IStorageCommandFactory CommandFactory { get;set; }
+		IDealerCruid CommandFactory { get;set; }
 	}
 }
