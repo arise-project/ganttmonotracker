@@ -87,7 +87,7 @@ namespace GanttTracker
 				TaskManager = mgr.CreateNewManager(ProjectFileName);
 				break;
 				case CoreState.OpenProject :
-				mgr.CreateManager(ProjectFileName);
+				TaskManager = mgr.CreateManager(ProjectFileName);
 				break;
 			}
 			StorageManager = TaskManager;
