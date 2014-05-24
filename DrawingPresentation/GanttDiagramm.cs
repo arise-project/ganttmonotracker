@@ -14,6 +14,7 @@ using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
 using System.Configuration;
 using GanttTracker;
+using GanttTracker.TaskManager;
 
 namespace GanttMonoTracker.DrawingPresentation
 {
@@ -53,7 +54,11 @@ namespace GanttMonoTracker.DrawingPresentation
 
 		protected override bool OnExposeEvent(Gdk.EventExpose args)
 		{
-			base.OnExposeEvent (args);
+			var baseResult = base.OnExposeEvent (args);
+			if(Source == null && TrackerCore.Instance.TaskManager is EmptyTaskManager)
+			{
+				return baseResult;
+			}
 
 			Source = Source ?? TrackerCore.Instance.TaskManager.GanttSource;
 
@@ -123,7 +128,7 @@ namespace GanttMonoTracker.DrawingPresentation
 					Gdk.GC taskGC = new Gdk.GC((Drawable)this.GdkWindow);
 
 					if (Source.Tables["TaskState"].Select("ID = " + row["StateID"]).Length == 0)
-						throw new KeyNotFoundException(row["StateID"]);
+						throw new KeyNotFoundException<int>((int)row["StateID"]);
 
 					DataRow stateRow = Source.Tables["TaskState"].Select("ID = " + row["StateID"])[0];
 

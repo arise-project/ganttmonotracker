@@ -163,7 +163,7 @@ namespace GanttMonoTracker.GuiPresentation
 			
 			if (miCreateProject != null)
 				miCreateProject.Activated += new EventHandler(OnCreateProject);
-			else throw new KeyNotFoundException("miCreateProject");
+			else throw new KeyNotFoundException<string>("miCreateProject");
 			miOpenProject.Activated += new EventHandler(OnOpenProject);
 			miRecentProject.Activated += new EventHandler(OnRecentProject);
 			miSaveProject.Activated += new EventHandler(OnSaveProject);

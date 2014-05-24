@@ -11,16 +11,16 @@ namespace TaskManagerInterface
 		void SetDealer(IStorageDealer daler);
 
 
-		IStorageCommand GetSelectCommand();
+		IStorageCommand GetSelectCommand(string entityName);
 
 
-		IStorageCommand GetInsertCommand();
+		IStorageCommand GetInsertCommand(string entityName);
 
 
-		IStorageCommand GetUpdateCommand();
+		IStorageCommand GetUpdateCommand(string entityName);
 
 
-		IStorageCommand GetDeleteCommand();
+		IStorageCommand GetDeleteCommand(string entityName);
 	}
 }
 

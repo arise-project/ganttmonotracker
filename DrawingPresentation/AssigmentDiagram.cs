@@ -14,6 +14,7 @@ using Cairo;
 using GanttTracker;
 using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
+using GanttTracker.TaskManager;
 
 namespace GanttMonoTracker.DrawingPresentation
 {
@@ -43,7 +44,11 @@ namespace GanttMonoTracker.DrawingPresentation
 
 		protected override bool OnExposeEvent(Gdk.EventExpose args)
 		{
-			base.OnExposeEvent (args);
+			var baseResult = base.OnExposeEvent (args);
+			if(TrackerCore.Instance.TaskManager is EmptyTaskManager)
+			{
+				return baseResult;
+			}
 
 			Source = TrackerCore.Instance.TaskManager.AssigmentSource;
 

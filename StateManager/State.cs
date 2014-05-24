@@ -100,7 +100,7 @@ namespace GanttTracker.StateManager
 				Connections.Remove(stateEntry.Id);
 			}	
 			else
-				throw new KeyNotFoundException(stateEntry.Id);
+				throw new KeyNotFoundException<int>(stateEntry.Id);
 		}
 
 		

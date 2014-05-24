@@ -9,13 +9,8 @@ using TaskManagerInterface;
 namespace GanttTracker.TaskManager.TaskStorage
 {
 	public class CommandFactory : IDealerCruid
-	{		
+	{
 		IStorageDealer daler;
-
-
-		public CommandFactory()
-		{
-		}
 
 
 		public void SetDealer(IStorageDealer daler)
@@ -24,27 +19,27 @@ namespace GanttTracker.TaskManager.TaskStorage
 		}
 
 		
-		public IStorageCommand GetSelectCommand()
+		public IStorageCommand GetSelectCommand(string entityName)
 		{
-			return new SelectCommand(daler.Storage, "",null);
+			return new SelectCommand(daler.Storage, entityName,null);
 		}
 
 				
-		public IStorageCommand GetInsertCommand()
+		public IStorageCommand GetInsertCommand(string entityName)
 		{
-			return new InsertCommand(daler.Storage, "",null);
+			return new InsertCommand(daler.Storage, entityName,null);
 		}
 
 		
-		public IStorageCommand GetUpdateCommand()
+		public IStorageCommand GetUpdateCommand(string entityName)
 		{
-			return new UpdateCommand(daler.Storage, "",null,null);
+			return new UpdateCommand(daler.Storage, entityName,null,null);
 		}
 
 		
-		public IStorageCommand GetDeleteCommand()
+		public IStorageCommand GetDeleteCommand(string entityName)
 		{
-			return new DeleteCommand(daler.Storage, "",null);
+			return new DeleteCommand(daler.Storage, entityName,null);
 		}
 	}
 }

@@ -11,18 +11,18 @@ using Arise.Logic;
 
 namespace GanttTracker.TaskManager.ManagerException
 {
-	public class KeyNotFoundException : Exception
+	public class KeyNotFoundException<T> : Exception
 	{
-		public object Key { get;set; }
+		public T Key { get;set; }
 
 
-		public KeyNotFoundException(object key) : base (key.ToString()+" key not found")
+		public KeyNotFoundException(T key) : base (key.ToString()+" key not found")
 		{
 			Key = key;
 		}
 
 
-		public KeyNotFoundException(string message,object key) : base (message)
+		public KeyNotFoundException(string message,T key) : base (message)
 		{
 			Key = key;
 		}

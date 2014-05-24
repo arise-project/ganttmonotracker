@@ -59,7 +59,7 @@ namespace GanttTracker
 		void ShowError(Exception ex)
 		{
 			var silentexceptions = ConfigurationManager.AppSettings["silentexceptions"];
-			if(ex != null && silentexceptions.Split(';').Any(s => ex.ToString().IndexOf(s) >= 0 ) )
+			if(silentexceptions != null && ex != null && silentexceptions.Split(';').Any(s => ex.ToString().IndexOf(s) >= 0 ) )
 			{
 				return;
 			}
@@ -70,20 +70,7 @@ namespace GanttTracker
 				 Console.WriteLine("unknown");
 				return;
 			}
-			Console.WriteLine("Type : "+ex.GetType().Name );
-			Console.WriteLine("Message : ");
-			Console.WriteLine(ex.Message);
-			Console.WriteLine("Source : ");
-			Console.WriteLine(ex.Source);
-			if (ex.InnerException != null)
-			{
-				Console.WriteLine("InnerException Message : ");
-				Console.WriteLine(ex.InnerException.Message);
-			}
-			Console.WriteLine("Help Link : ");
-			Console.WriteLine(ex.HelpLink);
-			Console.WriteLine("Stack Trace : ");
-			Console.WriteLine(ex.StackTrace);
+			Console.WriteLine(ex.ToString());
 
 			IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,mainForm);
 			dialog.ShowDialog();

@@ -299,8 +299,9 @@ namespace GanttTracker.TaskManager
 		#endregion
 		
 		public void Save()
-		{			
-			throw new ManagementException(ExceptionType.NotAllowed);
+		{
+			if (fConnectionString != null)
+				fDealer.Create();
 		}
 
 
