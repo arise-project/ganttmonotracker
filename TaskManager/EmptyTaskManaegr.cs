@@ -299,7 +299,7 @@ namespace GanttTracker.TaskManager
 		#endregion
 		
 		public void Save()
-		{
+		{			
 			if (fConnectionString != null)
 				fDealer.Create();
 		}
