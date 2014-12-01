@@ -51,7 +51,12 @@ namespace GanttTracker
 		{
 			 get
 			{
-				return File.ReadAllText("recent.txt".GetPath ()); 
+				var file = "recent.txt".GetPath ();
+				if (File.Exists (file)) {
+					return File.ReadAllText(file); 
+				}
+
+				return null;
 			}
 		 }
 		
