@@ -55,7 +55,8 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog.Modal = true;
 			thisDialog.TransientFor = parent;
 			thisDialog.SetDefaultSize(200,450);
-			
+			thisDialog.WindowPosition = WindowPosition.Center;
+
 			cbActor.Entry.IsEditable = false;
 			cbActor.Changed += new EventHandler(OnCbActorChanged);
 			tvComment.KeyReleaseEvent += CommentKeyReleaseEvent;

@@ -103,6 +103,7 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog = ((Gtk.Dialog)(glade.GetWidget("ViewConnectionDialog")));
 			thisDialog.TransientFor = parent;
 			thisDialog.Modal = true;
+			thisDialog.WindowPosition = WindowPosition.Center;
 			TaskStateSource = taskStateSource;
 			
 			cbStateIn.Sensitive = false;

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.IO;
 using TaskManagerInterface;
+using GanttTracker.TaskManager.ManagerException;
 
 namespace GanttMonoTracker.ExceptionPresentation
 {
@@ -50,12 +51,19 @@ namespace GanttMonoTracker.ExceptionPresentation
 			thisDialog.Modal = true;
 			thisDialog.AllowGrow = false;
 			thisDialog.AllowShrink = false;
-			tvButtonDescription.Buffer.Text = 
-				"Use ignore for continue, Quit for exit program.";
-			ExceptionType = exception.GetType().FullName;
+			thisDialog.WindowPosition = WindowPosition.Center;
+
 			ExceptionMessage = exception.Message;
-			ExceptionDescription = exception.ToString();
+
 			tvButtonDescription.Sensitive = false;
+			if (!(exception is ManagementException)) {
+				ExceptionType = exception.GetType ().FullName;
+				ExceptionDescription = exception.ToString ();
+				tvButtonDescription.Buffer.Text = 
+					"Use ignore for continue, Quit for exit program.";
+			} else {
+				ExceptionType = string.Empty;
+			}
 		}
 
 		

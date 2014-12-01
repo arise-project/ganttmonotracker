@@ -90,7 +90,8 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog.Modal = true;
 			thisDialog.TransientFor = parent;
 			thisDialog.SetDefaultSize(800,600);
-			
+			thisDialog.WindowPosition = WindowPosition.CenterAlways;
+
 			btnApply.Clicked += new EventHandler(OnApply);
 			
 			btnSearch.Clicked += new EventHandler(OnStateSearch);

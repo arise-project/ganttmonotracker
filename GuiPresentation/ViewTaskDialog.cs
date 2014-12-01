@@ -81,7 +81,8 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog = ((Gtk.Dialog)(glade.GetWidget("ViewTaskDialog")));
 			thisDialog.Modal = true;
 			thisDialog.TransientFor = parent;
-			
+			thisDialog.WindowPosition = WindowPosition.CenterAlways;
+
 			cbActor.Entry.IsEditable = false;
 			cbActor.Changed += new EventHandler(OnCbActorChanged);
 			calStartTime.Date = DateTime.Now.Date;

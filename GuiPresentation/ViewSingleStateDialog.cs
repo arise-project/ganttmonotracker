@@ -51,6 +51,7 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog = ((Gtk.Dialog)(glade.GetWidget ("ViewSingleStateDialog")));
 			thisDialog.TransientFor = parent;
 			thisDialog.Modal = true;
+			thisDialog.WindowPosition = WindowPosition.Center;
 			entName.Changed += OnChangeName;
 			
 			lbStateAction.Text = "Create State";

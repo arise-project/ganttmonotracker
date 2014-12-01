@@ -34,6 +34,7 @@ namespace GanttMonoTracker.GuiPresentation
 			thisDialog = ((Gtk.Dialog)(glade.GetWidget("GMTAboutDialog")));
 			thisDialog.Modal = true;
 			thisDialog.TransientFor = parent;
+			thisDialog.WindowPosition = WindowPosition.Center;
 		}
 
 		
