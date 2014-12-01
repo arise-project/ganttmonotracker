@@ -306,7 +306,11 @@ namespace GanttMonoTracker.GuiPresentation
 			bool stateRequired = true;
 			try
 			{
-				stateId = (int)model.GetValue(iter,0);
+				object res = model.GetValue(iter,0);
+				if(res != null)
+				{
+					stateId = (int)res;
+				}
 			}
 			catch(Exception ex)
 			{
@@ -331,7 +335,11 @@ namespace GanttMonoTracker.GuiPresentation
 			bool stateRequired = true;
 			try
 			{
-				stateId = (int)model.GetValue(iter,0);
+				object res = model.GetValue(iter,0);
+				if(res != null)
+				{
+					stateId = (int)res;
+				}
 			}
 			catch(Exception ex)
 			{
@@ -356,7 +364,11 @@ namespace GanttMonoTracker.GuiPresentation
 			bool stateRequired = true;
 			try
 			{
-				stateId = (int)model.GetValue(iter,0);
+				object res = model.GetValue(iter,0);
+				if(res != null)
+				{
+					stateId = (int)res;
+				}
 			}
 			catch(Exception ex)
 			{

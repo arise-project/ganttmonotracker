@@ -305,7 +305,11 @@ namespace GanttMonoTracker.GuiPresentation
 			bool actionRequierd = true;
 			try
 			{
-				actorId = (int)model.GetValue(iter,0);
+				object res = model.GetValue(iter,0);
+				if(res != null)
+				{
+					actorId = (int)res;
+				}
 			}
 			catch(Exception ex)
 			{
@@ -328,7 +332,11 @@ namespace GanttMonoTracker.GuiPresentation
 			bool actionRequired = true;
 			try
 			{
-				actorId = (int)model.GetValue(iter,0);
+				object res = model.GetValue(iter,0);
+				if(res != null)
+				{
+					actorId = (int)res;
+				}
 			}
 			catch(Exception ex)
 			{
@@ -353,11 +361,16 @@ namespace GanttMonoTracker.GuiPresentation
 			TreeModel model;
 			TreeIter iter;
 			((TreeSelection)tvTaskTree.Selection).GetSelected (out model, out iter);				
+
 			int taskID = -1;
 			bool actionRequired = true;
 			try
 			{
-				taskID = (int)model.GetValue(iter,0);
+				object res = model.GetValue(iter,0);
+				if(res != null)
+				{
+					taskID = (int)res;
+				}
 			}
 			catch(Exception ex)
 			{
@@ -380,7 +393,11 @@ namespace GanttMonoTracker.GuiPresentation
 			bool actionRequired = true;
 			try
 			{
-				taskID = (int)model.GetValue(iter,0);
+				object res = model.GetValue(iter,0);
+				if(res != null)
+				{
+					taskID = (int)res;
+				}
 			}
 			catch(Exception ex)
 			{
