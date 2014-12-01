@@ -5,6 +5,7 @@
 // created on 08.11.2005 at 23:25
 
 using System;
+using System.Linq;
 using System.Configuration;
 using System.IO;
 using System.Data;
@@ -135,6 +136,9 @@ namespace GanttMonoTracker.GuiPresentation
 
 
 		Gtk.DrawingArea drwAssigment;
+
+
+		bool [] taskSort = new bool[6];
 		 
 		#endregion
 
@@ -209,6 +213,34 @@ namespace GanttMonoTracker.GuiPresentation
 			drwGantt = new GanttDiagramm ();
 			vbox3.Add (drwGantt);
 			drwGantt.Show ();
+
+
+
+			for (int i = 2; i < 5; i++) {
+
+				fTaskStore.SetSortFunc(i, delegate(TreeModel model, TreeIter a, TreeIter b) {
+					string s1 = model.GetValue (a, 0).ToString ();
+					string s2 = model.GetValue (b, 0).ToString ();
+					return String.Compare (s1, s2);
+				});
+			}
+
+			fTaskStore.SetSortFunc(0, delegate(TreeModel model, TreeIter a, TreeIter b) {
+				var s1 = (int)model.GetValue (a, 0);
+				var s2 = (int)model.GetValue (b, 0);
+				return s1 > s2 ? -1 : s1 == s2 ? 0 : 1;
+			});
+
+			tvTaskTree.Model = fTaskStore;
+			var index = 0;
+			tvTaskTree.Columns.ToList().ForEach(c => {
+				c.Clickable = true;
+				c.SortColumnId = index++;
+				c.Clicked+= (object sender, EventArgs e) => {
+					taskSort[c.SortColumnId] = !taskSort[c.SortColumnId];
+					fTaskStore.SetSortColumnId(c.SortColumnId, taskSort[c.SortColumnId] ? SortType.Ascending : SortType.Descending);
+				};
+			});
 		}
 
 		
@@ -496,7 +528,8 @@ namespace GanttMonoTracker.GuiPresentation
 					fTaskStore.SetValue(itemNode,5,state);
 				}
 			}
-			tvTaskTree.Model = fTaskStore;
+
+			
 			}
 			catch (Exception ex)
 			{
