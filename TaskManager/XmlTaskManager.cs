@@ -446,7 +446,8 @@ namespace GanttTracker.TaskManager
 			fAssigmentSource = new DataSet("AssigmentSource");
 			fAssigmentSource.Tables.Add("AssigmentSource");
 			fAssigmentSource.Tables.Add(ActorSource.Tables["Actor"].Copy());			
-			fAssigmentSource.Tables.Add("DataRange");			
+			fAssigmentSource.Tables.Add("DataRange");		
+			fAssigmentSource.Tables.Add ("StateRange");
 			
 			fAssigmentSource.Tables["DataRange"].Columns.Add("MinDate",typeof(DateTime));
 			fAssigmentSource.Tables["DataRange"].Columns.Add("MaxDate",typeof(DateTime));
@@ -461,7 +462,15 @@ namespace GanttTracker.TaskManager
 			fAssigmentSource.Tables["AssigmentSource"].Columns.Add("ActorID",typeof(int));			
 			fAssigmentSource.Tables["AssigmentSource"].Columns.Add("Date",typeof(DateTime));
 			fAssigmentSource.Tables["AssigmentSource"].Columns.Add("TaskCount",typeof(int));
-			
+
+			fAssigmentSource.Tables["StateRange"].Columns.Add("AssigmentID",typeof(int));			
+			fAssigmentSource.Tables["StateRange"].Columns.Add("StateID",typeof(int));
+			fAssigmentSource.Tables["StateRange"].Columns.Add("TaskCount",typeof(int));
+			fAssigmentSource.Tables["StateRange"].Columns.Add("ColorBlue",typeof(int));
+			fAssigmentSource.Tables["StateRange"].Columns.Add("ColorGreen",typeof(int));
+			fAssigmentSource.Tables["StateRange"].Columns.Add("ColorRed",typeof(int));
+
+			int assignmentId = 0;
 			foreach(DataRow actorRow in ActorSource.Tables["Actor"].Rows)
 			{
 				Actor actor = (Actor)GetActor((int)actorRow["ID"]);
@@ -475,19 +484,40 @@ namespace GanttTracker.TaskManager
 					{
 						for(DateTime day =  task.StartTime.Date; day <= task.EndTime.Date; day = day.AddDays(1))
 						{
+							int currentAssignmentId = -1;
+
 							if ( fAssigmentSource.Tables["AssigmentSource"].Select("ActorID = " + actor.Id + " and Date = '" + day.ToShortDateString() + "'" ).Length > 0)
 							{
 								DataRow existAssigmentRow = fAssigmentSource.Tables["AssigmentSource"].Select("ActorID = " + actor.Id + " and Date = '" + day.ToShortDateString()+"'")[0];
 								existAssigmentRow["TaskCount"] = (int)existAssigmentRow["TaskCount"] + 1;								 
+								currentAssignmentId = (int)existAssigmentRow ["ID"];
 							}
 							else
 							{
 								DataRow assigmentRow = fAssigmentSource.Tables["AssigmentSource"].NewRow();								
+								currentAssignmentId = assignmentId;
+								assigmentRow["ID"] = assignmentId++; 
 								assigmentRow["ActorID"] = actor.Id; 
 								assigmentRow["TaskCount"] = 1;
 								assigmentRow["Date"] = day;
 								fAssigmentSource.Tables["AssigmentSource"].Rows.Add(assigmentRow);
 							
+							}
+
+							var stateRows = fAssigmentSource.Tables ["StateRange"].Select ("AssigmentID = " + currentAssignmentId + " and StateID = " + task.StateID);
+							if (stateRows.Length > 0) {
+								stateRows [0] ["TaskCount"] = (int)stateRows [0] ["TaskCount"] + 1;
+							} else {
+								DataRow stateRow = fAssigmentSource.Tables ["StateRange"].NewRow ();
+								stateRow ["AssigmentID"] = currentAssignmentId;
+								stateRow ["StateID"] = task.StateID;
+								var state = (IState)GetTaskState (task.StateID);
+								stateRow ["ColorBlue"]  = state.ColorBlue;
+								stateRow ["ColorGreen"]  = state.ColorGreen;
+								stateRow ["ColorRed"]  = state.ColorRed;
+
+								stateRow ["TaskCount"] = 1;
+								fAssigmentSource.Tables["StateRange"].Rows.Add(stateRow);
 							}
 						}
 					}

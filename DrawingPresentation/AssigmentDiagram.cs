@@ -115,33 +115,45 @@ namespace GanttMonoTracker.DrawingPresentation
 				for (int i = 0; i < deltaSpan.Days; i++)
 				{
 					int taskCount = 0;
-					if (Source.Tables["AssigmentSource"]
-						.Select("ActorID = " + row["ID"] + " and Date = '" +labelDate.ToShortDateString() + "'")
-						.Length > 0)
-						taskCount = (int)(Source.Tables["AssigmentSource"]
-							.Select("ActorID = " + row["ID"] + "and Date = '" +labelDate.ToShortDateString() + "'")
-							[0]["TaskCount"]);
+					int assignmentId = -1;
+					var assignment = Source.Tables["AssigmentSource"]
+						.Select("ActorID = " + row["ID"] + "and Date = '" +labelDate.ToShortDateString() + "'");
+					if (assignment.Length > 0) {
+							taskCount = (int)assignment[0]["TaskCount"];
+							assignmentId = (int)assignment[0]["ID"];
+					}	
+
 					if (taskCount > 0)
 					{
-						grw.SetSourceRGB(0xff, 0, 0);
-						grw.Rectangle(offset, 
-							fBorderMarginV + (int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) 
-							+ deltaActor * actorIndex,delta,(int)(deltaActor*((double)taskCount / maxTaskCout)) 
-							- fBorderMarginV);
-						grw.Clip();
-						grw.Paint();
-						grw.ResetClip();
+						var states = Source.Tables ["StateRange"].Select ("AssigmentID = " + assignmentId);
+						int taskSum = 0;
+						for (int s = 0; s < states.Length; s++) {
+							var state = states [s];
+							byte colorRed = Convert.ToByte(state["ColorRed"]);
+							byte colorGreen = Convert.ToByte(state["ColorGreen"]);
+							byte colorBlue = Convert.ToByte(state["ColorBlue"]);
 
-						Pango.Layout layout = new Pango.Layout(PangoContext);
-						layout.Wrap = Pango.WrapMode.Word;
-						layout.FontDescription = FontDescription.FromString("Tahoma 10");
-						layout.SetMarkup(taskCount.ToString());
+							grw.SetSourceRGB(colorRed, colorGreen, colorBlue);
+							var currentCount = (int)state["TaskCount"];
+							grw.Rectangle(offset, 
+								fBorderMarginV + (int)(deltaActor*(1 - (double)(taskSum + currentCount) / maxTaskCout)) 
+								+ deltaActor * actorIndex,delta,(int)(deltaActor*((double)(taskSum + currentCount) / maxTaskCout)) 
+								- fBorderMarginV);
+							grw.Clip();
+							grw.Paint();
+							grw.ResetClip();
+							taskSum += currentCount;
+							Pango.Layout layout = new Pango.Layout(PangoContext);
+							layout.Wrap = Pango.WrapMode.Word;
+							layout.FontDescription = FontDescription.FromString("Tahoma 10");
+							layout.SetMarkup(taskCount.ToString());
 
 
-						this.GdkWindow.DrawLayout(TaskLabelGC, 
-							offset,
-							(int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,layout);
-
+							this.GdkWindow.DrawLayout(TaskLabelGC, 
+								offset,
+								(int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,layout);
+							break;
+						}
 					}
 					offset += delta;
 					labelDate = labelDate.AddDays(1);
