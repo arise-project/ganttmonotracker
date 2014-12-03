@@ -133,15 +133,22 @@ namespace GanttMonoTracker.DrawingPresentation
 							byte colorGreen = Convert.ToByte(state["ColorGreen"]);
 							byte colorBlue = Convert.ToByte(state["ColorBlue"]);
 
-							grw.SetSourceRGB(colorRed, colorGreen, colorBlue);
+							Gdk.GC taskGC = new Gdk.GC((Drawable)this.GdkWindow);
+							Gdk.Color foregroundColor2 = new Gdk.Color(colorRed, colorGreen, colorBlue);
+							colormap.AllocColor(ref foregroundColor2,true,true);
+							taskGC.Foreground = foregroundColor2;
+
 							var currentCount = (int)state["TaskCount"];
-							grw.Rectangle(offset, 
+
+							this.GdkWindow.DrawRectangle(
+								taskGC, 
+								true,
+								offset, 
 								fBorderMarginV + (int)(deltaActor*(1 - (double)(taskSum + currentCount) / maxTaskCout)) 
-								+ deltaActor * actorIndex,delta,(int)(deltaActor*((double)(taskSum + currentCount) / maxTaskCout)) 
-								- fBorderMarginV);
-							grw.Clip();
-							grw.Paint();
-							grw.ResetClip();
+								+ deltaActor * actorIndex
+								,delta
+								,(int)(deltaActor*((double)currentCount / maxTaskCout)));
+
 							taskSum += currentCount;
 							Pango.Layout layout = new Pango.Layout(PangoContext);
 							layout.Wrap = Pango.WrapMode.Word;
@@ -152,7 +159,7 @@ namespace GanttMonoTracker.DrawingPresentation
 							this.GdkWindow.DrawLayout(TaskLabelGC, 
 								offset,
 								(int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,layout);
-							break;
+
 						}
 					}
 					offset += delta;
