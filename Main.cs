@@ -4,10 +4,14 @@
 //date:4/12/2014
 // project created on 08.11.2005 at 22:11
 using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.IO;
 using Gtk;
 using GLib;
 using Glade;
+using Process = System.Diagnostics.Process;
 
 using GanttMonoTracker;
 using GanttMonoTracker.GuiPresentation;
@@ -33,6 +37,16 @@ namespace GanttTracker
 			AppDomain.CurrentDomain.UnhandledException += (object sender, UnhandledExceptionEventArgs e) =>  {
 				ShowError(e.ExceptionObject as Exception);
 			};
+
+			//check single open
+			bool single;
+			if (bool.TryParse (ConfigurationManager.AppSettings ["single"], out single) && single) {
+				var procName = Path.GetFileNameWithoutExtension (Assembly.GetExecutingAssembly ().Location);
+				var procList = Process.GetProcessesByName (procName);
+				if (procList.Length > 1) {
+					return;
+				}
+			}
 
 			try
 			{	
