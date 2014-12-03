@@ -40,6 +40,11 @@ namespace GanttTracker
 				UnhandledExceptionHandler h = new UnhandledExceptionHandler(OnError);
 				ExceptionManager.UnhandledException += h;
 				mainForm = new MainForm();
+				bool autoopen;
+				if(bool.TryParse( ConfigurationManager.AppSettings["autoopen"], out autoopen) && autoopen)
+				{
+					mainForm.OnRecentProject(this, EventArgs.Empty);
+				}
 				Application.Run();
 			}
 			catch(Exception ex)

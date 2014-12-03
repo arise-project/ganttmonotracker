@@ -268,7 +268,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 
-		private void OnRecentProject(object sender, EventArgs args)
+		public void OnRecentProject(object sender, EventArgs args)
 		{
 			var r = TrackerCore.Instance.Recent;
 			if(!string.IsNullOrEmpty(r) && File.Exists(r))
