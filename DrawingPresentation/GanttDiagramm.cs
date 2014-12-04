@@ -96,7 +96,9 @@ namespace GanttMonoTracker.DrawingPresentation
 			if (deltaSpan.Days > 1)
 				deltaTask = fWidth / deltaSpan.Days;
 
-			Hashtable taskCountHash = new Hashtable(); 
+			var columns = (lastDate - firstDate).Days + 1;
+			bool [,] filled = new bool[columns, 100];
+
 			foreach(DataRow row in Source.Tables["Task"].Rows)
 			{
 				if ((int)row["ActorID"] >= 0)
@@ -108,22 +110,35 @@ namespace GanttMonoTracker.DrawingPresentation
 							break;
 						actorIndex++;
 					}
-					int tasksCount = 0;
-					if (!taskCountHash.ContainsKey(actorIndex))
-					{
-						taskCountHash.Add(actorIndex,0);
-					}
-					else
-					{
-						tasksCount = (int)taskCountHash[actorIndex];
-						tasksCount++;
-						taskCountHash[actorIndex] = tasksCount; 
-					}
 
 					DateTime startTime = (DateTime)row["StartTime"];
 					DateTime endTime = (DateTime)row["EndTime"];
 					TimeSpan startSpan = startTime.Subtract(firstDate);
 					TimeSpan endSpan = endTime.Subtract(firstDate);	
+
+					// fill availability matrix
+					int tasksCount = 0;
+					if (columns > (startTime - firstDate).Days && tasksCount  < 99) {
+						try
+						{
+							while (tasksCount < 99 && filled [(startTime - firstDate).Days, tasksCount]) {
+								tasksCount++;
+								tasksCount++;
+							}
+						
+
+
+						var days = (endTime - startTime).Days + 1;
+						for (int i = 0; i < days; i++) {
+							filled [(startTime - firstDate).Days + i, tasksCount] = true;
+						}
+						}
+						catch(Exception) {
+							var c = (startTime - firstDate).Days;
+						}
+					} else {
+
+					}
 
 					Gdk.GC taskGC = new Gdk.GC((Drawable)this.GdkWindow);
 
