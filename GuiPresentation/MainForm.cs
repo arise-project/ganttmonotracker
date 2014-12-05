@@ -33,8 +33,9 @@ namespace GanttMonoTracker.GuiPresentation
 
 		FileSelection fFileSelection; // todo : FileChooserWidget
 
-
 		string selectedFile;
+
+		string searchTask;
 
 		#region Widgets
 		
@@ -113,7 +114,15 @@ namespace GanttMonoTracker.GuiPresentation
 		[Glade.WidgetAttribute]
 		Gtk.Button btnChangeTask;
 
-		 
+
+		[Glade.WidgetAttribute]
+		Gtk.Button btnSearchTask;
+
+
+		[Glade.WidgetAttribute]
+		Gtk.Entry entSearchTask;
+
+
 		[Glade.WidgetAttribute]
 		Gtk.TreeView tvTaskTree;
 
@@ -191,7 +200,8 @@ namespace GanttMonoTracker.GuiPresentation
 			btnCreateTask.Clicked += new EventHandler(OnTaskCreate);
 			btnAssignTask.Clicked += new EventHandler(OnTaskAssign);
 			btnChangeTask.Clicked += new EventHandler(OnChangeTaskState);
-			
+			btnSearchTask.Clicked += new EventHandler(OnSearchTask);
+
 			tvActorTree.HeadersVisible = true;
 			tvActorTree.AppendColumn("Name",new CellRendererText(), "text", 1);
 			tvActorTree.AppendColumn("Email",new CellRendererText(), "text", 2);
@@ -415,7 +425,14 @@ namespace GanttMonoTracker.GuiPresentation
 				TrackerCore.Instance.AssignTask(taskID);
 		}
 
+
+		private void OnSearchTask(object sender, EventArgs args)
+		{
+			searchTask = entSearchTask.Text;
+			BindTask ();
+		}
 		
+
 		private void OnChangeTaskState(object sender, EventArgs args)
 		{
 			TreeModel model;
@@ -514,22 +531,32 @@ namespace GanttMonoTracker.GuiPresentation
 			fTaskStore.Clear();
 			try
 			{
-			foreach (DataRow row in TaskSource.Tables["Task"].Rows)
-			{
-				TreeIter itemNode = fTaskStore.AppendNode();
-				fTaskStore.SetValue(itemNode,0,row["Id"]);
-				fTaskStore.SetValue(itemNode,1,row["Description"]);
-				fTaskStore.SetValue(itemNode,2,((DateTime)row["StartTime"]).ToShortDateString());
-				fTaskStore.SetValue(itemNode,3,((DateTime)row["EndTime"]).ToShortDateString());
-					fTaskStore.SetValue(itemNode,4,ActorSource.Tables["Actor"].Select("ID = " + (int)row["ActorID"])[0]["Name"]);
-				if (StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"]).Length > 0)
+				foreach (DataRow row in TaskSource.Tables["Task"].Rows)
 				{
-					var state = StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"])[0]["Name"];
-					fTaskStore.SetValue(itemNode,5,state);
-				}
-			}
+					var actorName = ActorSource.Tables["Actor"].Select("ID = " + (int)row["ActorID"])[0]["Name"];
+					var stateName = string.Empty;
+					if (StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"]).Length > 0)
+					{
+						stateName = (string)StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"])[0]["Name"];
+					}
 
-			
+					if(!string.IsNullOrEmpty(searchTask))
+					{
+						string text = string.Join("", row["Id"], row["Description"], row["StartTime"], actorName, stateName);
+						if(!text.Contains(searchTask))
+						{
+							continue;
+						}
+					}
+
+					TreeIter itemNode = fTaskStore.AppendNode();
+					fTaskStore.SetValue(itemNode,0,row["Id"]);
+					fTaskStore.SetValue(itemNode,1,row["Description"]);
+					fTaskStore.SetValue(itemNode,2,((DateTime)row["StartTime"]).ToShortDateString());
+					fTaskStore.SetValue(itemNode,3,((DateTime)row["EndTime"]).ToShortDateString());
+					fTaskStore.SetValue(itemNode,4,actorName);
+					fTaskStore.SetValue(itemNode,5,stateName);				
+				}
 			}
 			catch (Exception ex)
 			{
