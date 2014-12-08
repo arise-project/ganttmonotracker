@@ -215,6 +215,8 @@ namespace GanttMonoTracker.GuiPresentation
 			tvTaskTree.AppendColumn("Actor",new CellRendererText(), "text", 4);
 			tvTaskTree.AppendColumn("State",new CellRendererText(), "text", 5);
 
+			tvTaskTree.ButtonPressEvent+= HandleButtonPressEvent;
+
 			// Assigment
 			drwAssigment = new AssigmentDiagramm ();
 			vbox4.Add (drwAssigment);
@@ -251,6 +253,15 @@ namespace GanttMonoTracker.GuiPresentation
 					fTaskStore.SetSortColumnId(c.SortColumnId, taskSort[c.SortColumnId] ? SortType.Ascending : SortType.Descending);
 				};
 			});
+		}
+
+		[GLib.ConnectBefore]
+		void HandleButtonPressEvent (object o, ButtonPressEventArgs args)
+		{
+			if(args.Event.Type == EventType.TwoButtonPress)
+			{
+				OnChangeTaskState(o, EventArgs.Empty);
+			}
 		}
 
 		
@@ -543,7 +554,7 @@ namespace GanttMonoTracker.GuiPresentation
 					if(!string.IsNullOrEmpty(searchTask))
 					{
 						string text = string.Join("", row["Id"], row["Description"], row["StartTime"], actorName, stateName);
-						if(!text.Contains(searchTask))
+						if(!text.ToLower().Contains(searchTask.ToLower()))
 						{
 							continue;
 						}
