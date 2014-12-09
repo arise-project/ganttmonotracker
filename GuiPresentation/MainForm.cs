@@ -284,6 +284,9 @@ namespace GanttMonoTracker.GuiPresentation
 
 					TrackerCore.Instance.BindProject();
 					File.WriteAllText("recent.txt".GetPath (), TrackerCore.Instance.ProjectFileName);
+					//backup file.
+					File.AppendAllText(TrackerCore.Instance.ProjectFileName + ".backup", 
+						File.ReadAllText(TrackerCore.Instance.ProjectFileName));
 					break;
 				}
 			}
