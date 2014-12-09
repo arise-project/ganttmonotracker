@@ -57,7 +57,7 @@ namespace GanttMonoTracker.GuiPresentation
 			ReadMe();
 
 			// Assigment
-			dwLogo = new GanttDiagramm () { ReadOnly = true, Source = GetLogoSource(), DateNowVisible = false };
+			dwLogo = new GanttDiagramm () { ReadOnly = true, StaticSource = GetLogoSource(), DateNowVisible = false };
 			var readme = vbox1.Children [1];
 			var readme1 = vbox1.Children [2];
 			vbox1.Remove (readme1);

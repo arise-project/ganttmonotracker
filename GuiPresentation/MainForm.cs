@@ -278,9 +278,10 @@ namespace GanttMonoTracker.GuiPresentation
 			{	
 				switch (TrackerCore.Instance.State)
 				{
-					case CoreState.CreateProject :
-					case CoreState.OpenProject :
+				case CoreState.CreateProject:
+				case CoreState.OpenProject:
 					TrackerCore.Instance.ProjectFileName = args == null ? selectedFile : ((FileSelection)sender).Filename;
+
 					TrackerCore.Instance.BindProject();
 					File.WriteAllText("recent.txt".GetPath (), TrackerCore.Instance.ProjectFileName);
 					break;

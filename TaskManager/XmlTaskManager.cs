@@ -335,6 +335,10 @@ namespace GanttTracker.TaskManager
 		
 		void CalculateGanttSource()
 		{
+			ActorSource.Tables ["Actor"].AcceptChanges ();
+			TaskSource.Tables["Task"].AcceptChanges ();
+			TaskStateSource.Tables["TaskState"].AcceptChanges ();
+
 			fGanttSource = new DataSet("GanttSource");
 			fGanttSource.Tables.Add(ActorSource.Tables["Actor"].Copy());
 			fGanttSource.Tables.Add(TaskSource.Tables["Task"].Copy());

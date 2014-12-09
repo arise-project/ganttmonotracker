@@ -41,7 +41,7 @@ namespace GanttMonoTracker.DrawingPresentation
 
 		public DataSet Source { get;set; }
 
-
+		public DataSet StaticSource { get;set; }
 
 		public bool DateNowVisible	{ get;set; }
 
@@ -60,7 +60,7 @@ namespace GanttMonoTracker.DrawingPresentation
 				return baseResult;
 			}
 
-			Source = Source ?? TrackerCore.Instance.TaskManager.GanttSource;
+			Source = StaticSource ?? TrackerCore.Instance.TaskManager.GanttSource;
 
 			//ReadGepmetry
 			int fX, fY, fWidth,fHeight,fDepth;

@@ -3,11 +3,12 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="d:\gmt\ganttmonotracker\GuiPresentation\MainForm.cs">
     <Files>
       <File FileName="DrawingPresentation\GanttDiagramm.cs" Line="1" Column="1" />
-      <File FileName="d:\gmt\ganttmonotracker\GuiPresentation\MainForm.cs" Line="1" Column="1" />
+      <File FileName="d:\gmt\ganttmonotracker\GuiPresentation\MainForm.cs" Line="6" Column="6" />
       <File FileName="d:\gmt\ganttmonotracker\TaskManager\TaskStorage\StorageDealer.cs" Line="1" Column="1" />
       <File FileName="d:\gmt\ganttmonotracker\ExceptionPresentation\MessageFactory.cs" Line="1" Column="1" />
       <File FileName="d:\gmt\ganttmonotracker\Main.cs" Line="1" Column="1" />
-      <File FileName="GuiPresentation\MainForm.glade" Line="49" Column="49" />
+      <File FileName="GuiPresentation\MainForm.glade" Line="1" Column="1" />
+      <File FileName="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -16,11 +17,12 @@
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/DrawingPresentation/AssigmentDiagram.cs" line="292" column="1" />
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/GuiPresentation/GuiFactory.cs" line="69" column="5" />
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/StateManager/StateCore.cs" line="187" column="14" />
-      <Breakpoint file="D:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" line="77" column="1" />
       <Breakpoint file="D:\gmt\ganttmonotracker\TaskManager\XmlTaskManager.cs" line="520" column="1" />
       <Breakpoint file="d:\gmt\ganttmonotracker\ExceptionPresentation\MessageFactory.cs" line="17" column="1" />
       <Breakpoint file="D:\gmt\ganttmonotracker\DrawingPresentation\GanttDiagramm.cs" line="140" column="1" />
-      <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\MainForm.cs" line="431" column="8" />
+      <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\MainForm.cs" line="263" column="1" />
+      <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" line="77" column="1" />
+      <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\MainForm.cs" line="295" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches>
