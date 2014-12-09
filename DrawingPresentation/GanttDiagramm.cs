@@ -6,6 +6,7 @@
 using System;
 using System.Collections;
 using System.Data;
+using System.Linq;
 using Gdk;
 using Pango; 
 using Cairo; 
@@ -98,6 +99,7 @@ namespace GanttMonoTracker.DrawingPresentation
 
 			var columns = (lastDate - firstDate).Days + 1;
 			bool [,] filled = new bool[columns, 100];
+			var passedState = ConfigurationManager.AppSettings ["passed_state"];
 
 			foreach(DataRow row in Source.Tables["Task"].Rows)
 			{
@@ -146,6 +148,12 @@ namespace GanttMonoTracker.DrawingPresentation
 						throw new KeyNotFoundException<int>((int)row["StateID"]);
 
 					DataRow stateRow = Source.Tables["TaskState"].Select("ID = " + row["StateID"])[0];
+
+					var stateName = (string)stateRow ["Name"];
+					if(passedState.Split(';').Select(s => s.ToLower()).Contains(stateName.ToLower()))
+					{
+						continue;
+					}
 
 					byte colorRed = Convert.ToByte(stateRow["ColorRed"]);
 					byte colorGreen = Convert.ToByte(stateRow["ColorGreen"]);
