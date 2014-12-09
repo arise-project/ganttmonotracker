@@ -544,17 +544,22 @@ namespace GanttMonoTracker.GuiPresentation
 		public void BindTask()
 		{
 			fTaskStore.Clear();
+			var passedState = ConfigurationManager.AppSettings ["passed_state"];
 			try
 			{
 				foreach (DataRow row in TaskSource.Tables["Task"].Rows)
 				{
 					var actorName = ActorSource.Tables["Actor"].Select("ID = " + (int)row["ActorID"])[0]["Name"];
 					var stateName = string.Empty;
+
 					if (StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"]).Length > 0)
 					{
 						stateName = (string)StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"])[0]["Name"];
 					}
-
+					if(passedState.Split(';').Select(s => s.ToLower()).Contains(stateName.ToLower()))
+					{
+						continue;
+					}
 					if(!string.IsNullOrEmpty(searchTask))
 					{
 						string text = string.Join("", row["Id"], row["Description"], row["StartTime"], actorName, stateName);
