@@ -125,7 +125,7 @@ namespace GanttMonoTracker.DrawingPresentation
 
 					if (taskCount > 0)
 					{
-						var states = Source.Tables ["StateRange"].Select ("AssigmentID = " + assignmentId);
+						var states = Source.Tables ["StateRange"].Select ("AssigmentID = " + assignmentId, "StateID");
 						int taskSum = 0;
 						for (int s = 0; s < states.Length; s++) {
 							var state = states [s];
