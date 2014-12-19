@@ -112,7 +112,7 @@
                         <child>
                           <widget class="GtkTreeView" id="tvState">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
+                            <property name="can_fookcus">True</property>
                           </widget>
                         </child>
                       </widget>
@@ -273,19 +273,7 @@
                 <property name="response_id">-6</property>
               </widget>
             </child>
-            <child>
-              <widget class="GtkButton" id="okbutton1">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="label">gtk-ok</property>
-                <property name="use_stock">True</property>
-                <property name="response_id">-5</property>
-              </widget>
-              <packing>
-                <property name="position">1</property>
-              </packing>
-            </child>
+
             <child>
               <widget class="GtkButton" id="btnApply">
                 <property name="visible">True</property>
