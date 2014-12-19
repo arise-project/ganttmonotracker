@@ -1,21 +1,21 @@
 ﻿<Properties GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="DrawingPresentation\GanttDiagramm.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DrawingPresentation\AssigmentDiagram.cs">
     <Files>
-      <File FileName="DrawingPresentation\GanttDiagramm.cs" Line="13" Column="13" />
-      <File FileName="d:\gmt\ganttmonotracker\GuiPresentation\MainForm.cs" Line="7" Column="7" />
+      <File FileName="DrawingPresentation\GanttDiagramm.cs" Line="2" Column="2" />
+      <File FileName="d:\gmt\ganttmonotracker\GuiPresentation\MainForm.cs" Line="1" Column="1" />
       <File FileName="d:\gmt\ganttmonotracker\TaskManager\TaskStorage\StorageDealer.cs" Line="1" Column="1" />
       <File FileName="d:\gmt\ganttmonotracker\ExceptionPresentation\MessageFactory.cs" Line="1" Column="1" />
       <File FileName="d:\gmt\ganttmonotracker\Main.cs" Line="1" Column="1" />
       <File FileName="GuiPresentation\MainForm.glade" Line="1" Column="1" />
       <File FileName="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" Line="1" Column="1" />
-      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="1" Column="1" />
+      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="5" Column="5" />
       <File FileName="interface\ITaskManager.cs" Line="1" Column="1" />
       <File FileName="TaskManager\TrackerCore.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\XmlTaskManager.cs" Line="8" Column="8" />
+      <File FileName="TaskManager\XmlTaskManager.cs" Line="1" Column="1" />
       <File FileName="GuiPresentation\LogoForm.cs" Line="1" Column="1" />
       <File FileName="app.config" Line="1" Column="1" />
-      <File FileName="StateManager\StateCore.cs" Line="14" Column="14" />
+      <File FileName="StateManager\StateCore.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

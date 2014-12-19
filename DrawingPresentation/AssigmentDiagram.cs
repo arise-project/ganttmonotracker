@@ -5,6 +5,7 @@
 // created on 04.02.2006 at 18:33
 
 using System;
+using System.Linq;
 using System.Collections;
 using System.Data;
 using Gdk;
@@ -15,6 +16,7 @@ using GanttTracker;
 using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
 using GanttTracker.TaskManager;
+using System.Collections.Generic;
 
 namespace GanttMonoTracker.DrawingPresentation
 {
@@ -108,6 +110,47 @@ namespace GanttMonoTracker.DrawingPresentation
 			colormap.AllocColor(ref foregroundColor3,true,true);
 			TaskLabelGC.Foreground = foregroundColor3;
 
+			//draw proportion line.
+			Dictionary<int, int> states1 = new Dictionary<int, int>(); 
+			foreach (DataRow row in Source.Tables ["StateRange"].Rows) {
+				var id = (int)row ["StateID"];
+				if (states1.ContainsKey (id))
+					states1 [id] += 1;
+				else {
+					states1.Add (id, 0);
+				}
+			}
+
+			int sum = 0;
+			foreach (int id in states1.Keys) {
+				sum += states1 [id];
+			}
+
+			List<int> states2 = new List<int> ();
+			foreach (int id in states1.Keys) {
+				states2.Add (id);
+			}
+
+			foreach (int id in states2.OrderBy(s => s)) {
+				states1 [id] = (int)(((double)fHeight / sum) * states1 [id]);
+			}
+
+
+			int proportionOffset = 0;
+			foreach(int id in states1.Keys)
+			{
+				var state = Source.Tables ["StateRange"].Select ("StateID = " + id) [0];
+				byte colorRed = Convert.ToByte(state["ColorRed"]);
+				byte colorGreen = Convert.ToByte(state["ColorGreen"]);
+				byte colorBlue = Convert.ToByte(state["ColorBlue"]);
+				Gdk.GC taskGC = new Gdk.GC((Drawable)this.GdkWindow);
+				Gdk.Color foregroundColor2 = new Gdk.Color(colorRed, colorGreen, colorBlue);
+				colormap.AllocColor(ref foregroundColor2,true,true);
+				taskGC.Foreground = foregroundColor2;
+				this.GdkWindow.DrawRectangle (taskGC, true, fWidth - 10, proportionOffset, 10, states1 [id]);
+				proportionOffset += states1 [id];
+			}
+
 			foreach(DataRow row in Source.Tables["Actor"].Rows)
 			{
 				DateTime labelDate = firstDate;
@@ -125,7 +168,7 @@ namespace GanttMonoTracker.DrawingPresentation
 
 					if (taskCount > 0)
 					{
-						var states = Source.Tables ["StateRange"].Select ("AssigmentID = " + assignmentId, "StateID");
+						var states = Source.Tables ["StateRange"].Select ("AssigmentID = " + assignmentId, "StateID"); //order by stateid
 						int taskSum = 0;
 						for (int s = 0; s < states.Length; s++) {
 							var state = states [s];
