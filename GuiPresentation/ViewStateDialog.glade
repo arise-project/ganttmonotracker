@@ -79,37 +79,15 @@
                       <widget class="GtkHBox" id="hbox2">
                         <property name="visible">True</property>
                         <child>
-                          <widget class="GtkLabel" id="lbStateSearch">
+                          <widget class="GtkLabel" id="lbState">
                             <property name="visible">True</property>
                             <property name="xalign">0,000000</property>
                             <property name="yalign">0,000000</property>
-                            <property name="label">Search</property>
+                            <property name="label">States</property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkEntry" id="entStateSearch">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                          </widget>
-                          <packing>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkButton" id="btnSearch">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="label">Go</property>
-                            <property name="response_id">0</property>
-                          </widget>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">2</property>
                           </packing>
                         </child>
                       </widget>

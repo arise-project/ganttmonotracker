@@ -94,7 +94,7 @@ namespace GanttMonoTracker.GuiPresentation
 
 			btnApply.Clicked += new EventHandler(OnApply);
 			
-			btnSearch.Clicked += new EventHandler(OnStateSearch);
+			//btnSearch.Clicked += new EventHandler(OnStateSearch);
 			btnCreateState.Clicked += new EventHandler(OnCreateState);
 			btnEditState.Clicked += new EventHandler(OnEditState);
 			btnDeleteState.Clicked += new EventHandler(OnDeleteState);
@@ -119,7 +119,7 @@ namespace GanttMonoTracker.GuiPresentation
 			
 			BindStateSearchDictionary();
 			BindStates();
-			BindStateSearchCompletion();
+			//BindStateSearchCompletion();
 		}
 
 		
