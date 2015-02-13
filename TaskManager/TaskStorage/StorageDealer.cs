@@ -32,6 +32,8 @@ namespace GanttTracker.TaskManager.TaskStorage
 		public IDealerCruid CommandFactory { get;	set; }
 
 
+		public GDriveManager Online { get; set; }
+
 		public DataSet EmptyStorage
 		{
 			get
@@ -92,6 +94,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 			ConnectionString = connectionString;
 			CommandFactory = commandFactory;
 			CommandFactory.SetDealer(this);
+			Online = new GDriveManager(new GDriveCredentials("1067781202017-nr9fbc3amvcd93rkigtkfsadl6httkj0.apps.googleusercontent.com", @"3fMJyreqqvQNtuB0Z8IAArzn"));
 		}
 
 		
@@ -122,6 +125,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 			}
 			validator.Close();
 			*/
+
 			Storage = new DataSet();
 			Storage.ReadXml(ConnectionString);
 		}
@@ -169,5 +173,88 @@ namespace GanttTracker.TaskManager.TaskStorage
 		{
 			return !(ConnectionString == null || !File.Exists(ConnectionString));
 		}
+
+		#region Synckronization
+
+		public bool Backup(string fileId)
+		{
+			if (!CheckConnection()) {
+				return false;
+			}
+
+			Online.Authorize ();
+			Save (ConnectionString);
+			var raw = File.ReadAllBytes (ConnectionString);
+			try
+			{
+                Online.Uploader.Upload(Online.Credentials, raw, fileId);
+				return true;
+			}
+			catch {
+				throw;
+			}
+			return false;
+		}
+
+		public bool Restore (string fileId)
+		{
+			Online.Authorize ();
+			byte[] raw;
+			try
+			{
+                raw = Online.Downloader.Download(Online.Credentials, fileId);
+			}
+			catch {
+				throw;
+			}
+			using (Stream s = new MemoryStream (raw)) {
+				Storage = new DataSet();
+				Storage.ReadXml (s, XmlReadMode.Auto);
+			}
+
+			return true;
+		}
+
+		public bool Merge (string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate)
+		{
+			Online.Authorize ();
+			if (!CheckConnection()) {
+				return false;
+			}
+			byte[] raw;
+			try
+			{
+                raw = Online.Downloader.Download(Online.Credentials, fileId);
+			}
+			catch {
+				return false;
+			}
+
+			DataSet update;
+			using (Stream s = new MemoryStream (raw)) {
+				update = new DataSet();
+				update.ReadXml (s, XmlReadMode.Auto);
+			}
+
+			// check modified date.
+			var updateDate = readDate (update);
+			DataSet src, dest;
+
+			if (updateDate > currentDate) {
+				src = Storage;
+				dest = update;
+			} else {
+				src = update;
+				dest = Storage;
+			}
+
+			src.Merge (dest, true, MissingSchemaAction.AddWithKey);
+
+			Storage = src;
+			return true;
+		}
+
+		#endregion
+
 	}
 }

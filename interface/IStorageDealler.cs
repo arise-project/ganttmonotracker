@@ -5,6 +5,7 @@
 // created on 19.11.2005 at 21:36
 
 using System.Data;
+using System;
 
 namespace TaskManagerInterface
 {
@@ -44,5 +45,11 @@ namespace TaskManagerInterface
 
 
 		IDealerCruid CommandFactory { get;set; }
+
+        bool Backup(string fileId);
+
+        bool Restore(string fileId);
+
+        bool Merge(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate);
 	}
 }

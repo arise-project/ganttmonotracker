@@ -1,21 +1,32 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupItem="GanttMonoTracker.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="TaskManager\GDrive\GDriveManager.cs">
     <Files>
       <File FileName="DrawingPresentation\GanttDiagramm.cs" Line="1" Column="1" />
       <File FileName="d:\gmt\ganttmonotracker\GuiPresentation\MainForm.cs" Line="1" Column="1" />
-      <File FileName="d:\gmt\ganttmonotracker\TaskManager\TaskStorage\StorageDealer.cs" Line="1" Column="1" />
-      <File FileName="d:\gmt\ganttmonotracker\ExceptionPresentation\MessageFactory.cs" Line="14" Column="14" />
+      <File FileName="d:\gmt\ganttmonotracker\TaskManager\TaskStorage\StorageDealer.cs" Line="5" Column="5" />
+      <File FileName="d:\gmt\ganttmonotracker\ExceptionPresentation\MessageFactory.cs" Line="1" Column="1" />
       <File FileName="d:\gmt\ganttmonotracker\Main.cs" Line="1" Column="1" />
       <File FileName="GuiPresentation\MainForm.glade" Line="1" Column="1" />
       <File FileName="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" Line="1" Column="1" />
-      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="25" Column="25" />
+      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="1" Column="1" />
       <File FileName="interface\ITaskManager.cs" Line="1" Column="1" />
       <File FileName="TaskManager\TrackerCore.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\XmlTaskManager.cs" Line="12" Column="12" />
+      <File FileName="TaskManager\XmlTaskManager.cs" Line="10" Column="10" />
       <File FileName="GuiPresentation\LogoForm.cs" Line="1" Column="1" />
-      <File FileName="app.config" Line="1" Column="1" />
+      <File FileName="app.config" Line="2" Column="2" />
       <File FileName="StateManager\StateCore.cs" Line="1" Column="1" />
+      <File FileName="GuiPresentation\ViewStateDialog.glade" Line="1" Column="1" />
+      <File FileName="GuiPresentation\ViewStateDialog.cs" Line="1" Column="1" />
+      <File FileName="GuiPresentation\ViewTaskAssign.glade" Line="1" Column="1" />
+      <File FileName="TaskManager\FSLocations.cs" Line="1" Column="1" />
+      <File FileName="TaskManager\TaskStorage\DeleteCommand.cs" Line="1" Column="1" />
+      <File FileName="interface\IStorageDealler.cs" Line="3" Column="3" />
+      <File FileName="TaskManager\GDrive\GDriveCredentials.cs" Line="4" Column="4" />
+      <File FileName="TaskManager\GDrive\GDriveManager.cs" Line="6" Column="6" />
+      <File FileName="TaskManager\GDrive\GDriveUploader.cs" Line="14" Column="14" />
+      <File FileName="TaskManager\GDrive\GDriveDownloader.cs" Line="1" Column="1" />
+      <File FileName="TaskManager\TaskStorage\SelectCommand.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
