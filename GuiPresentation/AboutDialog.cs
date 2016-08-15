@@ -5,16 +5,13 @@
 // created on 10.02.2006 at 18:13
 using System;
 using System.Threading;
-using System.Data;
 using System.IO;
 using Gtk;
-using GanttTracker.StateManager;
-using GanttMonoTracker.ExceptionPresentation;
 using TaskManagerInterface;
 
 namespace GanttMonoTracker.GuiPresentation
-{	
-	public class AboutDialog : IGuiMessageDialog,IDisposable
+{
+    public class AboutDialog : IGuiMessageDialog,IDisposable
 	{
 		private Gtk.Dialog thisDialog;
 	

@@ -3,14 +3,12 @@
 //license:GPLv3.0
 //date:4/12/2014
 // created on 18.11.2005 at 23:03
-using System;
-using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
 
 
 namespace GanttTracker.TaskManager
 {
-	public class Actor : IManagerEntity
+    public class Actor : IManagerEntity
 	{
 		public Actor(ITaskManager parent)
 		{

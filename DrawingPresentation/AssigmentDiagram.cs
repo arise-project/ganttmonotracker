@@ -34,8 +34,7 @@ namespace GanttMonoTracker.DrawingPresentation
 
 		#endregion
 
-		public AssigmentDiagramm() : base()	{ }
-
+		
 		#region IGuiAssigment Implementation
 		
 		public DataSet Source { get;set; }
@@ -193,8 +192,8 @@ namespace GanttMonoTracker.DrawingPresentation
 								,(int)(deltaActor*((double)currentCount / maxTaskCout)));
 
 							taskSum += currentCount;
-							Pango.Layout layout = new Pango.Layout(PangoContext);
-							layout.Wrap = Pango.WrapMode.Word;
+                            Layout layout = new Layout(PangoContext);
+							layout.Wrap = WrapMode.Word;
 							layout.FontDescription = FontDescription.FromString("Tahoma 10");
 							layout.SetMarkup(taskCount.ToString());
 
@@ -225,8 +224,8 @@ namespace GanttMonoTracker.DrawingPresentation
 
 			foreach(DataRow row in Source.Tables["Actor"].Rows)
 			{
-				Pango.Layout layout = new Pango.Layout(PangoContext);
-				layout.Wrap = Pango.WrapMode.Word;
+				Layout layout = new Layout(PangoContext);
+				layout.Wrap = WrapMode.Word;
 				layout.FontDescription = FontDescription.FromString("Tahoma 10");
 				layout.SetMarkup((string)row["Name"]);
 
@@ -249,8 +248,8 @@ namespace GanttMonoTracker.DrawingPresentation
 			int offset1 = fBorderMarginH;
 			for (int i = 0; i < deltaSpan.Days; i++)
 			{
-				Pango.Layout layout = new Pango.Layout(PangoContext);
-				layout.Wrap = Pango.WrapMode.Word;
+				Layout layout = new Layout(PangoContext);
+				layout.Wrap = WrapMode.Word;
 				layout.FontDescription = FontDescription.FromString("Tahoma 10");
 				layout.SetMarkup(labelDate1.ToString("dd/MM"));
 

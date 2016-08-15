@@ -7,17 +7,15 @@
 
 using System;
 using System.Threading;
-using System.Linq;
 using System.Data;
 using System.IO;
-using System.Reflection;
 using Gtk;
 using TaskManagerInterface;
 using GanttTracker.TaskManager.ManagerException;
 
 namespace GanttMonoTracker.GuiPresentation
 {
-	public class ViewTaskDialog : IGuiTask, IGuiTracker
+    public class ViewTaskDialog : IGuiTask, IGuiTracker
 	{
 		ListStore fStateStore;
 
@@ -34,39 +32,39 @@ namespace GanttMonoTracker.GuiPresentation
 		string fComment;
 
 
-		Gtk.Dialog thisDialog;
+		Dialog thisDialog;
 
 
 		[Glade.Widget()]
-		Gtk.ComboBoxEntry cbActor;
+		ComboBoxEntry cbActor;
 
 
 		[Glade.Widget()]
-		Gtk.TextView tvDescription;
+		TextView tvDescription;
 
 
 		[Glade.Widget()]
-		Gtk.Calendar calStartTime;
+		Calendar calStartTime;
 
 
 		[Glade.Widget()]
-		Gtk.Calendar calEndTime;
+		Calendar calEndTime;
 
 
 		[Glade.Widget()]
-		Gtk.ComboBoxEntry cbState;
+		ComboBoxEntry cbState;
 
 
 		[Glade.Widget()]
-		Gtk.TextView tvComment;	
+		TextView tvComment;	
 
 
 		[Glade.Widget()]
-		Gtk.ScrolledWindow swComment;
+		ScrolledWindow swComment;
 
 
 		[Glade.Widget()]
-		Gtk.Label lbCommentDescription;
+		Label lbCommentDescription;
 
 
 		string fDescription;
@@ -78,7 +76,7 @@ namespace GanttMonoTracker.GuiPresentation
 			Glade.XML glade = new Glade.XML(stream, "ViewTaskDialog", null);
 			stream.Close();
 			glade.Autoconnect(this);
-			thisDialog = ((Gtk.Dialog)(glade.GetWidget("ViewTaskDialog")));
+			thisDialog = ((Dialog)(glade.GetWidget("ViewTaskDialog")));
 			thisDialog.Modal = true;
 			thisDialog.TransientFor = parent;
 			thisDialog.WindowPosition = WindowPosition.CenterAlways;
@@ -127,7 +125,7 @@ namespace GanttMonoTracker.GuiPresentation
 			for (; true;) 
 			{
 				result = thisDialog.Run();
-				if ((result != ((int)(Gtk.ResponseType.None))))
+				if ((result != ((int)(ResponseType.None))))
 				{
 					break;
 				}
@@ -322,7 +320,7 @@ namespace GanttMonoTracker.GuiPresentation
 				fActorStore.AppendValues((int)row["ID"],(string)row["Name"]);
 			}
 			cbActor.Model = fActorStore;
-			Gtk.CellRendererText actorText = new Gtk.CellRendererText();
+			CellRendererText actorText = new CellRendererText();
 			actorText.Style = Pango.Style.Oblique;
 			//actorText.BackgroundGdk = new Gdk.Color(0x63,0,0);
 			cbActor.PackStart(actorText,true);
@@ -345,7 +343,7 @@ namespace GanttMonoTracker.GuiPresentation
 				fStateStore.AppendValues((int)row["ID"],(string)row["Name"]);
 			}
 			cbState.Model = fStateStore;
-			Gtk.CellRendererText stateText = new Gtk.CellRendererText();
+			CellRendererText stateText = new CellRendererText();
 			cbState.PackStart(stateText,true);
 			cbState.AddAttribute(stateText,"text",1);
 			TreeIter iter;

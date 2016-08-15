@@ -4,12 +4,11 @@
 //date:4/12/2014
 // created on 15.01.2006 at 15:07
 using System;
-using System.Collections;
 using System.Data;
 using System.Linq;
 using Gdk;
-using Pango; 
-using Cairo; 
+using Pango;
+using Cairo;
 
 using GanttTracker.TaskManager.ManagerException;
 using TaskManagerInterface;
@@ -19,7 +18,7 @@ using GanttTracker.TaskManager;
 
 namespace GanttMonoTracker.DrawingPresentation
 {
-	public class GanttDiagramm : Gtk.DrawingArea, IGuiSource
+    public class GanttDiagramm : Gtk.DrawingArea, IGuiSource
 	{
 		#region Constants
 
@@ -53,7 +52,7 @@ namespace GanttMonoTracker.DrawingPresentation
 
 		#region Protected methods
 
-		protected override bool OnExposeEvent(Gdk.EventExpose args)
+		protected override bool OnExposeEvent(EventExpose args)
 		{
 			var baseResult = base.OnExposeEvent (args);
 			if(Source == null && TrackerCore.Instance.TaskManager is EmptyTaskManager)
@@ -138,9 +137,7 @@ namespace GanttMonoTracker.DrawingPresentation
 						catch(Exception) {
 							var c = (startTime - firstDate).Days;
 						}
-					} else {
-
-					}
+					} 
 
 					Gdk.GC taskGC = new Gdk.GC((Drawable)this.GdkWindow);
 
@@ -227,8 +224,8 @@ namespace GanttMonoTracker.DrawingPresentation
 
 				foreach(DataRow row in Source.Tables["Actor"].Rows)
 				{
-					Pango.Layout layout = new Pango.Layout(PangoContext);
-					layout.Wrap = Pango.WrapMode.Word;
+                    Layout layout = new Layout(PangoContext);
+					layout.Wrap = WrapMode.Word;
 					layout.FontDescription = FontDescription.FromString("Tahoma 10");
 					layout.SetMarkup((string)row["Name"]);
 
@@ -251,8 +248,8 @@ namespace GanttMonoTracker.DrawingPresentation
 				int offset1 = fBorderMarginH;
 				for (int i = 0; i < deltaSpan.Days; i++)
 				{
-					Pango.Layout layout = new Pango.Layout(PangoContext);
-					layout.Wrap = Pango.WrapMode.Word;
+					Layout layout = new Layout(PangoContext);
+					layout.Wrap = WrapMode.Word;
 					layout.FontDescription = FontDescription.FromString("Tahoma 10");
 					layout.SetMarkup(labelDate1.ToString("dd/MM"));
 

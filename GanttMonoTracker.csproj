@@ -26,9 +26,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="ExceptionPresentation\ExceptionViewDialog.glade">
       <LogicalName>ExceptionViewDialog.glade</LogicalName>
     </EmbeddedResource>
@@ -64,8 +61,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="gtk-gui\generated.cs" />
-    <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="DrawingPresentation\AssigmentDiagram.cs" />
     <Compile Include="ExceptionPresentation\ExceptionViewDialog.cs" />

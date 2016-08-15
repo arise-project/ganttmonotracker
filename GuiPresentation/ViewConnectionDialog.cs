@@ -8,7 +8,6 @@
 using System;
 using System.Data;
 using System.IO;
-using System.Reflection;
 using Gtk;
 
 using GanttTracker.TaskManager.ManagerException;
@@ -16,8 +15,8 @@ using TaskManagerInterface;
 
 namespace GanttMonoTracker.GuiPresentation
 {
-	
-	public class ViewConnectionDialog : IGuiConnection
+
+    public class ViewConnectionDialog : IGuiConnection
 	{
 		int fStateInID = -1;
 
@@ -31,67 +30,67 @@ namespace GanttMonoTracker.GuiPresentation
 		ListStore fStateOutStore;
 
 
-		Gtk.Dialog thisDialog;
+		Dialog thisDialog;
 
 		
 		[Glade.Widget()]
-		Gtk.VBox vbox2;
+		VBox vbox2;
 
 		
 		[Glade.Widget()]
-		Gtk.VBox vbox1;
+		VBox vbox1;
 
 		
 		[Glade.Widget()]
-		Gtk.Label lbConnectionAction;
+		Label lbConnectionAction;
 
 		
 		[Glade.Widget()]
-		Gtk.HBox hbox1;
+		HBox hbox1;
 
 		
 		[Glade.Widget()]
-		Gtk.Label lbNameDescription;
+		Label lbNameDescription;
 
 		
 		[Glade.Widget()]
-		Gtk.Entry entName;
+		Entry entName;
 
 		
 		[Glade.Widget()]
-		Gtk.HBox hbox2;
+		HBox hbox2;
 
 		
 		[Glade.Widget()]
-		Gtk.Label lbStateInDescription;
+		Label lbStateInDescription;
 
 		
 		[Glade.Widget()]
-		Gtk.ComboBoxEntry cbStateIn;
+		ComboBoxEntry cbStateIn;
 
 		
 		[Glade.Widget()]
-		Gtk.HBox hbox3;
+		HBox hbox3;
 
 		
 		[Glade.Widget()]
-		Gtk.Label lbStateOutDescription;
+		Label lbStateOutDescription;
 
 		
 		[Glade.Widget()]
-		Gtk.ComboBoxEntry cbStateOut;
+		ComboBoxEntry cbStateOut;
 
 		
 		[Glade.Widget()]
-		Gtk.HButtonBox hbuttonbox2;
+		HButtonBox hbuttonbox2;
 
 		
 		[Glade.Widget()]
-		Gtk.Button btnCancel;
+		Button btnCancel;
 
 		
 		[Glade.Widget()]
-		Gtk.Button btnOk;
+		Button btnOk;
 
 		
 		public ViewConnectionDialog(Window parent, DataSet taskStateSource)
@@ -100,7 +99,7 @@ namespace GanttMonoTracker.GuiPresentation
 			Glade.XML glade = new Glade.XML(stream, "ViewConnectionDialog", null);
 			stream.Close();
 			glade.Autoconnect(this);
-			thisDialog = ((Gtk.Dialog)(glade.GetWidget("ViewConnectionDialog")));
+			thisDialog = ((Dialog)(glade.GetWidget("ViewConnectionDialog")));
 			thisDialog.TransientFor = parent;
 			thisDialog.Modal = true;
 			thisDialog.WindowPosition = WindowPosition.Center;
@@ -124,7 +123,7 @@ namespace GanttMonoTracker.GuiPresentation
 			)
 			{
 				result = thisDialog.Run();
-				if ((result != ((int)(Gtk.ResponseType.None))))
+				if ((result != ((int)(ResponseType.None))))
 				{
 					break;
 				}
@@ -203,7 +202,7 @@ namespace GanttMonoTracker.GuiPresentation
 					fStateInStore.AppendValues((int)row["ID"],(string)row["Name"]);
 				}
 				cbStateIn.Model = fStateInStore;
-				Gtk.CellRendererText stateText = new Gtk.CellRendererText();
+				CellRendererText stateText = new CellRendererText();
 				stateText.Style = Pango.Style.Oblique;
 				stateText.ForegroundGdk = new Gdk.Color(0x63,0,0);
 				cbStateIn.PackStart(stateText,true);
@@ -229,7 +228,7 @@ namespace GanttMonoTracker.GuiPresentation
 					fStateOutStore.AppendValues((int)row["ID"],(string)row["Name"]);
 				}
 				cbStateOut.Model = fStateOutStore;
-				Gtk.CellRendererText stateText = new Gtk.CellRendererText();
+				CellRendererText stateText = new CellRendererText();
 				stateText.Style = Pango.Style.Oblique;
 				cbStateOut.PackStart(stateText,true);
 				cbStateOut.AddAttribute(stateText,"text",1);

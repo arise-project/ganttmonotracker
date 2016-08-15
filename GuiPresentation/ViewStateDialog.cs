@@ -26,51 +26,51 @@ namespace GanttMonoTracker.GuiPresentation
 		ListStore fStateSearchDictionaryStore;
 		StateCore stateCore;
 
-		Gtk.Dialog thisDialog;
+		Dialog thisDialog;
 
 		
 		[Glade.Widget()]
-		Gtk.Button btnApply;
+		Button btnApply;
 
 		
 		[Glade.Widget()]
-		Gtk.Entry entStateSearch;
+		Entry entStateSearch;
 
 		
 		[Glade.Widget()]
-		Gtk.Button btnSearch;
+		Button btnSearch;
 
 		
 		[Glade.Widget()]
-		Gtk.TreeView tvState;
+		TreeView tvState;
 
 		
 		[Glade.Widget()]
-		Gtk.Button btnCreateState;
+		Button btnCreateState;
 
 		
 		[Glade.Widget()]
-		Gtk.Button btnEditState;
+		Button btnEditState;
 
 		
 		[Glade.Widget()]
-		Gtk.Button btnDeleteState;
+		Button btnDeleteState;
 
 		
 		[Glade.Widget()]
-		Gtk.TreeView tvStateConnection;
+		TreeView tvStateConnection;
 
 		
 		[Glade.Widget()]
-		Gtk.Button btnCreateConnection;
+		Button btnCreateConnection;
 
 		
 		[Glade.Widget()]
-		Gtk.Button btnEditConnection;
+		Button btnEditConnection;
 
 		
 		[Glade.Widget()]
-		Gtk.Button btnDeleteConnection;
+		Button btnDeleteConnection;
 
 
 		public ViewStateDialog(Window parent, IGuiCore guiCore)
@@ -86,7 +86,7 @@ namespace GanttMonoTracker.GuiPresentation
 			Glade.XML glade = new Glade.XML(stream, "EditStatesDialog", null);
 			stream.Close();
 			glade.Autoconnect(this);
-			thisDialog = ((Gtk.Dialog)(glade.GetWidget("EditStatesDialog")));
+			thisDialog = ((Dialog)(glade.GetWidget("EditStatesDialog")));
 			thisDialog.Modal = true;
 			thisDialog.TransientFor = parent;
 			thisDialog.SetDefaultSize(800,600);
@@ -131,7 +131,7 @@ namespace GanttMonoTracker.GuiPresentation
 			for (; true;) 
 			{
 				result = thisDialog.Run();
-				if ((result != ((int)(Gtk.ResponseType.None))) && result != ((int)(Gtk.ResponseType.Apply)))
+				if ((result != ((int)(ResponseType.None))) && result != ((int)(ResponseType.Apply)))
 				{
 					break;
 				}

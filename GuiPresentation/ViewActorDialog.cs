@@ -6,14 +6,13 @@
 // http://eric.extremeboredom.net/projects/gladesharpcodegenerator/
 using System;
 using System.IO;
-using System.Reflection;
 using Glade;
 using Gtk;
 using TaskManagerInterface;
 
 namespace GanttMonoTracker.GuiPresentation
 {
-	public class ViewActorDialog : IGuiActorView
+    public class ViewActorDialog : IGuiActorView
 	{
 		private Gtk.Dialog thisDialog;
 

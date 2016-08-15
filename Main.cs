@@ -4,16 +4,12 @@
 //date:4/12/2014
 // project created on 08.11.2005 at 22:11
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.IO;
 using Gtk;
 using GLib;
-using Glade;
 using Process = System.Diagnostics.Process;
-
-using GanttMonoTracker;
 using GanttMonoTracker.GuiPresentation;
 using GanttMonoTracker.ExceptionPresentation;
 using TaskManagerInterface;
@@ -21,7 +17,7 @@ using System.Configuration;
 
 namespace GanttTracker
 {
-	public class GanttTrackerApp
+    public class GanttTrackerApp
 	{
 		MainForm mainForm;
 

@@ -8,25 +8,23 @@
 using System;
 using System.Data;
 using System.IO;
-using System.Reflection;
-using System.Threading;
 using Gtk;
 
 using GanttMonoTracker.DrawingPresentation;
 using TaskManagerInterface;
 
 namespace GanttMonoTracker.GuiPresentation
-{	
-	public class LogoForm: IGuiMessageDialog
+{
+    public class LogoForm: IGuiMessageDialog
 	{
 		private DataSet fGanttSource;
 
 
-		private Gtk.Window thisWindow;
+		private Window thisWindow;
 
 
 		[Glade.Widget()]
-		private Gtk.TextView tvReleaseNews;
+		private TextView tvReleaseNews;
 
 
 		private GanttDiagramm fLogoDiagram;
@@ -36,10 +34,10 @@ namespace GanttMonoTracker.GuiPresentation
 		/// The drwAssigment container.
 		/// </summary>
 		[Glade.Widget()]
-		private Gtk.VBox vbox1;
+		private VBox vbox1;
 
 
-		private Gtk.DrawingArea dwLogo;
+		private DrawingArea dwLogo;
 
 
 		public LogoForm()
@@ -48,7 +46,7 @@ namespace GanttMonoTracker.GuiPresentation
 			Glade.XML glade = new Glade.XML(stream, "LogoMindow", null);
 			stream.Close();
 			glade.Autoconnect(this);
-			thisWindow = ((Gtk.Window)(glade.GetWidget("LogoMindow")));
+			thisWindow = ((Window)(glade.GetWidget("LogoMindow")));
 			thisWindow.WindowPosition = WindowPosition.Center;
 			thisWindow.SetDefaultSize(480,460);
 			thisWindow.KeyReleaseEvent += (o, args) => {

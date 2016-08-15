@@ -5,11 +5,10 @@
 // created on 18.12.2005 at 23:11
 
 using System;
-using System.Data;
 
 namespace TaskManagerInterface
 {
-	public interface ITask
+    public interface ITask
 	{
 		bool ActorPresent { get;set; }
 

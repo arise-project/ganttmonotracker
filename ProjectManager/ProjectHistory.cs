@@ -4,16 +4,13 @@
 //date:4/12/2014
 // created on 31.01.2006 at 2:33
 
-using System;
 using System.IO;
 using System.Xml;
-using System.Collections; 
-using GanttTracker.TaskManager.ManagerException;
-using TaskManagerInterface;
+using System.Collections;
 
 namespace GanttTracker.ProjectManager
 {
-	public class ProjectHistory
+    public class ProjectHistory
 	{
 		static ProjectHistory fInstance;
 

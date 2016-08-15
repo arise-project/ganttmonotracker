@@ -9,7 +9,6 @@ using System;
 using System.Threading;
 using System.Collections;
 using System.IO;
-using System.Reflection;
 using Glade;
 using Gtk;
 using GanttTracker.TaskManager.ManagerException;
@@ -17,26 +16,26 @@ using TaskManagerInterface;
 
 namespace GanttMonoTracker.GuiPresentation
 {
-	public class ViewSingleStateDialog : IState, IGuiMessageDialog,IDisposable
+    public class ViewSingleStateDialog : IState, IGuiMessageDialog,IDisposable
 	{
 		private byte fColorRed;
 		private byte fColorGreen;
 		private byte fColorBlue;
 		private int fMappingID;
 
-		Gtk.Dialog thisDialog;
+		Dialog thisDialog;
 
 
 		[Widget]
-		Gtk.Label lbStateAction;
+		Label lbStateAction;
 
 
 		[Widget]
-		Gtk.Entry entName;
+		Entry entName;
 
 
 		[Widget]
-		Gtk.ColorButton cbtnColor;
+		ColorButton cbtnColor;
 
 
 		string fName;
@@ -48,7 +47,7 @@ namespace GanttMonoTracker.GuiPresentation
 			Glade.XML glade = Glade.XML.FromAssembly ("ViewSingleStateDialog.glade", "ViewSingleStateDialog", null);
 			stream.Close ();
 			glade.Autoconnect (this);
-			thisDialog = ((Gtk.Dialog)(glade.GetWidget ("ViewSingleStateDialog")));
+			thisDialog = ((Dialog)(glade.GetWidget ("ViewSingleStateDialog")));
 			thisDialog.TransientFor = parent;
 			thisDialog.Modal = true;
 			thisDialog.WindowPosition = WindowPosition.Center;
@@ -66,7 +65,7 @@ namespace GanttMonoTracker.GuiPresentation
 			for (; true;) 
 			{
 				result = thisDialog.Run ();
-				if ((result != ((int)(Gtk.ResponseType.None)))) {
+				if ((result != ((int)(ResponseType.None)))) {
 					break;
 				}
 				Thread.Sleep(500);

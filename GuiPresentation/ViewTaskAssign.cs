@@ -10,15 +10,12 @@ using System.Threading;
 using System.Data;
 using System.IO;
 using Gtk;
-
-using GanttTracker.StateManager;
 using GanttTracker.TaskManager.ManagerException;
-using GanttMonoTracker.ExceptionPresentation;
 using TaskManagerInterface;
 
 namespace GanttMonoTracker.GuiPresentation
 {
-	public class ViewTaskAssign : IGuiMessageDialog,IDisposable
+    public class ViewTaskAssign : IGuiMessageDialog,IDisposable
 	{
 		int fActorID;
 
@@ -29,19 +26,19 @@ namespace GanttMonoTracker.GuiPresentation
 		string fComment;
 
 
-		Gtk.Dialog thisDialog;
+		Dialog thisDialog;
 
 
 		[Glade.Widget()]
-		Gtk.Label lbAssignAction;
+		Label lbAssignAction;
 
 
 		[Glade.Widget()]
-		Gtk.ComboBoxEntry cbActor;
+		ComboBoxEntry cbActor;
 
 
 		[Glade.Widget()]
-		Gtk.TextView tvComment;
+		TextView tvComment;
 
 		
 		public ViewTaskAssign(Window parent)
@@ -51,7 +48,7 @@ namespace GanttMonoTracker.GuiPresentation
 			stream.Close();
 			glade.Autoconnect(this);
 			
-			thisDialog = ((Gtk.Dialog)(glade.GetWidget("ViewTaskAssign")));
+			thisDialog = ((Dialog)(glade.GetWidget("ViewTaskAssign")));
 			thisDialog.Modal = true;
 			thisDialog.TransientFor = parent;
 			thisDialog.SetDefaultSize(200,450);
@@ -77,7 +74,7 @@ namespace GanttMonoTracker.GuiPresentation
 			for (; true;)
 			{
 				result = thisDialog.Run();
-				if ((result != ((int)(Gtk.ResponseType.None))))
+				if ((result != ((int)(ResponseType.None))))
 				{
 					break;
 				}
@@ -157,7 +154,7 @@ namespace GanttMonoTracker.GuiPresentation
 				fActorStore.AppendValues((int)row["ID"],(string)row["Name"]);
 			}
 			cbActor.Model = fActorStore;
-			Gtk.CellRendererText actorText = new Gtk.CellRendererText();
+			CellRendererText actorText = new CellRendererText();
 			actorText.Style = Pango.Style.Oblique;
 			//actorText.BackgroundGdk = new Gdk.Color(0x63,0,0);
 			cbActor.PackStart(actorText,true);

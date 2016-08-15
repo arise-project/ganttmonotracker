@@ -15,35 +15,35 @@ namespace GanttMonoTracker.ExceptionPresentation
 {
 	public class MessageViewDialog : IGuiMessageDialog
 	{
-		private Gtk.Dialog thisDialog;
+		private Dialog thisDialog;
 
 		
 		[Glade.Widget()]
-		private Gtk.Label lbWarningDescription;
+		private Label lbWarningDescription;
 
 		
 		[Glade.Widget()]
-		private Gtk.Label lbWarning;
+		private Label lbWarning;
 
 		
 		[Glade.Widget()]
-		private Gtk.Label lbSubject;
+		private Label lbSubject;
 
 		
 		[Glade.Widget()]
-		private Gtk.TextView tvDescription;
+		private TextView tvDescription;
 
 		
 		[Glade.Widget()]
-		private Gtk.HButtonBox hbuttonbox1;
+		private HButtonBox hbuttonbox1;
 
 		
 		[Glade.Widget()]
-		private Gtk.Button btnOk;
+		private Button btnOk;
 
 		
 		[Glade.Widget()]
-		private Gtk.Label label1;
+		private Label label1;
 
 		
 		public MessageViewDialog(string type, string subject, string description, Window parent)
@@ -52,7 +52,7 @@ namespace GanttMonoTracker.ExceptionPresentation
 			Glade.XML glade = new Glade.XML(stream, "dialog1", null);
 			stream.Close();
 			glade.Autoconnect(this);
-			thisDialog = ((Gtk.Dialog)(glade.GetWidget("dialog1")));
+			thisDialog = ((Dialog)(glade.GetWidget("dialog1")));
 			thisDialog.TransientFor = parent;
 			thisDialog.Modal = true;
 
@@ -68,7 +68,7 @@ namespace GanttMonoTracker.ExceptionPresentation
 			Glade.XML glade = new Glade.XML(stream, "dialog1", null);
 			stream.Close();
 			glade.Autoconnect(this);
-			thisDialog = ((Gtk.Dialog)(glade.GetWidget("dialog1")));
+			thisDialog = ((Dialog)(glade.GetWidget("dialog1")));
 			thisDialog.TransientFor = parent;
 			thisDialog.Modal = true;
 			
@@ -87,7 +87,7 @@ namespace GanttMonoTracker.ExceptionPresentation
 			for (; true; )
 			{
 				result = thisDialog.Run();
-				if ((result != ((int)(Gtk.ResponseType.None))))
+				if ((result != ((int)(ResponseType.None))))
 				{
 					break;
 				}
