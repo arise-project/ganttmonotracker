@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GanttMonoTracker.DrawingPresentation.AssigmentDiagramm" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgABAAAAAAAAEAAAAABAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>DrawingPresentation\AssigmentDiagram.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.DrawingPresentation.GanttDiagramm" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAgBBAAAAEAAAEAAAAABAAAAAAABIAAAAAAA=</HashCode>
+      <FileName>DrawingPresentation\GanttDiagramm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.ExceptionPresentation.ExceptionViewDialog" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAFACAAAEAACAAAEAEIIAAAAAAQAAAAAAAAAII=</HashCode>
+      <FileName>ExceptionPresentation\ExceptionViewDialog.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.ExceptionPresentation.MessageFactory" Collapsed="true">
+    <Position X="14.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>ExceptionPresentation\MessageFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttMonoTracker.ExceptionPresentation.MessageViewDialog" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAACgCAAAFIAAAACAQEAABAABAAEAAAAAIAAAAI=</HashCode>
+      <FileName>ExceptionPresentation\MessageViewDialog.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.GuiPresentation.AboutDialog" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAACAAAUAAAAAAAAEAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>GuiPresentation\AboutDialog.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.GuiPresentation.GuiFactory" Collapsed="true">
+    <Position X="12.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAQEAAAAAAAAACAAAAACAAAAAAAAAAAAEAQgAA=</HashCode>
+      <FileName>GuiPresentation\GuiFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttMonoTracker.GuiPresentation.LogoForm" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAgAAiAAAkAAAAAgAgEAAABEUAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GuiPresentation\LogoForm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.GuiPresentation.MainForm" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hiCQAAAARBIIloGFBCUoECKRCBQOmQgJgKAAGYAAAQg=</HashCode>
+      <FileName>GuiPresentation\MainForm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.GuiPresentation.ViewActorDialog" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCAMAgAEACAAAEAAAAAAAAEAAAAIAAAAAEAAAAQAAAI=</HashCode>
+      <FileName>GuiPresentation\ViewActorDialog.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.GuiPresentation.ViewConnectionDialog" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAwAACAMBEEgAAAAAgUAARAIlAAgAAAIACAwoEI=</HashCode>
+      <FileName>GuiPresentation\ViewConnectionDialog.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.GuiPresentation.ViewSingleStateDialog" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SAUAACAAACAAAERAABEQAIUAAABIAAACAEBQACIgABI=</HashCode>
+      <FileName>GuiPresentation\ViewSingleStateDialog.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.GuiPresentation.ViewStateDialog" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DQAABQEASigAAUEDBBAgABEIgAQAAQARA5UCBAAUAEI=</HashCode>
+      <FileName>GuiPresentation\ViewStateDialog.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.GuiPresentation.ViewTaskAssign" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgAABAAEQCAAAEAAAAAAAAEgIAIAAQIIAAAACAAAgAI=</HashCode>
+      <FileName>GuiPresentation\ViewTaskAssign.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttMonoTracker.GuiPresentation.ViewTaskDialog" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgAABAQGQKgsAEAABgIAAAMoIBIgAQgIgIACCACAgAI=</HashCode>
+      <FileName>GuiPresentation\ViewTaskDialog.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.GanttTrackerApp" Collapsed="true">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAgQAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Main.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttTracker.TrackerCore" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAYAAAAAAgAAARAClACAAgQAAAAEYFIQgAABIAAIAA=</HashCode>
+      <FileName>TaskManager\TrackerCore.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MainWindow" Collapsed="true">
+    <Position X="9" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MainWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttMonoTracker.GdkPalette" Collapsed="true">
+    <Position X="16" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgEAAAAAAAAAAAAAEAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Palette\GdkPalette.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttMonoTracker.GanttDiagramFactory" Collapsed="true">
+    <Position X="10.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>ProjectManager\GanttDiagramFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttMonoTracker.FSLocations" Collapsed="true">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TaskManager\FSLocations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttMonoTracker.GDriveCredentials" Collapsed="true">
+    <Position X="17.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAIAAAQAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>TaskManager\GDrive\GDriveCredentials.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttMonoTracker.GDriveDownloader" Collapsed="true">
+    <Position X="7.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>TaskManager\GDrive\GDriveDownloader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttMonoTracker.GDriveManager" Collapsed="true">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAABEAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>TaskManager\GDrive\GDriveManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttMonoTracker.GDriveUploader" Collapsed="true">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TaskManager\GDrive\GDriveUploader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttTracker.ProjectManager.ProjectHistory" Collapsed="true">
+    <Position X="17.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAACAAAAAgAAAAAAQAAAAAAAAQA=</HashCode>
+      <FileName>ProjectManager\ProjectHistory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttTracker.StateManager.Connection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACGIAAAAAAAUAAAAAAQAQAABEAAAAgAEAAACAgAAA=</HashCode>
+      <FileName>StateManager\Connection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.StateManager.State" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQCGIAAAAAAAQRAABEAQIQAAAFAAAAAAEAQACAgAAA=</HashCode>
+      <FileName>StateManager\State.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.StateManager.StateCore" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAIABAAAAACAQAAAgAAAAQQAAAAAAMAAAAEBAAAAAA=</HashCode>
+      <FileName>StateManager\StateCore.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.StateManager.StateFactory" Collapsed="true">
+    <Position X="12.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>StateManager\StateFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttTracker.TaskManager.Actor" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACGIAAACAAAAAAAAAAQAQAAAEAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>TaskManager\Actor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.TaskManager.EmptyTaskManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BpQAUJBAAACogQAQCMAwBIzQABAhAAjJAIAEAGAEAAA=</HashCode>
+      <FileName>TaskManager\EmptyTaskManaegr.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.TaskManager.ManagerFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>TaskManager\ManagerFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.TaskManager.Task" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACGIAGAAAgAEEAAAIAQAAgIAEgAACAAEAAAAAAgAA=</HashCode>
+      <FileName>TaskManager\Task.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.TaskManager.XmlTaskManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BpQAUJBAAAAogQAYCMAwBIzQABQhQADJAIAkAGAAQAI=</HashCode>
+      <FileName>TaskManager\XmlTaskManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.TaskManager.ManagerException.KeyNotFoundException&lt;T&gt;" Collapsed="true">
+    <Position X="16" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TaskManager\ManagerException\KeyNotFoundException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttTracker.TaskManager.ManagerException.ManagementException" Collapsed="true">
+    <Position X="10.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>TaskManager\ManagerException\ManagementException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GanttTracker.TaskManager.TaskStorage.CommandFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAQAAAAAAAAAQAAAAAAAQAAAAAAEAAAAAEA=</HashCode>
+      <FileName>TaskManager\TaskStorage\CommandFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.TaskManager.TaskStorage.DeleteCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAQQAAAAAAAAAAAAIgAAEAAAAAAAQAAA=</HashCode>
+      <FileName>TaskManager\TaskStorage\DeleteCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.TaskManager.TaskStorage.InsertCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAQQAAAAAAAAAAAAIgAAEAAAAAAAQAAA=</HashCode>
+      <FileName>TaskManager\TaskStorage\InsertCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.TaskManager.TaskStorage.SelectCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAQQAAAAAAAAAAAAIgAAEAAAAAAAQAAA=</HashCode>
+      <FileName>TaskManager\TaskStorage\SelectCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.TaskManager.TaskStorage.StorageDealer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAA0IAAAAAAAAAAABACEEAAAAAAAUBBQCAAQAAAAgA=</HashCode>
+      <FileName>TaskManager\TaskStorage\StorageDealer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GanttTracker.TaskManager.TaskStorage.UpdateCommand" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAQQAAAAAAAAAAAAIgAAEAAAAAAAQAAA=</HashCode>
+      <FileName>TaskManager\TaskStorage\UpdateCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="TaskManagerInterface.IDealerCruid" Collapsed="true">
+    <Position X="7.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAQAAAAAAAAAQAAAAAAAQAAAAAAAAAAAAEA=</HashCode>
+      <FileName>interface\IDealerCruid.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IGuiActorView" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>interface\IGuiActorView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IGuiComment" Collapsed="true">
+    <Position X="9" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAgAAAAAAAAAAAAAAAIAAABAAAAAAAAAAA=</HashCode>
+      <FileName>interface\IGuiComment.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IGuiConnection" Collapsed="true">
+    <Position X="10.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAQAABAAAAAgAAAAACAgAAA=</HashCode>
+      <FileName>interface\IGuiConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IGuiCore" Collapsed="true">
+    <Position X="12.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAgAAAAAAAAAAAAEAAAAABAAAAAA=</HashCode>
+      <FileName>interface\IGuiCore.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IGuiMessageDialog" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAEAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>interface\IGuiMessageDialog.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IGuiSource" Collapsed="true">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>interface\IGuiSource.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IGuiState" Collapsed="true">
+    <Position X="3.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABQAAAAAAAAEAABAAAAAAAAAAAQAQAAAAAAAAAAA=</HashCode>
+      <FileName>interface\IGuiState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IGuiTask" Collapsed="true">
+    <Position X="1.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>interface\IGuiTask.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IGuiTracker" Collapsed="true">
+    <Position X="14.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAIAAAABAAAAAAAAAAAAAAIgIAAAAAAAAA=</HashCode>
+      <FileName>interface\IGuiTracker.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IManagerEntity" Collapsed="true">
+    <Position X="16" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACGIAAAAAAAAAAAAAAQAAAAAEAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>interface\IManagerEntity.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IManagerFactory" Collapsed="true">
+    <Position X="17.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>interface\IManagerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.ISingleStateView" Collapsed="true">
+    <Position X="7.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>interface\ISingleStateView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IState" Collapsed="true">
+    <Position X="9" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAAAAAAAAARAABEAAIQAAABAAAAAAAAAACAgAAA=</HashCode>
+      <FileName>interface\IState.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IStateManager" Collapsed="true">
+    <Position X="10.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>interface\IStateManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IStorageCommand" Collapsed="true">
+    <Position X="12.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAQAAAAAAAAAAAAIgAAAAAAAAAAQAAA=</HashCode>
+      <FileName>interface\IStorageCommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IStorageDealer" Collapsed="true">
+    <Position X="14.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAgIAAAAAAAAAAABACAEAAAAAAAUBBQCAAQAAAAgA=</HashCode>
+      <FileName>interface\IStorageDealler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.IStorageManager" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>interface\IStorageMannager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.ITask" Collapsed="true">
+    <Position X="4.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAgAEAAAAAAAAAgIAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>interface\ITask.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TaskManagerInterface.ITaskManager" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhAAUBBAAAAogAAQCMAwBIzQABAhAADJAIAEAGAAAAA=</HashCode>
+      <FileName>interface\ITaskManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="TaskManagerInterface.CoreState" Collapsed="true">
+    <Position X="9" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAAAAAAgAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>interface\IGuiCore.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GanttMonoTracker.ColorEnum" Collapsed="true">
+    <Position X="7.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAQAAAAAQAAAAAAAiAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Palette\ColorEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GanttMonoTracker.ExceptionType" Collapsed="true">
+    <Position X="10.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAEAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TaskManager\ManagerException\ExceptionType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

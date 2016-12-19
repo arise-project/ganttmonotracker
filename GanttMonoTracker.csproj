@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Screenshots\ABOUTDIALOG.PNG" />
     <None Include="Screenshots\ACTORSCREEN.PNG" />

@@ -1,18 +1,26 @@
-﻿<Properties GitUserInfo="UsingGIT" StartupItem="GanttMonoTracker.csproj">
+﻿<Properties StartupConfiguration="{991D9B6D-5D35-4FA6-8B0E-48A8FA84EF30}|Default" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="TaskManager\GDrive\GDriveManager.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="Main.cs" line="59" offsetX="432" offsetY="1160" expression="ex" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/DrawingPresentation/AssigmentDiagram.cs" line="208" column="1" />
+      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/DrawingPresentation/AssigmentDiagram.cs" line="292" column="1" />
+      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/GuiPresentation/GuiFactory.cs" line="69" column="5" />
+      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/StateManager/StateCore.cs" line="187" column="14" />
+      <Breakpoint file="D:\gmt\ganttmonotracker\DrawingPresentation\GanttDiagramm.cs" line="142" column="1" />
+      <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" line="77" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="TaskManager\GDrive\GDriveUploader.cs">
     <Files>
       <File FileName="DrawingPresentation\GanttDiagramm.cs" Line="1" Column="1" />
-      <File FileName="d:\gmt\ganttmonotracker\GuiPresentation\MainForm.cs" Line="1" Column="1" />
-      <File FileName="d:\gmt\ganttmonotracker\TaskManager\TaskStorage\StorageDealer.cs" Line="5" Column="5" />
-      <File FileName="d:\gmt\ganttmonotracker\ExceptionPresentation\MessageFactory.cs" Line="1" Column="1" />
-      <File FileName="d:\gmt\ganttmonotracker\Main.cs" Line="1" Column="1" />
       <File FileName="GuiPresentation\MainForm.glade" Line="1" Column="1" />
-      <File FileName="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" Line="1" Column="1" />
       <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="1" Column="1" />
       <File FileName="interface\ITaskManager.cs" Line="1" Column="1" />
       <File FileName="TaskManager\TrackerCore.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\XmlTaskManager.cs" Line="10" Column="10" />
+      <File FileName="TaskManager\XmlTaskManager.cs" Line="10" Column="1" />
       <File FileName="GuiPresentation\LogoForm.cs" Line="1" Column="1" />
       <File FileName="app.config" Line="2" Column="2" />
       <File FileName="StateManager\StateCore.cs" Line="1" Column="1" />
@@ -24,22 +32,11 @@
       <File FileName="interface\IStorageDealler.cs" Line="3" Column="3" />
       <File FileName="TaskManager\GDrive\GDriveCredentials.cs" Line="4" Column="4" />
       <File FileName="TaskManager\GDrive\GDriveManager.cs" Line="6" Column="6" />
-      <File FileName="TaskManager\GDrive\GDriveUploader.cs" Line="14" Column="14" />
+      <File FileName="TaskManager\GDrive\GDriveUploader.cs" Line="16" Column="19" />
       <File FileName="TaskManager\GDrive\GDriveDownloader.cs" Line="1" Column="1" />
       <File FileName="TaskManager\TaskStorage\SelectCommand.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/DrawingPresentation/AssigmentDiagram.cs" line="208" column="1" />
-      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/DrawingPresentation/AssigmentDiagram.cs" line="292" column="1" />
-      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/GuiPresentation/GuiFactory.cs" line="69" column="5" />
-      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/StateManager/StateCore.cs" line="187" column="14" />
-      <Breakpoint file="D:\gmt\ganttmonotracker\DrawingPresentation\GanttDiagramm.cs" line="142" column="1" />
-      <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" line="77" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
-    <Watch file="Main.cs" line="59" offsetX="432" offsetY="1160" expression="ex" liveUpdate="False" />
-  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.GanttMonoTracker PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>
