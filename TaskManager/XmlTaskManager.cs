@@ -1091,7 +1091,12 @@ namespace GanttTracker.TaskManager
 						
 			fDealer.Storage.Merge(updateDealer.Storage,true,System.Data.MissingSchemaAction.Error);			
 		}
-		
+
+		public void BindProject(IManagerEntity taskEntity)
+		{
+			throw new NotImplementedException();
+		}
+
 		#endregion
 	}
 }

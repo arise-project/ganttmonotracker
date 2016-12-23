@@ -11,8 +11,14 @@ namespace TaskManagerInterface
 {
 	public interface ITaskManager : IStorageManager
 	{
+		#region Project
+
+		void BindProject(IManagerEntity taskEntity);
+
+		#endregion
+
 		#region Tasks
-		
+
 		DataSet TaskSource { get;set; }
 
 

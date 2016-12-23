@@ -309,5 +309,10 @@ namespace GanttTracker.TaskManager
 		{
 			throw new ManagementException(ExceptionType.NotAllowed);
 		}
+
+		public void BindProject(IManagerEntity taskEntity)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

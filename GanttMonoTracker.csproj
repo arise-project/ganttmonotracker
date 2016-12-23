@@ -127,6 +127,8 @@
     <Compile Include="TaskManager\GDrive\GDriveManager.cs" />
     <Compile Include="TaskManager\GDrive\GDriveDownloader.cs" />
     <Compile Include="TaskManager\GDrive\GDriveUploader.cs" />
+    <Compile Include="TaskManager\Project.cs" />
+    <Compile Include="interface\IProject.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
