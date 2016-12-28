@@ -4,52 +4,56 @@
 //date:4/12/2014
 // created on 19.11.2005 at 21:36
 
-using System.Data;
-using System;
-
 namespace TaskManagerInterface
 {
-	public interface IStorageDealer
-	{
-		string ConnectionString	{ get;set;	}
+    using System;
+    using System.Data;
 
+    public interface IStorageDealer
+    {
+        IDealerCruid CommandFactory
+        {
+            get;
+            set;
+        }
 
-		DataSet Storage { get;set; }
+        string ConnectionString
+        {
+            get;
+            set;
+        }
 
+        DataSet EmptyStorage
+        {
+            get;
+        }
 
-		DataSet EmptyStorage { get; }
-
-
-		void Create();
-
-
-		void Load();
-
-
-		void Save();
-
-
-		void Save(string connectionString);
-
-
-		DataSet ExecuteDataSet(IStorageCommand command);
-
-
-		object ExecuteScalar(IStorageCommand command);
-
-
-		void ExecuteNonQuery(IStorageCommand command);
-
-
-		bool CheckConnection();
-
-
-		IDealerCruid CommandFactory { get;set; }
+        DataSet Storage
+        {
+            get;
+            set;
+        }
 
         bool Backup(string fileId);
 
-        bool Restore(string fileId);
+        bool CheckConnection();
+
+        void Create();
+
+        DataSet ExecuteDataSet(IStorageCommand command);
+
+        void ExecuteNonQuery(IStorageCommand command);
+
+        object ExecuteScalar(IStorageCommand command);
+
+        void Load();
 
         bool Merge(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate);
-	}
+
+        bool Restore(string fileId);
+
+        void Save();
+
+        void Save(string connectionString);
+    }
 }

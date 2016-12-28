@@ -1,8 +1,14 @@
-﻿using System;
+﻿//----------------------------------------------------------------------------------------------
+// <copyright file="IProject.cs" company="Artificial Renassance Inner Selft">
+// Copyright (c) Artificial Renassance Inner Selft.  All rights reserved.
+// </copyright>
+//-------------------------------------------------------------------------------------------------
+
 namespace GanttMonoTracker
 {
-	public interface IProject
-	{
-		
-	}
+    using System;
+
+    public interface IProject
+    {
+    }
 }

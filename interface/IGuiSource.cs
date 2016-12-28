@@ -4,12 +4,16 @@
 //date:4/12/2014
 // created on 15.01.2006 at 1:25
 
-using System.Data;
-
 namespace TaskManagerInterface
 {
-	public interface IGuiSource
-	{
-		DataSet Source	{ get;set; }
-	}
+    using System.Data;
+
+    public interface IGuiSource
+    {
+        DataSet Source
+        {
+            get;
+            set;
+        }
+    }
 }

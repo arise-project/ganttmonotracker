@@ -4,140 +4,112 @@
 //date:4/12/2014
 // created on 18.11.2005 at 21:52
 
-using System;
-using System.Data;
- 
 namespace TaskManagerInterface
 {
-	public interface ITaskManager : IStorageManager
-	{
-		#region Project
+    using System;
+    using System.Data;
 
-		void BindProject(IManagerEntity taskEntity);
+    public interface ITaskManager : IStorageManager
+    {
+        DataSet ActorSource
+        {
+            get;
+            set;
+        }
 
-		#endregion
+        DataSet AssigmentSource
+        {
+            get;
+        }
 
-		#region Tasks
+        DateTime GanttFirstDate
+        {
+            get;
+            set;
+        }
 
-		DataSet TaskSource { get;set; }
+        DateTime GanttLastDate
+        {
+            get;
+            set;
+        }
 
+        DataSet GanttSource
+        {
+            get;
+        }
 
-		IManagerEntity GetTask(int id);
+        DataSet TaskSource
+        {
+            get;
+            set;
+        }
 
+        DataSet TaskStateConnectionsSource
+        {
+            get;
+            set;
+        }
 
-		IManagerEntity CreateTask();
+        DataSet TaskStateSource
+        {
+            get;
+            set;
+        }
 
+        void BindActor(IManagerEntity actorEntity);
 
-		void BindTask(IManagerEntity taskEntity);
+        void BindProject(IManagerEntity taskEntity);
 
+        void BindTask(IManagerEntity taskEntity);
 
-		void UpdateTask(IManagerEntity taskEntity);
+        void BindTaskState(IManagerEntity stateEntity);
 
+        void BindTaskStateConnection(IManagerEntity stateConnectionEntity);
 
-		bool IsUpdatedTask(IManagerEntity taskEntity);
+        IManagerEntity CreateActor();
 
+        IManagerEntity CreateTask();
 
-		void DeleteTask(int id);
-		
-		#endregion
-		
-		#region Actors
-		
-		DataSet ActorSource	{ get;set; }
+        IManagerEntity CreateTaskState();
 
+        IManagerEntity CreateTaskStateConnection(IManagerEntity stateEntity, IManagerEntity connectedStateEntity);
 
-		IManagerEntity GetActor(int id);
+        void DeleteActor(int id);
 
+        void DeleteTask(int id);
 
-		IManagerEntity CreateActor();
+        void DeleteTaskState(int id);
 
+        void DeleteTaskStateConnection(int id);
 
-		void BindActor(IManagerEntity actorEntity);
+        IManagerEntity GetActor(int id);
 
+        DataSet GetInitialTaskStateSource();
 
-		void UpdateActor(IManagerEntity actorEntity);
+        IManagerEntity GetTask(int id);
 
+        IManagerEntity GetTaskState(int id);
 
-		bool IsUpdatedActor(IManagerEntity actorEntity);
+        IManagerEntity GetTaskStateConnection(int id);
 
+        DataSet GetTaskStateSource(IManagerEntity state);
 
-		void DeleteActor(int id);
-		
-		#endregion
-		
-		#region Gantt
-		
-		DataSet GanttSource	{ get; }
+        bool IsUpdatedActor(IManagerEntity actorEntity);
 
+        bool IsUpdatedTask(IManagerEntity taskEntity);
 
-		DateTime GanttFirstDate	{get;set; }
+        bool IsUpdatedTaskState(IManagerEntity stateEntity);
 
+        bool isUpdatedTaskStateConnection(IManagerEntity stateConnectionEntity);
 
-		DateTime GanttLastDate { get;set; }
-		
-		#endregion
-		
-		#region Assigment
-		
-		DataSet AssigmentSource	{ get; }
-		
-		#endregion	
-		
-		#region Task State
-		
-		DataSet TaskStateSource { get;set; }
+        void UpdateActor(IManagerEntity actorEntity);
 
+        void UpdateTask(IManagerEntity taskEntity);
 
-		IManagerEntity GetTaskState(int id);
+        //void BindTaskComment(IManagerEntity stateEntity);
+        void UpdateTaskState(IManagerEntity stateEntity);
 
-
-		IManagerEntity CreateTaskState();
-
-
-		void BindTaskState(IManagerEntity stateEntity);
-
-
-		//void BindTaskComment(IManagerEntity stateEntity);
-
-
-		void UpdateTaskState(IManagerEntity stateEntity);
-
-
-		bool IsUpdatedTaskState(IManagerEntity stateEntity);
-
-
-		void DeleteTaskState(int id);
-		
-		#endregion
-		
-		#region Task State Connection
-		
-		DataSet TaskStateConnectionsSource { get;set; }
-
-
-		IManagerEntity GetTaskStateConnection(int id);
-
-
-		IManagerEntity CreateTaskStateConnection(IManagerEntity stateEntity, IManagerEntity connectedStateEntity);
-
-
-		void BindTaskStateConnection(IManagerEntity stateConnectionEntity);
-
-
-		void UpdateTaskStateConnection(IManagerEntity stateConnectionEntity);
-
-
-		bool isUpdatedTaskStateConnection(IManagerEntity stateConnectionEntity);
-
-
-		void DeleteTaskStateConnection(int id);
-
-
-		DataSet GetInitialTaskStateSource();
-
-
-		DataSet GetTaskStateSource(IManagerEntity state);
-		
-		#endregion
-	}
+        void UpdateTaskStateConnection(IManagerEntity stateConnectionEntity);
+    }
 }

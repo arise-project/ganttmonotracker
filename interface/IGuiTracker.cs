@@ -3,27 +3,35 @@
 //license:GPLv3.0
 //date:4/12/2014
 // created on 10.11.2005 at 1:31
-using System.Data;
 
 namespace TaskManagerInterface
 {
-	public interface IGuiTracker
-	{
-		DataSet TaskSource { get;set; }	
+    using System.Data;
 
-		
-		DataSet ActorSource { get;set; }
+    public interface IGuiTracker
+    {
+        DataSet ActorSource
+        {
+            get;
+            set;
+        }
 
-		
-		DataSet StateSource { get;set; }
+        DataSet StateSource
+        {
+            get;
+            set;
+        }
 
-		
-		void BindTask();
+        DataSet TaskSource
+        {
+            get;
+            set;
+        }
 
+        void BindActor();
 
-		void BindActor();
+        void BindState();
 
-
-		void BindState();
-	}
+        void BindTask();
+    }
 }

@@ -13,16 +13,21 @@
       <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" line="77" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\LogoForm.cs">
     <Files>
-      <File FileName="TaskManager\Task.cs" Line="93" Column="29" />
-      <File FileName="TaskManager\Project.cs" Line="6" Column="45" />
+      <File FileName="TaskManager\Task.cs" Line="122" Column="17" />
+      <File FileName="TaskManager\Project.cs" Line="40" Column="10" />
       <File FileName="interface\ITask.cs" Line="11" Column="22" />
-      <File FileName="interface\IProject.cs" Line="4" Column="27" />
-      <File FileName="interface\ITaskManager.cs" Line="16" Column="45" />
-      <File FileName="TaskManager\EmptyTaskManaegr.cs" Line="318" Column="2" />
-      <File FileName="TaskManager\XmlTaskManager.cs" Line="19" Column="37" />
+      <File FileName="interface\IProject.cs" Line="4" Column="16" />
+      <File FileName="interface\ITaskManager.cs" Line="31" Column="13" />
+      <File FileName="TaskManager\EmptyTaskManaegr.cs" Line="84" Column="15" />
+      <File FileName="TaskManager\XmlTaskManager.cs" Line="149" Column="4" />
       <File FileName="C:\Program Files (x86)\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets" Line="1820" Column="5" />
+      <File FileName="interface\IManagerEntity.cs" Line="23" Column="3" />
+      <File FileName="TaskManager\Actor.cs" Line="58" Column="10" />
+      <File FileName="StateManager\Connection.cs" Line="79" Column="10" />
+      <File FileName="StateManager\State.cs" Line="145" Column="10" />
+      <File FileName="GuiPresentation\LogoForm.cs" Line="138" Column="57" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />

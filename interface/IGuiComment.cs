@@ -4,21 +4,34 @@
 //date:4/12/2014
 // created on 10.02.2006 at 12:05
 
-using System;
-
 namespace TaskManagerInterface
 {
-	public interface IGuiComment
-	{
-		bool CommentedEntryPresent { get; set; }
+    using System;
 
+    public interface IGuiComment
+    {
+        int CommentedEntryID
+        {
+            get;
+            set;
+        }
 
-		int CommentedEntryID { get; set; }
+        bool CommentedEntryPresent
+        {
+            get;
+            set;
+        }
 
+        DateTime Date
+        {
+            get;
+            set;
+        }
 
-		string Description { get; set; }
-
-
-		DateTime Date {	get; set; }	
-	}
+        string Description
+        {
+            get;
+            set;
+        }
+    }
 }

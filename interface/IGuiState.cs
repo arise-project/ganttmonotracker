@@ -4,28 +4,23 @@
 //date:4/12/2014
 // created on 22.01.2006 at 3:28
 
-using System;
-using System.Data;
-
 namespace TaskManagerInterface
 {
-	public interface IGuiState : IGuiSource
-	{
-		void BindStates();
+    using System;
+    using System.Data;
 
+    public interface IGuiState : IGuiSource
+    {
+        void BindConnections(IManagerEntity stateEntry);
 
-		void BindConnections(IManagerEntity stateEntry);
+        void BindStates();
 
+        void ClearConnections(IManagerEntity stateEntry);
 
-		void CreateConnection(IManagerEntity stateEntry,IManagerEntity connectedEntry);
+        void CreateConnection(IManagerEntity stateEntry,IManagerEntity connectedEntry);
 
+        void DeleteConnection(IManagerEntity stateEntry,IManagerEntity connectedEntry);
 
-		void EditConnection(IManagerEntity stateEntry,IManagerEntity connectedEntry);
-
-
-		void DeleteConnection(IManagerEntity stateEntry,IManagerEntity connectedEntry);
-
-
-		void ClearConnections(IManagerEntity stateEntry);
-	}
+        void EditConnection(IManagerEntity stateEntry,IManagerEntity connectedEntry);
+    }
 }

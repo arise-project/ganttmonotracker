@@ -4,42 +4,60 @@
 //date:4/12/2014
 // created on 21.01.2006 at 20:14
 
-using System.Collections;
-
 namespace TaskManagerInterface
 {
-	public interface IState
-	{
-		string Name { get;set; }
+    using System.Collections;
 
-		
-		byte ColorGreen	{ get;set; }
+    public interface IState
+    {
+        byte ColorBlue
+        {
+            get;
+            set;
+        }
 
-		
-		byte ColorRed {	get;set; }
+        byte ColorGreen
+        {
+            get;
+            set;
+        }
 
-		
-		byte ColorBlue { get;set; }
-		
-		
-		int MappingID {	get;set; }
+        byte ColorRed
+        {
+            get;
+            set;
+        }
 
-		
-		bool IsMapped {	get;set; }
+        Hashtable Connections
+        {
+            get;
+            set;
+        }
 
-		
-		Hashtable Connections {	get;set; }
+        bool IsMapped
+        {
+            get;
+            set;
+        }
 
-		
-		void Connect(IManagerEntity stateEntry, string connectionName);
+        int MappingID
+        {
+            get;
+            set;
+        }
 
+        string Name
+        {
+            get;
+            set;
+        }
 
-		void Disconnect(IManagerEntity stateEntry);
+        void ClearConnections();
 
+        void Connect(IManagerEntity stateEntry, string connectionName);
 
-		bool IsConnected(IManagerEntity stateEntry);
+        void Disconnect(IManagerEntity stateEntry);
 
-
-		void ClearConnections();
-	}
+        bool IsConnected(IManagerEntity stateEntry);
+    }
 }
