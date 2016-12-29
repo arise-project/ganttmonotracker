@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -22,15 +22,11 @@ namespace GanttTracker.TaskManager.TaskStorage
 	{
 		DataSet fEmptyStorage;
 
-
 		public string ConnectionString { get;set; }	
 
-		
 		public DataSet Storage { get;set; }
 
-
 		public IDealerCruid CommandFactory { get;	set; }
-
 
 		public GDriveManager Online { get; set; }
 
@@ -82,13 +78,12 @@ namespace GanttTracker.TaskManager.TaskStorage
 					fEmptyStorage.Relations.Add("Relation_TaskState_Task_ActorID",taskStateTable.Columns["ID"],taskTable.Columns["StateID"]);
 					fEmptyStorage.Relations.Add("Relation_TaskState_TaskStateConnection_ActorID",taskStateTable.Columns["MappingID"],taskStateConnectionTable.Columns["MappingID"]);
 					fEmptyStorage.Relations.Add("Relation_Task_Comment_TaskID",taskTable.Columns["ID"],commentTable.Columns["EntryID"]);				
-					
 				}
+
 				return fEmptyStorage;
 			}
 		}
 
-		
 		public StorageDealer(string connectionString,IDealerCruid commandFactory)
 		{
 			ConnectionString = connectionString;
@@ -97,7 +92,6 @@ namespace GanttTracker.TaskManager.TaskStorage
 			Online = new GDriveManager(new GDriveCredentials("1067781202017-nr9fbc3amvcd93rkigtkfsadl6httkj0.apps.googleusercontent.com", @"3fMJyreqqvQNtuB0Z8IAArzn"));
 		}
 
-		
 		public void Create()
 		{
 			if (File.Exists(ConnectionString))
@@ -107,7 +101,6 @@ namespace GanttTracker.TaskManager.TaskStorage
 			EmptyStorage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));		 			 
 		}	
 
-		
 		public void Load()
 		{
 			/*XmlTextReader reader = new XmlTextReader(ConnectionString);
@@ -130,45 +123,38 @@ namespace GanttTracker.TaskManager.TaskStorage
 			Storage.ReadXml(ConnectionString);
 		}
 
-		
 		private void ValidationHandler(object sender, ValidationEventArgs args)
 		{
 			throw new ManagementException(ExceptionType.ValidationFailed, string.Format("Validation failed with message {0}", args.Message));
 		}
 
-		
 		public void Save()
 		{
 			Storage.WriteXml(ConnectionString, System.Data.XmlWriteMode.WriteSchema);
 			Storage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));		
 		}
 
-		
 		public void Save(string connectionString)
 		{
 			Storage.WriteXml(connectionString, System.Data.XmlWriteMode.WriteSchema);
 			Storage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));		
 		}
 
-				
 		public DataSet ExecuteDataSet(IStorageCommand command)
 		{
 			return (DataSet)command.Execute();
 		}
 
-		
 		public object ExecuteScalar(IStorageCommand command)
 		{
 			return command.Execute();
 		}
 
-		
 		public void ExecuteNonQuery(IStorageCommand command)
 		{
 			command.Execute();
 		}
 
-		
 		public bool CheckConnection()
 		{
 			return !(ConnectionString == null || !File.Exists(ConnectionString));
@@ -193,6 +179,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 			catch {
 				throw;
 			}
+
 			return false;
 		}
 
@@ -207,6 +194,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 			catch {
 				throw;
 			}
+
 			using (Stream s = new MemoryStream (raw)) {
 				Storage = new DataSet();
 				Storage.ReadXml (s, XmlReadMode.Auto);
@@ -221,6 +209,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 			if (!CheckConnection()) {
 				return false;
 			}
+
 			byte[] raw;
 			try
 			{
@@ -255,6 +244,5 @@ namespace GanttTracker.TaskManager.TaskStorage
 		}
 
 		#endregion
-
 	}
 }

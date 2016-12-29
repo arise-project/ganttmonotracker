@@ -134,6 +134,7 @@ namespace GanttMonoTracker.DrawingPresentation
                         {
                             break;
                         }
+
                         actorIndex++;
                     }
 
@@ -218,7 +219,6 @@ namespace GanttMonoTracker.DrawingPresentation
 
                     if (DateNowVisible)
                     {
-
                         Pango.Layout layout = new Pango.Layout (PangoContext)
                         {
                             Wrap = Pango.WrapMode.Word,
@@ -274,7 +274,6 @@ namespace GanttMonoTracker.DrawingPresentation
                 AxisGC.Dispose ();
 
                 //DrawDateAxis
-
                 var labelDate1 = firstDate;
                 int offset1 = fBorderMarginH;
                 for (int i = 0; i < deltaSpan.Days; i++)

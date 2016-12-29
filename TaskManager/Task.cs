@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -15,16 +15,13 @@ namespace GanttTracker.TaskManager
 	{
 		int fActorID;
 
-
 		int fStateID;
-
 
 		public Task(ITaskManager parent)
 		{
 			Parent = parent;
 		}
 
-		
 		public Task(ITaskManager parent, int id)
 		{
 			Id = id;
@@ -36,9 +33,7 @@ namespace GanttTracker.TaskManager
 		
 		public string Description {	get;set; }
 
-		
 		public bool ActorPresent { get;set; }
-
 
 		public int ActorID
 		{
@@ -49,6 +44,7 @@ namespace GanttTracker.TaskManager
 					
 				return fActorID;
 			}
+
 			set
 			{
 				ActorPresent = true;
@@ -56,9 +52,7 @@ namespace GanttTracker.TaskManager
 			}
 		}
 
-
 		public bool StatePresent { get;set; }
-
 
 		public int StateID
 		{
@@ -76,22 +70,17 @@ namespace GanttTracker.TaskManager
 			}
 		}
 
-
 		public DateTime StartTime {	get;set; }
 
-
 		public DateTime EndTime	{ get;set; }
-
 
 		public TimeSpan EstimatedTime {	get;set; }
 		
 		#endregion
 	
-	
 		#region IManagerEntity Implementation
 		
 		public int Id {	get;set; }
-
 
 		public bool IsNew
 		{
@@ -101,7 +90,6 @@ namespace GanttTracker.TaskManager
 			}
 		}
 
-
 		public bool isUpdated
 		{
 			get
@@ -110,24 +98,19 @@ namespace GanttTracker.TaskManager
 			}
 		}
 
-			
 		public ITaskManager Parent { get;set; }
 
-
 		public string Comment {	get;set; }
-
 
 		public void BindData()
 		{
 			Parent.BindTask(this);
 		}
 
-			
 		public void Save()
 		{
 			Parent.UpdateTask(this);
 		}
-
 
 		public void Delete()
 		{

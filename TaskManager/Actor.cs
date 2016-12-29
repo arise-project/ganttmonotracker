@@ -1,10 +1,9 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
 // created on 18.11.2005 at 23:03
 using TaskManagerInterface;
-
 
 namespace GanttTracker.TaskManager
 {
@@ -15,7 +14,6 @@ namespace GanttTracker.TaskManager
 			Parent = parent;
 		}
 
-		
 		public Actor(ITaskManager parent, int id)
 		{
 			Id = id;
@@ -26,7 +24,6 @@ namespace GanttTracker.TaskManager
 		
 		public string Name { get;set; }
 
-
 		public string Email { get; set; }
 		
 		#endregion
@@ -35,7 +32,6 @@ namespace GanttTracker.TaskManager
 	
 		public int Id {	get;set; }
 
-
 		public bool IsNew
 		{
 			get
@@ -43,7 +39,6 @@ namespace GanttTracker.TaskManager
 				return (Id == 0);
 			}
 		}
-
 
 		public bool isUpdated
 		{

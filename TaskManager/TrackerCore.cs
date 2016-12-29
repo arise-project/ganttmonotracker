@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -24,16 +24,12 @@ namespace GanttTracker
 	{
 		private Window window;
 
-
 		private static TrackerCore fInstance;
-
 
 		private TrackerCore()
 		{
 		}
 		
-
-
 		public static TrackerCore Instance
 		{
 			get
@@ -43,9 +39,7 @@ namespace GanttTracker
 			}
 		}
 
-			
 		public IGuiTracker Tracker { get;set; }
-
 
 		public string Recent 
 		{
@@ -64,19 +58,15 @@ namespace GanttTracker
 		
 		public CoreState State { get;set; }
 
-
 		public ITaskManager TaskManager	{ get;set; }
 
-
 		public IStorageManager StorageManager { get;set; }
-
 
 		public IStateManager StateManager {	get;set; }
 		
 		#endregion
 
 		public string ProjectFileName {	get;set; }
-
 
 		public void BindProject()
 		{
@@ -95,6 +85,7 @@ namespace GanttTracker
 				TaskManager = mgr.CreateManager(ProjectFileName);
 				break;
 			}
+
 			StorageManager = TaskManager;
 			Tracker.TaskSource = TaskManager.TaskSource;
 			Tracker.ActorSource = TaskManager.ActorSource;
@@ -104,13 +95,11 @@ namespace GanttTracker
 			window = Tracker as Window;
 		}
 
-		
 		public void SaveProject()
 		{
 			StorageManager.Save();
 		}
 
-		
 		public void CreateActor()
 		{
 			IGuiActorView actorView = GuiFactory.CreateActorView(window);
@@ -126,7 +115,6 @@ namespace GanttTracker
 			}
 		}
 
-		
 		public void EditActor(int actorID)
 		{	
 			Actor actor = (Actor)TaskManager.GetActor(actorID);
@@ -142,7 +130,6 @@ namespace GanttTracker
 			}
 		}
 
-		
 		public void DeleteActor(int actorID)
 		{
 			Actor actor = (Actor)TaskManager.GetActor(actorID);
@@ -152,7 +139,6 @@ namespace GanttTracker
 			Tracker.BindActor();
 		}
 
-		
 		public void CreateTask()
 		{
 			IGuiTask taskView = null;
@@ -191,7 +177,6 @@ namespace GanttTracker
 				}
 		}
 
-
 		public void AssignTask(int taskID)
 		{
 			ViewTaskAssign assignView = null;
@@ -218,7 +203,6 @@ namespace GanttTracker
 			}
 		}
 
-		
 		public void UpdateTaskState(int taskID)
 		{
 			IGuiTask taskView = null;
@@ -250,7 +234,6 @@ namespace GanttTracker
 			}
 		}
 
-		
 		public void StateEdit()
 		{
 			ViewStateDialog stateView = null;
@@ -262,13 +245,10 @@ namespace GanttTracker
 			}
 		}
 
-		
 		public GanttDiagramm GanttPresentation { get;set; }
-
 
 		public AssigmentDiagramm AssigmentPresentation { get;set; }	
 
-				
 		public void DrawGantt(Gtk.DrawingArea drawingarea)
 		{
 			Gdk.Window parent = drawingarea.GdkWindow;
@@ -277,7 +257,6 @@ namespace GanttTracker
 			GanttPresentation.DateNowVisible = true;
 		}
 
-		
 		public void ShowAboutDialog()
 		{
 			AboutDialog aboutView = (AboutDialog)GuiFactory.CreateAboutDialog(window);

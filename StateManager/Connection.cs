@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -18,14 +18,12 @@ namespace GanttTracker.StateManager
 			Initialize(null);
 		}
 
-		
 		public Connection(ITaskManager parent)
 		{
 			IsNew = true;
 			Initialize(parent);
 		}
 
-		
 		public Connection(ITaskManager parent, int Id)
 		{
 			IsNew = false;
@@ -33,7 +31,6 @@ namespace GanttTracker.StateManager
 			Initialize(parent);
 		}
 
-		
 		void Initialize(ITaskManager parent)
 		{
 			Parent = parent;
@@ -43,10 +40,8 @@ namespace GanttTracker.StateManager
 		
 		public string Name { get; set; }
 
-		
 		public int MappingID { get;set; }
 
-		
 		public int StateID { get;set; }
 		
 		#endregion
@@ -55,9 +50,7 @@ namespace GanttTracker.StateManager
 		
 		public int Id {	get;set; }
 
-
 		public bool IsNew {	get;set; }
-
 
 		public bool isUpdated
 		{
@@ -72,22 +65,18 @@ namespace GanttTracker.StateManager
 			}
 		}
 
-
 		public ITaskManager Parent { get;set; }
-
 
 		public void BindData()
 		{
 			Parent.BindTaskStateConnection(this);
 		}
 
-
 		public void Save()
 		{
 			IsNew = false;
 			Parent.UpdateTaskStateConnection(this);
 		}
-
 
 		public void Delete()
 		{
@@ -98,12 +87,10 @@ namespace GanttTracker.StateManager
 
 		public void BindStateIn ()
 		{
-
 		}
 
 		public void BindStateOut ()
 		{
-
 		}
 
 		public System.Data.DataSet TaskStateSource { get; set; }

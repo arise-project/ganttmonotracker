@@ -35,8 +35,9 @@ namespace GanttMonoTracker
         }
 
         public GDriveCredentials Credentials { get; set; }
+
         public GDriveUploader Uploader { get; set; }
+
         public GDriveDownloader Downloader { get; set; }
     }
 }
-

@@ -82,6 +82,7 @@ namespace GanttMonoTracker.GuiPresentation
             {
                 stateView.IsMapped = false;
             }
+
             return stateView;
         }
 
@@ -101,12 +102,14 @@ namespace GanttMonoTracker.GuiPresentation
             {
                 return assignDialog;
             }
+
             assignDialog.ActorSource = core.TaskManager.ActorSource;
             assignDialog.BindActor();
             if (task.ActorPresent)
             {
                 assignDialog.ActorID = task.ActorID;
             }
+
             assignDialog.Title = "Assign Task";
             assignDialog.AssignAction = string.Format("Assign task {0} to Actor", task.Id);
 
@@ -125,6 +128,7 @@ namespace GanttMonoTracker.GuiPresentation
             {
                 return taskDialog;
             }
+
             taskDialog.BindActor();
             taskDialog.BindState();
 
@@ -141,6 +145,7 @@ namespace GanttMonoTracker.GuiPresentation
             {
                 return taskDialog;
             }
+
             if (task.StatePresent)
             {
                 State state = (State)core.TaskManager.GetTaskState(task.StateID);
@@ -148,11 +153,13 @@ namespace GanttMonoTracker.GuiPresentation
                 {
                     return taskDialog;
                 }
+
                 taskDialog.StateSource = core.TaskManager.GetTaskStateSource(state);
                 if(taskDialog.StateSource == null)
                 {
                     return taskDialog;
                 }
+
                 taskDialog.BindState();
                 taskDialog.StateID = task.StateID;
             }
@@ -163,6 +170,7 @@ namespace GanttMonoTracker.GuiPresentation
                 {
                     return taskDialog;
                 }
+
                 taskDialog.BindState();
             }
 
@@ -174,6 +182,7 @@ namespace GanttMonoTracker.GuiPresentation
             {
                 taskDialog.ActorID = task.ActorID;
             }
+
             taskDialog.Description = task.Description;
             taskDialog.EndTime = task.EndTime;
             taskDialog.StartTime = task.StartTime;

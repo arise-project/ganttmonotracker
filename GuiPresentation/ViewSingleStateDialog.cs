@@ -117,6 +117,7 @@ namespace GanttMonoTracker.GuiPresentation
                 {
                     throw new ManagementException(ExceptionType.NotAllowed,"State not mapped");
                 }
+
                 return fMappingID;
             }
 

@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -15,12 +15,10 @@ namespace GanttTracker.TaskManager.ManagerException
 	{
 		public T Key { get;set; }
 
-
 		public KeyNotFoundException(T key) : base (key.ToString()+" key not found")
 		{
 			Key = key;
 		}
-
 
 		public KeyNotFoundException(string message,T key) : base (message)
 		{

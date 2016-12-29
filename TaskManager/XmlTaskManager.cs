@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -20,23 +20,18 @@ namespace GanttTracker.TaskManager
 	{
 		string fConnectionString;
 
-
 		DataSet fGanttSource;
-
 
 		DataSet fAssigmentSource;
 
-
 		IStorageDealer fDealer;
 
-		
 		public XmlTaskManager(string connectionString)
 		{
 			fConnectionString  = connectionString;
 			Initialize();
 		}
 
-		
 		private void Initialize()
 		{
 			fDealer = new StorageDealer(fConnectionString,new CommandFactory());
@@ -44,6 +39,7 @@ namespace GanttTracker.TaskManager
 			{
 				throw new ManagementException(ExceptionType.NotAllowed,"Check connection failed for connection string " + fConnectionString);
 			}
+
 			fDealer.Load(); 
 		}
 	
@@ -64,7 +60,6 @@ namespace GanttTracker.TaskManager
 			}
 		}
 
-
 		public IManagerEntity GetTask(int id)
 		{
 			Task task = new Task(this, id);
@@ -72,7 +67,6 @@ namespace GanttTracker.TaskManager
 			
 			return task; 
 		}
-
 
 		public IManagerEntity CreateTask()
 		{
@@ -95,7 +89,6 @@ namespace GanttTracker.TaskManager
 			
 			return task; 
 		}
-
 
 		public void BindTask(IManagerEntity taskEntity)
 		{
@@ -128,7 +121,6 @@ namespace GanttTracker.TaskManager
 			if(task.Description == null)
 				task.Description = string.Empty;
 
-			 
 			task.StartTime = (DateTime)taskRow["StartTime"];
 			task.EndTime = (DateTime)taskRow["EndTime"];
 			if (!(taskRow["StateID"] is DBNull))
@@ -137,7 +129,6 @@ namespace GanttTracker.TaskManager
 				task.StatePresent = false;
 			task.EstimatedTime = task.EndTime.Subtract(task.StartTime);		
 		}
-
 
 		public void UpdateTask(IManagerEntity taskEntity)
 		{
@@ -165,7 +156,6 @@ namespace GanttTracker.TaskManager
 			fDealer.ExecuteNonQuery(updateTaskCommand);			
 		}
 
-
 		public bool IsUpdatedTask(IManagerEntity taskEntity)
 		{
 			Task newTask = (Task)taskEntity;
@@ -182,7 +172,6 @@ namespace GanttTracker.TaskManager
 			return result;
 		}
 
-		
 		public void DeleteTask(int id)
 		{
 			IStorageCommand deleteTaskCommand = fDealer.CommandFactory.GetDeleteCommand("Task");
@@ -214,7 +203,6 @@ namespace GanttTracker.TaskManager
 			}		
 		}
 
-		
 		public IManagerEntity GetActor(int id)
 		{			
 			Actor actor = new Actor(this, id);
@@ -223,7 +211,6 @@ namespace GanttTracker.TaskManager
 			return actor;
 		}
 
-		
 		public IManagerEntity CreateActor()
 		{
 			IStorageCommand createActorCommand = fDealer.CommandFactory.GetInsertCommand("Actor");
@@ -242,7 +229,6 @@ namespace GanttTracker.TaskManager
 			return actor;
 		}
 
-		
 		public void BindActor(IManagerEntity actorEntity)
 		{
 			Actor actor = (Actor)actorEntity;
@@ -269,7 +255,6 @@ namespace GanttTracker.TaskManager
 			actor.Email = actorRow["Email"].ToString();		
 		}
 
-		
 		public void UpdateActor(IManagerEntity actorEntity)
 		{
 			Actor actor = (Actor)actorEntity;
@@ -291,7 +276,6 @@ namespace GanttTracker.TaskManager
 			fDealer.ExecuteNonQuery(updateActorCommand);
 		}
 
-
 		public bool IsUpdatedActor(IManagerEntity actorEntity)
 		{
 			Actor newActor = (Actor)actorEntity;
@@ -306,7 +290,6 @@ namespace GanttTracker.TaskManager
 			return result;
 		}
 
-		
 		public void DeleteActor(int id)
 		{
 			IStorageCommand deleteActorCommand = fDealer.CommandFactory.GetDeleteCommand("Actor");
@@ -332,7 +315,6 @@ namespace GanttTracker.TaskManager
 			}
 		}
 
-		
 		void CalculateGanttSource()
 		{
 			ActorSource.Tables ["Actor"].AcceptChanges ();
@@ -355,7 +337,6 @@ namespace GanttTracker.TaskManager
 			fGanttSource.Tables["DataRange"].Rows.Add(rangeRow);						
 		}
 
-		
 		public DateTime GanttFirstDate
 		{
 			get
@@ -383,17 +364,15 @@ namespace GanttTracker.TaskManager
 					if (firstDate > task.StartTime)
 						firstDate = task.StartTime;
 				}
+
 				return firstDate; 
-								 
 			}
 			
 			set
 			{
 				throw new ManagementException(ExceptionType.NotAllowed,"Update for gantt min date not implemented");
 			}
-			
 		}
-
 
 		public DateTime GanttLastDate
 		{
@@ -422,6 +401,7 @@ namespace GanttTracker.TaskManager
 					if (lastDate < task.EndTime)
 						lastDate = task.EndTime;
 				}
+
 				return lastDate;
 			}
 			
@@ -444,7 +424,6 @@ namespace GanttTracker.TaskManager
 			}
 		}
 
-		
 		void CalculateAssigmentSource()
 		{
 			fAssigmentSource = new DataSet("AssigmentSource");
@@ -505,7 +484,6 @@ namespace GanttTracker.TaskManager
 								assigmentRow["TaskCount"] = 1;
 								assigmentRow["Date"] = day;
 								fAssigmentSource.Tables["AssigmentSource"].Rows.Add(assigmentRow);
-							
 							}
 
 							var stateRows = fAssigmentSource.Tables ["StateRange"].Select ("AssigmentID = " + currentAssignmentId + " and StateID = " + task.StateID);
@@ -534,7 +512,6 @@ namespace GanttTracker.TaskManager
 //				Console.WriteLine("{0} {1} {2} ",row["ActorID"],row["TaskCount"],row["Date"]);
 //			}
 //			throw new ImplementationException();
-
 		}
 		
 		#endregion
@@ -556,7 +533,6 @@ namespace GanttTracker.TaskManager
 			}
 		}
 
-		
 		public DataSet GetInitialTaskStateSource()
 		{
 			DataSet stateSource = new DataSet("TaskStateSource");
@@ -564,7 +540,6 @@ namespace GanttTracker.TaskManager
 			return stateSource;
 		}
 
-		
 		public DataSet GetTaskStateSource(IManagerEntity state)
 		{
 			DataSet stateSource = new DataSet("TaskStateSource");
@@ -572,7 +547,6 @@ namespace GanttTracker.TaskManager
 			return stateSource;
 		}
 
-		
 		public IManagerEntity GetTaskState(int id)
 		{
 			State state = new State(this, id);
@@ -581,7 +555,6 @@ namespace GanttTracker.TaskManager
 			return state;
 		}
 
-		
 		public IManagerEntity CreateTaskState()
 		{
 			IStorageCommand createTaskStateCommand = fDealer.CommandFactory.GetInsertCommand("TaskState");
@@ -599,6 +572,7 @@ namespace GanttTracker.TaskManager
 			{
 				if ( !(row["MappingID"] is DBNull) && (int)row["MappingID"] > mappintID) mappintID = (int)row["MappingID"]; 
 			}
+
 			mappintID++;
 			values.Add("MappingID",mappintID);
 					
@@ -609,7 +583,6 @@ namespace GanttTracker.TaskManager
 			BindTaskState(state);
 			return state;
 		}
-
 
 		public void BindTaskState(IManagerEntity stateEntity)
 		{
@@ -649,6 +622,7 @@ namespace GanttTracker.TaskManager
 				connectionsPresent = false;
 				state.IsMapped = false;
 			}
+
 			if (connectionsPresent)
 			{
 				IStorageCommand stateConnectionCommand = fDealer.CommandFactory.GetSelectCommand("TaskStateConnection");
@@ -706,7 +680,6 @@ namespace GanttTracker.TaskManager
 		}
 		*/
 
-
 		public void UpdateTaskState(IManagerEntity stateEntity)
 		{
 			State state = (State)stateEntity;
@@ -742,7 +715,6 @@ namespace GanttTracker.TaskManager
 			//store fConnections
 		}
 
-
 		public bool IsUpdatedTaskState(IManagerEntity stateEntity)
 		{
 			State newState = (State)stateEntity;
@@ -760,6 +732,7 @@ namespace GanttTracker.TaskManager
 			{
 				result = result && 	newState.IsMapped == oldState.IsMapped;
 			}
+
 			foreach(int stateID in newState.Connections.Keys)
 			{
 				result = result && oldState.Connections.ContainsKey(stateID) && oldState.Connections[stateID] == newState.Connections[stateID]; 
@@ -768,7 +741,6 @@ namespace GanttTracker.TaskManager
 			return result;
 		}
 
-		
 		public void DeleteTaskState(int id)
 		{
 			IStorageCommand deleteStateCommand = fDealer.CommandFactory.GetDeleteCommand("TaskState");
@@ -800,7 +772,6 @@ namespace GanttTracker.TaskManager
 			}
 		}
 
-		
 		public IManagerEntity GetTaskStateConnection(int id)
 		{
 			Connection connection = new Connection(this, id);
@@ -809,7 +780,6 @@ namespace GanttTracker.TaskManager
 			return connection;
 		}
 
-		
 		public IManagerEntity CreateTaskStateConnection(IManagerEntity stateEntity, IManagerEntity connectedStateEntity)
 		{
 			IStorageCommand createTaskStateConnectionCommand = fDealer.CommandFactory.GetInsertCommand("TaskStateConnection");
@@ -828,11 +798,12 @@ namespace GanttTracker.TaskManager
 				{
 					if ( !(row["MappingID"] is DBNull) && (int)row["MappingID"] > mappintID) mappintID = (int)row["MappingID"]; 
 				}
+
 				mappintID++;
 				state.MappingID = mappintID;
 				state.Save();
-				
 			}	
+
 			values.Add("MappingID",state.MappingID);
 			values.Add("StateID",connectedState.Id);
 			
@@ -843,7 +814,6 @@ namespace GanttTracker.TaskManager
 			return connection;
 		}
 
-		
 		public void BindTaskStateConnection(IManagerEntity stateConnectionEntity)
 		{
 			Connection connection = (Connection)stateConnectionEntity;
@@ -870,7 +840,6 @@ namespace GanttTracker.TaskManager
 			connection.StateID = (int)connectionRow["StateID"];			
 		}
 
-		
 		public void UpdateTaskStateConnection(IManagerEntity stateConnectionEntity)
 		{
 			Connection connection = (Connection)stateConnectionEntity;
@@ -895,7 +864,6 @@ namespace GanttTracker.TaskManager
 			//store fConnections
 		}
 
-		
 		public bool isUpdatedTaskStateConnection(IManagerEntity stateConnectionEntity)
 		{
 			Connection newConnection = (Connection)stateConnectionEntity;
@@ -911,7 +879,6 @@ namespace GanttTracker.TaskManager
 			return result;
 		}
 
-		
 		public void DeleteTaskStateConnection(int id)
 		{
 			IStorageCommand deleteStateConnectionCommand = fDealer.CommandFactory.GetDeleteCommand("TaskStateConnection");
@@ -943,7 +910,6 @@ namespace GanttTracker.TaskManager
 			}
 		}
 
-
 		/*
 		public IManagerEntity GetComment(int id)
 		{
@@ -951,7 +917,6 @@ namespace GanttTracker.TaskManager
 			BindComment(comment);			
 			return comment;
 		}*/
-
 
 		public IManagerEntity CreateComment(IManagerEntity commentedEntity)
 		{
@@ -970,13 +935,13 @@ namespace GanttTracker.TaskManager
 				values.Add("EntryID",DBNull.Value);
 			
 			createCommentCommand.SetParam("Values",values);			
+
 			//int id = (int)fDealer.ExecuteScalar(createCommentCommand);					 
 			//Comment comment = new Comment(this, id);
 			//BindComment(comment);
 			return null;
 		}
 				
-
 		/*
 		public void BindComment(IManagerEntity commentEntity)
 		{
@@ -1060,7 +1025,6 @@ namespace GanttTracker.TaskManager
 		}
 		*/
 
-
 		public void DeleteComment(int id)
 		{
 			IStorageCommand deleteCommentCommand = fDealer.CommandFactory.GetDeleteCommand("Comment");
@@ -1081,7 +1045,6 @@ namespace GanttTracker.TaskManager
 		{
 			fDealer.Save();
 		}
-
 
 		public void Update(IStorageDealer updateDealer)
 		{

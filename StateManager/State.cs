@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -23,13 +23,11 @@ namespace GanttTracker.StateManager
 			Initialize(null);
 		}
 
-
 		public State(ITaskManager parent)
 		{
 			IsNew = true;
 			Initialize(parent);
 		}
-
 
 		public State(ITaskManager parent, int Id)
 		{
@@ -37,7 +35,6 @@ namespace GanttTracker.StateManager
 			Initialize(parent);
 			this.Id = Id;
 		}
-
 
 		private void Initialize(ITaskManager parent)
 		{
@@ -49,16 +46,12 @@ namespace GanttTracker.StateManager
 		
 		public string Name { get;set; }
 
-
 		public byte ColorRed {	get;set; }
-
 
 		public byte ColorGreen { get;set; }
 
-
 		public byte ColorBlue {	get;set; }
 		
-
 		public int MappingID
 		{
 			get
@@ -67,6 +60,7 @@ namespace GanttTracker.StateManager
 					throw new ManagementException(ExceptionType.NotAllowed, "State not mapped");
 				return fMappingID;
 			}
+
 			set
 			{
 				IsMapped = true;
@@ -74,13 +68,10 @@ namespace GanttTracker.StateManager
 			}
 		}
 
-		
 		public bool IsMapped { get;set; }
 
-		
 		public Hashtable Connections { get;set; }
 
-		
 		public void Connect(IManagerEntity stateEntry, string connectionName)
 		{
 			State state = (State)stateEntry;
@@ -92,7 +83,6 @@ namespace GanttTracker.StateManager
 				throw new ManagementException(ExceptionType.NotRequired , "Connection to state with ID "+stateEntry.Id+" already added");
 		}
 
-		
 		public void Disconnect(IManagerEntity stateEntry)
 		{
 			if (Connections.ContainsKey(stateEntry.Id))
@@ -103,13 +93,11 @@ namespace GanttTracker.StateManager
 				throw new KeyNotFoundException<int>(stateEntry.Id);
 		}
 
-		
 		public bool IsConnected(IManagerEntity stateEntry)
 		{
 			return Connections.ContainsKey(stateEntry.Id);
 		}
 
-		
 		public void ClearConnections()
 		{
 			Connections.Clear();
@@ -121,9 +109,7 @@ namespace GanttTracker.StateManager
 		
 		public int Id {	get;set; }
 
-
 		public bool IsNew {	get;set; }
-
 
 		public bool isUpdated
 		{
@@ -138,22 +124,18 @@ namespace GanttTracker.StateManager
 			}
 		}
 
-
 		public ITaskManager Parent { get;set; }
-
 
 		public void BindData()
 		{
 			Parent.BindTaskState(this);
 		}
 
-				
 		public void Save()
 		{
 			IsNew = false;
 			Parent.UpdateTaskState(this);
 		}
-
 
 		public void Delete()
 		{

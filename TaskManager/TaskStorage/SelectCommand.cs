@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -17,13 +17,11 @@ namespace GanttTracker.TaskManager.TaskStorage
 	{
 		Hashtable fParams = new Hashtable();
 
-
 		public SelectCommand(DataSet source,string entityName,Hashtable rules)
 		{
 			Initialize(source,entityName,rules);
 		}
 		
-
 		private void Initialize(DataSet source,string entityName,Hashtable rules)
 		{
 			fParams.Add("Source",source);
@@ -31,7 +29,6 @@ namespace GanttTracker.TaskManager.TaskStorage
 			fParams.Add("Rules",rules);
 		}
 
-		
 		public void SetParam(object key, object value)
 		{
 			if (fParams.ContainsKey(key))
@@ -40,7 +37,6 @@ namespace GanttTracker.TaskManager.TaskStorage
 				fParams.Add(key,value);
 		}
 
-		
 		public object GetParam(object key)
 		{
 			if (fParams.ContainsKey(key))
@@ -49,13 +45,11 @@ namespace GanttTracker.TaskManager.TaskStorage
 				throw new KeyNotFoundException<object>(key);
 		}
 
-		
 		public object Contains(object key)
 		{
 			return fParams.ContainsKey(key);
 		}
 
-		
 		public object [] GetParamKeys()
 		{
 			ArrayList keys = new ArrayList();
@@ -63,10 +57,10 @@ namespace GanttTracker.TaskManager.TaskStorage
 			{
 				keys.Add(key);
 			} 
+
 			return (object [])keys.ToArray(typeof(object));
 		}
 
-		
 		public void CheckParams()
 		{
 			if (!fParams.ContainsKey("Source"))
@@ -77,7 +71,6 @@ namespace GanttTracker.TaskManager.TaskStorage
 				throw new KeyNotFoundException<string>("Rules");
 		}
 
-						
 		public object Execute()
 		{
 			CheckParams();
@@ -104,6 +97,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 			{
 				rule += rules[key].ToString() + " ";
 			}
+
 			if (rule.Length > 1)
 				rule = rule.Substring(0,rule.Length - 1);
 			

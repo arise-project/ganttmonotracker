@@ -80,6 +80,7 @@ namespace GanttMonoTracker.GuiPresentation
                 {
                     throw new ManagementException(ExceptionType.NotAllowed,"Actor not present");
                 }
+
                 return fActorID;
             }
 
@@ -90,6 +91,7 @@ namespace GanttMonoTracker.GuiPresentation
                 {
                     throw new ManagementException(ExceptionType.NotAllowed,"Bind combo before with BindActor method");
                 }
+
                 int index = 0;
                 foreach(DataRow row in ActorSource.Tables["Actor"].Rows)
                 {
@@ -136,7 +138,6 @@ namespace GanttMonoTracker.GuiPresentation
         {
             get
             {
-
                 return string.IsNullOrWhiteSpace(fComment) ? fDescription : fDescription + Environment.NewLine + fComment;
             }
 
@@ -144,7 +145,6 @@ namespace GanttMonoTracker.GuiPresentation
             {
                 fDescription = value;
                 tvDescription.Buffer.Text = value;
-
             }
         }
 
@@ -195,6 +195,7 @@ namespace GanttMonoTracker.GuiPresentation
                 {
                     throw new ManagementException(ExceptionType.NotAllowed,"Bind combo before with BindState method");
                 }
+
                 int index = 0;
                 foreach(DataRow row in StateSource.Tables["TaskState"].Rows)
                 {
@@ -249,6 +250,7 @@ namespace GanttMonoTracker.GuiPresentation
             cbActor.Model = fActorStore;
             CellRendererText actorText = new CellRendererText();
             actorText.Style = Pango.Style.Oblique;
+
             //actorText.BackgroundGdk = new Gdk.Color(0x63,0,0);
             cbActor.PackStart(actorText,true);
             cbActor.AddAttribute(actorText,"text",1);

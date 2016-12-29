@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -12,7 +12,6 @@ namespace GanttMonoTracker
 	public static class GdkPalette
 	{
 		public static Gdk.GC CurrentGC { get;set; }
-
 
 		public static Gdk.GC InitColor(Drawable area, ColorEnum value)
 		{
@@ -34,7 +33,6 @@ namespace GanttMonoTracker
 			}
 		}
 
-
 		public static void DestroyColor()
 		{
 			if(CurrentGC != null)
@@ -43,7 +41,6 @@ namespace GanttMonoTracker
 				CurrentGC = null;
 			}
 		}
-
 
 		/// <summary>
 		/// Get color by rgb abriviature.
@@ -71,8 +68,8 @@ namespace GanttMonoTracker
 				// something went wrong, then use neutral black color
 				color = new Gdk.Color (0, 0, 0);
 			}
+
 			return color;
 		}
 	}
 }
-

@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -21,7 +21,6 @@ namespace GanttTracker.StateManager
 			Initialize(guiCore, controledGui);
 		}
 		
-
 		void Initialize(IGuiCore guiCore, IGuiState controledGui)
 		{
 			StateManager = this;
@@ -35,12 +34,9 @@ namespace GanttTracker.StateManager
 		
 		public CoreState State { get;set; }
 
-
 		public ITaskManager TaskManager { get;set; }
 
-
 		public IStorageManager StorageManager {	get;set; }
-
 
 		public IStateManager StateManager {	get;set; }
 		
@@ -48,9 +44,7 @@ namespace GanttTracker.StateManager
 		
 		public Window MainForm { get;set; }
 
-		
 		public IGuiState ControledGui {	get;set; }
-
 
 		public void CreateTaskState()
 		{
@@ -71,7 +65,6 @@ namespace GanttTracker.StateManager
 			}
 		}
 
-
 		public void EditTaskState(int stateID)
 		{
 			State state = (State)TaskManager.GetTaskState(stateID); 
@@ -91,14 +84,12 @@ namespace GanttTracker.StateManager
 			}
 		}
 
-
 		public void DeleteTaskState(int stateID)
 		{			
 			TaskManager.DeleteTaskState(stateID);
 			ControledGui.Source =	TaskManager.TaskStateSource;
 			ControledGui.BindStates();
 		}
-
 
 		public void CreateTaskStateConnection(int stateID)
 		{
@@ -116,12 +107,10 @@ namespace GanttTracker.StateManager
 			}
 		}
 
-
 		public void EditTaskStateConnection(int connectionID)
 		{
 		}
 
-		 
 		public void DeleteTaskStateConnection(int connectionID)
 		{
 		} 

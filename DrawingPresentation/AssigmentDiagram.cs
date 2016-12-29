@@ -203,7 +203,6 @@ namespace GanttMonoTracker.DrawingPresentation
                             this.GdkWindow.DrawLayout(TaskLabelGC,
                                                       offset,
                                                       (int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,layout);
-
                         }
                     }
 
@@ -246,7 +245,6 @@ namespace GanttMonoTracker.DrawingPresentation
             AxisGC.Dispose ();
 
             //DrawDateAxis
-
             var labelDate1 = firstDate;
             int offset1 = fBorderMarginH;
             for (int i = 0; i < deltaSpan.Days; i++)

@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -19,12 +19,10 @@ namespace GanttTracker.TaskManager.ManagerException
 			Type = type;
 		}
 
-
 		public ManagementException(ExceptionType type, string message) : base (message) 
 		{
 			Type = type;
 		}
-
 
 		public ExceptionType Type { get; private set; }
 	}

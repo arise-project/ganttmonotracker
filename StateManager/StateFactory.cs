@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -14,14 +14,12 @@ namespace GanttTracker.StateManager
 	{
 		public static ITaskManager Parent { get; set; }
 
-
 		public static IManagerEntity CreateTaskState()
 		{
 			if (Parent == null)
 				throw new ManagementException(ExceptionType.ValidationFailed, "Parent no set to instance for factory"); 
 			return (State)Parent.CreateTaskState();
 		}
-
 
 //		public IManagerEntity CreateTaskState(string connectionName, IManagerEntity connectedStateEntity)
 //		{

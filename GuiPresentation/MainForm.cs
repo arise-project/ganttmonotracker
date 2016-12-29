@@ -191,6 +191,7 @@ namespace GanttMonoTracker.GuiPresentation
             catch (Exception ex)
             {
                 var m = ex.Message;
+
                 //todo: fix ui exception
             }
         }
@@ -232,6 +233,7 @@ namespace GanttMonoTracker.GuiPresentation
             {
                 throw new KeyNotFoundException<string>("miCreateProject");
             }
+
             miOpenProject.Activated += new EventHandler(OnOpenProject);
             miRecentProject.Activated += new EventHandler(OnRecentProject);
             miSaveProject.Activated += new EventHandler(OnSaveProject);
@@ -260,8 +262,8 @@ namespace GanttMonoTracker.GuiPresentation
             tvActorTree.HeadersVisible = true;
             tvActorTree.AppendColumn("Name",new CellRendererText(), "text", 1);
             tvActorTree.AppendColumn("Email",new CellRendererText(), "text", 2);
-            //tvActorTree.AppendColumn("Id",new CellRendererText(), "text", 2).Visible = false;
 
+            //tvActorTree.AppendColumn("Id",new CellRendererText(), "text", 2).Visible = false;
             tvTaskTree.HeadersVisible = true;
             tvTaskTree.AppendColumn("Id",new CellRendererText(), "text", 0);
             tvTaskTree.AppendColumn("Description",new CellRendererText(), "text", 1);
@@ -283,7 +285,6 @@ namespace GanttMonoTracker.GuiPresentation
 
             for (int i = 2; i < 5; i++)
             {
-
                 fTaskStore.SetSortFunc(i, delegate(TreeModel model, TreeIter a, TreeIter b)
                 {
                     string s1 = model.GetValue (a, 0).ToString ();
@@ -443,6 +444,7 @@ namespace GanttMonoTracker.GuiPresentation
 
                     TrackerCore.Instance.BindProject();
                     File.WriteAllText("recent.txt".GetPath (), TrackerCore.Instance.ProjectFileName);
+
                     //backup file.
                     File.AppendAllText(TrackerCore.Instance.ProjectFileName + ".backup",
                                        File.ReadAllText(TrackerCore.Instance.ProjectFileName));

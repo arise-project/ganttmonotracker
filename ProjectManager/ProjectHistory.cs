@@ -1,4 +1,4 @@
-//author:Eugene Pirogov
+﻿//author:Eugene Pirogov
 //email:eugene.intalk@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
@@ -19,7 +19,6 @@ namespace GanttTracker.ProjectManager
 			Projects = new Hashtable();
 		}
 		
-
 		public static ProjectHistory Instance
 		{
 			get
@@ -30,9 +29,7 @@ namespace GanttTracker.ProjectManager
 			}	
 		}
 
-		
 		public Hashtable Projects {	get;set; }
-
 
 		public void SaveProject(string fileName)
 		{
@@ -48,6 +45,7 @@ namespace GanttTracker.ProjectManager
 					projectTeg.SetAttribute("name",(string)Projects[path]);
 					mainTeg.AppendChild(projectTeg);
 				}
+
 				doc.AppendChild(mainTeg);
 				StreamWriter s = new StreamWriter(fileName); 
 				doc.Save(s.BaseStream);
@@ -55,7 +53,6 @@ namespace GanttTracker.ProjectManager
 			}
 		}
 
-		
 		public void OpenProject(string fileName)
 		{
 			if (Projects != null)

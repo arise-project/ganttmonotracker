@@ -24,4 +24,3 @@ namespace GanttMonoTracker
         public string[] Scopes { get; set; }
 	}
 }
-

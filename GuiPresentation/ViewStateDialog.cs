@@ -135,6 +135,7 @@ namespace GanttMonoTracker.GuiPresentation
                 {
                     throw new ManagementException(ExceptionType.NotAllowed,"State Search Dictionary no set to instance of object");
                 }
+
                 if (!StateSearchDictionary.ContainsKey(row["Name"]))
                 {
                     StateSearchDictionary.Add(row["Name"],row["Name"]);
@@ -152,6 +153,7 @@ namespace GanttMonoTracker.GuiPresentation
             {
                 throw new ManagementException(ExceptionType.NotAllowed,"State Search Dictionary no set to instance of object");
             }
+
             foreach (object searchKey in StateSearchDictionary.Keys)
             {
                 fStateSearchDictionaryStore.AppendValues(searchKey);
@@ -252,6 +254,7 @@ namespace GanttMonoTracker.GuiPresentation
 
             BindStateSearchDictionary();
             BindStates();
+
             //BindStateSearchCompletion();
         }
 
@@ -382,6 +385,7 @@ namespace GanttMonoTracker.GuiPresentation
             {
                 Source = stateCore.TaskManager.TaskStateSource;
             }
+
             BindStates();
         }
     }

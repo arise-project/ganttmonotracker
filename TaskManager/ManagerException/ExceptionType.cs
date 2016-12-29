@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace GanttMonoTracker
 {
@@ -6,11 +6,8 @@ namespace GanttMonoTracker
 	{
 		NotAllowed,
 
-
 		NotRequired,
-
 
 		ValidationFailed
 	}
 }
-
