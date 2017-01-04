@@ -50,8 +50,8 @@ namespace GanttMonoTracker.GuiPresentation
         TreeStore fActorStore = new TreeStore(typeof(int),typeof(string),typeof(string));
         FileSelection fFileSelection; // todo : FileChooserWidget
 
-        // id, description, start time, end time, actor, status
-        TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string),typeof(string), typeof(string),typeof(string),typeof(string));
+        //                                   id,          status          description,   start time,     end time,      actor,         
+        TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string), typeof(string),typeof(string), typeof(string),typeof(string));
         [Glade.WidgetAttribute]
         Gtk.MenuItem miAbout;
         [Glade.WidgetAttribute]
@@ -181,11 +181,11 @@ namespace GanttMonoTracker.GuiPresentation
 
                     TreeIter itemNode = fTaskStore.AppendNode();
                     fTaskStore.SetValue(itemNode,0,row["Id"]);
-                    fTaskStore.SetValue(itemNode,1,row["Description"]);
-                    fTaskStore.SetValue(itemNode,2,((DateTime)row["StartTime"]).ToShortDateString());
-                    fTaskStore.SetValue(itemNode,3,((DateTime)row["EndTime"]).ToShortDateString());
-                    fTaskStore.SetValue(itemNode,4,actorName);
-                    fTaskStore.SetValue(itemNode,5,stateName);
+					fTaskStore.SetValue(itemNode,1, stateName);
+                    fTaskStore.SetValue(itemNode,2,row["Description"]);
+                    fTaskStore.SetValue(itemNode,3,((DateTime)row["StartTime"]).ToShortDateString());
+                    fTaskStore.SetValue(itemNode,4,((DateTime)row["EndTime"]).ToShortDateString());
+                    fTaskStore.SetValue(itemNode,5,actorName);                    
                 }
             }
             catch (Exception ex)
@@ -266,11 +266,11 @@ namespace GanttMonoTracker.GuiPresentation
             //tvActorTree.AppendColumn("Id",new CellRendererText(), "text", 2).Visible = false;
             tvTaskTree.HeadersVisible = true;
             tvTaskTree.AppendColumn("Id",new CellRendererText(), "text", 0);
-            tvTaskTree.AppendColumn("Description",new CellRendererText(), "text", 1);
-            tvTaskTree.AppendColumn("Start Time",new CellRendererText(), "text", 2);
-            tvTaskTree.AppendColumn("End Time",new CellRendererText(), "text", 3);
-            tvTaskTree.AppendColumn("Actor",new CellRendererText(), "text", 4);
-            tvTaskTree.AppendColumn("State",new CellRendererText(), "text", 5);
+			tvTaskTree.AppendColumn("State", new CellRendererText(), "text", 1);
+            tvTaskTree.AppendColumn("Description",new CellRendererText(), "text", 2);
+            tvTaskTree.AppendColumn("Start Time",new CellRendererText(), "text", 3);
+            tvTaskTree.AppendColumn("End Time",new CellRendererText(), "text", 4);
+            tvTaskTree.AppendColumn("Actor",new CellRendererText(), "text", 5);
 
             tvTaskTree.ButtonPressEvent+= HandleButtonPressEvent;
 

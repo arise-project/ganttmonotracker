@@ -13,7 +13,7 @@
       <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" line="77" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\LogoForm.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\ViewTaskDialog.glade">
     <Files>
       <File FileName="TaskManager\Task.cs" Line="122" Column="2" />
       <File FileName="TaskManager\Project.cs" Line="40" Column="10" />
@@ -27,7 +27,10 @@
       <File FileName="TaskManager\Actor.cs" Line="58" Column="10" />
       <File FileName="StateManager\Connection.cs" Line="79" Column="4" />
       <File FileName="StateManager\State.cs" Line="145" Column="10" />
-      <File FileName="GuiPresentation\LogoForm.cs" Line="148" Column="2" />
+      <File FileName="GuiPresentation\LogoForm.cs" Line="115" Column="68" />
+      <File FileName="GuiPresentation\MainForm.glade" Line="600" Column="1" />
+      <File FileName="GuiPresentation\MainForm.cs" Line="271" Column="38" />
+      <File FileName="GuiPresentation\ViewTaskDialog.glade" Line="280" Column="43" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
