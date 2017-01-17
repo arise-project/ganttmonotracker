@@ -5,6 +5,7 @@
 // created on 22.01.2006 at 2:18
 
 using System;
+using System.Configuration;
 using Gtk;
 
 using GanttTracker.TaskManager.ManagerException;
@@ -16,9 +17,12 @@ namespace GanttTracker.StateManager
 {
 	public class StateCore : IGuiCore, IStateManager
 	{
+		private bool autosave;
+
 		public StateCore(IGuiCore guiCore, IGuiState controledGui)
 		{
 			Initialize(guiCore, controledGui);
+			autosave = bool.TryParse(ConfigurationManager.AppSettings["autosave"], out autosave) || autosave;
 		}
 		
 		void Initialize(IGuiCore guiCore, IGuiState controledGui)
@@ -62,6 +66,10 @@ namespace GanttTracker.StateManager
 				newState.Save();
 				ControledGui.Source =	TaskManager.TaskStateSource;
 				ControledGui.BindStates();
+				if (autosave)
+				{
+					StorageManager.Save();
+				}
 			}
 		}
 
@@ -81,6 +89,10 @@ namespace GanttTracker.StateManager
 				state.Save();
 				ControledGui.Source =	TaskManager.TaskStateSource;
 				ControledGui.BindStates();
+				if (autosave)
+				{
+					StorageManager.Save();
+				}
 			}
 		}
 
@@ -104,6 +116,10 @@ namespace GanttTracker.StateManager
 				connection.Name = connectionView.Name;
 				connection.Save();
 				ControledGui.BindConnections(state);
+				if (autosave)
+				{
+					StorageManager.Save();
+				}
 			}
 		}
 

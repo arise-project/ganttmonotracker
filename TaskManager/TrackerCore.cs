@@ -5,6 +5,7 @@
 // created on 10.11.2005 at 1:25
 
 using System;
+using System.Configuration;
 using System.IO;
 using System.Data;
 using Gtk;
@@ -25,9 +26,11 @@ namespace GanttTracker
 		private Window window;
 
 		private static TrackerCore fInstance;
+		private bool autosave;                
 
 		private TrackerCore()
 		{
+			autosave = bool.TryParse(ConfigurationManager.AppSettings["autosave"], out autosave) || autosave;
 		}
 		
 		public static TrackerCore Instance
@@ -112,6 +115,10 @@ namespace GanttTracker
 				newActor.Save();
 				Tracker.ActorSource = TaskManager.ActorSource;
 				Tracker.BindActor();
+				if (autosave)
+				{
+					SaveProject();
+				}
 			}
 		}
 
@@ -127,6 +134,10 @@ namespace GanttTracker
 				actor.Save();
 				Tracker.ActorSource = TaskManager.ActorSource;
 				Tracker.BindActor();
+				if (autosave)
+				{
+					SaveProject();
+				}
 			}
 		}
 
@@ -174,6 +185,10 @@ namespace GanttTracker
 					
 					Tracker.TaskSource = TaskManager.TaskSource;
 					Tracker.BindTask();
+					if (autosave)
+					{
+						SaveProject();
+					}
 				}
 		}
 
@@ -200,6 +215,10 @@ namespace GanttTracker
 				task.Save();
 				Tracker.TaskSource = TaskManager.TaskSource;
 				Tracker.BindTask();
+				if (autosave)
+				{
+					SaveProject();
+				}
 			}
 		}
 
@@ -231,6 +250,10 @@ namespace GanttTracker
 				task.Save();
 				Tracker.TaskSource = TaskManager.TaskSource;
 				Tracker.BindTask();
+				if (autosave)
+				{
+					SaveProject();
+				}
 			}
 		}
 
