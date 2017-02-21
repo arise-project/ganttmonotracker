@@ -13,7 +13,7 @@
       <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" line="77" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\MainForm.glade">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\ViewTaskDialog.glade">
     <Files>
       <File FileName="TaskManager\Task.cs" Line="122" Column="2" />
       <File FileName="TaskManager\Project.cs" Line="40" Column="10" />
@@ -28,13 +28,14 @@
       <File FileName="StateManager\Connection.cs" Line="79" Column="4" />
       <File FileName="StateManager\State.cs" Line="145" Column="10" />
       <File FileName="GuiPresentation\LogoForm.cs" Line="115" Column="68" />
-      <File FileName="GuiPresentation\MainForm.glade" Line="295" Column="3" />
+      <File FileName="GuiPresentation\MainForm.glade" Line="423" Column="11" />
       <File FileName="GuiPresentation\MainForm.cs" Line="271" Column="38" />
-      <File FileName="GuiPresentation\ViewTaskDialog.glade" Line="280" Column="43" />
+      <File FileName="GuiPresentation\ViewTaskDialog.glade" Line="21" Column="3" />
       <File FileName="TaskManager\TrackerCore.cs" Line="34" Column="4" />
       <File FileName="app.config" Line="4" Column="21" />
       <File FileName="Main.cs" Line="62" Column="18" />
       <File FileName="StateManager\StateCore.cs" Line="135" Column="1" />
+      <File FileName="GuiPresentation\ViewTaskDialog.cs" Line="59" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
