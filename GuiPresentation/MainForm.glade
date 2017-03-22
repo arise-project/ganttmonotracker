@@ -232,6 +232,15 @@
 		      <property name="label" translatable="yes">Update from Xml</property>
 		      <property name="use_underline">True</property>
 		    </widget>
+		   
+		  </child>
+		  <child>
+		    <widget class="GtkMenuItem" id="miExportToHtml">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Export To Html</property>
+		      <property name="use_underline">True</property>
+		    </widget>
+		   
 		  </child>
 		</widget>
 	      </child>

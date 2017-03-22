@@ -11,559 +11,571 @@
 
 namespace GanttMonoTracker.GuiPresentation
 {
-    using System;
-    using System.Configuration;
-    using System.Data;
-    using System.IO;
-    using System.Linq;
+	using System;
+	using System.Configuration;
+	using System.Data;
+	using System.IO;
+	using System.Linq;
 
-    using GanttMonoTracker.DrawingPresentation;
-    using GanttMonoTracker.ExceptionPresentation;
+	using GanttMonoTracker.DrawingPresentation;
+	using GanttMonoTracker.ExceptionPresentation;
 
-    using GanttTracker;
-    using GanttTracker.TaskManager.ManagerException;
+	using GanttTracker;
+	using GanttTracker.TaskManager.ManagerException;
 
-    using Gdk;
+	using Gdk;
 
-    using Glade;
+	using Glade;
 
-    using Gtk;
+	using Gtk;
 
-    using Pango;
+	using Pango;
 
-    using TaskManagerInterface;
+	using TaskManagerInterface;
 
-    public class MainForm : Gtk.Window, IGuiTracker
-    {
-        [Glade.WidgetAttribute]
-        Gtk.Button btnAssignTask;
-        [Glade.WidgetAttribute]
-        Gtk.Button btnChangeTask;
-        [Glade.WidgetAttribute]
-        Gtk.Button btnCreateTask;
-        [Glade.WidgetAttribute]
-        Gtk.Button btnSearchTask;
-        Gtk.DrawingArea drwAssigment;
-        Gtk.DrawingArea drwGantt;
-        [Glade.WidgetAttribute]
-        Gtk.Entry entSearchTask;
-        TreeStore fActorStore = new TreeStore(typeof(int),typeof(string),typeof(string));
-        FileSelection fFileSelection; // todo : FileChooserWidget
+	public class MainForm : Gtk.Window, IGuiTracker
+	{
+		[Glade.WidgetAttribute]
+		Gtk.Button btnAssignTask;
+		[Glade.WidgetAttribute]
+		Gtk.Button btnChangeTask;
+		[Glade.WidgetAttribute]
+		Gtk.Button btnCreateTask;
+		[Glade.WidgetAttribute]
+		Gtk.Button btnSearchTask;
+		Gtk.DrawingArea drwAssigment;
+		Gtk.DrawingArea drwGantt;
+		[Glade.WidgetAttribute]
+		Gtk.Entry entSearchTask;
+		TreeStore fActorStore = new TreeStore(typeof(int), typeof(string), typeof(string));
+		FileSelection fFileSelection; // todo : FileChooserWidget
 
-        //                                   id,          status          description,   start time,     end time,      actor,         
-        TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string), typeof(string),typeof(string), typeof(string),typeof(string));
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miAbout;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miActorCreate;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miActorDelete;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miActorEdit;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miAssignTask;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miChangeTaskState;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miCloseProject;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miCreateProject;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miExit;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miOpenProject;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miRecentProject;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miSaveProject;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miStateEdit;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miTaskCreate;
-        [Glade.WidgetAttribute]
-        Gtk.MenuItem miUpdateFromXml;
-        string searchTask;
-        string selectedFile;
-        bool[] taskSort = new bool[6];
-        [Glade.WidgetAttribute]
-        Gtk.TreeView tvActorTree;
-        [Glade.WidgetAttribute]
-        Gtk.TreeView tvTaskTree;
+		//                                   id,          status          description,   start time,     end time,      actor,         
+		TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string));
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miAbout;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miActorCreate;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miActorDelete;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miActorEdit;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miAssignTask;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miChangeTaskState;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miCloseProject;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miCreateProject;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miExit;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miOpenProject;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miRecentProject;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miSaveProject;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miStateEdit;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miTaskCreate;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miUpdateFromXml;
+		[Glade.WidgetAttribute]
+		Gtk.MenuItem miExportToHtml;
 
-        /// <summary>
-        /// Gantt.
-        /// </summary>
-        [Glade.Widget]
-        Gtk.VBox vbox3;
+		string searchTask;
+		string selectedFile;
+		bool[] taskSort = new bool[6];
+		[Glade.WidgetAttribute]
+		Gtk.TreeView tvActorTree;
+		[Glade.WidgetAttribute]
+		Gtk.TreeView tvTaskTree;
 
-        /// <summary>
-        /// Assigment.
-        /// </summary>
-        [Glade.Widget]
-        Gtk.VBox vbox4;
+		/// <summary>
+		/// Gantt.
+		/// </summary>
+		[Glade.Widget]
+		Gtk.VBox vbox3;
 
-        public MainForm()
-        : base("Gantt Tracker")
-        {
-            InitializeComponents();
+		/// <summary>
+		/// Assigment.
+		/// </summary>
+		[Glade.Widget]
+		Gtk.VBox vbox4;
 
-            LogoForm logoWindow = new LogoForm();
-            logoWindow.ShowDialog();
+		public MainForm()
+		: base("Gantt Tracker")
+		{
+			InitializeComponents();
 
-            TrackerCore.Instance.Tracker = this;
+			LogoForm logoWindow = new LogoForm();
+			logoWindow.ShowDialog();
 
-            TrackerCore.Instance.State = CoreState.EmptyProject;
-            TrackerCore.Instance.BindProject();
-        }
+			TrackerCore.Instance.Tracker = this;
 
-        public DataSet ActorSource
-        {
-            get;
-            set;
-        }
+			TrackerCore.Instance.State = CoreState.EmptyProject;
+			TrackerCore.Instance.BindProject();
+		}
 
-        public DataSet StateSource
-        {
-            get;
-            set;
-        }
+		public DataSet ActorSource
+		{
+			get;
+			set;
+		}
 
-        public DataSet TaskSource
-        {
-            get;
-            set;
-        }
+		public DataSet StateSource
+		{
+			get;
+			set;
+		}
 
-        public void BindActor()
-        {
-            fActorStore.Clear();
-            foreach (DataRow row in ActorSource.Tables["Actor"].Rows)
-            {
-                fActorStore.AppendValues(row["ID"], row["Name"], row["Email"]);
-            }
+		public DataSet TaskSource
+		{
+			get;
+			set;
+		}
 
-            tvActorTree.Model = fActorStore;
-        }
+		public void BindActor()
+		{
+			fActorStore.Clear();
+			foreach (DataRow row in ActorSource.Tables["Actor"].Rows)
+			{
+				fActorStore.AppendValues(row["ID"], row["Name"], row["Email"]);
+			}
 
-        public void BindState()
-        {
-        }
+			tvActorTree.Model = fActorStore;
+		}
 
-        public void BindTask()
-        {
-            fTaskStore.Clear();
-            var passedState = ConfigurationManager.AppSettings ["passed_state"];
-            try
-            {
-                foreach (DataRow row in TaskSource.Tables["Task"].Rows)
-                {
-                    var actorName = ActorSource.Tables["Actor"].Select("ID = " + (int)row["ActorID"])[0]["Name"];
-                    var stateName = string.Empty;
+		public void BindState()
+		{
+		}
 
-                    if (StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"]).Length > 0)
-                    {
-                        stateName = (string)StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"])[0]["Name"];
-                    }
+		public void BindTask()
+		{
+			fTaskStore.Clear();
+			var passedState = ConfigurationManager.AppSettings["passed_state"];
+			try
+			{
+				foreach (DataRow row in TaskSource.Tables["Task"].Rows)
+				{
+					var actorName = ActorSource.Tables["Actor"].Select("ID = " + (int)row["ActorID"])[0]["Name"];
+					var stateName = string.Empty;
 
-                    if(passedState.Split(';').Select(s => s.ToLower()).Contains(stateName.ToLower()))
-                    {
-                        continue;
-                    }
+					if (StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"]).Length > 0)
+					{
+						stateName = (string)StateSource.Tables["TaskState"].Select("ID = " + (int)row["StateID"])[0]["Name"];
+					}
 
-                    if(!string.IsNullOrEmpty(searchTask))
-                    {
-                        string text = string.Join("", row["Id"], row["Description"], row["StartTime"], actorName, stateName);
-                        if(!text.ToLower().Contains(searchTask.ToLower()))
-                        {
-                            continue;
-                        }
-                    }
+					if (passedState.Split(';').Select(s => s.ToLower()).Contains(stateName.ToLower()))
+					{
+						continue;
+					}
 
-                    TreeIter itemNode = fTaskStore.AppendNode();
-                    fTaskStore.SetValue(itemNode,0,row["Id"]);
-					fTaskStore.SetValue(itemNode,1, stateName);
-                    fTaskStore.SetValue(itemNode,2,row["Description"]);
-                    fTaskStore.SetValue(itemNode,3,((DateTime)row["StartTime"]).ToShortDateString());
-                    fTaskStore.SetValue(itemNode,4,((DateTime)row["EndTime"]).ToShortDateString());
-                    fTaskStore.SetValue(itemNode,5,actorName);                    
-                }
-            }
-            catch (Exception ex)
-            {
-                var m = ex.Message;
+					if (!string.IsNullOrEmpty(searchTask))
+					{
+						string text = string.Join("", row["Id"], row["Description"], row["StartTime"], actorName, stateName);
+						if (!text.ToLower().Contains(searchTask.ToLower()))
+						{
+							continue;
+						}
+					}
 
-                //todo: fix ui exception
-            }
-        }
+					TreeIter itemNode = fTaskStore.AppendNode();
+					fTaskStore.SetValue(itemNode, 0, row["Id"]);
+					fTaskStore.SetValue(itemNode, 1, stateName);
+					fTaskStore.SetValue(itemNode, 2, row["Description"]);
+					fTaskStore.SetValue(itemNode, 3, ((DateTime)row["StartTime"]).ToShortDateString());
+					fTaskStore.SetValue(itemNode, 4, ((DateTime)row["EndTime"]).ToShortDateString());
+					fTaskStore.SetValue(itemNode, 5, actorName);
+				}
+			}
+			catch (Exception ex)
+			{
+				var m = ex.Message;
 
-        public void OnRecentProject(object sender, EventArgs args)
-        {
-            var r = TrackerCore.Instance.Recent;
-            if(!string.IsNullOrEmpty(r) && File.Exists(r))
-            {
-                selectedFile = r;
-                TrackerCore.Instance.State = CoreState.OpenProject;
-                OnFileSelectionResponce(fFileSelection, null );
-            }
-        }
+				//todo: fix ui exception
+			}
+		}
 
-        [GLib.ConnectBefore]
-        void HandleButtonPressEvent(object o, ButtonPressEventArgs args)
-        {
-            if(args.Event.Type == EventType.TwoButtonPress)
-            {
-                OnChangeTaskState(o, EventArgs.Empty);
-            }
-        }
+		public void OnRecentProject(object sender, EventArgs args)
+		{
+			var r = TrackerCore.Instance.Recent;
+			if (!string.IsNullOrEmpty(r) && File.Exists(r))
+			{
+				selectedFile = r;
+				TrackerCore.Instance.State = CoreState.OpenProject;
+				OnFileSelectionResponce(fFileSelection, null);
+			}
+		}
 
-        private void InitializeComponents()
-        {
-            Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("MainForm.glade");
-            Glade.XML glade = new Glade.XML(stream, "MainForm", null);
-            stream.Close();
-            glade.Autoconnect(this);
-            this.IconList = new Pixbuf[] { new Pixbuf(System.Reflection.Assembly.GetExecutingAssembly(), "GMTLogo.bmp")};
-            this.Icon = this.IconList[0];
+		[GLib.ConnectBefore]
+		void HandleButtonPressEvent(object o, ButtonPressEventArgs args)
+		{
+			if (args.Event.Type == EventType.TwoButtonPress)
+			{
+				OnChangeTaskState(o, EventArgs.Empty);
+			}
+		}
 
-            if (miCreateProject != null)
-            {
-                miCreateProject.Activated += new EventHandler(OnCreateProject);
-            }
-            else
-            {
-                throw new KeyNotFoundException<string>("miCreateProject");
-            }
+		private void InitializeComponents()
+		{
+			Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("MainForm.glade");
+			Glade.XML glade = new Glade.XML(stream, "MainForm", null);
+			stream.Close();
+			glade.Autoconnect(this);
+			this.IconList = new Pixbuf[] { new Pixbuf(System.Reflection.Assembly.GetExecutingAssembly(), "GMTLogo.bmp") };
+			this.Icon = this.IconList[0];
 
-            miOpenProject.Activated += new EventHandler(OnOpenProject);
-            miRecentProject.Activated += new EventHandler(OnRecentProject);
-            miSaveProject.Activated += new EventHandler(OnSaveProject);
-            miCloseProject.Activated += new EventHandler(OnCloseProject);
-            miExit.Activated += new EventHandler(OnExitProgramm);
+			if (miCreateProject != null)
+			{
+				miCreateProject.Activated += OnCreateProject;
+			}
+			else
+			{
+				throw new KeyNotFoundException<string>("miCreateProject");
+			}
 
-            miActorCreate.Activated += new EventHandler(OnActorCreate);
-            miActorEdit.Activated += new EventHandler(OnActorEdit);
-            miActorDelete.Activated += new EventHandler(OnActorDelete);
+			miOpenProject.Activated += OnOpenProject;
+			miRecentProject.Activated += OnRecentProject;
+			miSaveProject.Activated += OnSaveProject;
+			miCloseProject.Activated += OnCloseProject;
+			miExit.Activated += OnExitProgramm;
 
-            miTaskCreate.Activated += new EventHandler(OnTaskCreate);
-            miChangeTaskState.Activated += new EventHandler(OnChangeTaskState);
-            miAssignTask.Activated += new EventHandler(OnTaskAssign);
+			miActorCreate.Activated += OnActorCreate;
+			miActorEdit.Activated += OnActorEdit;
+			miActorDelete.Activated += OnActorDelete;
 
-            miStateEdit.Activated += new EventHandler(OnStateEdit);
+			miTaskCreate.Activated += OnTaskCreate;
+			miChangeTaskState.Activated += OnChangeTaskState;
+			miAssignTask.Activated += OnTaskAssign;
 
-            miUpdateFromXml.Activated += new EventHandler(OnUpdateFromXml);
+			miStateEdit.Activated += OnStateEdit;
 
-            miAbout.Activated += new EventHandler(OnAbout);
+			miUpdateFromXml.Activated += OnUpdateFromXml;
 
-            btnCreateTask.Clicked += new EventHandler(OnTaskCreate);
-            btnAssignTask.Clicked += new EventHandler(OnTaskAssign);
-            btnChangeTask.Clicked += new EventHandler(OnChangeTaskState);
-            btnSearchTask.Clicked += new EventHandler(OnSearchTask);
+			miExportToHtml.Activated += OnExportToHtml;
 
-            tvActorTree.HeadersVisible = true;
-            tvActorTree.AppendColumn("Name",new CellRendererText(), "text", 1);
-            tvActorTree.AppendColumn("Email",new CellRendererText(), "text", 2);
+			miAbout.Activated += OnAbout;
 
-            //tvActorTree.AppendColumn("Id",new CellRendererText(), "text", 2).Visible = false;
-            tvTaskTree.HeadersVisible = true;
-            tvTaskTree.AppendColumn("Id",new CellRendererText(), "text", 0);
+			btnCreateTask.Clicked += OnTaskCreate;
+			btnAssignTask.Clicked += OnTaskAssign;
+			btnChangeTask.Clicked += OnChangeTaskState;
+			btnSearchTask.Clicked += OnSearchTask;
+
+			tvActorTree.HeadersVisible = true;
+			tvActorTree.AppendColumn("Name", new CellRendererText(), "text", 1);
+			tvActorTree.AppendColumn("Email", new CellRendererText(), "text", 2);
+
+			//tvActorTree.AppendColumn("Id",new CellRendererText(), "text", 2).Visible = false;
+			tvTaskTree.HeadersVisible = true;
+			tvTaskTree.AppendColumn("Id", new CellRendererText(), "text", 0);
 			tvTaskTree.AppendColumn("State", new CellRendererText(), "text", 1);
-            tvTaskTree.AppendColumn("Description",new CellRendererText(), "text", 2);
-            tvTaskTree.AppendColumn("Start Time",new CellRendererText(), "text", 3);
-            tvTaskTree.AppendColumn("End Time",new CellRendererText(), "text", 4);
-            tvTaskTree.AppendColumn("Actor",new CellRendererText(), "text", 5);
+			tvTaskTree.AppendColumn("Description", new CellRendererText(), "text", 2);
+			tvTaskTree.AppendColumn("Start Time", new CellRendererText(), "text", 3);
+			tvTaskTree.AppendColumn("End Time", new CellRendererText(), "text", 4);
+			tvTaskTree.AppendColumn("Actor", new CellRendererText(), "text", 5);
 
-            tvTaskTree.ButtonPressEvent+= HandleButtonPressEvent;
+			tvTaskTree.ButtonPressEvent += HandleButtonPressEvent;
 
-            // Assigment
-            drwAssigment = new AssigmentDiagramm ();
-            vbox4.Add (drwAssigment);
-            drwAssigment.Show ();
+			// Assigment
+			drwAssigment = new AssigmentDiagramm();
+			vbox4.Add(drwAssigment);
+			drwAssigment.Show();
 
-            drwGantt = new GanttDiagramm ();
-            vbox3.Add (drwGantt);
-            drwGantt.Show ();
+			drwGantt = new GanttDiagramm();
+			vbox3.Add(drwGantt);
+			drwGantt.Show();
 
-            for (int i = 2; i < 5; i++)
-            {
-                fTaskStore.SetSortFunc(i, delegate(TreeModel model, TreeIter a, TreeIter b)
-                {
-                    string s1 = model.GetValue (a, 0).ToString ();
-                    string s2 = model.GetValue (b, 0).ToString ();
-                    return String.Compare (s1, s2);
-                });
-            }
+			for (int i = 2; i < 5; i++)
+			{
+				fTaskStore.SetSortFunc(i, delegate (TreeModel model, TreeIter a, TreeIter b)
+				{
+					string s1 = model.GetValue(a, 0).ToString();
+					string s2 = model.GetValue(b, 0).ToString();
+					return String.Compare(s1, s2);
+				});
+			}
 
-            fTaskStore.SetSortFunc(0, delegate(TreeModel model, TreeIter a, TreeIter b)
-            {
-                var s1 = (int)model.GetValue (a, 0);
-                var s2 = (int)model.GetValue (b, 0);
-                return s1 > s2 ? -1 : s1 == s2 ? 0 : 1;
-            });
+			fTaskStore.SetSortFunc(0, delegate (TreeModel model, TreeIter a, TreeIter b)
+			{
+				var s1 = (int)model.GetValue(a, 0);
+				var s2 = (int)model.GetValue(b, 0);
+				return s1 > s2 ? -1 : s1 == s2 ? 0 : 1;
+			});
 
-            tvTaskTree.Model = fTaskStore;
-            var index = 0;
-            tvTaskTree.Columns.ToList().ForEach(c =>
-            {
-                c.Clickable = true;
-                c.SortColumnId = index++;
-                c.Clicked+= (object sender, EventArgs e) => {
-                    taskSort[c.SortColumnId] = !taskSort[c.SortColumnId];
-                    fTaskStore.SetSortColumnId(c.SortColumnId, taskSort[c.SortColumnId] ? SortType.Ascending : SortType.Descending);
-                };
-            });
-        }
+			tvTaskTree.Model = fTaskStore;
+			var index = 0;
+			tvTaskTree.Columns.ToList().ForEach(c =>
+			{
+				c.Clickable = true;
+				c.SortColumnId = index++;
+				c.Clicked += (object sender, EventArgs e) =>
+				{
+					taskSort[c.SortColumnId] = !taskSort[c.SortColumnId];
+					fTaskStore.SetSortColumnId(c.SortColumnId, taskSort[c.SortColumnId] ? SortType.Ascending : SortType.Descending);
+				};
+			});
+		}
 
-        private void OnAbout(object sender, EventArgs args)
-        {
-            TrackerCore.Instance.ShowAboutDialog();
-        }
+		private void OnAbout(object sender, EventArgs args)
+		{
+			TrackerCore.Instance.ShowAboutDialog();
+		}
 
-        private void OnActorCreate(object sender, EventArgs args)
-        {
-            TrackerCore.Instance.CreateActor();
-        }
+		private void OnActorCreate(object sender, EventArgs args)
+		{
+			TrackerCore.Instance.CreateActor();
+		}
 
-        private void OnActorDelete(object sender, EventArgs args)
-        {
-            TreeModel model;
-            TreeIter iter;
-            ((TreeSelection)tvActorTree.Selection).GetSelected (out model, out iter);
-            int actorId = -1;
-            bool actionRequired = true;
-            try
-            {
-                object res = model.GetValue(iter,0);
-                if(res != null)
-                {
-                    actorId = (int)res;
-                }
-            }
-            catch(Exception ex)
-            {
-                actionRequired = false;
-                IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex ,this);
-                dialog.Title = "Actor Edit";
-                dialog.ShowDialog();
-            }
+		private void OnActorDelete(object sender, EventArgs args)
+		{
+			TreeModel model;
+			TreeIter iter;
+			((TreeSelection)tvActorTree.Selection).GetSelected(out model, out iter);
+			int actorId = -1;
+			bool actionRequired = true;
+			try
+			{
+				object res = model.GetValue(iter, 0);
+				if (res != null)
+				{
+					actorId = (int)res;
+				}
+			}
+			catch (Exception ex)
+			{
+				actionRequired = false;
+				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex, this);
+				dialog.Title = "Actor Edit";
+				dialog.ShowDialog();
+			}
 
-            if (actionRequired && actorId != -1)
-            {
-                TrackerCore.Instance.DeleteActor(actorId);
-            }
-        }
+			if (actionRequired && actorId != -1)
+			{
+				TrackerCore.Instance.DeleteActor(actorId);
+			}
+		}
 
-        private void OnActorEdit(object sender, EventArgs args)
-        {
-            TreeModel model;
-            TreeIter iter;
+		private void OnActorEdit(object sender, EventArgs args)
+		{
+			TreeModel model;
+			TreeIter iter;
 
-            ((TreeSelection)tvActorTree.Selection).GetSelected (out model, out iter);
+			((TreeSelection)tvActorTree.Selection).GetSelected(out model, out iter);
 
-            int actorId = -1;
-            bool actionRequierd = true;
-            try
-            {
-                object res = model.GetValue(iter,0);
-                if(res != null)
-                {
-                    actorId = (int)res;
-                }
-            }
-            catch(Exception ex)
-            {
-                actionRequierd = false;
-                IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex ,this);
-                dialog.Title = "Actor Edit";
-                dialog.ShowDialog();
-            }
+			int actorId = -1;
+			bool actionRequierd = true;
+			try
+			{
+				object res = model.GetValue(iter, 0);
+				if (res != null)
+				{
+					actorId = (int)res;
+				}
+			}
+			catch (Exception ex)
+			{
+				actionRequierd = false;
+				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex, this);
+				dialog.Title = "Actor Edit";
+				dialog.ShowDialog();
+			}
 
-            if (actionRequierd && actorId != -1)
-            {
-                TrackerCore.Instance.EditActor(actorId);
-            }
-        }
+			if (actionRequierd && actorId != -1)
+			{
+				TrackerCore.Instance.EditActor(actorId);
+			}
+		}
 
-        private void OnChangeTaskState(object sender, EventArgs args)
-        {
-            TreeModel model;
-            TreeIter iter;
-            ((TreeSelection)tvTaskTree.Selection).GetSelected (out model, out iter);
-            int taskID = -1;
-            bool actionRequired = true;
-            try
-            {
-                object res = model.GetValue(iter,0);
-                if(res != null)
-                {
-                    taskID = (int)res;
-                }
-            }
-            catch(Exception ex)
-            {
-                actionRequired = false;
-                IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex ,this);
-                dialog.Title = "Change Task State";
-                dialog.ShowDialog();
-            }
+		private void OnChangeTaskState(object sender, EventArgs args)
+		{
+			TreeModel model;
+			TreeIter iter;
+			((TreeSelection)tvTaskTree.Selection).GetSelected(out model, out iter);
+			int taskID = -1;
+			bool actionRequired = true;
+			try
+			{
+				object res = model.GetValue(iter, 0);
+				if (res != null)
+				{
+					taskID = (int)res;
+				}
+			}
+			catch (Exception ex)
+			{
+				actionRequired = false;
+				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex, this);
+				dialog.Title = "Change Task State";
+				dialog.ShowDialog();
+			}
 
-            if (actionRequired && taskID != -1)
-            {
-                TrackerCore.Instance.UpdateTaskState(taskID);
-            }
-        }
+			if (actionRequired && taskID != -1)
+			{
+				TrackerCore.Instance.UpdateTaskState(taskID);
+			}
+		}
 
-        private void OnCloseProject(object sender, EventArgs args)
-        {
-            TrackerCore.Instance.State = CoreState.EmptyProject;
-            TrackerCore.Instance.BindProject();
-        }
+		private void OnCloseProject(object sender, EventArgs args)
+		{
+			TrackerCore.Instance.State = CoreState.EmptyProject;
+			TrackerCore.Instance.BindProject();
+		}
 
-        private void OnCreateProject(object sender, EventArgs args)
-        {
-            TrackerCore.Instance.State = CoreState.CreateProject;
-            fFileSelection = new FileSelection("Cerate Project");
-            fFileSelection.Response += new ResponseHandler(OnFileSelectionResponce);
-            fFileSelection.Run();
-            fFileSelection.Hide();
-        }
+		private void OnCreateProject(object sender, EventArgs args)
+		{
+			TrackerCore.Instance.State = CoreState.CreateProject;
+			fFileSelection = new FileSelection("Cerate Project");
+			fFileSelection.Response += new ResponseHandler(OnFileSelectionResponce);
+			fFileSelection.Run();
+			fFileSelection.Hide();
+		}
 
-        private void OnExitProgramm(object sender, EventArgs args)
-        {
-            Application.Quit ();
-        }
+		private void OnExitProgramm(object sender, EventArgs args)
+		{
+			Application.Quit();
+		}
 
-        private void OnFileSelectionResponce(object sender, ResponseArgs args)
-        {
-            if (args == null || args.ResponseId == ResponseType.Ok)
-            {
-                switch (TrackerCore.Instance.State)
-                {
-                case CoreState.CreateProject:
-                case CoreState.OpenProject:
-                    TrackerCore.Instance.ProjectFileName = args == null ? selectedFile : ((FileSelection)sender).Filename;
+		private void OnFileSelectionResponce(object sender, ResponseArgs args)
+		{
+			if (args == null || args.ResponseId == ResponseType.Ok)
+			{
+				switch (TrackerCore.Instance.State)
+				{
+					case CoreState.CreateProject:
+					case CoreState.OpenProject:
+						TrackerCore.Instance.ProjectFileName = args == null ? selectedFile : ((FileSelection)sender).Filename;
 
-                    TrackerCore.Instance.BindProject();
-                    File.WriteAllText("recent.txt".GetPath (), TrackerCore.Instance.ProjectFileName);
+						TrackerCore.Instance.BindProject();
+						File.WriteAllText("recent.txt".GetPath(), TrackerCore.Instance.ProjectFileName);
 
-                    //backup file.
-                    File.AppendAllText(TrackerCore.Instance.ProjectFileName + ".backup",
-                                       File.ReadAllText(TrackerCore.Instance.ProjectFileName));
-                    break;
-                }
-            }
-        }
+						//backup file.
+						File.AppendAllText(TrackerCore.Instance.ProjectFileName + ".backup",
+										   File.ReadAllText(TrackerCore.Instance.ProjectFileName));
+						break;
+				}
+			}
+		}
 
-        private void OnGanttExpose(object sender, ExposeEventArgs args)
-        {
-            TrackerCore.Instance.DrawGantt(drwGantt);
-        }
+		private void OnGanttExpose(object sender, ExposeEventArgs args)
+		{
+			TrackerCore.Instance.DrawGantt(drwGantt);
+		}
 
-        private void OnKeyPress(object sender, Gtk.KeyPressEventArgs args)
-        {
-            if (args.Event.Key == Gdk.Key.F2||
-                args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
-                args.Event.Key == Gdk.Key.o)
-            {
-                OnOpenProject(this, new EventArgs());
-            }
+		private void OnKeyPress(object sender, Gtk.KeyPressEventArgs args)
+		{
+			if (args.Event.Key == Gdk.Key.F2 ||
+				args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
+				args.Event.Key == Gdk.Key.o)
+			{
+				OnOpenProject(this, new EventArgs());
+			}
 
-            if (args.Event.Key == Gdk.Key.F3||
-                args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
-                args.Event.Key == Gdk.Key.s)
-            {
-                OnSaveProject(this, new EventArgs());
-            }
+			if (args.Event.Key == Gdk.Key.F3 ||
+				args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
+				args.Event.Key == Gdk.Key.s)
+			{
+				OnSaveProject(this, new EventArgs());
+			}
 
-            if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
-                args.Event.Key == Gdk.Key.q)
-            {
-                OnExitProgramm(this, new EventArgs());
-            }
+			if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
+				args.Event.Key == Gdk.Key.q)
+			{
+				OnExitProgramm(this, new EventArgs());
+			}
 
-            if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
-                args.Event.Key == Gdk.Key.e)
-            {
-                OnCloseProject(this, new EventArgs());
-            }
-        }
+			if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
+				args.Event.Key == Gdk.Key.e)
+			{
+				OnCloseProject(this, new EventArgs());
+			}
+		}
 
-        private void OnOpenProject(object sender, EventArgs args)
-        {
-            TrackerCore.Instance.State = CoreState.OpenProject;
-            fFileSelection = new FileSelection("Open Project");
-            fFileSelection.Response += new ResponseHandler(OnFileSelectionResponce);
-            fFileSelection.Run();
-            fFileSelection.Hide();
-        }
+		private void OnOpenProject(object sender, EventArgs args)
+		{
+			TrackerCore.Instance.State = CoreState.OpenProject;
+			fFileSelection = new FileSelection("Open Project");
+			fFileSelection.Response += new ResponseHandler(OnFileSelectionResponce);
+			fFileSelection.Run();
+			fFileSelection.Hide();
+		}
 
-        private void OnSaveProject(object sender, EventArgs args)
-        {
-            TrackerCore.Instance.SaveProject();
-        }
+		private void OnSaveProject(object sender, EventArgs args)
+		{
+			TrackerCore.Instance.SaveProject();
+		}
 
-        private void OnSearchTask(object sender, EventArgs args)
-        {
-            searchTask = entSearchTask.Text;
-            BindTask ();
-        }
+		private void OnSearchTask(object sender, EventArgs args)
+		{
+			searchTask = entSearchTask.Text;
+			BindTask();
+		}
 
-        private void OnStateEdit(object sender, EventArgs args)
-        {
-            try
-            {
-                TrackerCore.Instance.StateEdit();
-            }
-            catch(InvalidCastException ex)
-            {
-                IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex ,this);
-                dialog.Title = "Actor Edit";
-                dialog.ShowDialog();
-            }
-        }
+		private void OnStateEdit(object sender, EventArgs args)
+		{
+			try
+			{
+				TrackerCore.Instance.StateEdit();
+			}
+			catch (InvalidCastException ex)
+			{
+				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex, this);
+				dialog.Title = "Actor Edit";
+				dialog.ShowDialog();
+			}
+		}
 
-        private void OnTaskAssign(object sender, EventArgs args)
-        {
-            TreeModel model;
-            TreeIter iter;
-            ((TreeSelection)tvTaskTree.Selection).GetSelected (out model, out iter);
+		private void OnTaskAssign(object sender, EventArgs args)
+		{
+			TreeModel model;
+			TreeIter iter;
+			((TreeSelection)tvTaskTree.Selection).GetSelected(out model, out iter);
 
-            int taskID = -1;
-            bool actionRequired = true;
-            try
-            {
-                object res = model.GetValue(iter,0);
-                if(res != null)
-                {
-                    taskID = (int)res;
-                }
-            }
-            catch(Exception ex)
-            {
-                actionRequired = false;
-                IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex ,this);
-                dialog.Title = "Assign Task";
-                dialog.ShowDialog();
-            }
+			int taskID = -1;
+			bool actionRequired = true;
+			try
+			{
+				object res = model.GetValue(iter, 0);
+				if (res != null)
+				{
+					taskID = (int)res;
+				}
+			}
+			catch (Exception ex)
+			{
+				actionRequired = false;
+				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex, this);
+				dialog.Title = "Assign Task";
+				dialog.ShowDialog();
+			}
 
-            if (actionRequired && taskID != -1)
-            {
-                TrackerCore.Instance.AssignTask(taskID);
-            }
-        }
+			if (actionRequired && taskID != -1)
+			{
+				TrackerCore.Instance.AssignTask(taskID);
+			}
+		}
 
-        private void OnTaskCreate(object sender, EventArgs args)
-        {
-            TrackerCore.Instance.CreateTask();
-        }
+		private void OnTaskCreate(object sender, EventArgs args)
+		{
+			TrackerCore.Instance.CreateTask();
+		}
 
-        private void OnUpdateFromXml(object sender, EventArgs args)
-        {
-        }
+		private void OnUpdateFromXml(object sender, EventArgs args)
+		{
+		}
 
-        private void OnWindowDeleteEvent(object sender, DeleteEventArgs a)
-        {
-            a.RetVal = true;
-            Application.Quit ();
-        }
-    }
+		private void OnExportToHtml(object sender, EventArgs args)
+		{
+			var html = HtmlHelpders.ToHTMLTable(TaskSource.Tables["Task"]);            
+			File.WriteAllText(ConfigurationManager.AppSettings["webpage"], html);
+		}
+
+		private void OnWindowDeleteEvent(object sender, DeleteEventArgs a)
+		{
+			a.RetVal = true;
+			Application.Quit();
+		}
+	}
 }

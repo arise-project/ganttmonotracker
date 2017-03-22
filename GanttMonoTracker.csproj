@@ -129,6 +129,7 @@
     <Compile Include="TaskManager\GDrive\GDriveUploader.cs" />
     <Compile Include="TaskManager\Project.cs" />
     <Compile Include="interface\IProject.cs" />
+    <Compile Include="Sunchronization\HtmlHelpders.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -218,6 +219,9 @@
     <Content Include="Resources\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sunchronization\" />
   </ItemGroup>
   <Import Project="packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
