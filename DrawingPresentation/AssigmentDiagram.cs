@@ -12,7 +12,6 @@
 namespace GanttMonoTracker.DrawingPresentation
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
@@ -21,8 +20,6 @@ namespace GanttMonoTracker.DrawingPresentation
 
     using GanttTracker;
     using GanttTracker.TaskManager;
-    using GanttTracker.TaskManager.ManagerException;
-
     using Gdk;
 
     using Pango;
@@ -31,9 +28,9 @@ namespace GanttMonoTracker.DrawingPresentation
 
     public class AssigmentDiagramm : Gtk.DrawingArea, IGuiSource
     {
-        const int fBorderMarginH = 2;
-        const int fBorderMarginV = 2;
-        const int fTaskHeight = 14;
+        private const int FBorderMarginH = 2;
+        private const int FBorderMarginV = 2;
+        private const int FTaskHeight = 14;
 
         public DataSet Source
         {
@@ -41,7 +38,7 @@ namespace GanttMonoTracker.DrawingPresentation
             set;
         }
 
-        protected override bool OnExposeEvent(Gdk.EventExpose args)
+        protected override bool OnExposeEvent(EventExpose args)
         {
             var baseResult = base.OnExposeEvent (args);
             if(TrackerCore.Instance.TaskManager is EmptyTaskManager)
@@ -51,64 +48,60 @@ namespace GanttMonoTracker.DrawingPresentation
 
             Source = TrackerCore.Instance.TaskManager.AssigmentSource;
 
-            DateTime firstDate = (DateTime)Source.Tables["DataRange"].Rows[0]["MinDate"];
-            DateTime lastDate = (DateTime)Source.Tables["DataRange"].Rows[0]["MaxDate"];
-            TimeSpan deltaSpan = lastDate.Subtract(firstDate);
+            var v1 = Source.Tables["DataRange"].Rows[0]["MinDate"];
+            var firstDate = v1 as DateTime? ?? DateTime.Now;
+            var v2 = Source.Tables["DataRange"].Rows[0]["MaxDate"];
+            var lastDate = v2 as DateTime? ?? DateTime.Now;
+            var deltaSpan = lastDate.Subtract(firstDate);
 
             // Insert drawing code here.
-            Cairo.Context grw = Gdk.CairoHelper.Create (this.GdkWindow);
+            var grw = Gdk.CairoHelper.Create (GdkWindow);
 
             int fX, fY, fWidth, fHeight, fDepth;
 
-            base.GdkWindow.GetGeometry(out fX,out fY,out fWidth,out fHeight,out fDepth);
+            GdkWindow.GetGeometry(out fX,out fY,out fWidth,out fHeight,out fDepth);
 
             fWidth -= 3;
             fHeight -= 3;
 
-            int delta = (deltaSpan.Days > 0) ?
-                        (fWidth - 2 * fBorderMarginH) / deltaSpan.Days :
-                        (fWidth - 2 * fBorderMarginH);
+            var delta = (deltaSpan.Days > 0) ?
+                        (fWidth - 2 * FBorderMarginH) / deltaSpan.Days :
+                        (fWidth - 2 * FBorderMarginH);
 
-            base.GdkWindow.ClearArea(fX,fY,fWidth,fHeight);
-            base.Show();
+            GdkWindow.ClearArea(fX,fY,fWidth,fHeight);
+            Show();
 
             //DrawBorder
             grw.SetSourceRGB(0xff, 0, 0);
 
-            grw.MoveTo(fBorderMarginH, fBorderMarginV);
-            grw.LineTo(fWidth - fBorderMarginH, fBorderMarginV);
-            grw.LineTo(fWidth - fBorderMarginH, fHeight - fBorderMarginV);
-            grw.LineTo(fBorderMarginH, fHeight - fBorderMarginV);
-            grw.LineTo(fBorderMarginH, fBorderMarginV);
+            grw.MoveTo(FBorderMarginH, FBorderMarginV);
+            grw.LineTo(fWidth - FBorderMarginH, FBorderMarginV);
+            grw.LineTo(fWidth - FBorderMarginH, fHeight - FBorderMarginV);
+            grw.LineTo(FBorderMarginH, fHeight - FBorderMarginV);
+            grw.LineTo(FBorderMarginH, FBorderMarginV);
             grw.Stroke();
 
             //DrawTasks
-            int deltaActor = (Source.Tables["Actor"].Rows.Count > 0) ?
-                             (fHeight - 2 * fBorderMarginV) / Source.Tables["Actor"].Rows.Count :
-                             fHeight - 2 * fBorderMarginV;
-            deltaActor -= fTaskHeight;
+            var deltaActor = (Source.Tables["Actor"].Rows.Count > 0) ?
+                             (fHeight - 2 * FBorderMarginV) / Source.Tables["Actor"].Rows.Count :
+                             fHeight - 2 * FBorderMarginV;
+            deltaActor -= FTaskHeight;
 
-            int maxTaskCout = 0;
-            foreach(DataRow row in Source.Tables["AssigmentSource"].Rows)
-            {
-                if (maxTaskCout < (int)row["TaskCount"])
-                {
-                    maxTaskCout = (int)row["TaskCount"];
-                }
-            }
+            var maxTaskCout = (from DataRow row in Source.Tables["AssigmentSource"].Rows select (int) row["TaskCount"]).Concat(new[] {0}).Max();
 
-            int actorIndex = 0;
-            Gdk.Color foregroundColor3 = new Gdk.Color(0xff, 0xff, 0xff);
-            Gdk.GC TaskLabelGC = new Gdk.GC (this.GdkWindow);
-            Colormap colormap = Colormap.System;
+            var actorIndex = 0;
+            var foregroundColor3 = new Gdk.Color(0xff, 0xff, 0xff);
+            var taskLabelGc = new Gdk.GC (GdkWindow);
+            var colormap = Colormap.System;
             colormap.AllocColor(ref foregroundColor3,true,true);
-            TaskLabelGC.Foreground = foregroundColor3;
+            taskLabelGc.Foreground = foregroundColor3;
 
             //draw proportion line.
-            Dictionary<int, int> states1 = new Dictionary<int, int>();
+            var states1 = new Dictionary<int, int>();
             foreach (DataRow row in Source.Tables ["StateRange"].Rows)
             {
-                var id = (int)row ["StateID"];
+                v1 = row ["StateID"];
+                var id = v1 as int? ?? -1;
                 if (states1.ContainsKey (id))
                 {
                     states1 [id] += 1;
@@ -119,90 +112,101 @@ namespace GanttMonoTracker.DrawingPresentation
                 }
             }
 
-            int sum = 0;
-            foreach (int id in states1.Keys)
-            {
-                sum += states1 [id];
-            }
+            var sum = states1.Keys.Sum(id => states1[id]);
 
-            List<int> states2 = new List<int> ();
-            foreach (int id in states1.Keys)
-            {
-                states2.Add (id);
-            }
+            var states2 = states1.Keys.ToList();
 
-            foreach (int id in states2.OrderBy(s => s))
+            foreach (var id in states2.OrderBy(s => s))
             {
                 states1 [id] = (int)(((double)fHeight / sum) * states1 [id]);
             }
 
-            int proportionOffset = 0;
-            foreach(int id in states1.Keys)
+            var proportionOffset = 0;
+            foreach(var id in states1.Keys)
             {
                 var state = Source.Tables ["StateRange"].Select ("StateID = " + id) [0];
-                byte colorRed = Convert.ToByte(state["ColorRed"]);
-                byte colorGreen = Convert.ToByte(state["ColorGreen"]);
-                byte colorBlue = Convert.ToByte(state["ColorBlue"]);
-                Gdk.GC taskGC = new Gdk.GC((Drawable)this.GdkWindow);
-                Gdk.Color foregroundColor2 = new Gdk.Color(colorRed, colorGreen, colorBlue);
-                colormap.AllocColor(ref foregroundColor2,true,true);
-                taskGC.Foreground = foregroundColor2;
-                this.GdkWindow.DrawRectangle (taskGC, true, fWidth - 10, proportionOffset, 10, states1 [id]);
+                var taskGc = new Gdk.GC(GdkWindow);
+                try
+                {
+                    var colorRed = Convert.ToByte(state["ColorRed"]);
+                    var colorGreen = Convert.ToByte(state["ColorGreen"]);
+                    var colorBlue = Convert.ToByte(state["ColorBlue"]);
+                
+                    var foregroundColor2 = new Gdk.Color(colorRed, colorGreen, colorBlue);
+                    colormap.AllocColor(ref foregroundColor2,true,true);
+                    taskGc.Foreground = foregroundColor2;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                
+                GdkWindow.DrawRectangle (taskGc, true, fWidth - 10, proportionOffset, 10, states1 [id]);
                 proportionOffset += states1 [id];
             }
 
             foreach(DataRow row in Source.Tables["Actor"].Rows)
             {
-                DateTime labelDate = firstDate;
-                int offset = fBorderMarginH;
-                for (int i = 0; i < deltaSpan.Days; i++)
+                var labelDate = firstDate;
+                var offset = FBorderMarginH;
+                for (var i = 0; i < deltaSpan.Days; i++)
                 {
-                    int taskCount = 0;
-                    int assignmentId = -1;
+                    var taskCount = 0;
+                    var assignmentId = -1;
                     var assignment = Source.Tables["AssigmentSource"]
                                      .Select("ActorID = " + row["ID"] + "and Date = '" +labelDate.ToShortDateString() + "'");
                     if (assignment.Length > 0)
                     {
-                        taskCount = (int)assignment[0]["TaskCount"];
-                        assignmentId = (int)assignment[0]["ID"];
+                        v1 = assignment[0]["TaskCount"];
+                        taskCount = v1 as int? ?? -1;
+                        v2 = assignment[0]["ID"];
+                        assignmentId = v2 as int? ?? -1;
                     }
 
                     if (taskCount > 0)
                     {
                         var states = Source.Tables ["StateRange"].Select ("AssigmentID = " + assignmentId, "StateID"); //order by stateid
-                        int taskSum = 0;
-                        for (int s = 0; s < states.Length; s++)
+                        var taskSum = 0;
+                        foreach (var state in states)
                         {
-                            var state = states [s];
-                            byte colorRed = Convert.ToByte(state["ColorRed"]);
-                            byte colorGreen = Convert.ToByte(state["ColorGreen"]);
-                            byte colorBlue = Convert.ToByte(state["ColorBlue"]);
-
-                            Gdk.GC taskGC = new Gdk.GC((Drawable)this.GdkWindow);
-                            Gdk.Color foregroundColor2 = new Gdk.Color(colorRed, colorGreen, colorBlue);
-                            colormap.AllocColor(ref foregroundColor2,true,true);
-                            taskGC.Foreground = foregroundColor2;
-
+                            var taskGc = new Gdk.GC(GdkWindow);
+                            try
+                            {
+                                var colorRed = Convert.ToByte(state["ColorRed"]);
+                                var colorGreen = Convert.ToByte(state["ColorGreen"]);
+                                var colorBlue = Convert.ToByte(state["ColorBlue"]);
+                                var foregroundColor2 = new Gdk.Color(colorRed, colorGreen, colorBlue);
+                                colormap.AllocColor(ref foregroundColor2,true,true);
+                                taskGc.Foreground = foregroundColor2;
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
+                            
                             var currentCount = (int)state["TaskCount"];
 
-                            this.GdkWindow.DrawRectangle(
-                                taskGC,
+                            GdkWindow.DrawRectangle(
+                                taskGc,
                                 true,
                                 offset,
-                                fBorderMarginV + (int)(deltaActor*(1 - (double)(taskSum + currentCount) / maxTaskCout))
+                                FBorderMarginV + (int)(deltaActor*(1 - (double)(taskSum + currentCount) / maxTaskCout))
                                 + deltaActor * actorIndex
                                 ,delta
                                 ,(int)(deltaActor*((double)currentCount / maxTaskCout)));
 
                             taskSum += currentCount;
-                            Layout layout = new Layout(PangoContext);
-                            layout.Wrap = WrapMode.Word;
-                            layout.FontDescription = FontDescription.FromString("Tahoma 10");
+                            var layout = new Layout(PangoContext)
+                            {
+                                Wrap = WrapMode.Word,
+                                FontDescription = FontDescription.FromString("Tahoma 10")
+                            };
                             layout.SetMarkup(taskCount.ToString());
 
-                            this.GdkWindow.DrawLayout(TaskLabelGC,
-                                                      offset,
-                                                      (int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,layout);
+                            GdkWindow.DrawLayout(taskLabelGc,
+                                offset,
+                                (int)(deltaActor*(1 - (double)taskCount / maxTaskCout)) + deltaActor * actorIndex,layout);
                         }
                     }
 
@@ -213,73 +217,77 @@ namespace GanttMonoTracker.DrawingPresentation
                 actorIndex++;
             }
 
-            TaskLabelGC.Dispose ();
+            taskLabelGc.Dispose ();
 
             //DrawActorAxis
-            int offsetActor = fBorderMarginV;
-            Gdk.Color foregroundColor = new Gdk.Color(0xff, 0, 0);
-            Gdk.Color foregroundColor1 = new Gdk.Color(0, 0, 0xff);
-            Gdk.GC ActorLabelGC = new Gdk.GC (this.GdkWindow);
-            Gdk.GC AxisGC = new Gdk.GC (this.GdkWindow);
+            var offsetActor = FBorderMarginV;
+            var foregroundColor = new Gdk.Color(0xff, 0, 0);
+            var foregroundColor1 = new Gdk.Color(0, 0, 0xff);
+            var actorLabelGc = new Gdk.GC (GdkWindow);
+            var axisGc = new Gdk.GC (GdkWindow);
             colormap.AllocColor(ref foregroundColor,true,true);
-            TaskLabelGC.Foreground = foregroundColor;
-            AxisGC.Foreground = foregroundColor1;
+            taskLabelGc.Foreground = foregroundColor;
+            axisGc.Foreground = foregroundColor1;
 
             foreach(DataRow row in Source.Tables["Actor"].Rows)
             {
-                Layout layout = new Layout(PangoContext);
-                layout.Wrap = WrapMode.Word;
-                layout.FontDescription = FontDescription.FromString("Tahoma 10");
+                var layout = new Layout(PangoContext)
+                {
+                    Wrap = WrapMode.Word,
+                    FontDescription = FontDescription.FromString("Tahoma 10")
+                };
                 layout.SetMarkup((string)row["Name"]);
 
-                this.GdkWindow.DrawLayout(ActorLabelGC,
-                                          fBorderMarginH,
-                                          offsetActor - fBorderMarginV,layout);
-                this.GdkWindow.DrawLine(AxisGC,
-                                        fBorderMarginH,
+                GdkWindow.DrawLayout(actorLabelGc,
+                                          FBorderMarginH,
+                                          offsetActor - FBorderMarginV,layout);
+                GdkWindow.DrawLine(axisGc,
+                                        FBorderMarginH,
                                         offsetActor,
-                                        fWidth - fBorderMarginH, offsetActor);
+                                        fWidth - FBorderMarginH, offsetActor);
                 offsetActor += deltaActor;
             }
 
-            AxisGC.Dispose ();
+            axisGc.Dispose ();
 
             //DrawDateAxis
             var labelDate1 = firstDate;
-            int offset1 = fBorderMarginH;
-            for (int i = 0; i < deltaSpan.Days; i++)
+            var offset1 = FBorderMarginH;
+            for (var i = 0; i < deltaSpan.Days; i++)
             {
-                Layout layout = new Layout(PangoContext);
-                layout.Wrap = WrapMode.Word;
-                layout.FontDescription = FontDescription.FromString("Tahoma 10");
+                var layout = new Layout(PangoContext)
+                {
+                    Wrap = WrapMode.Word,
+                    FontDescription = FontDescription.FromString("Tahoma 10")
+                };
                 layout.SetMarkup(labelDate1.ToString("dd/MM"));
 
-                this.GdkWindow.DrawLayout(ActorLabelGC,
-                                          offset1 + fBorderMarginH,
-                                          fHeight -2 * fBorderMarginV - fTaskHeight,
+                GdkWindow.DrawLayout(actorLabelGc,
+                                          offset1 + FBorderMarginH,
+                                          fHeight -2 * FBorderMarginV - FTaskHeight,
                                           layout);
 
-                this.GdkWindow.DrawLine(AxisGC,
+                GdkWindow.DrawLine(axisGc,
                                         offset1,
-                                        fBorderMarginV,
+                                        FBorderMarginV,
                                         offset1,
-                                        fHeight - fBorderMarginV);
+                                        fHeight - FBorderMarginV);
                 offset1 += delta;
                 labelDate1 = labelDate1.AddDays(1);
             }
 
-            ActorLabelGC.Dispose ();
+            actorLabelGc.Dispose ();
 
             //DrawDateNow
-            TimeSpan nowSpan = DateTime.Now.Subtract(firstDate);
+            var nowSpan = DateTime.Now.Subtract(firstDate);
 
-            int offsetDate = fBorderMarginH + (int)(delta*(double)nowSpan.Ticks / TimeSpan.TicksPerDay);
+            var offsetDate = FBorderMarginH + (int)(delta*(double)nowSpan.Ticks / TimeSpan.TicksPerDay);
 
             grw.SetSourceRGB(0, 0, 0);
             grw.MoveTo(offsetDate,
-                       fBorderMarginV);
+                       FBorderMarginV);
             grw.LineTo (offsetDate,
-                        fHeight - fBorderMarginV);
+                        fHeight - FBorderMarginV);
             grw.RelLineTo (new Distance { Dx = -3, Dy = 0 });
             grw.RelLineTo (new Distance { Dx = 3, Dy = -3 });
             grw.RelLineTo (new Distance { Dx = 3, Dy = 3 });
