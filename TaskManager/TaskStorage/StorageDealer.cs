@@ -179,8 +179,6 @@ namespace GanttTracker.TaskManager.TaskStorage
 			catch {
 				throw;
 			}
-
-			return false;
 		}
 
 		public bool Restore (string fileId)

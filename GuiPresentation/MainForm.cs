@@ -35,18 +35,18 @@ namespace GanttMonoTracker.GuiPresentation
 
 	public class MainForm : Gtk.Window, IGuiTracker
 	{
-		[Glade.WidgetAttribute]
-		Gtk.Button btnAssignTask;
-		[Glade.WidgetAttribute]
-		Gtk.Button btnChangeTask;
-		[Glade.WidgetAttribute]
-		Gtk.Button btnCreateTask;
-		[Glade.WidgetAttribute]
-		Gtk.Button btnSearchTask;
-		Gtk.DrawingArea drwAssigment;
-		Gtk.DrawingArea drwGantt;
-		[Glade.WidgetAttribute]
-		Gtk.Entry entSearchTask;
+		[WidgetAttribute]
+		Button btnAssignTask;
+		[WidgetAttribute]
+		Button btnChangeTask;
+		[WidgetAttribute]
+		Button btnCreateTask;
+		[WidgetAttribute]
+		Button btnSearchTask;
+		DrawingArea drwAssigment;
+		DrawingArea drwGantt;
+		[WidgetAttribute]
+		Entry entSearchTask;
 		TreeStore fActorStore = new TreeStore(typeof(int), typeof(string), typeof(string));
 		FileSelection fFileSelection; // todo : FileChooserWidget
 
@@ -211,11 +211,20 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 		[GLib.ConnectBefore]
-		void HandleButtonPressEvent(object o, ButtonPressEventArgs args)
+		void HandleTaskButtonPressEvent(object o, ButtonPressEventArgs args)
 		{
 			if (args.Event.Type == EventType.TwoButtonPress)
 			{
 				OnChangeTaskState(o, EventArgs.Empty);
+			}
+		}
+
+		[GLib.ConnectBefore]
+		void HandleActorButtonPressEvent(object o, ButtonPressEventArgs args)
+		{
+			if (args.Event.Type == EventType.TwoButtonPress)
+			{
+                OnActorEdit(o, EventArgs.Empty);
 			}
 		}
 
@@ -267,6 +276,7 @@ namespace GanttMonoTracker.GuiPresentation
 			tvActorTree.HeadersVisible = true;
 			tvActorTree.AppendColumn("Name", new CellRendererText(), "text", 1);
 			tvActorTree.AppendColumn("Email", new CellRendererText(), "text", 2);
+			tvActorTree.ButtonPressEvent += HandleActorButtonPressEvent;
 
 			//tvActorTree.AppendColumn("Id",new CellRendererText(), "text", 2).Visible = false;
 			tvTaskTree.HeadersVisible = true;
@@ -277,7 +287,7 @@ namespace GanttMonoTracker.GuiPresentation
 			tvTaskTree.AppendColumn("End Time", new CellRendererText(), "text", 4);
 			tvTaskTree.AppendColumn("Actor", new CellRendererText(), "text", 5);
 
-			tvTaskTree.ButtonPressEvent += HandleButtonPressEvent;
+			tvTaskTree.ButtonPressEvent += HandleTaskButtonPressEvent;
 
 			// Assigment
 			drwAssigment = new AssigmentDiagramm();

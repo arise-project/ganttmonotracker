@@ -11,16 +11,15 @@
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/StateManager/StateCore.cs" line="187" column="14" />
       <Breakpoint file="D:\gmt\ganttmonotracker\DrawingPresentation\GanttDiagramm.cs" line="142" column="1" />
       <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" line="77" column="1" />
+      <Breakpoint file="D:\eugene\ganttmonotracker\GuiPresentation\MainForm.cs" relfile="GuiPresentation\MainForm.cs" line="227" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="DrawingPresentation\AssigmentDiagram.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\ViewTaskDialog.cs">
     <Files>
-      <File FileName="GuiPresentation\MainForm.glade" Line="251" Column="36" />
-      <File FileName="GuiPresentation\MainForm.cs" Line="86" Column="16" />
-      <File FileName="Sunchronization\HtmlHelpders.cs" Line="57" Column="2" />
-      <File FileName="app.config" Line="8" Column="3" />
-      <File FileName="Main.cs" Line="64" Column="18" />
-      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="59" Column="39" />
+      <File FileName="GuiPresentation\MainForm.cs" Line="398" Column="1" />
+      <File FileName="GuiPresentation\ViewActorDialog.cs" Line="119" Column="10" />
+      <File FileName="GuiPresentation\ViewTaskDialog.glade" Line="1" Column="1" />
+      <File FileName="GuiPresentation\ViewTaskDialog.cs" Line="24" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
