@@ -17,8 +17,8 @@ namespace GanttMonoTracker.GuiPresentation
 	using System.IO;
 	using System.Linq;
 
-	using GanttMonoTracker.DrawingPresentation;
-	using GanttMonoTracker.ExceptionPresentation;
+	using DrawingPresentation;
+	using ExceptionPresentation;
 
 	using GanttTracker;
 	using GanttTracker.TaskManager.ManagerException;
@@ -28,9 +28,7 @@ namespace GanttMonoTracker.GuiPresentation
 	using Glade;
 
 	using Gtk;
-
-	using Pango;
-
+	
 	using TaskManagerInterface;
 
 	public class MainForm : Gtk.Window, IGuiTracker
@@ -47,70 +45,71 @@ namespace GanttMonoTracker.GuiPresentation
 		DrawingArea drwGantt;
 		[WidgetAttribute]
 		Entry entSearchTask;
-		TreeStore fActorStore = new TreeStore(typeof(int), typeof(string), typeof(string));
-		FileSelection fFileSelection; // todo : FileChooserWidget
+
+		private readonly TreeStore fActorStore = new TreeStore(typeof(int), typeof(string), typeof(string));
+		private FileSelection fFileSelection; // todo : FileChooserWidget
 
 		//                                   id,          status          description,   start time,     end time,      actor,         
 		TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string));
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miAbout;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miActorCreate;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miActorDelete;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miActorEdit;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miAssignTask;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miChangeTaskState;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miCloseProject;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miCreateProject;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miExit;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miOpenProject;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miRecentProject;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miSaveProject;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miStateEdit;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miTaskCreate;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miUpdateFromXml;
-		[Glade.WidgetAttribute]
-		Gtk.MenuItem miExportToHtml;
+		[WidgetAttribute]
+		MenuItem miAbout;
+		[WidgetAttribute]
+		MenuItem miActorCreate;
+		[WidgetAttribute]
+		MenuItem miActorDelete;
+		[WidgetAttribute]
+		MenuItem miActorEdit;
+		[WidgetAttribute]
+		MenuItem miAssignTask;
+		[WidgetAttribute]
+		MenuItem miChangeTaskState;
+		[WidgetAttribute]
+		MenuItem miCloseProject;
+		[WidgetAttribute]
+		MenuItem miCreateProject;
+		[WidgetAttribute]
+		MenuItem miExit;
+		[WidgetAttribute]
+		MenuItem miOpenProject;
+		[WidgetAttribute]
+		MenuItem miRecentProject;
+		[WidgetAttribute]
+		MenuItem miSaveProject;
+		[WidgetAttribute]
+		MenuItem miStateEdit;
+		[WidgetAttribute]
+		MenuItem miTaskCreate;
+		[WidgetAttribute]
+		MenuItem miUpdateFromXml;
+		[WidgetAttribute]
+		MenuItem miExportToHtml;
 
-		string searchTask;
-		string selectedFile;
-		bool[] taskSort = new bool[6];
-		[Glade.WidgetAttribute]
-		Gtk.TreeView tvActorTree;
-		[Glade.WidgetAttribute]
-		Gtk.TreeView tvTaskTree;
+		private string searchTask;
+		private string selectedFile;
+		readonly bool[] taskSort = new bool[6];
+		[WidgetAttribute]
+		TreeView tvActorTree;
+		[WidgetAttribute]
+		TreeView tvTaskTree;
 
 		/// <summary>
 		/// Gantt.
 		/// </summary>
-		[Glade.Widget]
-		Gtk.VBox vbox3;
+		[Widget]
+		VBox vbox3;
 
 		/// <summary>
 		/// Assigment.
 		/// </summary>
-		[Glade.Widget]
-		Gtk.VBox vbox4;
+		[Widget]
+		VBox vbox4;
 
 		public MainForm()
 		: base("Gantt Tracker")
 		{
 			InitializeComponents();
 
-			LogoForm logoWindow = new LogoForm();
+			var logoWindow = new LogoForm();
 			logoWindow.ShowDialog();
 
 			TrackerCore.Instance.Tracker = this;
@@ -182,7 +181,7 @@ namespace GanttMonoTracker.GuiPresentation
 						}
 					}
 
-					TreeIter itemNode = fTaskStore.AppendNode();
+					var itemNode = fTaskStore.AppendNode();
 					fTaskStore.SetValue(itemNode, 0, row["Id"]);
 					fTaskStore.SetValue(itemNode, 1, stateName);
 					fTaskStore.SetValue(itemNode, 2, row["Description"]);
@@ -194,7 +193,6 @@ namespace GanttMonoTracker.GuiPresentation
 			catch (Exception ex)
 			{
 				var m = ex.Message;
-
 				//todo: fix ui exception
 			}
 		}
@@ -202,16 +200,14 @@ namespace GanttMonoTracker.GuiPresentation
 		public void OnRecentProject(object sender, EventArgs args)
 		{
 			var r = TrackerCore.Instance.Recent;
-			if (!string.IsNullOrEmpty(r) && File.Exists(r))
-			{
-				selectedFile = r;
-				TrackerCore.Instance.State = CoreState.OpenProject;
-				OnFileSelectionResponce(fFileSelection, null);
-			}
+			if (string.IsNullOrEmpty(r) || !File.Exists(r)) return;
+			selectedFile = r;
+			TrackerCore.Instance.State = CoreState.OpenProject;
+			OnFileSelectionResponce(fFileSelection, null);
 		}
 
 		[GLib.ConnectBefore]
-		void HandleTaskButtonPressEvent(object o, ButtonPressEventArgs args)
+		private void HandleTaskButtonPressEvent(object o, ButtonPressEventArgs args)
 		{
 			if (args.Event.Type == EventType.TwoButtonPress)
 			{
@@ -220,7 +216,7 @@ namespace GanttMonoTracker.GuiPresentation
 		}
 
 		[GLib.ConnectBefore]
-		void HandleActorButtonPressEvent(object o, ButtonPressEventArgs args)
+		private void HandleActorButtonPressEvent(object o, ButtonPressEventArgs args)
 		{
 			if (args.Event.Type == EventType.TwoButtonPress)
 			{
@@ -230,12 +226,12 @@ namespace GanttMonoTracker.GuiPresentation
 
 		private void InitializeComponents()
 		{
-			Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("MainForm.glade");
-			Glade.XML glade = new Glade.XML(stream, "MainForm", null);
+			var stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("MainForm.glade");
+			var glade = new XML(stream, "MainForm", null);
 			stream.Close();
 			glade.Autoconnect(this);
-			this.IconList = new Pixbuf[] { new Pixbuf(System.Reflection.Assembly.GetExecutingAssembly(), "GMTLogo.bmp") };
-			this.Icon = this.IconList[0];
+			IconList = new[] { new Pixbuf(System.Reflection.Assembly.GetExecutingAssembly(), "GMTLogo.bmp") };
+			Icon = IconList[0];
 
 			if (miCreateProject != null)
 			{
@@ -298,13 +294,13 @@ namespace GanttMonoTracker.GuiPresentation
 			vbox3.Add(drwGantt);
 			drwGantt.Show();
 
-			for (int i = 2; i < 5; i++)
+			for (var i = 2; i < 5; i++)
 			{
 				fTaskStore.SetSortFunc(i, delegate (TreeModel model, TreeIter a, TreeIter b)
 				{
-					string s1 = model.GetValue(a, 0).ToString();
-					string s2 = model.GetValue(b, 0).ToString();
-					return String.Compare(s1, s2);
+					var s1 = model.GetValue(a, 0).ToString();
+					var s2 = model.GetValue(b, 0).ToString();
+					return string.Compare(s1, s2);
 				});
 			}
 
@@ -321,7 +317,7 @@ namespace GanttMonoTracker.GuiPresentation
 			{
 				c.Clickable = true;
 				c.SortColumnId = index++;
-				c.Clicked += (object sender, EventArgs e) =>
+				c.Clicked += (sender, e) =>
 				{
 					taskSort[c.SortColumnId] = !taskSort[c.SortColumnId];
 					fTaskStore.SetSortColumnId(c.SortColumnId, taskSort[c.SortColumnId] ? SortType.Ascending : SortType.Descending);
@@ -329,12 +325,12 @@ namespace GanttMonoTracker.GuiPresentation
 			});
 		}
 
-		private void OnAbout(object sender, EventArgs args)
+		private static void OnAbout(object sender, EventArgs args)
 		{
 			TrackerCore.Instance.ShowAboutDialog();
 		}
 
-		private void OnActorCreate(object sender, EventArgs args)
+		private static void OnActorCreate(object sender, EventArgs args)
 		{
 			TrackerCore.Instance.CreateActor();
 		}
@@ -343,12 +339,12 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			TreeModel model;
 			TreeIter iter;
-			((TreeSelection)tvActorTree.Selection).GetSelected(out model, out iter);
-			int actorId = -1;
-			bool actionRequired = true;
+			tvActorTree.Selection.GetSelected(out model, out iter);
+			var actorId = -1;
+			var actionRequired = true;
 			try
 			{
-				object res = model.GetValue(iter, 0);
+				var res = model.GetValue(iter, 0);
 				if (res != null)
 				{
 					actorId = (int)res;
@@ -357,7 +353,7 @@ namespace GanttMonoTracker.GuiPresentation
 			catch (Exception ex)
 			{
 				actionRequired = false;
-				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex, this);
+				var dialog = MessageFactory.CreateErrorDialog(ex, this);
 				dialog.Title = "Actor Edit";
 				dialog.ShowDialog();
 			}
@@ -373,13 +369,13 @@ namespace GanttMonoTracker.GuiPresentation
 			TreeModel model;
 			TreeIter iter;
 
-			((TreeSelection)tvActorTree.Selection).GetSelected(out model, out iter);
+			tvActorTree.Selection.GetSelected(out model, out iter);
 
-			int actorId = -1;
-			bool actionRequierd = true;
+			var actorId = -1;
+			var actionRequierd = true;
 			try
 			{
-				object res = model.GetValue(iter, 0);
+				var res = model.GetValue(iter, 0);
 				if (res != null)
 				{
 					actorId = (int)res;
@@ -388,7 +384,7 @@ namespace GanttMonoTracker.GuiPresentation
 			catch (Exception ex)
 			{
 				actionRequierd = false;
-				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex, this);
+				var dialog = MessageFactory.CreateErrorDialog(ex, this);
 				dialog.Title = "Actor Edit";
 				dialog.ShowDialog();
 			}
@@ -403,12 +399,12 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			TreeModel model;
 			TreeIter iter;
-			((TreeSelection)tvTaskTree.Selection).GetSelected(out model, out iter);
-			int taskID = -1;
-			bool actionRequired = true;
+			tvTaskTree.Selection.GetSelected(out model, out iter);
+			var taskID = -1;
+			var actionRequired = true;
 			try
 			{
-				object res = model.GetValue(iter, 0);
+				var res = model.GetValue(iter, 0);
 				if (res != null)
 				{
 					taskID = (int)res;
@@ -417,7 +413,7 @@ namespace GanttMonoTracker.GuiPresentation
 			catch (Exception ex)
 			{
 				actionRequired = false;
-				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex, this);
+				var dialog = MessageFactory.CreateErrorDialog(ex, this);
 				dialog.Title = "Change Task State";
 				dialog.ShowDialog();
 			}
@@ -428,7 +424,7 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}
 
-		private void OnCloseProject(object sender, EventArgs args)
+		private static void OnCloseProject(object sender, EventArgs args)
 		{
 			TrackerCore.Instance.State = CoreState.EmptyProject;
 			TrackerCore.Instance.BindProject();
@@ -438,34 +434,36 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			TrackerCore.Instance.State = CoreState.CreateProject;
 			fFileSelection = new FileSelection("Cerate Project");
-			fFileSelection.Response += new ResponseHandler(OnFileSelectionResponce);
+			fFileSelection.Response += OnFileSelectionResponce;
 			fFileSelection.Run();
 			fFileSelection.Hide();
 		}
 
-		private void OnExitProgramm(object sender, EventArgs args)
+		private static void OnExitProgramm(object sender, EventArgs args)
 		{
 			Application.Quit();
 		}
 
 		private void OnFileSelectionResponce(object sender, ResponseArgs args)
 		{
-			if (args == null || args.ResponseId == ResponseType.Ok)
+			if (args != null && args.ResponseId != ResponseType.Ok) return;
+			switch (TrackerCore.Instance.State)
 			{
-				switch (TrackerCore.Instance.State)
-				{
-					case CoreState.CreateProject:
-					case CoreState.OpenProject:
-						TrackerCore.Instance.ProjectFileName = args == null ? selectedFile : ((FileSelection)sender).Filename;
+				case CoreState.CreateProject:
+				case CoreState.OpenProject:
+					TrackerCore.Instance.ProjectFileName = args == null ? selectedFile : ((FileSelection)sender).Filename;
 
-						TrackerCore.Instance.BindProject();
-						File.WriteAllText("recent.txt".GetPath(), TrackerCore.Instance.ProjectFileName);
+					TrackerCore.Instance.BindProject();
+					File.WriteAllText("recent.txt".GetPath(), TrackerCore.Instance.ProjectFileName);
 
-						//backup file.
-						File.AppendAllText(TrackerCore.Instance.ProjectFileName + ".backup",
-										   File.ReadAllText(TrackerCore.Instance.ProjectFileName));
-						break;
-				}
+					//backup file.
+					File.AppendAllText(TrackerCore.Instance.ProjectFileName + ".backup",
+						File.ReadAllText(TrackerCore.Instance.ProjectFileName));
+					break;
+				case CoreState.EmptyProject:
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
 			}
 		}
 
@@ -474,29 +472,36 @@ namespace GanttMonoTracker.GuiPresentation
 			TrackerCore.Instance.DrawGantt(drwGantt);
 		}
 
-		private void OnKeyPress(object sender, Gtk.KeyPressEventArgs args)
+        [GLib.ConnectBefore]
+		private void OnSearchKeyPress(object sender, KeyPressEventArgs args)
+		{
+			if(args.Event.Key == Gdk.Key.Return)
+				OnSearchTask(sender, args);
+		}
+
+		private void OnKeyPress(object sender, KeyPressEventArgs args)
 		{
 			if (args.Event.Key == Gdk.Key.F2 ||
-				args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
+				args.Event.State == (ModifierType.ControlMask | ModifierType.Mod2Mask) &&
 				args.Event.Key == Gdk.Key.o)
 			{
 				OnOpenProject(this, new EventArgs());
 			}
 
 			if (args.Event.Key == Gdk.Key.F3 ||
-				args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
+				args.Event.State == (ModifierType.ControlMask | ModifierType.Mod2Mask) &&
 				args.Event.Key == Gdk.Key.s)
 			{
 				OnSaveProject(this, new EventArgs());
 			}
 
-			if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
+			if (args.Event.State == (ModifierType.ControlMask | ModifierType.Mod2Mask) &&
 				args.Event.Key == Gdk.Key.q)
 			{
 				OnExitProgramm(this, new EventArgs());
 			}
 
-			if (args.Event.State == (Gdk.ModifierType.ControlMask | Gdk.ModifierType.Mod2Mask) &&
+			if (args.Event.State == (ModifierType.ControlMask | ModifierType.Mod2Mask) &&
 				args.Event.Key == Gdk.Key.e)
 			{
 				OnCloseProject(this, new EventArgs());
@@ -507,12 +512,12 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			TrackerCore.Instance.State = CoreState.OpenProject;
 			fFileSelection = new FileSelection("Open Project");
-			fFileSelection.Response += new ResponseHandler(OnFileSelectionResponce);
+			fFileSelection.Response += OnFileSelectionResponce;
 			fFileSelection.Run();
 			fFileSelection.Hide();
 		}
 
-		private void OnSaveProject(object sender, EventArgs args)
+		private static void OnSaveProject(object sender, EventArgs args)
 		{
 			TrackerCore.Instance.SaveProject();
 		}
@@ -531,7 +536,7 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 			catch (InvalidCastException ex)
 			{
-				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex, this);
+				var dialog = MessageFactory.CreateErrorDialog(ex, this);
 				dialog.Title = "Actor Edit";
 				dialog.ShowDialog();
 			}
@@ -541,13 +546,13 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			TreeModel model;
 			TreeIter iter;
-			((TreeSelection)tvTaskTree.Selection).GetSelected(out model, out iter);
+			tvTaskTree.Selection.GetSelected(out model, out iter);
 
-			int taskID = -1;
-			bool actionRequired = true;
+			var taskID = -1;
+			var actionRequired = true;
 			try
 			{
-				object res = model.GetValue(iter, 0);
+				var res = model.GetValue(iter, 0);
 				if (res != null)
 				{
 					taskID = (int)res;
@@ -556,7 +561,7 @@ namespace GanttMonoTracker.GuiPresentation
 			catch (Exception ex)
 			{
 				actionRequired = false;
-				IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex, this);
+				var dialog = MessageFactory.CreateErrorDialog(ex, this);
 				dialog.Title = "Assign Task";
 				dialog.ShowDialog();
 			}
@@ -567,12 +572,12 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}
 
-		private void OnTaskCreate(object sender, EventArgs args)
+		private static void OnTaskCreate(object sender, EventArgs args)
 		{
 			TrackerCore.Instance.CreateTask();
 		}
 
-		private void OnUpdateFromXml(object sender, EventArgs args)
+		private static void OnUpdateFromXml(object sender, EventArgs args)
 		{
 		}
 
