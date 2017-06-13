@@ -284,6 +284,7 @@ namespace GanttMonoTracker.GuiPresentation
 			tvTaskTree.AppendColumn("Actor", new CellRendererText(), "text", 5);
 
 			tvTaskTree.ButtonPressEvent += HandleTaskButtonPressEvent;
+			tvTaskTree.Selection.Mode = SelectionMode.Multiple;
 
 			// Assigment
 			drwAssigment = new AssigmentDiagramm();
@@ -323,6 +324,25 @@ namespace GanttMonoTracker.GuiPresentation
 					fTaskStore.SetSortColumnId(c.SortColumnId, taskSort[c.SortColumnId] ? SortType.Ascending : SortType.Descending);
 				};
 			});
+		}
+
+		private void RemoveSelectedRows(TreeView treeView, ListStore listStore, TreeModelSort treeModelSort)
+		{
+			TreeModel model;
+			TreeIter iter;
+
+			TreePath[] treePath = treeView.Selection.GetSelectedRows(out model);
+
+			for (int i  = treePath.Length; i > 0; i--)
+			{
+				model.GetIter(out iter, treePath[(i - 1)]);
+
+				string value = (string)model.GetValue(iter, 0);
+				Console.WriteLine("Removing: " + value);
+
+				TreeIter childIter = treeModelSort.ConvertIterToChildIter(iter);
+				listStore.Remove(ref childIter);
+			}
 		}
 
 		private static void OnAbout(object sender, EventArgs args)
