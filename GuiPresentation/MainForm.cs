@@ -284,7 +284,8 @@ namespace GanttMonoTracker.GuiPresentation
 			tvTaskTree.AppendColumn("Actor", new CellRendererText(), "text", 5);
 
 			tvTaskTree.ButtonPressEvent += HandleTaskButtonPressEvent;
-			tvTaskTree.Selection.Mode = SelectionMode.Multiple;
+			//todo: use multi row mode
+			//tvTaskTree.Selection.Mode = SelectionMode.Multiple;
 
 			// Assigment
 			drwAssigment = new AssigmentDiagramm();
@@ -326,6 +327,7 @@ namespace GanttMonoTracker.GuiPresentation
 			});
 		}
 
+		//TODO: what exactly commands will be useed with multyrow selection
 		private void RemoveSelectedRows(TreeView treeView, ListStore listStore, TreeModelSort treeModelSort)
 		{
 			TreeModel model;
