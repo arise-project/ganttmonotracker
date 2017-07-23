@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.IO;
 using System.Xml;
@@ -89,7 +90,13 @@ namespace GanttTracker.TaskManager.TaskStorage
 			ConnectionString = connectionString;
 			CommandFactory = commandFactory;
 			CommandFactory.SetDealer(this);
-			Online = new GDriveManager(new GDriveCredentials("1067781202017-nr9fbc3amvcd93rkigtkfsadl6httkj0.apps.googleusercontent.com", @"3fMJyreqqvQNtuB0Z8IAArzn"));
+			var clientId = ConfigurationManager.AppSettings["GDRIVE_CLIENT_ID"];
+			var clientSecret = ConfigurationManager.AppSettings["GDRIVE_CLIENT_ID"];
+			if (!string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(clientSecret))
+			{
+				Online = new GDriveManager(new GDriveCredentials(clientId, clientSecret));
+				Online.Authorize ();
+			}
 		}
 
 		public void Create()
@@ -164,7 +171,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 
 		public bool Backup(string fileId)
 		{
-			if (!CheckConnection()) {
+			if (!CheckConnection() || Online == null) {
 				return false;
 			}
 
@@ -183,6 +190,10 @@ namespace GanttTracker.TaskManager.TaskStorage
 
 		public bool Restore (string fileId)
 		{
+			if (Online == null) {
+				return false;
+			}
+
 			Online.Authorize ();
 			byte[] raw;
 			try
@@ -194,8 +205,12 @@ namespace GanttTracker.TaskManager.TaskStorage
 			}
 
 			using (Stream s = new MemoryStream (raw)) {
-				Storage = new DataSet();
-				Storage.ReadXml (s, XmlReadMode.Auto);
+				var onlineStorage = new DataSet();
+				onlineStorage.ReadXml (s, XmlReadMode.Auto);
+				if (Storage != null)
+					Storage.Merge(onlineStorage);
+				else
+					Storage = onlineStorage;
 			}
 
 			return true;

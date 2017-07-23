@@ -16,6 +16,10 @@ namespace GanttMonoTracker
             Credentials = credentials;
         }
 
+		/// <summary>
+		/// Authorize this instance.
+		/// to setup credentials : https://console.developers.google.com/apis/library
+		/// </summary>
         public void Authorize()
         {
             //Scopes for use with the Google Drive API
@@ -31,7 +35,7 @@ namespace GanttMonoTracker
                                       Credentials.Scopes,
                                       Environment.UserName, 
                                       CancellationToken.None,
-                                      new FileDataStore("GMT")).Result;
+                                      new FileDataStore("gmt")).Result;
         }
 
         public GDriveCredentials Credentials { get; set; }
