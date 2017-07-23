@@ -41,10 +41,10 @@ namespace GanttTracker
 
             //check single open
             bool single;
-            if (bool.TryParse (ConfigurationManager.AppSettings ["single"], out single) && single)
+            if (bool.TryParse(ConfigurationManager.AppSettings["single"], out single) && single)
             {
-                var procName = Path.GetFileNameWithoutExtension (Assembly.GetExecutingAssembly ().Location);
-                var procList = Process.GetProcessesByName (procName);
+                var procName = Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
+                var procList = Process.GetProcessesByName(procName);
                 if (procList.Length > 1)
                 {
                     return;
@@ -53,19 +53,19 @@ namespace GanttTracker
 
             try
             {
-                Application.Init ();
+                Application.Init();
                 UnhandledExceptionHandler h = new UnhandledExceptionHandler(OnError);
                 ExceptionManager.UnhandledException += h;
                 mainForm = new MainForm();
                 bool autoopen;
-                if(bool.TryParse( ConfigurationManager.AppSettings["autoopen"], out autoopen) && autoopen)
+                if (bool.TryParse(ConfigurationManager.AppSettings["autoopen"], out autoopen) && autoopen)
                 {
                     mainForm.OnRecentProject(this, EventArgs.Empty);
                 }
 
                 Application.Run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ShowError(ex);
             }
@@ -73,7 +73,7 @@ namespace GanttTracker
 
         public static void Main(string[] args)
         {
-            new GanttTrackerApp (args);
+            new GanttTrackerApp(args);
         }
 
         void OnError(UnhandledExceptionEventArgs args)
@@ -85,13 +85,13 @@ namespace GanttTracker
         void ShowError(Exception ex)
         {
             var silentexceptions = ConfigurationManager.AppSettings["silentexceptions"];
-            if(silentexceptions != null && ex != null && silentexceptions.Split(';').Any(s => ex.ToString().IndexOf(s) >= 0 ) )
+            if (silentexceptions != null && ex != null && silentexceptions.Split(';').Any(s => ex.ToString().IndexOf(s) >= 0))
             {
                 return;
             }
 
             Console.WriteLine("--------------------------Appication Exception-----------------");
-            if(ex == null)
+            if (ex == null)
             {
                 Console.WriteLine("unknown");
                 return;
@@ -99,7 +99,7 @@ namespace GanttTracker
 
             Console.WriteLine(ex.ToString());
 
-            IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex,mainForm);
+            IGuiMessageDialog dialog = MessageFactory.CreateErrorDialog(ex, mainForm);
             dialog.ShowDialog();
         }
     }

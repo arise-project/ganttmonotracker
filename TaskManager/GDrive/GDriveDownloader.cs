@@ -1,44 +1,46 @@
-﻿using Google.Apis.Drive.v2;
+﻿using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using System;
-using Google.Apis.Drive.v2.Data;
+using Google.Apis.Drive.v3.Data;
 
 namespace GanttMonoTracker
 {
-	public class GDriveDownloader
-	{
-		public byte [] Download(GDriveCredentials cred, string fileId)
-		{
-            var service = new DriveService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = cred.Credential,
-                ApplicationName = "Gantt Mono Tracker",
-            });
+    public class GDriveDownloader
+    {
+        public byte[] Download(GDriveCredentials cred, string fileId)
+        {
+            //var service = new DriveService(new BaseClientService.Initializer()
+            //{
+            //    HttpClientInitializer = cred.Credential,
+            //    ApplicationName = "Gantt Mono Tracker",
+            //});
 
-			var l = service.Files.List ();
-			var list = l.Execute ();
-			File file1 = null;
-			foreach (var f in list.Items) {
-				if (f.Description == "Gantt Mono Tracker project") {
-					file1 = f;
-				}
-			}
+            //var l = service.Files.List();
+            //var list = l.Execute();
+            //File file1 = null;
+            //foreach (var f in list.Items)
+            //{
+            //    if (f.Description == "Gantt Mono Tracker project")
+            //    {
+            //        file1 = f;
+            //    }
+            //}
 
-			var request = service.Files.Get(file1.Id);
-		    var file = request.Execute();
-            
-		    if (!string.IsNullOrEmpty(file.DownloadUrl))
-		    {
-                var stream = service.HttpClient.GetStreamAsync(file.DownloadUrl);
-                using (var s = stream.Result)
-		        {
-		            return ReadToEnd(s);
-		        }
-		    }
-            
+            //var request = service.Files.Get(file1.Id);
+            //var file = request.Execute();
+
+            //if (!string.IsNullOrEmpty(file.DownloadUrl))
+            //{
+            //    var stream = service.HttpClient.GetStreamAsync(file.DownloadUrl);
+            //    using (var s = stream.Result)
+            //    {
+            //        return ReadToEnd(s);
+            //    }
+            //}
+
             throw new InvalidOperationException();
-		}
-        
+        }
+
         public static byte[] ReadToEnd(System.IO.Stream stream)
         {
             long originalPosition = 0;
@@ -91,5 +93,5 @@ namespace GanttMonoTracker
                 }
             }
         }
-	}
+    }
 }

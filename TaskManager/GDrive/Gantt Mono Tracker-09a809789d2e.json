@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "gantt-mono-tracker",
+  "private_key_id": "09a809789d2e7d0d81384c824c2f019abcba9c9f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCjSwvSP6ICowDv\nr0eyjpL1NuLVkbrqr/cFJMcmzni1YSlSXDwmXDtJJC1eXukLIffqoJDGl0ceVJ89\nTLig6Bd0dPbuUV27i5j1XAIvxjUewUyxkP4xv5uHFs7rQE26XODW24IJgzdfbPZW\nSDhesEOVNGijAvlxH24CFQZ+XCwbFCfb8W2K9PamXuLptCLgbC+x/LgfuypE9BoD\nueuMuxPCy7+aU3nTiP1VbxtNX+OsjPESOzzhMNWHzYoLIlteYOp/kGRXxKM9fQC4\nedIyNIxKaVzbybTRITpE7H/OQ2UNv8eg6r7Zp9NV9Tdz+Jzb2Rp1H2DZ9VaKiuyI\njIQVFZ/PAgMBAAECggEAS+S3yE6Z4kbXSw74sETyiXSqhZ93M9d35BSdWOxyjr5r\nQaOrsxp/1XUyft92yZ1Oh+Z7k0lBHRgwcIGld+eW6yHnmIkJmv59J2BNhd3F15b4\nqbidZArNYsJXhmA7IAhF2aZo8DnjtP7EGQL07BFZP9H9ZfIedBSrAN27yGPXffen\nfvikSRZf3LkAphJjuXZrKrtDhDqxGYN6S8+kAGcBAqOHa+kxch49rKreYvteFS0v\nfpxJO3sxxs35u0SwTyB3I3eV83fuhXG+OFRA7LI+FdLKjYQBt1iwMTFPh/AOvbbs\nKd7Fa+d/Qt5qUzazrIHi+rMaYGffc1rzxUptihaO9QKBgQDkS0OF1FGE7mUiWdwF\nbrQ4ktmgx6pBFU8BHOsAJTXbL4augHbrKz2OGUxPNtm2tfy104mrnKVQLgD/BCtQ\noaafC0jScA1AxjpW3JppCb56nX1jZ/k9W9KsYvAl9+TtaHm58+wkY1B7g9Xq2ieo\n+8bGjMl5OgT6cvdc1dFDMCSPGwKBgQC3HE7a9jN8pvhTEf9f56Rz9DT6ceEJFpgm\nzfkkQtry3LI/DKtoiSQ1MHUWEzCHKkh3oBI51Rm/9MG53kMeqF2BdWQr5vgleYXx\n9y8FcBecjok1cjIo5+Vg8tQbmWWm3EFTrNxRi/ImdjD0pljl5YvzbRtJRxvKrqED\nBz4FqrwZXQKBgFhSkgYV1ZATV0dJ8qibYtg8YDwm40SYxN8OXBDLVKG/KmEazGdB\nbGgse2xuMR7SG7oQ5ENjsEVr9vCyoTtpvvfrOrpHpaj4yBtQ7+BRZ8MyaQ9ra28E\ntmYBRR27YXNEJ0v9BdAyKDIRGFLrIcrr1cR9NXlULBblIbRl+LcAyjQfAoGAayiM\n2UU1smBAeNTSf3yfWCB1FI+qY1guqJ7ni5n4aiJPyegPM7j2UI5QJyAJyUAscp1h\nrSiRzi1dZfm1i+558jYR7kNXuw6YHZdLlEIZ/0vG7lkrE5dKPGc/S/uEapcBQAes\nU6iziGCom7Px2HBya33Rdxu/Huj9XzlQyZ42QB0CgYAMeHKV/8gQPx3mqY66p3UZ\n4iMPnAukXObiUVS74QS1zew2FO22t60ax98DdjHKXeNpQdXpKeYXn14z0YYNSEeI\n8jWwAH55FxmzkNa2G25QL8hlDaOZ2Z5dbYgpmSIAD4QQyEkpqjY4HSrBF/RWpkr+\nca6PT9EunOPpYQZvr7b0FA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "gmt-132@gantt-mono-tracker.iam.gserviceaccount.com",
+  "client_id": "104872811671042460923",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gmt-132%40gantt-mono-tracker.iam.gserviceaccount.com"
+}
