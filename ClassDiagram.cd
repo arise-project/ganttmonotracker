@@ -3,7 +3,7 @@
   <Class Name="GanttMonoTracker.DrawingPresentation.AssigmentDiagramm" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="0.5" Y="9" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAgABAAAAAAAAEAAAAABAAAAAAABAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAgAAAAAQAQAAAEAAAAAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>DrawingPresentation\AssigmentDiagram.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -11,7 +11,7 @@
   <Class Name="GanttMonoTracker.DrawingPresentation.GanttDiagramm" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="4.25" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAgBBAAAAEAAAEAAAAABAAAAAAABIAAAAAAA=</HashCode>
+      <HashCode>gAAAAAAAAgBAAAAQEQAAAEAAAAAAAAAAAABIAAAAAAA=</HashCode>
       <FileName>DrawingPresentation\GanttDiagramm.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -65,7 +65,7 @@
   <Class Name="GanttMonoTracker.GuiPresentation.MainForm" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="9" Y="10" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>hiCQAAAARBIIloGFBCUoECKRCBQOmQgJgKAAGYAAAQg=</HashCode>
+      <HashCode>hiCQAAAARBIIloGFBCUoELKRCBQOmQgJgKAAHYAAAQg=</HashCode>
       <FileName>GuiPresentation\MainForm.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -128,7 +128,7 @@
   <Class Name="GanttTracker.TrackerCore" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="5.75" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAYAAAAAAgAAARAClACAAgQAAAAEYFIQgAABIAAIAA=</HashCode>
+      <HashCode>AAAYAAAAAAgAAARAClACAAgQAAAAEYFIYgAABIAAIAA=</HashCode>
       <FileName>TaskManager\TrackerCore.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -178,7 +178,7 @@
   <Class Name="GanttMonoTracker.GDriveManager" Collapsed="true">
     <Position X="15.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAABEAAAAAAAAAQAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAEAEACAAAAAAAAAAAABEAAAAAAAAAQAAAAA=</HashCode>
       <FileName>TaskManager\GDrive\GDriveManager.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -215,7 +215,7 @@
   <Class Name="GanttTracker.StateManager.StateCore" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="8.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABAIABAAAAACAQAAAgAAAAQQAAAAAAMAAAAEBAAAAAA=</HashCode>
+      <HashCode>ABAIABAAAAACAQAAAgAAAAQQAAAAAAMAIAAEBAAAAAA=</HashCode>
       <FileName>StateManager\StateCore.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -238,7 +238,7 @@
   <Class Name="GanttTracker.TaskManager.EmptyTaskManager" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="3" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BpQAUJBAAACogQAQCMAwBIzQABAhAAjJAIAEAGAEAAA=</HashCode>
+      <HashCode>BpQAUJBAAACogQAQCMAwBIzQABAhAAjJAIAEAOAEAAA=</HashCode>
       <FileName>TaskManager\EmptyTaskManaegr.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -262,7 +262,7 @@
   <Class Name="GanttTracker.TaskManager.XmlTaskManager" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="10.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BpQAUJBAAAAogQAYCMAwBIzQABQhQADJAIAkAGAAQAI=</HashCode>
+      <HashCode>BpQAUJBAAAAogQAYCMAwBIzQABQhQADJAIAkAOAAQAI=</HashCode>
       <FileName>TaskManager\XmlTaskManager.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -465,7 +465,7 @@
   <Interface Name="TaskManagerInterface.ITaskManager" Collapsed="true">
     <Position X="0.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AhAAUBBAAAAogAAQCMAwBIzQABAhAADJAIAEAGAAAAA=</HashCode>
+      <HashCode>AhAAUBBAAAAogAAQCMAwBIzQABAhAADJAIAEAOAAAAA=</HashCode>
       <FileName>interface\ITaskManager.cs</FileName>
     </TypeIdentifier>
   </Interface>

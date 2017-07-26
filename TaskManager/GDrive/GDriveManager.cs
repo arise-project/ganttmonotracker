@@ -34,7 +34,7 @@ namespace GanttMonoTracker
         /// Use access_type offline with the Google C# SDK to prevent the need to reauthenticate every hour 
         /// https://gist.github.com/SNiels/d2d39276bdeaeaa4d6b6148a0ab02a48
         /// </summary>
-        public void Authorize()
+        public async void Authorize()
         {
 
             var credFile = "TaskManager\\GDrive\\client_secret_167315580398-e93kt4cfp2qnthgmpgf1hdn5p1u91e9a.apps.googleusercontent.com.json";
@@ -50,6 +50,23 @@ namespace GanttMonoTracker
 
                 var secrets = GoogleClientSecrets.Load(stream).Secrets;
 
+				var credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+				secrets,
+				new[] { Uri.EscapeUriString(DriveService.Scope.DriveReadonly ) },
+				"user",
+					CancellationToken.None);
+
+				var t = credential.Token;
+			/*
+				var calendarService = new CalendarService(new BaseClientService.Initializer
+				{
+					HttpClientInitializer = credential,
+					ApplicationName = "Windows 8.1 Calendar sample"
+				});
+				var calendarListResource = await calendarService.CalendarList.List().ExecuteAsync();
+				*/
+
+				/*
                 IAuthorizationCodeFlow flow =
         new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
         {
@@ -59,16 +76,17 @@ namespace GanttMonoTracker
             //DataStore = new GDriveMemoryDataStore(commonUser, refreshToken)
             DataStore = new GDriveMemoryDataStore()
         });
+        */
 
 
                 //// here is where we Request the user to give us access, or use the Refresh Token that was previously stored in %AppData%
-                //var credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                //  secrets,
-                //  Scopes,
-                //  "user",
-                //  CancellationToken.None,
-                //  new FileDataStore(resultPath, true)).Result;
-
+                /*var credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                  secrets,
+                  Scopes,
+                  "user",
+                  CancellationToken.None,
+                  new FileDataStore(resultPath, true)).Result;
+                  */
             }
 
         }

@@ -96,7 +96,7 @@ namespace GanttTracker.TaskManager.TaskStorage
             {
                 Online = new GDriveManager(new GDriveCredentials(clientId, clientSecret));
                 //TODO: Fix this
-                //Online.Authorize ();
+                Online.Authorize ();
             }
         }
 
