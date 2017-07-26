@@ -12,11 +12,12 @@
       <Breakpoint file="D:\gmt\ganttmonotracker\DrawingPresentation\GanttDiagramm.cs" line="142" column="1" />
       <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" line="77" column="1" />
       <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\TaskStorage\StorageDealer.cs" relfile="TaskManager\TaskStorage\StorageDealer.cs" line="97" column="1" />
+      <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\GDrive\GDriveManager.cs" relfile="TaskManager\GDrive\GDriveManager.cs" line="59" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\MainForm.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="TaskManager\GDrive\GDriveDownloader.cs">
     <Files>
-      <File FileName="GuiPresentation\MainForm.cs" Line="329" Column="1" />
+      <File FileName="GuiPresentation\MainForm.cs" Line="108" Column="22" />
       <File FileName="GuiPresentation\ViewActorDialog.cs" Line="62" Column="32" />
       <File FileName="GuiPresentation\ViewTaskDialog.glade" Line="1" Column="1" />
       <File FileName="GuiPresentation\ViewTaskDialog.cs" Line="24" Column="31" />
@@ -24,9 +25,9 @@
       <File FileName="app.config" Line="12" Column="66" />
       <File FileName="TaskManager\GDrive\GDriveCredentials.cs" Line="16" Column="1" />
       <File FileName="TaskManager\GDrive\GDriveDownloader.cs" Line="15" Column="43" />
-      <File FileName="TaskManager\GDrive\GDriveManager.cs" Line="65" Column="73" />
+      <File FileName="TaskManager\GDrive\GDriveManager.cs" Line="64" Column="10" />
       <File FileName="TaskManager\GDrive\GDriveUploader.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\TaskStorage\StorageDealer.cs" Line="227" Column="20" />
+      <File FileName="TaskManager\TaskStorage\StorageDealer.cs" Line="97" Column="1" />
       <File FileName="StateManager\StateCore.cs" Line="25" Column="101" />
       <File FileName="Main.cs" Line="82" Column="45" />
     </Files>

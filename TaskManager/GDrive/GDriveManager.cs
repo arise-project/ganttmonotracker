@@ -1,28 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
-using Google.Apis.Auth.OAuth2.Flows;
-using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Drive.v3;
-using Google.Apis.Services;
-using Google.Apis.Util.Store;
 
 namespace GanttMonoTracker
 {
     public class GDriveManager
     {
-        static string[] Scopes = { DriveService.Scope.DriveReadonly };
-        static string ApplicationName = "Drive API .NET Quickstart";
+        static string[] Scopes = { DriveService.Scope.DriveFile };
 
-        public GDriveManager(GDriveCredentials credentials)
+        public GDriveManager()
         {
             Uploader = new GDriveUploader();
             Downloader = new GDriveDownloader();
-            Credentials = credentials;
         }
 
         /// <summary>
@@ -49,175 +41,14 @@ namespace GanttMonoTracker
                 //Scopes for use with the Google Drive API
 
                 var secrets = GoogleClientSecrets.Load(stream).Secrets;
+                Credentials = new GDriveCredentials(secrets.ClientId, secrets.ClientSecret);
+                Credentials.Credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
+                secrets,
+                new[] { Uri.EscapeUriString(DriveService.Scope.DriveReadonly) },
+                Environment.UserName,
+                    CancellationToken.None);
+            };
 
-				var credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-				secrets,
-				new[] { Uri.EscapeUriString(DriveService.Scope.DriveReadonly ) },
-				"user",
-					CancellationToken.None);
-
-				var t = credential.Token;
-			/*
-				var calendarService = new CalendarService(new BaseClientService.Initializer
-				{
-					HttpClientInitializer = credential,
-					ApplicationName = "Windows 8.1 Calendar sample"
-				});
-				var calendarListResource = await calendarService.CalendarList.List().ExecuteAsync();
-				*/
-
-				/*
-                IAuthorizationCodeFlow flow =
-        new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
-        {
-            ClientSecrets = secrets,
-            Scopes = new[] { DriveService.Scope.Drive },
-            //DataStore = new FileDataStore("Drive.Api.Auth.Store")
-            //DataStore = new GDriveMemoryDataStore(commonUser, refreshToken)
-            DataStore = new GDriveMemoryDataStore()
-        });
-        */
-
-
-                //// here is where we Request the user to give us access, or use the Refresh Token that was previously stored in %AppData%
-                /*var credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                  secrets,
-                  Scopes,
-                  "user",
-                  CancellationToken.None,
-                  new FileDataStore(resultPath, true)).Result;
-                  */
-            }
-
-        }
-
-
-        internal class GDriveMemoryDataStore : IDataStore
-        {
-            private Dictionary<string, TokenResponse> _store;
-            private Dictionary<string, string> _stringStore;
-
-            //private key password: notasecret
-
-            public GDriveMemoryDataStore()
-            {
-                _store = new Dictionary<string, TokenResponse>();
-                _stringStore = new Dictionary<string, string>();
-            }
-
-            public GDriveMemoryDataStore(string key, string refreshToken)
-            {
-                if (string.IsNullOrEmpty(key))
-                    throw new ArgumentNullException("key");
-                if (string.IsNullOrEmpty(refreshToken))
-                    throw new ArgumentNullException("refreshToken");
-
-                _store = new Dictionary<string, TokenResponse>();
-
-                // add new entry
-                StoreAsync<TokenResponse>(key,
-                    new TokenResponse() { RefreshToken = refreshToken, TokenType = "Bearer" }).Wait();
-            }
-
-            /// <summary>
-            /// Remove all items
-            /// </summary>
-            /// <returns></returns>
-            public async Task ClearAsync()
-            {
-                await Task.Run(() =>
-                {
-                    _store.Clear();
-                    _stringStore.Clear();
-                });
-            }
-
-            /// <summary>
-            /// Remove single entry
-            /// </summary>
-            /// <typeparam name="T"></typeparam>
-            /// <param name="key"></param>
-            /// <returns></returns>
-            public async Task DeleteAsync<T>(string key)
-            {
-                await Task.Run(() =>
-                {
-                    // check type
-                    AssertCorrectType<T>();
-
-                    if (typeof(T) == typeof(string))
-                    {
-                        if (_stringStore.ContainsKey(key))
-                            _stringStore.Remove(key);
-                    }
-                    else if (_store.ContainsKey(key))
-                    {
-                        _store.Remove(key);
-                    }
-                });
-            }
-
-            /// <summary>
-            /// Obtain object
-            /// </summary>
-            /// <typeparam name="T"></typeparam>
-            /// <param name="key"></param>
-            /// <returns></returns>
-            public async Task<T> GetAsync<T>(string key)
-            {
-                // check type
-                AssertCorrectType<T>();
-
-                if (typeof(T) == typeof(string))
-                {
-                    if (_stringStore.ContainsKey(key))
-                        return await Task.Run(() => { return (T)(object)_stringStore[key]; });
-                }
-                else if (_store.ContainsKey(key))
-                {
-                    return await Task.Run(() => { return (T)(object)_store[key]; });
-                }
-                // key not found
-                return default(T);
-            }
-
-            /// <summary>
-            /// Add/update value for key/value
-            /// </summary>
-            /// <typeparam name="T"></typeparam>
-            /// <param name="key"></param>
-            /// <param name="value"></param>
-            /// <returns></returns>
-            public Task StoreAsync<T>(string key, T value)
-            {
-                return Task.Run(() =>
-                {
-                    if (typeof(T) == typeof(string))
-                    {
-                        if (_stringStore.ContainsKey(key))
-                            _stringStore[key] = (string)(object)value;
-                        else
-                            _stringStore.Add(key, (string)(object)value);
-                    }
-                    else
-                    {
-                        if (_store.ContainsKey(key))
-                            _store[key] = (TokenResponse)(object)value;
-                        else
-                            _store.Add(key, (TokenResponse)(object)value);
-                    }
-                });
-            }
-
-            /// <summary>
-            /// Validate we can store this type
-            /// </summary>
-            /// <typeparam name="T"></typeparam>
-            private void AssertCorrectType<T>()
-            {
-                if (typeof(T) != typeof(TokenResponse) && typeof(T) != typeof(string))
-                    throw new NotImplementedException(typeof(T).ToString());
-            }
         }
 
         public GDriveCredentials Credentials { get; set; }

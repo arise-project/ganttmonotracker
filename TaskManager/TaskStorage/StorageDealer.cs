@@ -90,14 +90,7 @@ namespace GanttTracker.TaskManager.TaskStorage
             ConnectionString = connectionString;
             CommandFactory = commandFactory;
             CommandFactory.SetDealer(this);
-            var clientId = ConfigurationManager.AppSettings["GDRIVE_CLIENT_ID"];
-            var clientSecret = ConfigurationManager.AppSettings["GDRIVE_CLIENT_ID"];
-            if (!string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(clientSecret))
-            {
-                Online = new GDriveManager(new GDriveCredentials(clientId, clientSecret));
-                //TODO: Fix this
-                Online.Authorize ();
-            }
+            Online = new GDriveManager();
         }
 
         public void Create()
