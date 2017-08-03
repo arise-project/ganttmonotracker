@@ -22,10 +22,10 @@
       <File FileName="GuiPresentation\ViewTaskDialog.glade" Line="1" Column="1" />
       <File FileName="GuiPresentation\ViewTaskDialog.cs" Line="24" Column="31" />
       <File FileName="GuiPresentation\MainForm.glade" Line="415" Column="31" />
-      <File FileName="app.config" Line="12" Column="66" />
+      <File FileName="app.config" Line="12" Column="12" />
       <File FileName="TaskManager\GDrive\GDriveCredentials.cs" Line="16" Column="1" />
       <File FileName="TaskManager\GDrive\GDriveDownloader.cs" Line="15" Column="43" />
-      <File FileName="TaskManager\GDrive\GDriveManager.cs" Line="64" Column="10" />
+      <File FileName="TaskManager\GDrive\GDriveManager.cs" Line="61" Column="1" />
       <File FileName="TaskManager\GDrive\GDriveUploader.cs" Line="1" Column="1" />
       <File FileName="TaskManager\TaskStorage\StorageDealer.cs" Line="97" Column="1" />
       <File FileName="StateManager\StateCore.cs" Line="25" Column="101" />
