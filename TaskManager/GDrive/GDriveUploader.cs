@@ -1,9 +1,10 @@
 ﻿using System;
-
+using System.IO;
 using Google.Apis.Drive.v3;
 using Google.Apis.Drive.v3.Data;
 using Google.Apis.Services;
 using Google;
+using File = Google.Apis.Drive.v3.Data.File;
 
 namespace GanttMonoTracker
 {
@@ -11,39 +12,26 @@ namespace GanttMonoTracker
     {
         public bool Upload(GDriveCredentials cred, byte[] raw, string fileId)
         {
-            //var service = new DriveService(new BaseClientService.Initializer()
-            //{
-            //    HttpClientInitializer = cred.Credential,
-            //    ApplicationName = "Gantt Mono Tracker",
-            //});
+            var service = new DriveService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = cred.Credential,
+                ApplicationName = "Gantt Mono Tracker",
+            });
 
-            //var body = new File { Title = fileId, Description = "Gantt Mono Tracker project", MimeType = "text/xml" };
+            var body = new File { Name = fileId, Description = "Gantt Mono Tracker project", MimeType = "text/xml" };
 
-            //using (var stream = new System.IO.MemoryStream(raw))
-            //{
-            //    var l = service.Files.List();
-            //    var list = l.Execute();
-            //    File file = null;
-            //    foreach (var f in list.Items)
-            //    {
-            //        if (f.Description == "Gantt Mono Tracker project")
-            //        {
-            //            file = f;
-            //        }
-            //    }
+			//https://developers.google.com/drive/v3/web/manage-uploads
 
-            //    if (file == null || string.IsNullOrEmpty(file.DownloadUrl))
-            //    {
-            //        FilesResource.InsertMediaUpload request = service.Files.Insert(body, stream, "text/plain");
-            //        request.Upload();
-            //    }
-            //    else
-            //    {
-            //        var request = service.Files.Update(body, fileId, stream, "text/plain");
-            //        request.Upload();
-            //    }
-            //}
-
+			FilesResource.CreateMediaUpload request;
+			using (var stream = new MemoryStream(raw))
+			{
+			    request = service.Files.Create(
+			        body, stream, "text/xml");
+			    request.Fields = "id";
+			    request.Upload();
+			}
+			var file = request.ResponseBody;
+		
             return true;
         }
     }
