@@ -111,5 +111,7 @@ namespace TaskManagerInterface
         void UpdateTaskState(IManagerEntity stateEntity);
 
         void UpdateTaskStateConnection(IManagerEntity stateConnectionEntity);
+
+		void Syncronize();
     }
 }

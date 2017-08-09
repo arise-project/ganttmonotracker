@@ -280,5 +280,9 @@ namespace GanttTracker.TaskManager
 		{
 			throw new NotImplementedException();
 		}
+
+		public void Syncronize()
+		{
+		}
 	}
 }

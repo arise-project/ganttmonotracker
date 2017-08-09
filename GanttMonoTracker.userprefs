@@ -15,21 +15,27 @@
       <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\GDrive\GDriveManager.cs" relfile="TaskManager\GDrive\GDriveManager.cs" line="59" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="TaskManager\GDrive\GDriveDownloader.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\MainForm.glade">
     <Files>
-      <File FileName="GuiPresentation\MainForm.cs" Line="108" Column="22" />
+      <File FileName="GuiPresentation\MainForm.cs" Line="270" Column="4" />
       <File FileName="GuiPresentation\ViewActorDialog.cs" Line="62" Column="32" />
       <File FileName="GuiPresentation\ViewTaskDialog.glade" Line="1" Column="1" />
       <File FileName="GuiPresentation\ViewTaskDialog.cs" Line="24" Column="31" />
-      <File FileName="GuiPresentation\MainForm.glade" Line="415" Column="31" />
+      <File FileName="GuiPresentation\MainForm.glade" Line="224" Column="8" />
       <File FileName="app.config" Line="12" Column="12" />
       <File FileName="TaskManager\GDrive\GDriveCredentials.cs" Line="16" Column="1" />
-      <File FileName="TaskManager\GDrive\GDriveDownloader.cs" Line="15" Column="43" />
-      <File FileName="TaskManager\GDrive\GDriveManager.cs" Line="61" Column="1" />
-      <File FileName="TaskManager\GDrive\GDriveUploader.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\TaskStorage\StorageDealer.cs" Line="97" Column="1" />
+      <File FileName="TaskManager\GDrive\GDriveDownloader.cs" Line="6" Column="45" />
+      <File FileName="TaskManager\GDrive\GDriveManager.cs" Line="10" Column="23" />
+      <File FileName="TaskManager\GDrive\GDriveUploader.cs" Line="39" Column="1" />
+      <File FileName="TaskManager\TaskStorage\StorageDealer.cs" Line="22" Column="31" />
       <File FileName="StateManager\StateCore.cs" Line="25" Column="101" />
       <File FileName="Main.cs" Line="82" Column="45" />
+      <File FileName="TaskManager\XmlTaskManager.cs" Line="20" Column="40" />
+      <File FileName="TaskManager\ManagerFactory.cs" Line="12" Column="22" />
+      <File FileName="TaskManager\TrackerCore.cs" Line="64" Column="34" />
+      <File FileName="interface\ITaskManager.cs" Line="12" Column="27" />
+      <File FileName="interface\IStorageMannager.cs" Line="8" Column="22" />
+      <File FileName="TaskManager\EmptyTaskManaegr.cs" Line="262" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />

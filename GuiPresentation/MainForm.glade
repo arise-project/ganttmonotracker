@@ -242,6 +242,14 @@
 		    </widget>
 		   
 		  </child>
+		  <child>
+		    <widget class="GtkMenuItem" id="miGooglePoint">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Google point</property>
+		      <property name="use_underline">True</property>
+		    </widget>
+		   
+		  </child>
 		</widget>
 	      </child>
 	    </widget>

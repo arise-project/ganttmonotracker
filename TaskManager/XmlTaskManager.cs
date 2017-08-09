@@ -5,6 +5,7 @@
 // created on 27.11.2005 at 21:21
 
 using System;
+using System.IO;
 using System.Data;
 using System.Collections;
 
@@ -1058,6 +1059,12 @@ namespace GanttTracker.TaskManager
 		public void BindProject(IManagerEntity taskEntity)
 		{
 			throw new NotImplementedException();
+		}
+
+		public void Syncronize()
+		{
+			fDealer.Restore(Path.GetFileName(fDealer.ConnectionString));
+			fDealer.Backup(Path.GetFileName(fDealer.ConnectionString));
 		}
 
 		#endregion

@@ -83,6 +83,9 @@ namespace GanttMonoTracker.GuiPresentation
 		MenuItem miUpdateFromXml;
 		[WidgetAttribute]
 		MenuItem miExportToHtml;
+		[WidgetAttribute]
+		MenuItem miGooglePoint;
+
 
 		private string searchTask;
 		private string selectedFile;
@@ -261,6 +264,7 @@ namespace GanttMonoTracker.GuiPresentation
 			miUpdateFromXml.Activated += OnUpdateFromXml;
 
 			miExportToHtml.Activated += OnExportToHtml;
+			miGooglePoint.Activated += OnGooglePoint;
 
 			miAbout.Activated += OnAbout;
 
@@ -607,6 +611,11 @@ namespace GanttMonoTracker.GuiPresentation
 		{
 			var html = HtmlHelpders.ToHTMLTable(TaskSource.Tables["Task"]);            
 			File.WriteAllText(ConfigurationManager.AppSettings["webpage"], html);
+		}
+
+		private void OnGooglePoint(object sender, EventArgs args)
+		{
+			TrackerCore.Instance.TaskManager.Syncronize();
 		}
 
 		private void OnWindowDeleteEvent(object sender, DeleteEventArgs a)
