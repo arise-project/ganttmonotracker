@@ -1061,10 +1061,10 @@ namespace GanttTracker.TaskManager
 			throw new NotImplementedException();
 		}
 
-		public void Syncronize()
+		public async System.Threading.Tasks.Task SyncronizeAsync()
 		{
-			fDealer.Restore(Path.GetFileName(fDealer.ConnectionString));
-			fDealer.Backup(Path.GetFileName(fDealer.ConnectionString));
+			await fDealer.RestoreAsync(Path.GetFileName(fDealer.ConnectionString));
+			await fDealer.BackupAsync(Path.GetFileName(fDealer.ConnectionString));
 		}
 
 		#endregion

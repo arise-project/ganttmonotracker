@@ -6,10 +6,11 @@
 
 namespace TaskManagerInterface
 {
-    using System;
-    using System.Data;
+	using System;
+	using System.Data;
+	using System.Threading.Tasks;
 
-    public interface IStorageDealer
+	public interface IStorageDealer
     {
         IDealerCruid CommandFactory
         {
@@ -34,7 +35,7 @@ namespace TaskManagerInterface
             set;
         }
 
-        bool Backup(string fileId);
+        Task<bool> BackupAsync(string fileId);
 
         bool CheckConnection();
 
@@ -48,9 +49,9 @@ namespace TaskManagerInterface
 
         void Load();
 
-        bool Merge(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate);
+        Task<bool> MergeAsync(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate);
 
-        bool Restore(string fileId);
+        Task<bool> RestoreAsync(string fileId);
 
         void Save();
 

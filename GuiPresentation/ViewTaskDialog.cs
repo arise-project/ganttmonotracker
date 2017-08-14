@@ -25,6 +25,15 @@ namespace GanttMonoTracker.GuiPresentation
 
     public class ViewTaskDialog : IGuiTask, IGuiTracker
     {
+		int fActorID = -1;
+		ListStore fActorStore;
+		string fComment;
+		string fDescription;
+		int fStateID = -1;
+		ListStore fStateStore;
+
+		#pragma warning disable 0649
+		#pragma warning disable 0169
         [Glade.Widget]
         Calendar calEndTime;
         [Glade.Widget]
@@ -33,12 +42,7 @@ namespace GanttMonoTracker.GuiPresentation
         ComboBoxEntry cbActor;
         [Glade.Widget]
         ComboBoxEntry cbState;
-        int fActorID = -1;
-        ListStore fActorStore;
-        string fComment;
-        string fDescription;
-        int fStateID = -1;
-        ListStore fStateStore;
+        
         [Glade.Widget]
         Label lbCommentDescription;
         [Glade.Widget]
@@ -48,6 +52,8 @@ namespace GanttMonoTracker.GuiPresentation
         TextView tvComment;
         [Glade.Widget]
         TextView tvDescription;
+		#pragma warning restore 0169
+		#pragma warning restore 0649
 
         public ViewTaskDialog(Window parent, bool isTaskInit)
         {

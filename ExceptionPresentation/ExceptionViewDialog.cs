@@ -25,6 +25,8 @@ namespace GanttMonoTracker.ExceptionPresentation
 
     public class ExceptionViewDialog : IGuiMessageDialog
     {
+		#pragma warning disable 0649
+
         [Glade.Widget]
         private Gtk.Label lbExceptionMessage;
         [Glade.Widget]
@@ -36,6 +38,8 @@ namespace GanttMonoTracker.ExceptionPresentation
         private Gtk.TextView tvComment;
         [Glade.Widget]
         private Gtk.TextView tvExceptionDescription;
+
+		#pragma warning restore 0649
 
         public ExceptionViewDialog(Exception exception, Window parent)
         {

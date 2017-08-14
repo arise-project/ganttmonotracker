@@ -27,17 +27,23 @@ namespace GanttMonoTracker.GuiPresentation
 
     public class ViewSingleStateDialog : IState, IGuiMessageDialog, IDisposable
     {
+		#pragma warning disable 0649
+
         [Widget]
         ColorButton cbtnColor;
         [Widget]
         Entry entName;
+		[Widget]
+		Label lbStateAction;
+
+		#pragma warning restore 0649
+
         private byte fColorBlue;
         private byte fColorGreen;
         private byte fColorRed;
         private int fMappingID;
         string fName;
-        [Widget]
-        Label lbStateAction;
+        
         Dialog thisDialog;
 
         public ViewSingleStateDialog(Window parent)

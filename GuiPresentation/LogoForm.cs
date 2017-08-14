@@ -24,10 +24,13 @@ namespace GanttMonoTracker.GuiPresentation
 
     public class LogoForm : IGuiMessageDialog
     {
+		private Window thisWindow;
         private DrawingArea dwLogo;
         private DataSet fGanttSource;
-        private GanttDiagramm fLogoDiagram;
-        private Window thisWindow;
+		#pragma warning disable 0649
+        
+		private GanttDiagramm fLogoDiagram;
+        
         [Glade.Widget]
         private TextView tvReleaseNews;
 
@@ -36,6 +39,8 @@ namespace GanttMonoTracker.GuiPresentation
         /// </summary>
         [Glade.Widget]
         private VBox vbox1;
+
+		#pragma warning restore 0649
 
         public LogoForm()
         {

@@ -24,6 +24,9 @@ namespace GanttMonoTracker.GuiPresentation
 
     public class ViewConnectionDialog : IGuiConnection
     {
+		#pragma warning disable 0649
+		#pragma warning disable 0169
+
         [Glade.Widget]
         Button btnCancel;
         [Glade.Widget]
@@ -59,6 +62,10 @@ namespace GanttMonoTracker.GuiPresentation
         VBox vbox1;
         [Glade.Widget]
         VBox vbox2;
+
+		#pragma warning restore 0169
+		#pragma warning restore 0649
+
 
         public ViewConnectionDialog(Window parent, DataSet taskStateSource)
         {

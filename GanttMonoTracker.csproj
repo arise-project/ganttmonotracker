@@ -152,6 +152,9 @@
     <Content Include="TaskManager\GDrive\client_secret_167315580398-e93kt4cfp2qnthgmpgf1hdn5p1u91e9a.apps.googleusercontent.com.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="TaskManager\GDrive\client_id.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Google.Apis, Version=1.28.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">

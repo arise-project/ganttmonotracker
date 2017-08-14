@@ -281,8 +281,9 @@ namespace GanttTracker.TaskManager
 			throw new NotImplementedException();
 		}
 
-		public void Syncronize()
+		public System.Threading.Tasks.Task SyncronizeAsync()
 		{
+			return System.Threading.Tasks.Task.FromResult(false);
 		}
 	}
 }

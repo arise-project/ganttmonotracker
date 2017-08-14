@@ -6,10 +6,11 @@
 
 namespace TaskManagerInterface
 {
-    using System;
-    using System.Data;
+	using System;
+	using System.Data;
+	using System.Threading.Tasks;
 
-    public interface ITaskManager : IStorageManager
+	public interface ITaskManager : IStorageManager
     {
         DataSet ActorSource
         {
@@ -112,6 +113,6 @@ namespace TaskManagerInterface
 
         void UpdateTaskStateConnection(IManagerEntity stateConnectionEntity);
 
-		void Syncronize();
+		System.Threading.Tasks.Task SyncronizeAsync();
     }
 }

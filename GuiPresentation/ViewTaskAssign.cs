@@ -25,16 +25,22 @@ namespace GanttMonoTracker.GuiPresentation
 
     public class ViewTaskAssign : IGuiMessageDialog, IDisposable
     {
+		int fActorID;
+		ListStore fActorStore;
+		string fComment;
+
+		#pragma warning disable 0649
+
         [Glade.Widget]
         ComboBoxEntry cbActor;
-        int fActorID;
-        ListStore fActorStore;
-        string fComment;
+        
         [Glade.Widget]
         Label lbAssignAction;
         Dialog thisDialog;
         [Glade.Widget]
         TextView tvComment;
+
+		#pragma warning restore 0649
 
         public ViewTaskAssign(Window parent)
         {

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 
@@ -26,10 +27,10 @@ namespace GanttMonoTracker
         /// Use access_type offline with the Google C# SDK to prevent the need to reauthenticate every hour 
         /// https://gist.github.com/SNiels/d2d39276bdeaeaa4d6b6148a0ab02a48
         /// </summary>
-        public async void Authorize()
+        public async Task AuthorizeAsync()
         {
 
-            var credFile = "TaskManager\\GDrive\\client_secret_167315580398-e93kt4cfp2qnthgmpgf1hdn5p1u91e9a.apps.googleusercontent.com.json";
+            var credFile = "TaskManager\\GDrive\\client_id.json";
             var resultFile = "TaskManager\\GDrive\\connect.json";
             string credPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string resultPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

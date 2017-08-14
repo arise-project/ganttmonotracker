@@ -31,6 +31,13 @@ namespace GanttMonoTracker.GuiPresentation
 
     public class ViewStateDialog : IGuiState, IGuiMessageDialog, IDisposable
     {
+		ListStore fStateSearchDictionaryStore;
+		StateCore stateCore;
+		Dialog thisDialog;
+
+		#pragma warning disable 0649
+		#pragma warning disable 0169
+
         [Glade.Widget]
         Button btnApply;
         [Glade.Widget]
@@ -49,13 +56,13 @@ namespace GanttMonoTracker.GuiPresentation
         Button btnSearch;
         [Glade.Widget]
         Entry entStateSearch;
-        ListStore fStateSearchDictionaryStore;
-        StateCore stateCore;
-        Dialog thisDialog;
+        
         [Glade.Widget]
         TreeView tvState;
         [Glade.Widget]
         TreeView tvStateConnection;
+		#pragma warning restore 0169
+		#pragma warning restore 0649
 
         public ViewStateDialog(Window parent, IGuiCore guiCore)
         {

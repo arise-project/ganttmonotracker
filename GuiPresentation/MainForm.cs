@@ -33,6 +33,7 @@ namespace GanttMonoTracker.GuiPresentation
 
 	public class MainForm : Gtk.Window, IGuiTracker
 	{
+		#pragma warning disable 0649
 		[WidgetAttribute]
 		Button btnAssignTask;
 		[WidgetAttribute]
@@ -46,11 +47,16 @@ namespace GanttMonoTracker.GuiPresentation
 		[WidgetAttribute]
 		Entry entSearchTask;
 
+		#pragma warning restore 0649
+
 		private readonly TreeStore fActorStore = new TreeStore(typeof(int), typeof(string), typeof(string));
 		private FileSelection fFileSelection; // todo : FileChooserWidget
 
 		//                                   id,          status          description,   start time,     end time,      actor,         
 		TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string));
+
+		#pragma warning disable 0649
+
 		[WidgetAttribute]
 		MenuItem miAbout;
 		[WidgetAttribute]
@@ -85,16 +91,18 @@ namespace GanttMonoTracker.GuiPresentation
 		MenuItem miExportToHtml;
 		[WidgetAttribute]
 		MenuItem miGooglePoint;
-
-
-		private string searchTask;
-		private string selectedFile;
-		readonly bool[] taskSort = new bool[6];
 		[WidgetAttribute]
 		TreeView tvActorTree;
 		[WidgetAttribute]
 		TreeView tvTaskTree;
 
+		#pragma warning restore 0649
+
+		private string searchTask;
+		private string selectedFile;
+		readonly bool[] taskSort = new bool[6];
+
+		#pragma warning disable 0649
 		/// <summary>
 		/// Gantt.
 		/// </summary>
@@ -106,6 +114,7 @@ namespace GanttMonoTracker.GuiPresentation
 		/// </summary>
 		[Widget]
 		VBox vbox4;
+		#pragma warning disable 0649
 
 		public MainForm()
 		: base("Gantt Tracker")
@@ -613,9 +622,9 @@ namespace GanttMonoTracker.GuiPresentation
 			File.WriteAllText(ConfigurationManager.AppSettings["webpage"], html);
 		}
 
-		private void OnGooglePoint(object sender, EventArgs args)
+		private async void OnGooglePoint(object sender, EventArgs args)
 		{
-			TrackerCore.Instance.TaskManager.Syncronize();
+			await TrackerCore.Instance.TaskManager.SyncronizeAsync();
 		}
 
 		private void OnWindowDeleteEvent(object sender, DeleteEventArgs a)

@@ -23,10 +23,13 @@ namespace GanttMonoTracker.GuiPresentation
 
     public class ViewActorDialog : IGuiActorView
     {
+		#pragma warning disable 0649
         [Widget]
         private Gtk.Entry entEmail;
         [Widget]
         private Gtk.Entry entName;
+		#pragma warning disable 0649
+
         private string fActorEmail;
         private string fActorName;
         private Gtk.Dialog thisDialog;

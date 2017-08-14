@@ -22,6 +22,9 @@ namespace GanttMonoTracker.ExceptionPresentation
 
     public class MessageViewDialog : IGuiMessageDialog
     {
+		#pragma warning disable 0649
+		#pragma warning disable 0169
+
         [Glade.Widget]
         private Button btnOk;
         [Glade.Widget]
@@ -37,6 +40,9 @@ namespace GanttMonoTracker.ExceptionPresentation
         private Dialog thisDialog;
         [Glade.Widget]
         private TextView tvDescription;
+
+		#pragma warning restore 0169
+		#pragma warning restore 0649
 
         public MessageViewDialog(string type, string subject, string description, Window parent)
         {

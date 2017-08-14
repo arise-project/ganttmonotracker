@@ -16,6 +16,7 @@ using System.Data;
 using TaskManagerInterface;
 using GanttTracker.TaskManager.ManagerException;
 using GanttMonoTracker;
+using System.Threading.Tasks;
 
 namespace GanttTracker.TaskManager.TaskStorage
 {
@@ -163,14 +164,14 @@ namespace GanttTracker.TaskManager.TaskStorage
 
         #region Synckronization
 
-        public bool Backup(string fileId)
+        public async Task<bool> BackupAsync(string fileId)
         {
             if (!CheckConnection() || Online == null)
             {
                 return false;
             }
 
-            Online.Authorize();
+            await Online.AuthorizeAsync();
             Save(ConnectionString);
             var raw = File.ReadAllBytes(ConnectionString);
             try
@@ -184,14 +185,14 @@ namespace GanttTracker.TaskManager.TaskStorage
             }
         }
 
-        public bool Restore(string fileId)
+        public async Task<bool> RestoreAsync(string fileId)
         {
             if (Online == null)
             {
                 return false;
             }
 
-            Online.Authorize();
+            await Online.AuthorizeAsync();
             byte[] raw;
             try
             {
@@ -199,6 +200,7 @@ namespace GanttTracker.TaskManager.TaskStorage
             }
             catch
             {
+				//TODO: write good message here
                 throw;
             }
 
@@ -215,9 +217,9 @@ namespace GanttTracker.TaskManager.TaskStorage
             return true;
         }
 
-        public bool Merge(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate)
+        public async Task<bool> Merge(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate)
         {
-            Online.Authorize();
+            await Online.AuthorizeAsync();
             if (!CheckConnection())
             {
                 return false;
