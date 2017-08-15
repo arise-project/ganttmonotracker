@@ -29,13 +29,12 @@ namespace GanttMonoTracker
         /// </summary>
         public async Task AuthorizeAsync()
         {
+			//TODO: exceptions from async methods hangs app.
 
-            var credFile = "TaskManager\\GDrive\\client_id.json";
-            var resultFile = "TaskManager\\GDrive\\connect.json";
+			var credFile = "TaskManager\\GDrive\\client_secret_861785879528-qovbc1cmjr6fo7itu1684ela6vo7taal.apps.googleusercontent.com.json";
             string credPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string resultPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             credPath = Path.Combine(credPath, credFile);
-            resultPath = Path.Combine(resultPath, resultFile);
             using (var stream =
                 new FileStream(credPath, FileMode.Open, FileAccess.Read))
             {
