@@ -13,7 +13,7 @@ namespace GanttMonoTracker
             var service = new DriveService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = cred.Credential,
-                ApplicationName = "Gantt Mono Tracker",
+                ApplicationName = "GMT",
             });
 
             var l = service.Files.List();
