@@ -197,6 +197,8 @@ namespace GanttTracker.TaskManager.TaskStorage
             try
             {
                 raw = Online.Downloader.Download(Online.Credentials, fileId);
+				if (raw == null)
+					return false;
             }
             catch
             {
@@ -217,7 +219,7 @@ namespace GanttTracker.TaskManager.TaskStorage
             return true;
         }
 
-        public async Task<bool> Merge(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate)
+        public async Task<bool> MergeAsync(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate)
         {
             await Online.AuthorizeAsync();
             if (!CheckConnection())
@@ -229,6 +231,8 @@ namespace GanttTracker.TaskManager.TaskStorage
             try
             {
                 raw = Online.Downloader.Download(Online.Credentials, fileId);
+				if (raw == null)
+					return false;
             }
             catch
             {

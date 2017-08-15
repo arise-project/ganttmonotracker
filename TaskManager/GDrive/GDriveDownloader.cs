@@ -27,6 +27,9 @@ namespace GanttMonoTracker
                 }
             }
 
+			if (file1 == null)
+				return null;
+
 			//https://developers.google.com/drive/v3/web/manage-downloads
             var request = service.Files.Get(file1.Id);
 			using (var s = new MemoryStream())
