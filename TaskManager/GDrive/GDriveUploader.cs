@@ -28,6 +28,21 @@ namespace GanttMonoTracker
 			    request = service.Files.Create(
 			        body, stream, "text/xml");
 			    request.Fields = "id";
+
+				/*{
+				 "error": {
+				  "errors": [
+				   {
+				    "domain": "global",
+				    "reason": "insufficientPermissions",
+				    "message": "Insufficient Permission"
+				   }
+				  ],
+				  "code": 403,
+				  "message": "Insufficient Permission"	
+				 }
+				}*/
+
 			    request.Upload();
 			}
 			var file = request.ResponseBody;

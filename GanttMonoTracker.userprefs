@@ -28,7 +28,7 @@
       <File FileName="TaskManager\GDrive\GDriveManager.cs" Line="34" Column="1" />
       <File FileName="GuiPresentation\MainForm.cs" Line="631" Column="4" />
       <File FileName="interface\IStorageDealler.cs" Line="13" Column="19" />
-      <File FileName="TaskManager\GDrive\GDriveUploader.cs" Line="35" Column="25" />
+      <File FileName="TaskManager\GDrive\GDriveUploader.cs" Line="45" Column="8" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
