@@ -10,7 +10,7 @@ namespace GanttMonoTracker
 {
     public class GDriveManager
     {
-        static string[] Scopes = { DriveService.Scope.DriveFile };
+		static string[] Scopes = { DriveService.Scope.DriveFile, DriveService.Scope.Drive, DriveService.Scope.DriveAppdata, DriveService.Scope.DriveReadonly };
 
         public GDriveManager()
         {
