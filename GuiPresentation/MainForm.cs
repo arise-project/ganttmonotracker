@@ -120,7 +120,7 @@ namespace GanttMonoTracker.GuiPresentation
 		: base("Gantt Tracker")
 		{
 			InitializeComponents();
-
+			this.Shown += BindRecentProjects;
 			var logoWindow = new LogoForm();
 			logoWindow.ShowDialog();
 
@@ -129,6 +129,7 @@ namespace GanttMonoTracker.GuiPresentation
 			TrackerCore.Instance.State = CoreState.EmptyProject;
 			TrackerCore.Instance.BindProject();
 		}
+
 
 		public DataSet ActorSource
 		{
@@ -255,7 +256,6 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 
 			miOpenProject.Activated += OnOpenProject;
-			miRecentProject.Activated += OnRecentProject;
 			miSaveProject.Activated += OnSaveProject;
 			miCloseProject.Activated += OnCloseProject;
 			miExit.Activated += OnExitProgramm;
@@ -338,6 +338,27 @@ namespace GanttMonoTracker.GuiPresentation
 					fTaskStore.SetSortColumnId(c.SortColumnId, taskSort[c.SortColumnId] ? SortType.Ascending : SortType.Descending);
 				};
 			});
+		}
+
+		[GLib.ConnectBefore]
+		void BindRecentProjects(object o, EventArgs args)
+		{
+			var r = TrackerCore.Instance.Recent;
+			if (!string.IsNullOrWhiteSpace(r))
+			{
+				var recentMenu = new Menu();
+
+				//TODO: Submenu not visible
+				//TODO: Recent projects should be limited to a range not to last item
+				var lastItem = new MenuItem("test"); //new MenuItem(System.IO.Path.GetFileNameWithoutExtension(r)) { TooltipText = r };
+				lastItem.Activated += OnRecentProject;
+				recentMenu.Append(lastItem);
+				miRecentProject.Submenu = recentMenu;
+			}
+			else
+			{
+				miRecentProject.Visible = false;
+			}
 		}
 
 		//TODO: what exactly commands will be useed with multyrow selection

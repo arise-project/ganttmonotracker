@@ -76,7 +76,7 @@ namespace GanttTracker.TaskManager
 			Hashtable values = new Hashtable();
 			
 			values.Add("ActorID",DBNull.Value);
-			values.Add("Description", String.Empty);			
+			values.Add("Description", string.Empty);			
 			values.Add("StartTime",DateTime.Now);
 			values.Add("EndTime",DateTime.Now);
 			values.Add("StateID",DBNull.Value);
@@ -252,7 +252,7 @@ namespace GanttTracker.TaskManager
 			
 			DataRow actorRow = actorTable.Rows[0]; 
 			
-			actor.Name = (string)actorRow["Name"].ToString();
+			actor.Name = actorRow["Name"].ToString();
 			actor.Email = actorRow["Email"].ToString();		
 		}
 
