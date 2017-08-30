@@ -219,6 +219,11 @@ namespace GanttTracker.TaskManager.TaskStorage
             return true;
         }
 
+        public async void Revoke()
+        {
+            await Online.Revoke();
+        }
+
         public async Task<bool> MergeAsync(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate)
         {
             await Online.AuthorizeAsync();

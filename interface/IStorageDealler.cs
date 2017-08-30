@@ -53,6 +53,8 @@ namespace TaskManagerInterface
 
         Task<bool> RestoreAsync(string fileId);
 
+        void Revoke();
+
         void Save();
 
         void Save(string connectionString);

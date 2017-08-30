@@ -1065,7 +1065,8 @@ namespace GanttTracker.TaskManager
 		{
 			await fDealer.RestoreAsync(Path.GetFileName(fDealer.ConnectionString));
 			await fDealer.BackupAsync(Path.GetFileName(fDealer.ConnectionString));
-		}
+            fDealer.Revoke();
+        }
 
 		#endregion
 	}

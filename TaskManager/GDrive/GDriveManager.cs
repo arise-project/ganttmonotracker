@@ -31,7 +31,7 @@ namespace GanttMonoTracker
         {
 			//TODO: exceptions from async methods hangs app.
 
-			var credFile = "TaskManager\\GDrive\\client_secret_861785879528-qovbc1cmjr6fo7itu1684ela6vo7taal.apps.googleusercontent.com.json";
+			var credFile = "TaskManager\\GDrive\\client_id.json";
             string credPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string resultPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             credPath = Path.Combine(credPath, credFile);
@@ -56,5 +56,11 @@ namespace GanttMonoTracker
         public GDriveUploader Uploader { get; set; }
 
         public GDriveDownloader Downloader { get; set; }
+
+        public async Task Revoke()
+        {
+            var cancelationSource = new CancellationTokenSource();
+            await Credentials.Credential.RevokeTokenAsync(cancelationSource.Token);
+        }
     }
 }
