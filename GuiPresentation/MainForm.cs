@@ -120,7 +120,6 @@ namespace GanttMonoTracker.GuiPresentation
 		: base("Gantt Tracker")
 		{
 			InitializeComponents();
-			this.Shown += BindRecentProjects;
 			var logoWindow = new LogoForm();
 			logoWindow.ShowDialog();
 
@@ -255,6 +254,8 @@ namespace GanttMonoTracker.GuiPresentation
 				throw new KeyNotFoundException<string>("miCreateProject");
 			}
 
+			BindRecentProjects(this, EventArgs.Empty);
+
 			miOpenProject.Activated += OnOpenProject;
 			miSaveProject.Activated += OnSaveProject;
 			miCloseProject.Activated += OnCloseProject;
@@ -352,8 +353,8 @@ namespace GanttMonoTracker.GuiPresentation
 				//TODO: Recent projects should be limited to a range not to last item
 				var lastItem = new MenuItem("test"); //new MenuItem(System.IO.Path.GetFileNameWithoutExtension(r)) { TooltipText = r };
 				lastItem.Activated += OnRecentProject;
-				recentMenu.Append(lastItem);
-				miRecentProject.Submenu = recentMenu;
+				//miRecentProject.Submenu.Chi(lastItem);
+				//miRecentProject.Submenu = recentMenu;
 			}
 			else
 			{

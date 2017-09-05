@@ -3,6 +3,7 @@ using TaskManagerInterface;
 
 namespace GanttMonoTracker
 {
+	//TODO: this class will be used to create dialog for manage projects and move tasks from one to another and add projects methadata
 	public class Project : IManagerEntity, IProject
 	{
 		public Project(ITaskManager parent)
