@@ -18,7 +18,7 @@
       <Breakpoint file="D:\eugene\ganttmonotracker\GuiPresentation\MainForm.cs" relfile="GuiPresentation\MainForm.cs" line="241" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Resources\readme.txt">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ExceptionPresentation\ExceptionViewDialog.cs">
     <Files>
       <File FileName="TaskManager\GDrive\GDriveDownloader.cs" Line="36" Column="5" />
       <File FileName="TaskManager\TaskStorage\StorageDealer.cs" Line="201" Column="13" />
@@ -29,12 +29,18 @@
       <File FileName="GuiPresentation\MainForm.cs" Line="257" Column="22" />
       <File FileName="interface\IStorageDealler.cs" Line="13" Column="19" />
       <File FileName="TaskManager\GDrive\GDriveUploader.cs" Line="55" Column="1" />
-      <File FileName="TaskManager\TrackerCore.cs" Line="74" Column="15" />
+      <File FileName="TaskManager\TrackerCore.cs" Line="280" Column="6" />
       <File FileName="TaskManager\Project.cs" Line="24" Column="4" />
       <File FileName="GuiPresentation\MainForm.glade" Line="64" Column="3" />
       <File FileName="GuiPresentation\ViewActorDialog.cs" Line="22" Column="32" />
-      <File FileName="Resources\readme.txt" Line="8" Column="1" />
+      <File FileName="Resources\readme.txt" Line="22" Column="13" />
       <File FileName="AssemblyInfo.cs" Line="23" Column="1" />
+      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="56" Column="4" />
+      <File FileName="DrawingPresentation\GanttDiagramm.cs" Line="312" Column="2" />
+      <File FileName="interface\IGuiSource.cs" Line="11" Column="22" />
+      <File FileName="interface\IGanttSource.cs" Line="31" Column="3" />
+      <File FileName="GuiPresentation\LogoForm.cs" Line="90" Column="14" />
+      <File FileName="ExceptionPresentation\ExceptionViewDialog.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />

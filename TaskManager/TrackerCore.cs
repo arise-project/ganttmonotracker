@@ -277,7 +277,7 @@ namespace GanttTracker
 			Gdk.Window parent = drawingarea.GdkWindow;
 			if (GanttPresentation == null)
 				GanttPresentation = new GanttDiagramm();
-			GanttPresentation.DateNowVisible = true;
+			((IGanttSource)GanttPresentation).DateNowVisible = true;
 		}
 
 		public void ShowAboutDialog()

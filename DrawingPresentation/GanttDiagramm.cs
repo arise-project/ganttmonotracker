@@ -28,60 +28,39 @@ namespace GanttMonoTracker.DrawingPresentation
 
     using TaskManagerInterface;
 
-    public class GanttDiagramm : Gtk.DrawingArea, IGuiSource
+    public sealed class GanttDiagramm : Gtk.DrawingArea, IGuiSource, IGanttSource
     {
         private const int FBorderMarginH = 2;
         public const int FBorderMarginV = 2;
         public const int FTaskHeight = 14;
 
-        public GanttDiagramm()
-        {
-            DateNowVisible = true;
-        }
+		bool IGanttSource.DateNowVisible{get;set;} = true;
 
-        public bool DateNowVisible
-        {
-            get;
-            set;
-        }
+        bool IGanttSource.ReadOnly{get;set;}
 
-        public bool ReadOnly
-        {
-            get;
-            set;
-        }
+        public DataSet Source{get;set;}
 
-        public DataSet Source
-        {
-            get;
-            set;
-        }
-
-        public DataSet StaticSource
-        {
-            get;
-            set;
-        }
+        DataSet IGanttSource.StaticSource{get;set;}
 
         // todo : implement refresh
-        public void Refresh()
+        void IGanttSource.Refresh()
         {
-            if (!ReadOnly)
+			if (!((IGanttSource)this).ReadOnly)
             {
                 //this.GdkWindow.ClearArea(fX,fY,fWidth,fHeight);
                 //this.GdkWindow.Show();
             }
         }
 
-        protected override bool OnExposeEvent(EventExpose args)
+        protected override bool OnExposeEvent(EventExpose evnt)
         {
-            var baseResult = base.OnExposeEvent (args);
+            var baseResult = base.OnExposeEvent (evnt);
             if(Source == null && TrackerCore.Instance.TaskManager is EmptyTaskManager)
             {
                 return baseResult;
             }
 
-            Source = StaticSource ?? TrackerCore.Instance.TaskManager.GanttSource;
+            Source = ((IGanttSource)this).StaticSource ?? TrackerCore.Instance.TaskManager.GanttSource;
 
             //ReadGepmetry
             int fX, fY, fWidth,fHeight,fDepth;
@@ -90,242 +69,244 @@ namespace GanttMonoTracker.DrawingPresentation
             fWidth -= 3;
             fHeight -= 3;
 
-            // Insert drawing code here.
-            var grw = Gdk.CairoHelper.Create (GdkWindow);
+			// Insert drawing code here.
+			using (var grw = Gdk.CairoHelper.Create(GdkWindow))
+			{
 
-            //DrawBorder
-            grw.SetSourceRGB(0xff, 0, 0);
+				//DrawBorder
+				grw.SetSourceRGB(0xff, 0, 0);
 
-            grw.MoveTo(FBorderMarginH, FBorderMarginV);
-            grw.LineTo(fWidth - FBorderMarginH, FBorderMarginV);
-            grw.LineTo(fWidth - FBorderMarginH, fHeight - FBorderMarginV);
-            grw.LineTo(FBorderMarginH, fHeight - FBorderMarginV);
-            grw.LineTo(FBorderMarginH, FBorderMarginV);
-            grw.Stroke();
+				grw.MoveTo(FBorderMarginH, FBorderMarginV);
+				grw.LineTo(fWidth - FBorderMarginH, FBorderMarginV);
+				grw.LineTo(fWidth - FBorderMarginH, fHeight - FBorderMarginV);
+				grw.LineTo(FBorderMarginH, fHeight - FBorderMarginV);
+				grw.LineTo(FBorderMarginH, FBorderMarginV);
+				grw.Stroke();
 
-            //DrawTasks
-            var deltaActor = (Source.Tables["Actor"].Rows.Count > 0) ?
-                             (fHeight - 2 * FBorderMarginV) / Source.Tables["Actor"].Rows.Count :
-                             fHeight - 2 * FBorderMarginV;
+				//DrawTasks
+				var deltaActor = (Source.Tables["Actor"].Rows.Count > 0) ?
+								 (fHeight - 2 * FBorderMarginV) / Source.Tables["Actor"].Rows.Count :
+								 fHeight - 2 * FBorderMarginV;
 
-            var v1 = Source.Tables["DataRange"].Rows[0]["MinDate"];
-            var v2 = Source.Tables["DataRange"].Rows[0]["MaxDate"];
-            var firstDate = v1 as DateTime? ?? DateTime.Now;
-            var lastDate = v2 as DateTime? ?? DateTime.Now;
-            var deltaSpan = lastDate.Date.Subtract(firstDate.Date);
+				var v1 = Source.Tables["DataRange"].Rows[0]["MinDate"];
+				var v2 = Source.Tables["DataRange"].Rows[0]["MaxDate"];
+				var firstDate = v1 as DateTime? ?? DateTime.Now;
+				var lastDate = v2 as DateTime? ?? DateTime.Now;
+				var deltaSpan = lastDate.Date.Subtract(firstDate.Date);
 
-            var deltaTask = fWidth;
-            if (deltaSpan.Days > 1)
-            {
-                deltaTask = fWidth / deltaSpan.Days;
-            }
+				var deltaTask = fWidth;
+				if (deltaSpan.Days > 1)
+				{
+					deltaTask = fWidth / deltaSpan.Days;
+				}
 
-            var columns = (lastDate - firstDate).Days + 1;
-            var filled = new bool[columns, 100];
-            var passedState = ConfigurationManager.AppSettings ["passed_state"];
+				var columns = (lastDate - firstDate).Days + 1;
+				var filled = new bool[columns, 100];
+				var passedState = ConfigurationManager.AppSettings["passed_state"];
 
-            foreach(DataRow row in Source.Tables["Task"].Rows)
-            {
-                v1 = row["ActorID"];
-                if ((v1 as int? ?? -1)  < 0) continue;
-                var actorIndex = Source.Tables["Actor"].Rows.Cast<DataRow>().TakeWhile(actorRow => (int) actorRow["ID"] != (int) row["ActorID"]).Count();
+				foreach (DataRow row in Source.Tables["Task"].Rows)
+				{
+					v1 = row["ActorID"];
+					if ((v1 as int? ?? -1) < 0) continue;
+					var actorIndex = Source.Tables["Actor"].Rows.Cast<DataRow>().TakeWhile(actorRow => (int)actorRow["ID"] != (int)row["ActorID"]).Count();
 
-                v1 = row["StartTime"];
-                v2 = row["EndTime"];
-                var startTime = v1 as DateTime? ?? DateTime.Now;
-                var endTime = v2 as DateTime? ?? DateTime.Now;
-                var startSpan = startTime.Subtract(firstDate);
-                var endSpan = endTime.Subtract(firstDate);
+					v1 = row["StartTime"];
+					v2 = row["EndTime"];
+					var startTime = v1 as DateTime? ?? DateTime.Now;
+					var endTime = v2 as DateTime? ?? DateTime.Now;
+					var startSpan = startTime.Subtract(firstDate);
+					var endSpan = endTime.Subtract(firstDate);
 
-                // fill availability matrix
-                var tasksCount = 0;
-                if (columns > (startTime - firstDate).Days && tasksCount  < 99)
-                {
-                    try
-                    {
-                        while (tasksCount < 99 && filled [(startTime - firstDate).Days, tasksCount])
-                        {
-                            tasksCount++;
-                            tasksCount++;
-                        }
+					// fill availability matrix
+					var tasksCount = 0;
+					if (columns > (startTime - firstDate).Days && tasksCount < 99)
+					{
+						try
+						{
+							while (tasksCount < 99 && filled[(startTime - firstDate).Days, tasksCount])
+							{
+								tasksCount++;
+								tasksCount++;
+							}
 
-                        var days = (endTime - startTime).Days + 1;
-                        for (var i = 0; i < days; i++)
-                        {
-                            filled [(startTime - firstDate).Days + i, tasksCount] = true;
-                        }
-                    }
-                    catch(Exception ex)
-                    {
-                        Console.Write((startTime - firstDate).Days);
-                        Console.WriteLine(ex);
-                    }
-                }
+							var days = (endTime - startTime).Days + 1;
+							for (var i = 0; i < days; i++)
+							{
+								filled[(startTime - firstDate).Days + i, tasksCount] = true;
+							}
+						}
+						catch (Exception ex)
+						{
+							Console.Write((startTime - firstDate).Days);
+							Console.WriteLine(ex);
+						}
+					}
 
-                var taskGc = new Gdk.GC(GdkWindow);
+					var taskGc = new Gdk.GC(GdkWindow);
 
-                if (Source.Tables["TaskState"].Select("ID = " + row["StateID"]).Length == 0)
-                {
-                    throw new KeyNotFoundException<object>(row["StateID"]);
-                }
+					if (Source.Tables["TaskState"].Select("ID = " + row["StateID"]).Length == 0)
+					{
+						throw new KeyNotFoundException<object>(row["StateID"]);
+					}
 
-                var list = Source.Tables["TaskState"].Select("ID = " + row["StateID"]);
-                if (list.Length > 0)
-                {
-                    var stateRow = list[0];
+					var list = Source.Tables["TaskState"].Select("ID = " + row["StateID"]);
+					if (list.Length > 0)
+					{
+						var stateRow = list[0];
 
-                    var stateName = (string)stateRow ["Name"];
-                    if(passedState.Split(';').Select(s => s.ToLower()).Contains(stateName.ToLower()))
-                    {
-                        continue;
-                    }
+						var stateName = (string)stateRow["Name"];
+						if (passedState.Split(';').Select(s => s.ToLower()).Contains(stateName.ToLower()))
+						{
+							continue;
+						}
 
-                    try
-                    {
-                        var colorRed = Convert.ToByte(stateRow["ColorRed"]);
-                        var colorGreen = Convert.ToByte(stateRow["ColorGreen"]);
-                        var colorBlue = Convert.ToByte(stateRow["ColorBlue"]);
+						try
+						{
+							var colorRed = Convert.ToByte(stateRow["ColorRed"]);
+							var colorGreen = Convert.ToByte(stateRow["ColorGreen"]);
+							var colorBlue = Convert.ToByte(stateRow["ColorBlue"]);
 
-                        var foregroundColor = new Gdk.Color(colorRed, colorGreen, colorBlue);
-                        var colormap = Colormap.System;
-                        colormap.AllocColor(ref foregroundColor, true, true);
-                        taskGc.Foreground = foregroundColor;
-                        colormap.Dispose();
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                    }
-                }
+							var foregroundColor = new Gdk.Color(colorRed, colorGreen, colorBlue);
+							var colormap = Colormap.System;
+							colormap.AllocColor(ref foregroundColor, true, true);
+							taskGc.Foreground = foregroundColor;
+							colormap.Dispose();
+						}
+						catch (Exception e)
+						{
+							Console.WriteLine(e);
+						}
+					}
 
-                if (lastDate.Date > endTime.Date)
-                {
-                    GdkWindow.DrawRectangle(
-                        taskGc,
-                        true,
-                        startSpan.Days * deltaTask + FBorderMarginH,
-                        actorIndex * deltaActor + FBorderMarginV + FTaskHeight * (tasksCount+1),
-                        (endSpan.Days - startSpan.Days) * deltaTask + deltaTask,
-                        FTaskHeight);
-                }
-                else if (startTime.Date < lastDate.Date)
-                    GdkWindow.DrawRectangle(
-                        taskGc,
-                        true,
-                        startSpan.Days * deltaTask + FBorderMarginH,
-                        actorIndex * deltaActor + FBorderMarginV + FTaskHeight * (tasksCount+1),
-                        (endSpan.Days - startSpan.Days) * deltaTask + FBorderMarginH,
-                        FTaskHeight);
-                else
-                    GdkWindow.DrawRectangle(
-                        taskGc,
-                        true,(startSpan.Days -1) * deltaTask + FBorderMarginH,
-                        actorIndex * deltaActor + FBorderMarginV + FTaskHeight * (tasksCount+1),
-                        (endSpan.Days - startSpan.Days + 1) * deltaTask + FBorderMarginH,
-                        FTaskHeight);
+					if (lastDate.Date > endTime.Date)
+					{
+						GdkWindow.DrawRectangle(
+							taskGc,
+							true,
+							startSpan.Days * deltaTask + FBorderMarginH,
+							actorIndex * deltaActor + FBorderMarginV + FTaskHeight * (tasksCount + 1),
+							(endSpan.Days - startSpan.Days) * deltaTask + deltaTask,
+							FTaskHeight);
+					}
+					else if (startTime.Date < lastDate.Date)
+						GdkWindow.DrawRectangle(
+							taskGc,
+							true,
+							startSpan.Days * deltaTask + FBorderMarginH,
+							actorIndex * deltaActor + FBorderMarginV + FTaskHeight * (tasksCount + 1),
+							(endSpan.Days - startSpan.Days) * deltaTask + FBorderMarginH,
+							FTaskHeight);
+					else
+						GdkWindow.DrawRectangle(
+							taskGc,
+							true, (startSpan.Days - 1) * deltaTask + FBorderMarginH,
+							actorIndex * deltaActor + FBorderMarginV + FTaskHeight * (tasksCount + 1),
+							(endSpan.Days - startSpan.Days + 1) * deltaTask + FBorderMarginH,
+							FTaskHeight);
 
-                if (DateNowVisible)
-                {
-                    var layout = new Layout (PangoContext)
-                    {
-                        Wrap = WrapMode.Word,
-                        FontDescription = FontDescription.FromString ("Tahoma 10")
-                    };
-                    layout.SetMarkup (row ["ID"].ToString ());
+					if (((IGanttSource)this).DateNowVisible)
+					{
+						var layout = new Layout(PangoContext)
+						{
+							Wrap = WrapMode.Word,
+							FontDescription = FontDescription.FromString("Tahoma 10")
+						};
+						layout.SetMarkup(row["ID"].ToString());
 
-                    GdkWindow.DrawLayout (
-                        GdkPalette.InitColor (GdkWindow, ColorEnum.TaskLabel),
-                        startSpan.Days * deltaTask + FBorderMarginH,
-                        actorIndex * deltaActor + FTaskHeight * (tasksCount + 1),
-                        layout);
-                }
+						GdkWindow.DrawLayout(
+							GdkPalette.InitColor(GdkWindow, ColorEnum.TaskLabel),
+							startSpan.Days * deltaTask + FBorderMarginH,
+							actorIndex * deltaActor + FTaskHeight * (tasksCount + 1),
+							layout);
+					}
 
-                GdkPalette.DestroyColor();
-                taskGc.Dispose();
-            }
+					GdkPalette.DestroyColor();
+					taskGc.Dispose();
+				}
 
-            //DrawActorAxis
-            var taskLabelGc = new Gdk.GC (GdkWindow);
-            if (!DateNowVisible) return true;
-            
-            //DrawActorAxis
-            var offsetActor = FBorderMarginV;
-            var foregroundColor2 = new Gdk.Color(0xff, 0, 0);
-            var foregroundColor1 = new Gdk.Color(0, 0, 0xff);
-            var actorLabelGc = new Gdk.GC (GdkWindow);
-            var axisGc = new Gdk.GC (GdkWindow);
+				//DrawActorAxis
+				var taskLabelGc = new Gdk.GC(GdkWindow);
+				if (!((IGanttSource)this).DateNowVisible) return true;
 
-            Colormap.System.AllocColor(ref foregroundColor2,true,true);
-            taskLabelGc.Foreground = foregroundColor2;
-            axisGc.Foreground = foregroundColor1;
+				//DrawActorAxis
+				var offsetActor = FBorderMarginV;
+				var foregroundColor2 = new Gdk.Color(0xff, 0, 0);
+				var foregroundColor1 = new Gdk.Color(0, 0, 0xff);
+				var actorLabelGc = new Gdk.GC(GdkWindow);
+				var axisGc = new Gdk.GC(GdkWindow);
 
-            foreach(DataRow row in Source.Tables["Actor"].Rows)
-            {
-                var layout = new Layout(PangoContext)
-                {
-                    Wrap = WrapMode.Word,
-                    FontDescription = FontDescription.FromString("Tahoma 10")
-                };
-                v1 = row["Name"];
-                layout.SetMarkup(v1?.ToString() ?? "<unknown>");
+				Colormap.System.AllocColor(ref foregroundColor2, true, true);
+				taskLabelGc.Foreground = foregroundColor2;
+				axisGc.Foreground = foregroundColor1;
 
-                GdkWindow.DrawLayout(actorLabelGc,
-                    FBorderMarginH,
-                    offsetActor - FBorderMarginV,layout);
-                GdkWindow.DrawLine(axisGc,
-                    FBorderMarginH,
-                    offsetActor,
-                    fWidth - FBorderMarginH, offsetActor);
-                offsetActor += deltaActor;
-            }
+				foreach (DataRow row in Source.Tables["Actor"].Rows)
+				{
+					var layout = new Layout(PangoContext)
+					{
+						Wrap = WrapMode.Word,
+						FontDescription = FontDescription.FromString("Tahoma 10")
+					};
+					v1 = row["Name"];
+					layout.SetMarkup(v1?.ToString() ?? "<unknown>");
 
-            axisGc.Dispose ();
+					GdkWindow.DrawLayout(actorLabelGc,
+						FBorderMarginH,
+						offsetActor - FBorderMarginV, layout);
+					GdkWindow.DrawLine(axisGc,
+						FBorderMarginH,
+						offsetActor,
+						fWidth - FBorderMarginH, offsetActor);
+					offsetActor += deltaActor;
+				}
 
-            //DrawDateAxis
-            var labelDate1 = firstDate;
-            var offset1 = FBorderMarginH;
-            for (var i = 0; i < deltaSpan.Days; i++)
-            {
-                var layout = new Layout(PangoContext)
-                {
-                    Wrap = WrapMode.Word,
-                    FontDescription = FontDescription.FromString("Tahoma 10")
-                };
-                layout.SetMarkup(labelDate1.ToString("dd/MM"));
+				axisGc.Dispose();
 
-                GdkWindow.DrawLayout(actorLabelGc,
-                    offset1 + FBorderMarginH,
-                    fHeight -2 * FBorderMarginV - FTaskHeight,
-                    layout);
+				//DrawDateAxis
+				var labelDate1 = firstDate;
+				var offset1 = FBorderMarginH;
+				for (var i = 0; i < deltaSpan.Days; i++)
+				{
+					var layout = new Layout(PangoContext)
+					{
+						Wrap = WrapMode.Word,
+						FontDescription = FontDescription.FromString("Tahoma 10")
+					};
+					layout.SetMarkup(labelDate1.ToString("dd/MM"));
 
-                GdkWindow.DrawLine(axisGc,
-                    offset1,
-                    FBorderMarginV,
-                    offset1,
-                    fHeight - FBorderMarginV);
-                offset1 += deltaTask;
-                labelDate1 = labelDate1.AddDays(1);
-            }
+					GdkWindow.DrawLayout(actorLabelGc,
+						offset1 + FBorderMarginH,
+						fHeight - 2 * FBorderMarginV - FTaskHeight,
+						layout);
 
-            actorLabelGc.Dispose ();
+					GdkWindow.DrawLine(axisGc,
+						offset1,
+						FBorderMarginV,
+						offset1,
+						fHeight - FBorderMarginV);
+					offset1 += deltaTask;
+					labelDate1 = labelDate1.AddDays(1);
+				}
 
-            //DrawDateNow
-            var nowSpan = DateTime.Now.Subtract(firstDate);
+				actorLabelGc.Dispose();
 
-            var offsetDate = FBorderMarginH + (int)(deltaTask*(double)nowSpan.Ticks / TimeSpan.TicksPerDay);
+				//DrawDateNow
+				var nowSpan = DateTime.Now.Subtract(firstDate);
 
-            grw.SetSourceRGB(0, 0, 0);
-            grw.MoveTo(offsetDate,
-                FBorderMarginV);
-            grw.LineTo (offsetDate,
-                fHeight - FBorderMarginV);
-            grw.RelLineTo (new Distance { Dx = -3, Dy = 0 });
-            grw.RelLineTo (new Distance { Dx = 3, Dy = -3 });
-            grw.RelLineTo (new Distance { Dx = 3, Dy = 3 });
-            grw.RelLineTo (new Distance { Dx = -3, Dy = 0 });
-            grw.Stroke();
+				var offsetDate = FBorderMarginH + (int)(deltaTask * (double)nowSpan.Ticks / TimeSpan.TicksPerDay);
 
-            return true;
+				grw.SetSourceRGB(0, 0, 0);
+				grw.MoveTo(offsetDate,
+					FBorderMarginV);
+				grw.LineTo(offsetDate,
+					fHeight - FBorderMarginV);
+				grw.RelLineTo(new Distance { Dx = -3, Dy = 0 });
+				grw.RelLineTo(new Distance { Dx = 3, Dy = -3 });
+				grw.RelLineTo(new Distance { Dx = 3, Dy = 3 });
+				grw.RelLineTo(new Distance { Dx = -3, Dy = 0 });
+				grw.Stroke();
+			}
+
+			return true;
         }
     }
 }

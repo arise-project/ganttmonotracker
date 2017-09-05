@@ -58,10 +58,13 @@ namespace GanttMonoTracker.GuiPresentation
             ReadMe();
 
             // Assigment
-            dwLogo = new GanttDiagramm ()
-            {
-                ReadOnly = true, StaticSource = GetLogoSource(), DateNowVisible = false
-            };
+            dwLogo = new GanttDiagramm ();
+			//TODO: move readonly to strategy
+			var ganttSource = ((IGanttSource)dwLogo);
+			ganttSource.ReadOnly = true;
+			ganttSource.StaticSource = GetLogoSource();
+			ganttSource.DateNowVisible = false;
+
             var readme = vbox1.Children [1];
             var readme1 = vbox1.Children [2];
             vbox1.Remove (readme1);

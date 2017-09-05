@@ -132,6 +132,7 @@
     <Compile Include="TaskManager\Project.cs" />
     <Compile Include="interface\IProject.cs" />
     <Compile Include="Sunchronization\HtmlHelpders.cs" />
+    <Compile Include="interface\IGanttSource.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
