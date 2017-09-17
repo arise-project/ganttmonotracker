@@ -25,7 +25,7 @@ namespace GanttTracker.TaskManager
 
 		DataSet fAssigmentSource;
 
-		IStorageDealer fDealer;
+		IStorageRepository fRepository;
 
 		public XmlTaskManager(string connectionString)
 		{
@@ -35,13 +35,13 @@ namespace GanttTracker.TaskManager
 
 		private void Initialize()
 		{
-			fDealer = new StorageDealer(fConnectionString,new CommandFactory());
-			if (!fDealer.CheckConnection())
+			fRepository = new StorageRepository(fConnectionString,new CommandFactory());
+			if (!fRepository.CheckConnection())
 			{
 				throw new ManagementException(ExceptionType.NotAllowed,"Check connection failed for connection string " + fConnectionString);
 			}
 
-			fDealer.Load(); 
+			fRepository.Load(); 
 		}
 	
 	   #region Tasks
@@ -51,7 +51,7 @@ namespace GanttTracker.TaskManager
 			get
 			{
 				DataSet taskSource = new DataSet("TaskSource");
-				taskSource.Tables.Add(fDealer.Storage.Tables["Task"].Copy());
+				taskSource.Tables.Add(fRepository.Storage.Tables["Task"].Copy());
 				return taskSource;
 			}
 			
@@ -71,7 +71,7 @@ namespace GanttTracker.TaskManager
 
 		public IManagerEntity CreateTask()
 		{
-			IStorageCommand createTaskCommand = fDealer.CommandFactory.GetInsertCommand("Task");
+			IStorageCommand createTaskCommand = fRepository.CommandFactory.GetInsertCommand("Task");
 			
 			Hashtable values = new Hashtable();
 			
@@ -83,7 +83,7 @@ namespace GanttTracker.TaskManager
 					
 			createTaskCommand.SetParam("Values",values);
 			
-			int id = (int)fDealer.ExecuteScalar(createTaskCommand);		
+			int id = (int)fRepository.ExecuteScalar(createTaskCommand);		
 			 
 			Task task = new Task(this, id);
 			BindTask(task);
@@ -95,14 +95,14 @@ namespace GanttTracker.TaskManager
 		{
 			Task task = (Task)taskEntity;
 			
-			IStorageCommand taskCommand = fDealer.CommandFactory.GetSelectCommand("Task");
+			IStorageCommand taskCommand = fRepository.CommandFactory.GetSelectCommand("Task");
 
 			Hashtable rules = new Hashtable();
 			rules.Add("UniqueID","ID = " + task.Id);
 			
 			taskCommand.SetParam("Rules",rules);
 			
-			DataTable taskTable = fDealer.ExecuteDataSet(taskCommand).Tables[0];
+			DataTable taskTable = fRepository.ExecuteDataSet(taskCommand).Tables[0];
 			if (taskTable.Rows.Count > 1)
 			{
 				throw new ManagementException(ExceptionType.ValidationFailed,"more when one task for id " + task.Id);
@@ -135,7 +135,7 @@ namespace GanttTracker.TaskManager
 		{
 			Task task = (Task)taskEntity;
 			
-			IStorageCommand updateTaskCommand = fDealer.CommandFactory.GetUpdateCommand("Task");
+			IStorageCommand updateTaskCommand = fRepository.CommandFactory.GetUpdateCommand("Task");
 
 			Hashtable values = new Hashtable();
 			
@@ -154,7 +154,7 @@ namespace GanttTracker.TaskManager
 			
 			updateTaskCommand.SetParam("Rules",rules);
 			
-			fDealer.ExecuteNonQuery(updateTaskCommand);			
+			fRepository.ExecuteNonQuery(updateTaskCommand);			
 		}
 
 		public bool IsUpdatedTask(IManagerEntity taskEntity)
@@ -175,14 +175,14 @@ namespace GanttTracker.TaskManager
 
 		public void DeleteTask(int id)
 		{
-			IStorageCommand deleteTaskCommand = fDealer.CommandFactory.GetDeleteCommand("Task");
+			IStorageCommand deleteTaskCommand = fRepository.CommandFactory.GetDeleteCommand("Task");
 
 			Hashtable rules = new Hashtable();
 			rules.Add("UniqueID","ID = " + id);
 			
 			deleteTaskCommand.SetParam("Rules",rules);
 			
-			fDealer.ExecuteNonQuery (deleteTaskCommand);
+			fRepository.ExecuteNonQuery (deleteTaskCommand);
 		}	
 		
 		#endregion
@@ -194,7 +194,7 @@ namespace GanttTracker.TaskManager
 			get
 			{
 				DataSet actorSource = new DataSet("ActorSource");
-				actorSource.Tables.Add(fDealer.Storage.Tables["Actor"].Copy());				
+				actorSource.Tables.Add(fRepository.Storage.Tables["Actor"].Copy());				
 				return actorSource;
 			}
 			
@@ -214,7 +214,7 @@ namespace GanttTracker.TaskManager
 
 		public IManagerEntity CreateActor()
 		{
-			IStorageCommand createActorCommand = fDealer.CommandFactory.GetInsertCommand("Actor");
+			IStorageCommand createActorCommand = fRepository.CommandFactory.GetInsertCommand("Actor");
 
 			Hashtable values = new Hashtable();
 			
@@ -223,7 +223,7 @@ namespace GanttTracker.TaskManager
 					
 			createActorCommand.SetParam("Values",values);
 			
-			int id = (int)fDealer.ExecuteScalar(createActorCommand); 
+			int id = (int)fRepository.ExecuteScalar(createActorCommand); 
 			Actor actor = new Actor(this, id);
 			BindActor(actor);
 			
@@ -234,14 +234,14 @@ namespace GanttTracker.TaskManager
 		{
 			Actor actor = (Actor)actorEntity;
 			
-			IStorageCommand actorCommand = fDealer.CommandFactory.GetSelectCommand("Actor");
+			IStorageCommand actorCommand = fRepository.CommandFactory.GetSelectCommand("Actor");
 
 			Hashtable rules = new Hashtable();
 			rules.Add("UniqueID","ID = " + actor.Id);
 			
 			actorCommand.SetParam("Rules",rules);
 			
-			DataTable actorTable = fDealer.ExecuteDataSet(actorCommand).Tables[0];
+			DataTable actorTable = fRepository.ExecuteDataSet(actorCommand).Tables[0];
 			if (actorTable.Rows.Count > 1)
 			{
 				throw new ManagementException(ExceptionType.ValidationFailed,"more when one actor for id " + actor.Id);
@@ -260,7 +260,7 @@ namespace GanttTracker.TaskManager
 		{
 			Actor actor = (Actor)actorEntity;
 			
-			IStorageCommand updateActorCommand = fDealer.CommandFactory.GetUpdateCommand("Actor");
+			IStorageCommand updateActorCommand = fRepository.CommandFactory.GetUpdateCommand("Actor");
 
 			Hashtable values = new Hashtable();
 			
@@ -274,7 +274,7 @@ namespace GanttTracker.TaskManager
 			
 			updateActorCommand.SetParam("Rules",rules);
 			
-			fDealer.ExecuteNonQuery(updateActorCommand);
+			fRepository.ExecuteNonQuery(updateActorCommand);
 		}
 
 		public bool IsUpdatedActor(IManagerEntity actorEntity)
@@ -293,14 +293,14 @@ namespace GanttTracker.TaskManager
 
 		public void DeleteActor(int id)
 		{
-			IStorageCommand deleteActorCommand = fDealer.CommandFactory.GetDeleteCommand("Actor");
+			IStorageCommand deleteActorCommand = fRepository.CommandFactory.GetDeleteCommand("Actor");
 
 			Hashtable rules = new Hashtable();
 			rules.Add("UniqueID","ID = " + id);
 			
 			deleteActorCommand.SetParam("Rules",rules);
 			
-			fDealer.ExecuteNonQuery (deleteActorCommand);
+			fRepository.ExecuteNonQuery (deleteActorCommand);
 		}		
 		
 		#endregion
@@ -342,13 +342,13 @@ namespace GanttTracker.TaskManager
 		{
 			get
 			{
-				IStorageCommand taskCommand = fDealer.CommandFactory.GetSelectCommand("Task");
+				IStorageCommand taskCommand = fRepository.CommandFactory.GetSelectCommand("Task");
 			
 				Hashtable rules = new Hashtable();				
 				
 				taskCommand.SetParam("Rules",rules);
 				
-				DataTable taskTable = fDealer.ExecuteDataSet(taskCommand).Tables[0];
+				DataTable taskTable = fRepository.ExecuteDataSet(taskCommand).Tables[0];
 				
 				DateTime firstDate;
 				if (taskTable == null)
@@ -379,13 +379,13 @@ namespace GanttTracker.TaskManager
 		{
 			get
 			{
-				IStorageCommand taskCommand = fDealer.CommandFactory.GetSelectCommand("Task");
+				IStorageCommand taskCommand = fRepository.CommandFactory.GetSelectCommand("Task");
 			
 				Hashtable rules = new Hashtable();
 				
 				taskCommand.SetParam("Rules",rules);
 				
-				DataTable taskTable = fDealer.ExecuteDataSet(taskCommand).Tables[0];
+				DataTable taskTable = fRepository.ExecuteDataSet(taskCommand).Tables[0];
 				
 				DateTime lastDate;
 				if (taskTable == null)
@@ -524,7 +524,7 @@ namespace GanttTracker.TaskManager
 			get
 			{
 				DataSet stateSource = new DataSet("TaskStateSource");
-				stateSource.Tables.Add(fDealer.Storage.Tables["TaskState"].Copy());				
+				stateSource.Tables.Add(fRepository.Storage.Tables["TaskState"].Copy());				
 				return stateSource;
 			}
 			
@@ -537,14 +537,14 @@ namespace GanttTracker.TaskManager
 		public DataSet GetInitialTaskStateSource()
 		{
 			DataSet stateSource = new DataSet("TaskStateSource");
-			stateSource.Tables.Add(fDealer.Storage.Tables["TaskState"].Copy());				
+			stateSource.Tables.Add(fRepository.Storage.Tables["TaskState"].Copy());				
 			return stateSource;
 		}
 
 		public DataSet GetTaskStateSource(IManagerEntity state)
 		{
 			DataSet stateSource = new DataSet("TaskStateSource");
-			stateSource.Tables.Add(fDealer.Storage.Tables["TaskState"].Copy());				
+			stateSource.Tables.Add(fRepository.Storage.Tables["TaskState"].Copy());				
 			return stateSource;
 		}
 
@@ -558,7 +558,7 @@ namespace GanttTracker.TaskManager
 
 		public IManagerEntity CreateTaskState()
 		{
-			IStorageCommand createTaskStateCommand = fDealer.CommandFactory.GetInsertCommand("TaskState");
+			IStorageCommand createTaskStateCommand = fRepository.CommandFactory.GetInsertCommand("TaskState");
 
 			Hashtable values = new Hashtable();
 			
@@ -578,7 +578,7 @@ namespace GanttTracker.TaskManager
 			values.Add("MappingID",mappintID);
 					
 			createTaskStateCommand.SetParam("Values",values);			
-			int id = (int)fDealer.ExecuteScalar(createTaskStateCommand);
+			int id = (int)fRepository.ExecuteScalar(createTaskStateCommand);
 			Console.WriteLine(id);
 			State state = new State(this, id);
 			BindTaskState(state);
@@ -589,14 +589,14 @@ namespace GanttTracker.TaskManager
 		{
 			State state = (State)stateEntity;
 			
-			IStorageCommand stateCommand = fDealer.CommandFactory.GetSelectCommand("TaskState");
+			IStorageCommand stateCommand = fRepository.CommandFactory.GetSelectCommand("TaskState");
 
 			Hashtable rules = new Hashtable();
 			rules.Add("UniqueID","ID = " + state.Id);
 			
 			stateCommand.SetParam("Rules",rules);
 			
-			DataTable stateTable = fDealer.ExecuteDataSet(stateCommand).Tables[0];
+			DataTable stateTable = fRepository.ExecuteDataSet(stateCommand).Tables[0];
 			if (stateTable.Rows.Count > 1)
 			{
 				throw new ManagementException(ExceptionType.ValidationFailed,"more when one task state for id " + state.Id);
@@ -626,14 +626,14 @@ namespace GanttTracker.TaskManager
 
 			if (connectionsPresent)
 			{
-				IStorageCommand stateConnectionCommand = fDealer.CommandFactory.GetSelectCommand("TaskStateConnection");
+				IStorageCommand stateConnectionCommand = fRepository.CommandFactory.GetSelectCommand("TaskStateConnection");
 
 				Hashtable connectionRules = new Hashtable();
 				rules.Add("ReferenceID","ID = " + state.MappingID);
 				
 				stateConnectionCommand.SetParam("Rules",connectionRules);
 				
-				DataTable stateConnectionTable = fDealer.ExecuteDataSet(stateConnectionCommand).Tables[0];
+				DataTable stateConnectionTable = fRepository.ExecuteDataSet(stateConnectionCommand).Tables[0];
 							
 				foreach(DataRow row in stateConnectionTable.Rows)
 				{
@@ -685,7 +685,7 @@ namespace GanttTracker.TaskManager
 		{
 			State state = (State)stateEntity;
 			
-			IStorageCommand updateStateCommand = fDealer.CommandFactory.GetUpdateCommand("TaskState");
+			IStorageCommand updateStateCommand = fRepository.CommandFactory.GetUpdateCommand("TaskState");
 
 			Hashtable values = new Hashtable();
 			
@@ -711,7 +711,7 @@ namespace GanttTracker.TaskManager
 			
 			updateStateCommand.SetParam("Rules",rules);
 			
-			fDealer.ExecuteNonQuery(updateStateCommand);
+			fRepository.ExecuteNonQuery(updateStateCommand);
 			
 			//store fConnections
 		}
@@ -744,14 +744,14 @@ namespace GanttTracker.TaskManager
 
 		public void DeleteTaskState(int id)
 		{
-			IStorageCommand deleteStateCommand = fDealer.CommandFactory.GetDeleteCommand("TaskState");
+			IStorageCommand deleteStateCommand = fRepository.CommandFactory.GetDeleteCommand("TaskState");
 
 			Hashtable rules = new Hashtable();
 			rules.Add("UniqueID","ID = " + id);
 			
 			deleteStateCommand.SetParam("Rules",rules);
 			
-			fDealer.ExecuteNonQuery (deleteStateCommand);
+			fRepository.ExecuteNonQuery (deleteStateCommand);
 		}
 		
 		#endregion
@@ -763,7 +763,7 @@ namespace GanttTracker.TaskManager
 			get
 			{
 				DataSet connectionSource = new DataSet("TaskStateConnectionSource");
-				connectionSource.Tables.Add(fDealer.Storage.Tables["TaskStateConnection"].Copy());				
+				connectionSource.Tables.Add(fRepository.Storage.Tables["TaskStateConnection"].Copy());				
 				return connectionSource;
 			}
 			
@@ -783,7 +783,7 @@ namespace GanttTracker.TaskManager
 
 		public IManagerEntity CreateTaskStateConnection(IManagerEntity stateEntity, IManagerEntity connectedStateEntity)
 		{
-			IStorageCommand createTaskStateConnectionCommand = fDealer.CommandFactory.GetInsertCommand("TaskStateConnection");
+			IStorageCommand createTaskStateConnectionCommand = fRepository.CommandFactory.GetInsertCommand("TaskStateConnection");
 
 			Hashtable values = new Hashtable();
 			
@@ -809,7 +809,7 @@ namespace GanttTracker.TaskManager
 			values.Add("StateID",connectedState.Id);
 			
 			createTaskStateConnectionCommand.SetParam("Values",values);			
-			int id = (int)fDealer.ExecuteScalar(createTaskStateConnectionCommand);					 
+			int id = (int)fRepository.ExecuteScalar(createTaskStateConnectionCommand);					 
 			Connection connection = new Connection(this, id);
 			BindTaskStateConnection(connection);
 			return connection;
@@ -819,14 +819,14 @@ namespace GanttTracker.TaskManager
 		{
 			Connection connection = (Connection)stateConnectionEntity;
 			
-			IStorageCommand connectionCommand = fDealer.CommandFactory.GetSelectCommand("TaskStateConnection");
+			IStorageCommand connectionCommand = fRepository.CommandFactory.GetSelectCommand("TaskStateConnection");
 
 			Hashtable rules = new Hashtable();
 			rules.Add("UniqueID","ID = " + connection.Id);
 			
 			connectionCommand.SetParam("Rules",rules);
 			
-			DataTable connectionTable = fDealer.ExecuteDataSet(connectionCommand).Tables[0];
+			DataTable connectionTable = fRepository.ExecuteDataSet(connectionCommand).Tables[0];
 			if (connectionTable.Rows.Count > 1)
 			{
 				throw new ManagementException(ExceptionType.ValidationFailed,"more when one task state connection for id " + connection.Id);
@@ -845,7 +845,7 @@ namespace GanttTracker.TaskManager
 		{
 			Connection connection = (Connection)stateConnectionEntity;
 			
-			IStorageCommand updateStateConnectionCommand = fDealer.CommandFactory.GetUpdateCommand("TaskStateConnection");
+			IStorageCommand updateStateConnectionCommand = fRepository.CommandFactory.GetUpdateCommand("TaskStateConnection");
 
 			Hashtable values = new Hashtable();
 			
@@ -860,7 +860,7 @@ namespace GanttTracker.TaskManager
 			
 			updateStateConnectionCommand.SetParam("Rules",rules);
 			
-			fDealer.ExecuteNonQuery(updateStateConnectionCommand);
+			fRepository.ExecuteNonQuery(updateStateConnectionCommand);
 			
 			//store fConnections
 		}
@@ -882,14 +882,14 @@ namespace GanttTracker.TaskManager
 
 		public void DeleteTaskStateConnection(int id)
 		{
-			IStorageCommand deleteStateConnectionCommand = fDealer.CommandFactory.GetDeleteCommand("TaskStateConnection");
+			IStorageCommand deleteStateConnectionCommand = fRepository.CommandFactory.GetDeleteCommand("TaskStateConnection");
 
 			Hashtable rules = new Hashtable();
 			rules.Add("UniqueID","ID = " + id);
 			
 			deleteStateConnectionCommand.SetParam("Rules",rules);
 			
-			fDealer.ExecuteNonQuery (deleteStateConnectionCommand);
+			fRepository.ExecuteNonQuery (deleteStateConnectionCommand);
 		}
 		
 		#endregion
@@ -901,7 +901,7 @@ namespace GanttTracker.TaskManager
 			get
 			{
 				DataSet commentSource = new DataSet("CommentSource");				
-				commentSource.Tables.Add(fDealer.Storage.Tables["Comment"].Copy());				
+				commentSource.Tables.Add(fRepository.Storage.Tables["Comment"].Copy());				
 				return commentSource;
 			}
 			
@@ -921,7 +921,7 @@ namespace GanttTracker.TaskManager
 
 		public IManagerEntity CreateComment(IManagerEntity commentedEntity)
 		{
-			IStorageCommand createCommentCommand = fDealer.CommandFactory.GetInsertCommand("Comment");
+			IStorageCommand createCommentCommand = fRepository.CommandFactory.GetInsertCommand("Comment");
 
 			Hashtable values = new Hashtable();
 			
@@ -1028,14 +1028,14 @@ namespace GanttTracker.TaskManager
 
 		public void DeleteComment(int id)
 		{
-			IStorageCommand deleteCommentCommand = fDealer.CommandFactory.GetDeleteCommand("Comment");
+			IStorageCommand deleteCommentCommand = fRepository.CommandFactory.GetDeleteCommand("Comment");
 
 			Hashtable rules = new Hashtable();
 			rules.Add("UniqueID","ID = " + id);
 			
 			deleteCommentCommand.SetParam("Rules",rules);
 			
-			fDealer.ExecuteNonQuery (deleteCommentCommand);
+			fRepository.ExecuteNonQuery (deleteCommentCommand);
 		}
 		
 		#endregion
@@ -1044,16 +1044,16 @@ namespace GanttTracker.TaskManager
 		
 		public void Save()
 		{
-			fDealer.Save();
+			fRepository.Save();
 		}
 
-		public void Update(IStorageDealer updateDealer)
+		public void Update(IStorageRepository updateDealer)
 		{
 			if (!updateDealer.CheckConnection())
-				throw new ManagementException(ExceptionType.ValidationFailed,"Update storage not allowed for ConnectionString " + fDealer.ConnectionString);
+				throw new ManagementException(ExceptionType.ValidationFailed,"Update storage not allowed for ConnectionString " + fRepository.ConnectionString);
 			updateDealer.Load();
 						
-			fDealer.Storage.Merge(updateDealer.Storage,true,System.Data.MissingSchemaAction.Error);			
+			fRepository.Storage.Merge(updateDealer.Storage,true,System.Data.MissingSchemaAction.Error);			
 		}
 
 		public void BindProject(IManagerEntity taskEntity)
@@ -1063,9 +1063,9 @@ namespace GanttTracker.TaskManager
 
 		public async System.Threading.Tasks.Task SyncronizeAsync()
 		{
-			await fDealer.RestoreAsync(Path.GetFileName(fDealer.ConnectionString));
-			await fDealer.BackupAsync(Path.GetFileName(fDealer.ConnectionString));
-            fDealer.Revoke();
+			await fRepository.RestoreAsync(Path.GetFileName(fRepository.ConnectionString));
+			await fRepository.BackupAsync(Path.GetFileName(fRepository.ConnectionString));
+            fRepository.Revoke();
         }
 
 		#endregion

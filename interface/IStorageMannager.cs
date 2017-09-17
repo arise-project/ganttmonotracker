@@ -9,6 +9,6 @@ namespace TaskManagerInterface
     {
         void Save();
 
-        void Update(IStorageDealer updateDealer);
+        void Update(IStorageRepository updateDealer);
     }
 }

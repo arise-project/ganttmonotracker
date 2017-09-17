@@ -78,7 +78,7 @@
     <Compile Include="TaskManager\TaskStorage\DeleteCommand.cs" />
     <Compile Include="TaskManager\TaskStorage\InsertCommand.cs" />
     <Compile Include="TaskManager\TaskStorage\SelectCommand.cs" />
-    <Compile Include="TaskManager\TaskStorage\StorageDealer.cs" />
+    <Compile Include="TaskManager\TaskStorage\StorageRepository.cs" />
     <Compile Include="TaskManager\TaskStorage\UpdateCommand.cs" />
     <Compile Include="TaskManager\Actor.cs" />
     <Compile Include="TaskManager\EmptyTaskManaegr.cs" />
@@ -98,7 +98,7 @@
     <Compile Include="interface\ISingleStateView.cs" />
     <Compile Include="interface\IStateManager.cs" />
     <Compile Include="interface\IStorageCommand.cs" />
-    <Compile Include="interface\IStorageDealler.cs" />
+    <Compile Include="interface\IStorageRepository.cs" />
     <Compile Include="interface\IStorageMannager.cs" />
     <Compile Include="interface\ITaskManager.cs" />
     <Compile Include="GuiPresentation\AboutDialog.cs" />
@@ -124,11 +124,11 @@
     <Compile Include="interface\IGuiTask.cs" />
     <Compile Include="ProjectManager\GanttDiagramFactory.cs" />
     <Compile Include="interface\IState.cs" />
-    <Compile Include="interface\IDealerCruid.cs" />
-    <Compile Include="TaskManager\GDrive\GDriveCredentials.cs" />
-    <Compile Include="TaskManager\GDrive\GDriveManager.cs" />
-    <Compile Include="TaskManager\GDrive\GDriveDownloader.cs" />
-    <Compile Include="TaskManager\GDrive\GDriveUploader.cs" />
+    <Compile Include="interface\IRepositoryCruid.cs" />
+    <Compile Include="Sunchronization\GDrive\GDriveCredentials.cs" />
+    <Compile Include="Sunchronization\GDrive\GDriveManager.cs" />
+    <Compile Include="Sunchronization\GDrive\GDriveDownloader.cs" />
+    <Compile Include="Sunchronization\GDrive\GDriveUploader.cs" />
     <Compile Include="TaskManager\Project.cs" />
     <Compile Include="interface\IProject.cs" />
     <Compile Include="Sunchronization\HtmlHelpders.cs" />
@@ -150,13 +150,13 @@
     <None Include="Screenshots\WARNINGIMPLEMENTATIONEXCEPT.PNG" />
     <None Include="Lib\arise.dll" />
     <None Include="app.config" />
-    <Content Include="TaskManager\GDrive\client_secret_167315580398-e93kt4cfp2qnthgmpgf1hdn5p1u91e9a.apps.googleusercontent.com.json">
+    <Content Include="Sunchronization\GDrive\client_secret_167315580398-e93kt4cfp2qnthgmpgf1hdn5p1u91e9a.apps.googleusercontent.com.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TaskManager\GDrive\client_id.json">
+    <Content Include="Sunchronization\GDrive\client_id.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TaskManager\GDrive\client_secret_861785879528-qovbc1cmjr6fo7itu1684ela6vo7taal.apps.googleusercontent.com.json">
+    <Content Include="Sunchronization\GDrive\client_secret_861785879528-qovbc1cmjr6fo7itu1684ela6vo7taal.apps.googleusercontent.com.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -241,10 +241,10 @@
     <Content Include="Resources\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TaskManager\GDrive\Gantt Mono Tracker-09a809789d2e.json">
+    <Content Include="Sunchronization\GDrive\Gantt Mono Tracker-09a809789d2e.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="TaskManager\GDrive\client_secret_167315580398-bjh640fapnr8i2q4tr3ooifsa6ev4oe8.apps.googleusercontent.com.json">
+    <Content Include="Sunchronization\GDrive\client_secret_167315580398-bjh640fapnr8i2q4tr3ooifsa6ev4oe8.apps.googleusercontent.com.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

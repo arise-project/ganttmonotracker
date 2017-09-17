@@ -8,11 +8,11 @@ using TaskManagerInterface;
 
 namespace GanttTracker.TaskManager.TaskStorage
 {
-	public class CommandFactory : IDealerCruid
+	public class CommandFactory : IRepositoryCruid
 	{
-		IStorageDealer daler;
+		IStorageRepository daler;
 
-		public void SetDealer(IStorageDealer daler)
+		public void SetRepository(IStorageRepository daler)
 		{
 			this.daler = daler;
 		}

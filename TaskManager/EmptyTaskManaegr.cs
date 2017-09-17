@@ -16,7 +16,7 @@ namespace GanttTracker.TaskManager
 {
 	public class EmptyTaskManager : ITaskManager
 	{
-		IStorageDealer fDealer;
+		IStorageRepository fRepository;
 
 		string fConnectionString;
 
@@ -39,7 +39,7 @@ namespace GanttTracker.TaskManager
 
 		void Initialize()
 		{
-			fDealer = new  StorageDealer(fConnectionString, new CommandFactory());
+			fRepository = new  StorageRepository(fConnectionString, new CommandFactory());
 		}
 		
 		#region Tasks
@@ -51,7 +51,7 @@ namespace GanttTracker.TaskManager
 				if (fTaskSource == null)
 				{
 					fTaskSource = new DataSet("TaskSource");
-					fTaskSource.Tables.Add(fDealer.EmptyStorage.Tables["Task"].Copy());
+					fTaskSource.Tables.Add(fRepository.EmptyStorage.Tables["Task"].Copy());
 				}
 					
 				return fTaskSource;
@@ -103,7 +103,7 @@ namespace GanttTracker.TaskManager
 				if (fActorSource == null)
 				{
 					fActorSource = new DataSet("ActorSource");
-					fActorSource.Tables.Add(fDealer.EmptyStorage.Tables["Actor"].Copy());
+					fActorSource.Tables.Add(fRepository.EmptyStorage.Tables["Actor"].Copy());
 				}
 
 				return fActorSource;
@@ -171,7 +171,7 @@ namespace GanttTracker.TaskManager
 				if (fTaskStateSource == null)
 				{
 					fTaskStateSource = new DataSet("TaskStateSource");
-					fTaskStateSource.Tables.Add(fDealer.EmptyStorage.Tables["TaskState"].Copy());
+					fTaskStateSource.Tables.Add(fRepository.EmptyStorage.Tables["TaskState"].Copy());
 				}
 
 				return fTaskStateSource;
@@ -268,10 +268,10 @@ namespace GanttTracker.TaskManager
 		public void Save()
 		{			
 			if (fConnectionString != null)
-				fDealer.Create();
+				fRepository.Create();
 		}
 
-		public void Update(IStorageDealer updateDealer)
+		public void Update(IStorageRepository updateDealer)
 		{
 			throw new ManagementException(ExceptionType.NotAllowed);
 		}
