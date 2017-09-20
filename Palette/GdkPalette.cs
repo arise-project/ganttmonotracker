@@ -17,6 +17,7 @@ namespace GanttMonoTracker
 		public static Gdk.GC InitColor(Drawable area, ColorEnum value)
 		{
 			DestroyColor();
+			//TODO: use dictionary instead
 			switch(value)
 			{
 			case ColorEnum.Axis:

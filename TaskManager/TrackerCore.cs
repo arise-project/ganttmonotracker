@@ -73,21 +73,10 @@ namespace GanttTracker
 
 		public void BindProject()
 		{
-			var mgr = new ManagerFactory();
+			
 			if (State != CoreState.EmptyProject && ProjectFileName == null)
 				throw new ManagementException(ExceptionType.NotAllowed, "Set filename for create project");
-			switch(State)
-			{
-				case CoreState.EmptyProject :
-				TaskManager = mgr.CreateEmptyManager();
-				break;
-				case CoreState.CreateProject :
-				TaskManager = mgr.CreateNewManager(ProjectFileName);
-				break;
-				case CoreState.OpenProject :
-				TaskManager = mgr.CreateManager(ProjectFileName);
-				break;
-			}
+			TaskManager = new ManagerFactory(State).Create(ProjectFileName);
 
 			StorageManager = TaskManager;
 			Tracker.TaskSource = TaskManager.TaskSource;

@@ -4,6 +4,8 @@
 //date:4/12/2014
 // created on 19.11.2005 at 21:36
 
+using Task = System.Threading.Tasks.Task;
+
 namespace TaskManagerInterface
 {
 	using System;
@@ -53,7 +55,7 @@ namespace TaskManagerInterface
 
         Task<bool> RestoreAsync(string fileId);
 
-        void Revoke();
+        Task Revoke();
 
         void Save();
 

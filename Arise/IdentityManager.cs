@@ -33,6 +33,7 @@ namespace Arise.Logic
       this.r = new Random();
     }
 
+	//TODO: Use derivation and Factory method in childs.
     public int CreateObjectIdentity(Type type)
     {
       if (!this.fObjectIdentityHash.Contains((object) type))

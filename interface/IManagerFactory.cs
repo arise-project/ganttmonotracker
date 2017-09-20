@@ -7,10 +7,6 @@ namespace TaskManagerInterface
 {
     public interface IManagerFactory
     {
-        ITaskManager CreateEmptyManager();
-
-        ITaskManager CreateManager(string filename);
-
-        ITaskManager CreateNewManager(string filename);
+		ITaskManager Create(string fileName = null);
     }
 }
