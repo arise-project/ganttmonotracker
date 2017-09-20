@@ -11,24 +11,17 @@
       <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/StateManager/StateCore.cs" line="187" column="14" />
       <Breakpoint file="D:\gmt\ganttmonotracker\DrawingPresentation\GanttDiagramm.cs" line="142" column="1" />
       <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" line="77" column="1" />
-      <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\TaskStorage\StorageDealer.cs" relfile="TaskManager\TaskStorage\StorageDealer.cs" line="98" column="1" />
-      <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\GDrive\GDriveManager.cs" relfile="TaskManager\GDrive\GDriveManager.cs" line="34" column="1" />
-      <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\GDrive\GDriveUploader.cs" relfile="TaskManager\GDrive\GDriveUploader.cs" line="15" column="1" />
-      <Breakpoint file="D:\eugene\ganttmonotracker\GuiPresentation\MainForm.cs" relfile="GuiPresentation\MainForm.cs" line="347" column="1" />
-      <Breakpoint file="D:\eugene\ganttmonotracker\GuiPresentation\MainForm.cs" relfile="GuiPresentation\MainForm.cs" line="241" column="1" />
+      <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\TaskStorage\StorageDealer.cs" line="98" column="1" />
+      <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\GDrive\GDriveManager.cs" line="34" column="1" />
+      <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\GDrive\GDriveUploader.cs" line="15" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="ExceptionPresentation\ExceptionViewDialog.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\LogoForm.cs">
     <Files>
-      <File FileName="TaskManager\GDrive\GDriveDownloader.cs" Line="36" Column="5" />
-      <File FileName="TaskManager\TaskStorage\StorageDealer.cs" Line="201" Column="13" />
       <File FileName="TaskManager\XmlTaskManager.cs" Line="1059" Column="21" />
       <File FileName="interface\ITaskManager.cs" Line="63" Column="25" />
       <File FileName="TaskManager\EmptyTaskManaegr.cs" Line="279" Column="15" />
-      <File FileName="TaskManager\GDrive\GDriveManager.cs" Line="30" Column="36" />
-      <File FileName="GuiPresentation\MainForm.cs" Line="257" Column="22" />
-      <File FileName="interface\IStorageDealler.cs" Line="13" Column="19" />
-      <File FileName="TaskManager\GDrive\GDriveUploader.cs" Line="55" Column="1" />
+      <File FileName="GuiPresentation\MainForm.cs" Line="347" Column="1" />
       <File FileName="TaskManager\TrackerCore.cs" Line="280" Column="6" />
       <File FileName="TaskManager\Project.cs" Line="24" Column="4" />
       <File FileName="GuiPresentation\MainForm.glade" Line="64" Column="3" />
@@ -40,7 +33,11 @@
       <File FileName="interface\IGuiSource.cs" Line="11" Column="22" />
       <File FileName="interface\IGanttSource.cs" Line="31" Column="3" />
       <File FileName="GuiPresentation\LogoForm.cs" Line="90" Column="14" />
-      <File FileName="ExceptionPresentation\ExceptionViewDialog.cs" Line="1" Column="1" />
+      <File FileName="ExceptionPresentation\ExceptionViewDialog.cs" Line="28" Column="9" />
+      <File FileName="Arise\AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="Arise\DataSearch.cs" Line="6" Column="1" />
+      <File FileName="Arise\IdentityManager.cs" Line="28" Column="8" />
+      <File FileName="GuiPresentation\AboutDialog.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />

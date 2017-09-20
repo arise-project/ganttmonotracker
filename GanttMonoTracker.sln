@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GanttMonoTracker", "GanttMonoTracker.csproj", "{991D9B6D-5D35-4FA6-8B0E-48A8FA84EF30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arise", "Arise\Arise.csproj", "{EEB17EF1-1C9F-4CA6-B246-93543B5043F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{991D9B6D-5D35-4FA6-8B0E-48A8FA84EF30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{991D9B6D-5D35-4FA6-8B0E-48A8FA84EF30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{991D9B6D-5D35-4FA6-8B0E-48A8FA84EF30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEB17EF1-1C9F-4CA6-B246-93543B5043F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEB17EF1-1C9F-4CA6-B246-93543B5043F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEB17EF1-1C9F-4CA6-B246-93543B5043F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEB17EF1-1C9F-4CA6-B246-93543B5043F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = GanttMonoTracker.csproj

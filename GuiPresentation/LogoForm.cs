@@ -145,7 +145,8 @@ namespace GanttMonoTracker.GuiPresentation
 			{
 				using (var sr = new StreamReader(readme))
 				{
-					var text = sr.ReadToEnd().Substring(0, 256);
+					var text = sr.ReadToEnd();
+					text = text.Substring(0, text.Substring(1).IndexOf("Gantt Mono Tracker"));
 					text = text.Substring(0, text.LastIndexOf("\n"));
 					tvReleaseNews.Buffer.Text = text;
 					sr.Close();
