@@ -111,7 +111,8 @@ namespace GanttMonoTracker.GuiPresentation
 
         private DataSet GetLogoSource()
         {
-            fGanttSource = GanttDiagramFactory.Create();
+			//TODO: Looks like builder pattern needed here
+            fGanttSource = GanttDataSetBuilder.Create();
             var actors = fGanttSource.Tables["Actor"];
             actors.Rows.Add(new object [] {1, "Eugene Pirogov","pirogov.e@gmail.com"});
             var tasks = fGanttSource.Tables["Task"];

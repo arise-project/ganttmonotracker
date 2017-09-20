@@ -138,6 +138,7 @@ namespace GanttMonoTracker.GuiPresentation
 
         public void BindActor()
         {
+			//TODO: Looks like builder pattern needed for create TreeIters
             fActorStore = new ListStore(typeof(int),typeof(string));
             cbActor.Clear();
             foreach (DataRow row in ActorSource.Tables["Actor"].Rows)

@@ -114,7 +114,6 @@
     <Compile Include="TaskManager\FSLocations.cs" />
     <Compile Include="Palette\GdkPalette.cs" />
     <Compile Include="Palette\ColorEnum.cs" />
-    <Compile Include="MainWindow.cs" />
     <Compile Include="TaskManager\ManagerException\ExceptionType.cs" />
     <Compile Include="TaskManager\ManagerException\ManagementException.cs" />
     <Compile Include="DrawingPresentation\GanttDiagramm.cs" />
@@ -122,7 +121,7 @@
     <Compile Include="interface\IGuiSource.cs" />
     <Compile Include="interface\ITask.cs" />
     <Compile Include="interface\IGuiTask.cs" />
-    <Compile Include="ProjectManager\GanttDiagramFactory.cs" />
+    <Compile Include="ProjectManager\GanttDataSetBuilder.cs" />
     <Compile Include="interface\IState.cs" />
     <Compile Include="interface\IRepositoryCruid.cs" />
     <Compile Include="Sunchronization\GDrive\GDriveCredentials.cs" />
@@ -234,9 +233,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Content Include="ViewActorDialog.glade">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

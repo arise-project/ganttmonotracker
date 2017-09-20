@@ -9,12 +9,12 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes.
 // Change them to the values specific to your project.
 [assembly: AssemblyTitle("GanttMonoTracker")]
-[assembly: AssemblyDescription("Gantt tool written on mono by Eugene Pirogov")]
+[assembly: AssemblyDescription("Gantt tool written by Yevhen Pyrohov")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("arise-project.org.ua")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("arise-project.org.ua")]
-[assembly: AssemblyTrademark("Artificial Renaisance Inner Self")]
+[assembly: AssemblyTrademark("Artificial Renaisance Itself")]
 [assembly: AssemblyCulture("")]
 
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".

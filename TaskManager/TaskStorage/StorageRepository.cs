@@ -38,6 +38,7 @@ namespace GanttTracker.TaskManager.TaskStorage
             {
                 if (fEmptyStorage == null)
                 {
+					//TODO: Builder here
                     fEmptyStorage = new DataSet("Track");
                     DataTable taskTable = new DataTable("Task");
                     DataTable actorTable = new DataTable("Actor");
@@ -164,6 +165,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 
         #region Synckronization
 
+		//TODO: Violation of one rensponsibility rule
         public async Task<bool> BackupAsync(string fileId)
         {
             if (!CheckConnection() || Online == null)
@@ -185,6 +187,7 @@ namespace GanttTracker.TaskManager.TaskStorage
             }
         }
 
+		//TODO: Violation of one rensponsibility rule
         public async Task<bool> RestoreAsync(string fileId)
         {
             if (Online == null)
@@ -219,11 +222,13 @@ namespace GanttTracker.TaskManager.TaskStorage
             return true;
         }
 
+		//TODO: Violation of one rensponsibility rule
         public async void Revoke()
         {
             await Online.Revoke();
         }
 
+		//TODO: Violation of one rensponsibility rule
         public async Task<bool> MergeAsync(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate)
         {
             await Online.AuthorizeAsync();

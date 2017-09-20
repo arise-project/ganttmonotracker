@@ -9,6 +9,7 @@ using Pango;
 
 namespace GanttMonoTracker
 {
+	//TODO: the pallete is specific for a theme, missed interface here
 	public static class GdkPalette
 	{
 		public static Gdk.GC CurrentGC { get;set; }

@@ -17,6 +17,7 @@ using GanttMonoTracker;
 
 namespace GanttTracker.TaskManager
 {
+	//TODO: Create methods for Tasks, Actors, States e.t.s need to be moved to Abstract factories for unified presentaion in future.
 	public class XmlTaskManager : ITaskManager
 	{
 		string fConnectionString;

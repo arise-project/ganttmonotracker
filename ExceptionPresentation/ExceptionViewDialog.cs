@@ -43,6 +43,7 @@ namespace GanttMonoTracker.ExceptionPresentation
 
         public ExceptionViewDialog(Exception exception, Window parent)
         {
+			//TODO: Looks like builder pattern needed here
             Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("ExceptionViewDialog.glade");
             Glade.XML glade = new Glade.XML(stream, "ExceptionViewDialog", null);
             stream.Close();

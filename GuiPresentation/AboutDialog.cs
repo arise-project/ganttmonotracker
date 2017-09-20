@@ -73,6 +73,7 @@ namespace GanttMonoTracker.GuiPresentation
 
         private void Initialize(Window parent)
         {
+			//TODO: Looks like builder pattern needed here. too many copipaste with glade init.
             Stream stream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("GMTAboutDialog.glade");
             Glade.XML glade = new Glade.XML(stream, "GMTAboutDialog", null);
             stream.Close();

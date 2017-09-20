@@ -102,6 +102,7 @@ namespace GanttTracker.TaskManager
 
 		public string Comment {	get;set; }
 
+		//TODO: Copy past should be moved to base class
 		public void BindData()
 		{
 			Parent.BindTask(this);

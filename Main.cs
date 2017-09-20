@@ -30,9 +30,9 @@ namespace GanttTracker
 
     public class GanttTrackerApp
     {
-        MainForm mainForm;
+        static MainForm mainForm;
 
-        public GanttTrackerApp(string[] args)
+        public static void Init(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += (object sender, UnhandledExceptionEventArgs e) =>
             {
@@ -60,7 +60,7 @@ namespace GanttTracker
                 bool autoopen;
                 if (bool.TryParse(ConfigurationManager.AppSettings["autoopen"], out autoopen) && autoopen)
                 {
-                    mainForm.OnRecentProject(this, EventArgs.Empty);
+                    mainForm.OnRecentProject(mainForm, EventArgs.Empty);
                 }
 
                 Application.Run();
@@ -73,16 +73,16 @@ namespace GanttTracker
 
         public static void Main(string[] args)
         {
-            new GanttTrackerApp(args);
+            Init(args);
         }
 
-        void OnError(UnhandledExceptionEventArgs args)
+        static void OnError(UnhandledExceptionEventArgs args)
         {
             var exception = args.ExceptionObject as Exception;
             ShowError(exception ?? new Exception("Unknown error"));
         }
 
-        void ShowError(Exception ex)
+        static void ShowError(Exception ex)
         {
             var silentexceptions = ConfigurationManager.AppSettings["silentexceptions"];
             if (silentexceptions != null && ex != null && silentexceptions.Split(';').Any(s => ex.ToString().IndexOf(s) >= 0))

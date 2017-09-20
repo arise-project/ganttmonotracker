@@ -8,10 +8,11 @@ using System.Data;
 
 namespace GanttMonoTracker
 {
-	public class GanttDiagramFactory
+	public class GanttDataSetBuilder
 	{
 		public static DataSet Create()
 		{
+			//TODO: Should be generete from scheme here, not hardcoded.
 			var fEmptyStorage = new DataSet("Track");
 			var taskTable = new DataTable("Task");
 			var actorTable = new DataTable("Actor");
