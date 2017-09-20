@@ -101,9 +101,11 @@ namespace GanttTracker.TaskManager.TaskStorage
 			EmptyStorage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));
 		}
 
+		//TODO: async
 		public void Load()
 		{
 			//TODO: restore validation
+			//TODO: For lazy-loading TableAdapter msdn needed 
 			/*XmlTextReader reader = new XmlTextReader(ConnectionString);
 			XmlValidatingReader validator = new XmlValidatingReader(reader);
 			validator.ValidationType = ValidationType.Schema; 
@@ -129,12 +131,14 @@ namespace GanttTracker.TaskManager.TaskStorage
 			throw new ManagementException(ExceptionType.ValidationFailed, string.Format("Validation failed with message {0}", args.Message));
 		}
 
+		//TODO: async
 		public void Save()
 		{
 			Storage.WriteXml(ConnectionString, System.Data.XmlWriteMode.WriteSchema);
 			Storage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));
 		}
 
+		//TODO: async
 		public void Save(string connectionString)
 		{
 			Storage.WriteXml(connectionString, System.Data.XmlWriteMode.WriteSchema);

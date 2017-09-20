@@ -28,8 +28,11 @@ namespace GanttMonoTracker.DrawingPresentation
 
     using TaskManagerInterface;
 
-    public sealed class GanttDiagramm : Gtk.DrawingArea, IGuiSource, IGanttSource
+	public sealed class GanttDiagramm : Gtk.DrawingArea, IGuiSource, IGanttSource, IDisposable
     {
+		private Cairo.Context grw;
+		private Gdk.GC taskGc;
+
         private const int FBorderMarginH = 2;
         public const int FBorderMarginV = 2;
         public const int FTaskHeight = 14;
@@ -70,9 +73,8 @@ namespace GanttMonoTracker.DrawingPresentation
             fHeight -= 3;
 
 			// Insert drawing code here.
-			using (var grw = Gdk.CairoHelper.Create(GdkWindow))
-			{
 
+			if(grw == null)  grw = Gdk.CairoHelper.Create(GdkWindow);
 				//DrawBorder
 				grw.SetSourceRGB(0xff, 0, 0);
 
@@ -142,7 +144,7 @@ namespace GanttMonoTracker.DrawingPresentation
 						}
 					}
 
-					var taskGc = new Gdk.GC(GdkWindow);
+					if(taskGc == null) taskGc = new Gdk.GC(GdkWindow);
 
 					if (Source.Tables["TaskState"].Select("ID = " + row["StateID"]).Length == 0)
 					{
@@ -221,10 +223,11 @@ namespace GanttMonoTracker.DrawingPresentation
 					}
 
 					GdkPalette.DestroyColor();
-					taskGc.Dispose();
 				}
 
 				//DrawActorAxis
+
+				//TODO: reuse gc
 				var taskLabelGc = new Gdk.GC(GdkWindow);
 				if (!((IGanttSource)this).DateNowVisible) return true;
 
@@ -232,7 +235,9 @@ namespace GanttMonoTracker.DrawingPresentation
 				var offsetActor = FBorderMarginV;
 				var foregroundColor2 = new Gdk.Color(0xff, 0, 0);
 				var foregroundColor1 = new Gdk.Color(0, 0, 0xff);
+				//TODO: reuse gc
 				var actorLabelGc = new Gdk.GC(GdkWindow);
+				//TODO: reuse gc
 				var axisGc = new Gdk.GC(GdkWindow);
 
 				Colormap.System.AllocColor(ref foregroundColor2, true, true);
@@ -304,9 +309,16 @@ namespace GanttMonoTracker.DrawingPresentation
 				grw.RelLineTo(new Distance { Dx = 3, Dy = 3 });
 				grw.RelLineTo(new Distance { Dx = -3, Dy = 0 });
 				grw.Stroke();
-			}
+			
 
 			return true;
         }
+
+		public override void Dispose()
+		{
+			base.Dispose();
+			if( grw!= null) grw.Dispose();
+			if (taskGc != null) taskGc.Dispose();
+		}
     }
 }

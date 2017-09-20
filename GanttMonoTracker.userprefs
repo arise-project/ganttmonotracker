@@ -16,23 +16,23 @@
       <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\GDrive\GDriveUploader.cs" line="15" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="interface\IManagerFactory.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DrawingPresentation\GanttDiagramm.cs">
     <Files>
-      <File FileName="TaskManager\XmlTaskManager.cs" Line="12" Column="44" />
+      <File FileName="TaskManager\XmlTaskManager.cs" Line="135" Column="15" />
       <File FileName="interface\ITaskManager.cs" Line="63" Column="25" />
       <File FileName="TaskManager\EmptyTaskManaegr.cs" Line="279" Column="15" />
       <File FileName="GuiPresentation\MainForm.cs" Line="347" Column="1" />
-      <File FileName="TaskManager\TrackerCore.cs" Line="79" Column="20" />
+      <File FileName="TaskManager\TrackerCore.cs" Line="90" Column="28" />
       <File FileName="TaskManager\Project.cs" Line="24" Column="4" />
       <File FileName="GuiPresentation\MainForm.glade" Line="64" Column="3" />
       <File FileName="GuiPresentation\ViewActorDialog.cs" Line="22" Column="32" />
       <File FileName="Resources\readme.txt" Line="22" Column="13" />
       <File FileName="AssemblyInfo.cs" Line="18" Column="32" />
-      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="56" Column="4" />
-      <File FileName="DrawingPresentation\GanttDiagramm.cs" Line="312" Column="2" />
+      <File FileName="DrawingPresentation\AssigmentDiagram.cs" Line="51" Column="20" />
+      <File FileName="DrawingPresentation\GanttDiagramm.cs" Line="36" Column="34" />
       <File FileName="interface\IGuiSource.cs" Line="11" Column="22" />
       <File FileName="interface\IGanttSource.cs" Line="31" Column="3" />
-      <File FileName="GuiPresentation\LogoForm.cs" Line="115" Column="54" />
+      <File FileName="GuiPresentation\LogoForm.cs" Line="59" Column="4" />
       <File FileName="ExceptionPresentation\ExceptionViewDialog.cs" Line="46" Column="50" />
       <File FileName="Arise\AssemblyInfo.cs" Line="1" Column="1" />
       <File FileName="Arise\DataSearch.cs" Line="6" Column="1" />
@@ -62,15 +62,15 @@
       <File FileName="TaskManager\ManagerException\ManagementException.cs" Line="1" Column="1" />
       <File FileName="TaskManager\TaskStorage\CommandFactory.cs" Line="1" Column="1" />
       <File FileName="TaskManager\TaskStorage\DeleteCommand.cs" Line="1" Column="1" />
-      <File FileName="TaskManager\TaskStorage\StorageRepository.cs" Line="232" Column="4" />
+      <File FileName="TaskManager\TaskStorage\StorageRepository.cs" Line="109" Column="54" />
       <File FileName="TaskManager\TaskStorage\UpdateCommand.cs" Line="1" Column="1" />
       <File FileName="TaskManager\Actor.cs" Line="1" Column="1" />
       <File FileName="TaskManager\FSLocations.cs" Line="1" Column="1" />
       <File FileName="TaskManager\ManagerFactory.cs" Line="13" Column="38" />
-      <File FileName="TaskManager\Task.cs" Line="1" Column="1" />
-      <File FileName="Main.cs" Line="77" Column="10" />
+      <File FileName="TaskManager\Task.cs" Line="113" Column="11" />
+      <File FileName="Main.cs" Line="45" Column="12" />
       <File FileName="interface\IStorageRepository.cs" Line="8" Column="1" />
-      <File FileName="interface\IManagerFactory.cs" Line="9" Column="6" />
+      <File FileName="interface\IManagerFactory.cs" Line="10" Column="16" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />

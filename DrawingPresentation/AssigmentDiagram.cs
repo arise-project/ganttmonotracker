@@ -32,6 +32,8 @@ namespace GanttMonoTracker.DrawingPresentation
         private const int FBorderMarginV = 2;
         private const int FTaskHeight = 14;
 
+		private Cairo.Context grw;
+
         public DataSet Source
         {
             get;
@@ -55,8 +57,8 @@ namespace GanttMonoTracker.DrawingPresentation
             var deltaSpan = lastDate.Subtract(firstDate);
 
 			// Insert drawing code here.
-			using (var grw = Gdk.CairoHelper.Create(GdkWindow))
-			{
+			if (grw == null) grw = Gdk.CairoHelper.Create(GdkWindow);
+
 				int fX, fY, fWidth, fHeight, fDepth;
 
 				GdkWindow.GetGeometry(out fX, out fY, out fWidth, out fHeight, out fDepth);
@@ -293,9 +295,15 @@ namespace GanttMonoTracker.DrawingPresentation
 				grw.RelLineTo(new Distance { Dx = 3, Dy = 3 });
 				grw.RelLineTo(new Distance { Dx = -3, Dy = 0 });
 				grw.Stroke();
-			}
+
 
 			return true;
         }
+
+		public override void Dispose()
+		{
+			base.Dispose();
+			if (grw != null) grw.Dispose();
+		}
     }
 }
