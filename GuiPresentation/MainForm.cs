@@ -106,8 +106,8 @@ namespace GanttMonoTracker.GuiPresentation
 		/// <summary>
 		/// Gantt.
 		/// </summary>
-		[Widget]
-		VBox vbox3;
+		//[Widget]
+		//VBox vbox3;
 
 		/// <summary>
 		/// Assigment.
@@ -307,7 +307,7 @@ namespace GanttMonoTracker.GuiPresentation
 			drwAssigment.Show();
 
 			drwGantt = new GanttDiagramm();
-			vbox3.Add(drwGantt);
+			//vbox3.Add(drwGantt);
 			drwGantt.Show();
 
 			for (var i = 2; i < 5; i++)
