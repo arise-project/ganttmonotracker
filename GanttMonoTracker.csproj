@@ -230,12 +230,6 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="WebKit.Interop">
-      <HintPath>open-webkit-sharp\Source\generated\WebKit.Interop.dll</HintPath>
-    </Reference>
-    <Reference Include="JSCore">
-      <HintPath>open-webkit-sharp\Binary\JSCore.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualC" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -255,10 +249,6 @@
     <ProjectReference Include="Arise\Arise.csproj">
       <Project>{EEB17EF1-1C9F-4CA6-B246-93543B5043F8}</Project>
       <Name>Arise</Name>
-    </ProjectReference>
-    <ProjectReference Include="open-webkit-sharp\Source\OpenWebKitSharp\OpenWebKitSharp.csproj">
-      <Project>{52027BEA-E2A2-4240-BD7D-B51F3964AE66}</Project>
-      <Name>OpenWebKitSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

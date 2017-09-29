@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GanttMonoTracker", "GanttMo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arise", "Arise\Arise.csproj", "{EEB17EF1-1C9F-4CA6-B246-93543B5043F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenWebKitSharp", "open-webkit-sharp\Source\OpenWebKitSharp\OpenWebKitSharp.csproj", "{52027BEA-E2A2-4240-BD7D-B51F3964AE66}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,26 +59,6 @@ Global
 		{EEB17EF1-1C9F-4CA6-B246-93543B5043F8}.Debug_Linux|x86.Build.0 = Debug|Any CPU
 		{EEB17EF1-1C9F-4CA6-B246-93543B5043F8}.Release_Linux|x86.ActiveCfg = Debug|Any CPU
 		{EEB17EF1-1C9F-4CA6-B246-93543B5043F8}.Release_Linux|x86.Build.0 = Debug|Any CPU
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Release|Any CPU.Build.0 = Release|Any CPU
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Debug|x86.ActiveCfg = Debug|x86
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Debug|x86.Build.0 = Debug|x86
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Release|x86.ActiveCfg = Release|x86
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Release|x86.Build.0 = Release|x86
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Debug_NET2|Any CPU.ActiveCfg = Debug_NET2|Any CPU
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Debug_NET2|Any CPU.Build.0 = Debug_NET2|Any CPU
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Debug_NET2|x86.ActiveCfg = Debug_NET2|x86
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Debug_NET2|x86.Build.0 = Debug_NET2|x86
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Release_NET2|Any CPU.ActiveCfg = Release_NET2|Any CPU
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Release_NET2|Any CPU.Build.0 = Release_NET2|Any CPU
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Release_NET2|x86.ActiveCfg = Release_NET2|x86
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Release_NET2|x86.Build.0 = Release_NET2|x86
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Debug_Linux|x86.ActiveCfg = Debug_Linux|x86
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Debug_Linux|x86.Build.0 = Debug_Linux|x86
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Release_Linux|x86.ActiveCfg = Release_Linux|x86
-		{52027BEA-E2A2-4240-BD7D-B51F3964AE66}.Release_Linux|x86.Build.0 = Release_Linux|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = GanttMonoTracker.csproj

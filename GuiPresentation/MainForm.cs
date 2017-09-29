@@ -30,8 +30,6 @@ namespace GanttMonoTracker.GuiPresentation
 	using Gtk;
 
 	using TaskManagerInterface;
-	using WebKit;
-	using WebKit.Linux;
 
 	public class MainForm : Gtk.Window, IGuiTracker
 	{
