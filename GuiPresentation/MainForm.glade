@@ -461,7 +461,7 @@
 	    </packing>
 	  </child>
 
-	  <!--<child>
+	  <child>
 	    <widget class="GtkVBox" id="vbox3">
 	      <property name="border_width">12</property>
 	      <property name="visible">True</property>
@@ -480,9 +480,9 @@
 	      <property name="tab_expand">False</property>
 	      <property name="tab_fill">True</property>
 	    </packing>
-	  </child>-->
+	  </child>
 
-	  <!--<child>
+	  <child>
 	    <widget class="GtkLabel" id="lbGanttDescription">
 	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">Gantt</property>
@@ -503,7 +503,7 @@
 	    <packing>
 	      <property name="type">tab</property>
 	    </packing>
-	  </child>-->
+	  </child>
 	  <!--Assigment-->
 	  <child>
 	    <widget class="GtkVBox" id="vbox4">

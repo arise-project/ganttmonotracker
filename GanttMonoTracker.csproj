@@ -132,6 +132,7 @@
     <Compile Include="interface\IProject.cs" />
     <Compile Include="Sunchronization\HtmlHelpders.cs" />
     <Compile Include="interface\IGanttSource.cs" />
+    <Compile Include="BrowserPresentation\BrowserForm.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -220,9 +221,6 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Xml" />
-    <Reference Include="Arise">
-      <HintPath>Lib\arise.dll</HintPath>
-    </Reference>
     <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System.Configuration" />
     <Reference Include="Mono.Cairo" />
@@ -230,6 +228,15 @@
       <HintPath>packages\Zlib.Portable.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="WebKit.Interop">
+      <HintPath>open-webkit-sharp\Source\generated\WebKit.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="JSCore">
+      <HintPath>open-webkit-sharp\Binary\JSCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualC" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -249,6 +256,13 @@
       <Project>{EEB17EF1-1C9F-4CA6-B246-93543B5043F8}</Project>
       <Name>Arise</Name>
     </ProjectReference>
+    <ProjectReference Include="open-webkit-sharp\Source\OpenWebKitSharp\OpenWebKitSharp.csproj">
+      <Project>{52027BEA-E2A2-4240-BD7D-B51F3964AE66}</Project>
+      <Name>OpenWebKitSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BrowserPresentation\" />
   </ItemGroup>
   <Import Project="packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

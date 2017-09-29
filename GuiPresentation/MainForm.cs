@@ -16,7 +16,7 @@ namespace GanttMonoTracker.GuiPresentation
 	using System.Data;
 	using System.IO;
 	using System.Linq;
-
+	using System.Threading;
 	using DrawingPresentation;
 	using ExceptionPresentation;
 
@@ -28,8 +28,10 @@ namespace GanttMonoTracker.GuiPresentation
 	using Glade;
 
 	using Gtk;
-	
+
 	using TaskManagerInterface;
+	using WebKit;
+	using WebKit.Linux;
 
 	public class MainForm : Gtk.Window, IGuiTracker
 	{
@@ -43,7 +45,7 @@ namespace GanttMonoTracker.GuiPresentation
 		[WidgetAttribute]
 		Button btnSearchTask;
 		DrawingArea drwAssigment;
-		DrawingArea drwGantt;
+		//DrawingArea drwGantt;
 		[WidgetAttribute]
 		Entry entSearchTask;
 
@@ -106,8 +108,8 @@ namespace GanttMonoTracker.GuiPresentation
 		/// <summary>
 		/// Gantt.
 		/// </summary>
-		//[Widget]
-		//VBox vbox3;
+		[Widget]
+		VBox vbox3;
 
 		/// <summary>
 		/// Assigment.
@@ -306,9 +308,9 @@ namespace GanttMonoTracker.GuiPresentation
 			vbox4.Add(drwAssigment);
 			drwAssigment.Show();
 
-			drwGantt = new GanttDiagramm();
-			//vbox3.Add(drwGantt);
-			drwGantt.Show();
+
+
+			//vbox3.Add(vb);
 
 			for (var i = 2; i < 5; i++)
 			{
@@ -524,14 +526,9 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}
 
-		private void OnGanttExpose(object sender, ExposeEventArgs args)
-		{
-			TrackerCore.Instance.DrawGantt(drwGantt);
-		}
-
         [GLib.ConnectBefore]
 		private void OnSearchKeyPress(object sender, KeyPressEventArgs args)
-		{
+		{	
 			if(args.Event.Key == Gdk.Key.Return)
 				OnSearchTask(sender, args);
 		}
@@ -581,8 +578,23 @@ namespace GanttMonoTracker.GuiPresentation
 
 		private void OnSearchTask(object sender, EventArgs args)
 		{
-			searchTask = entSearchTask.Text;
-			BindTask();
+			//var vb = new LinuxWebKitBrowser();
+
+			try
+			{
+				//vb.Navigate("www.thesaus.com");
+				//var wkb = new WebKitBrowser();
+				//wkb.Show();
+				var msForm = new BrowserForm();
+				msForm.Show();
+			}
+			catch (Exception ex)
+			{
+			}
+
+
+			//searchTask = entSearchTask.Text;
+			//BindTask();
 		}
 
 		private void OnStateEdit(object sender, EventArgs args)

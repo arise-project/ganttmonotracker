@@ -71,9 +71,10 @@ namespace GanttTracker
             }
         }
 
+		[STAThread]
         public static void Main(string[] args)
         {
-            Init(args);
+			Init(args);
         }
 
         static void OnError(UnhandledExceptionEventArgs args)
