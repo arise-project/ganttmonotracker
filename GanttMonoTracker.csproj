@@ -61,6 +61,7 @@
     <EmbeddedResource Include="GuiPresentation\ViewTaskDialog.glade">
       <LogicalName>ViewTaskDialog.glade</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\GanttExample.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />

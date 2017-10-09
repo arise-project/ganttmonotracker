@@ -46,6 +46,8 @@ namespace GanttMonoTracker.GuiPresentation
 		//DrawingArea drwGantt;
 		[WidgetAttribute]
 		Entry entSearchTask;
+		[WidgetAttribute]
+		Button btnGoogleGantt;
 
 		#pragma warning restore 0649
 
@@ -282,6 +284,7 @@ namespace GanttMonoTracker.GuiPresentation
 			btnAssignTask.Clicked += OnTaskAssign;
 			btnChangeTask.Clicked += OnChangeTaskState;
 			btnSearchTask.Clicked += OnSearchTask;
+			btnGoogleGantt.Clicked += OnGoogleGantt;
 
 			tvActorTree.HeadersVisible = true;
 			tvActorTree.AppendColumn("Name", new CellRendererText(), "text", 1);
@@ -574,25 +577,31 @@ namespace GanttMonoTracker.GuiPresentation
 			TrackerCore.Instance.SaveProject();
 		}
 
-		private void OnSearchTask(object sender, EventArgs args)
+		private void OnGoogleGantt(object sender, EventArgs args)
 		{
-			//var vb = new LinuxWebKitBrowser();
-
 			try
 			{
-				//vb.Navigate("www.thesaus.com");
-				//var wkb = new WebKitBrowser();
-				//wkb.Show();
-				var msForm = new BrowserForm();
+				//todo: for linux should be default browse instead. Mono Howto OpenBrowser
+				//http://www.mono-project.com/archived/howto_openbrowser/
+
+				var msForm = new BrowserForm
+				{
+					StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen,
+					Width = 800,
+					Height = 600
+				};
+
 				msForm.Show();
 			}
 			catch (Exception ex)
 			{
 			}
+		}
 
-
-			//searchTask = entSearchTask.Text;
-			//BindTask();
+		private void OnSearchTask(object sender, EventArgs args)
+		{
+			searchTask = entSearchTask.Text;
+			BindTask();
 		}
 
 		private void OnStateEdit(object sender, EventArgs args)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace GanttMonoTracker
@@ -8,11 +9,19 @@ namespace GanttMonoTracker
 		private WebBrowser browser;
 		public BrowserForm()
 		{
+			var p = new Panel();
+			p.Dock = DockStyle.Fill;
+			Controls.Add(p);
 			browser = new WebBrowser();
+			browser.Anchor = AnchorStyles.Top;
 			browser.Dock = DockStyle.Fill;
-			Controls.Add(browser);
-			Load += (sender, e) => { browser.Navigate("https://linux.org.ru");};
-
+			p.Controls.Add(browser);
+			p.SizeChanged += (sender, e) => { browser.Refresh(); };
+			Load += (sender, e) => 
+			{
+				var stream = Assembly.GetEntryAssembly().GetManifestResourceStream("GanttMonoTracker.Resources.GanttExample.html");
+				browser.DocumentStream = stream;
+			};
 		}
 	}
 }
