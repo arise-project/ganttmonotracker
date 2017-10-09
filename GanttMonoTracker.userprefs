@@ -18,12 +18,12 @@
       <Breakpoint file="D:\eugene\ganttmonotracker\open-webkit-sharp\Source\OpenWebKitSharp\WebKitBrowser.cs" relfile="open-webkit-sharp\Source\OpenWebKitSharp\WebKitBrowser.cs" line="973" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\ViewActorDialog.glade">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\MainForm.cs">
     <Files>
-      <File FileName="GuiPresentation\MainForm.cs" Line="586" Column="15" />
+      <File FileName="GuiPresentation\MainForm.cs" Line="588" Column="5" />
       <File FileName="BrowserPresentation\BrowserForm.cs" Line="15" Column="12" />
       <File FileName="Resources\GanttExample.html" Line="3" Column="1" />
-      <File FileName="GuiPresentation\MainForm.glade" Line="19" Column="16" />
+      <File FileName="GuiPresentation\MainForm.glade" Line="476" Column="51" />
       <File FileName="GuiPresentation\ViewActorDialog.glade" Line="18" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>

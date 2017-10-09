@@ -583,6 +583,9 @@ namespace GanttMonoTracker.GuiPresentation
 			{
 				//todo: for linux should be default browse instead. Mono Howto OpenBrowser
 				//http://www.mono-project.com/archived/howto_openbrowser/
+				//Browser compatibility mode
+				//https://blogs.msdn.microsoft.com/patricka/2015/01/12/controlling-webbrowser-control-compatibility/
+				//https://stackoverflow.com/questions/6771258/what-does-meta-http-equiv-x-ua-compatible-content-ie-edge-do
 
 				var msForm = new BrowserForm
 				{
