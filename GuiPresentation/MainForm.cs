@@ -587,6 +587,12 @@ namespace GanttMonoTracker.GuiPresentation
 				//https://blogs.msdn.microsoft.com/patricka/2015/01/12/controlling-webbrowser-control-compatibility/
 				//https://stackoverflow.com/questions/6771258/what-does-meta-http-equiv-x-ua-compatible-content-ie-edge-do
 
+				//I think it is possible to check Cef.Glue for linux, it uses Chronium
+				//Xilium.CefGlue
+				//Xilium.CefGlue is a .NET/Mono binding for The Chromium Embedded Framework (CEF) by Marshall A. Greenblatt.
+				//https://bitbucket.org/xilium/xilium.cefglue/wiki/Home
+				//The Chromium Embedded Framework (CEF) is a simple framework for embedding Chromium-based browsers in other applications.
+
 				var msForm = new BrowserForm
 				{
 					StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen,
