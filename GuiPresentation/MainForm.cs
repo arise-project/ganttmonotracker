@@ -588,6 +588,12 @@ namespace GanttMonoTracker.GuiPresentation
 				//https://stackoverflow.com/questions/6771258/what-does-meta-http-equiv-x-ua-compatible-content-ie-edge-do
 
 				//for now browser on windows has error : libgluezilla not found. To have webbrowser support, you need libgluezilla installed
+				
+				//I think it is possible to check Cef.Glue for linux, it uses Chronium
+				//Xilium.CefGlue
+				//Xilium.CefGlue is a .NET/Mono binding for The Chromium Embedded Framework (CEF) by Marshall A. Greenblatt.
+				//https://bitbucket.org/xilium/xilium.cefglue/wiki/Home
+				//The Chromium Embedded Framework (CEF) is a simple framework for embedding Chromium-based browsers in other applications.
 
 				var msForm = new BrowserForm
 				{
