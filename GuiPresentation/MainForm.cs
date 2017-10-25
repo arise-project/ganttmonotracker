@@ -587,6 +587,8 @@ namespace GanttMonoTracker.GuiPresentation
 				//https://blogs.msdn.microsoft.com/patricka/2015/01/12/controlling-webbrowser-control-compatibility/
 				//https://stackoverflow.com/questions/6771258/what-does-meta-http-equiv-x-ua-compatible-content-ie-edge-do
 
+				//for now browser on windows has error : libgluezilla not found. To have webbrowser support, you need libgluezilla installed
+
 				var msForm = new BrowserForm
 				{
 					StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen,
