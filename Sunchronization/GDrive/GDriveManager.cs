@@ -10,7 +10,9 @@ namespace GanttMonoTracker
 {
     public class GDriveManager
     {
-		static string[] Scopes = { DriveService.Scope.DriveFile, DriveService.Scope.Drive, DriveService.Scope.DriveAppdata, DriveService.Scope.DriveReadonly };
+		//static string[] Scopes = { DriveService.Scope.Drive };
+		static string[] Scopes = { DriveService.Scope.DriveFile, DriveService.Scope.Drive, DriveService.Scope.DriveAppdata, DriveService.Scope.DriveReadonly
+			, DriveService.Scope.DriveScripts, DriveService.Scope.DrivePhotosReadonly, DriveService.Scope.DriveMetadataReadonly};
 
         public GDriveManager()
         {
@@ -44,7 +46,7 @@ namespace GanttMonoTracker
                 Credentials = new GDriveCredentials(secrets.ClientId, secrets.ClientSecret);
                 Credentials.Credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
                 secrets,
-                new[] { Uri.EscapeUriString(DriveService.Scope.DriveReadonly) },
+                new[] { Uri.EscapeUriString(DriveService.Scope.Drive) },
                 Environment.UserName,
                     CancellationToken.None);
             };

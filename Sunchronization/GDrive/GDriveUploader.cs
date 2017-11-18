@@ -44,7 +44,10 @@ namespace GanttMonoTracker
 				 }
 				}*/
 
-			    request.Upload();
+			    var process = request.Upload();
+				if (process.Status != Google.Apis.Upload.UploadStatus.Completed)
+				{
+				}
 			}
 			var file = request.ResponseBody;
 		

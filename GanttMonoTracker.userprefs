@@ -1,30 +1,25 @@
 ﻿<Properties StartupConfiguration="{991D9B6D-5D35-4FA6-8B0E-48A8FA84EF30}|Default" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
-    <Watch file="Main.cs" line="59" offsetX="432" offsetY="1160" expression="ex" liveUpdate="False" />
-  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/DrawingPresentation/AssigmentDiagram.cs" line="208" column="1" />
-      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/DrawingPresentation/AssigmentDiagram.cs" line="292" column="1" />
-      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/GuiPresentation/GuiFactory.cs" line="69" column="5" />
-      <Breakpoint file="/home/eugne/projects/GanntMonoTracker_xamarin/GanntMonoTracker_xamarin/GanttMonoTracker/StateManager/StateCore.cs" line="187" column="14" />
-      <Breakpoint file="D:\gmt\ganttmonotracker\DrawingPresentation\GanttDiagramm.cs" line="142" column="1" />
-      <Breakpoint file="d:\gmt\ganttmonotracker\GuiPresentation\ViewTaskDialog.cs" line="77" column="1" />
-      <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\TaskStorage\StorageDealer.cs" relfile="TaskManager\TaskStorage\StorageDealer.cs" line="98" column="1" />
-      <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\GDrive\GDriveManager.cs" relfile="TaskManager\GDrive\GDriveManager.cs" line="34" column="1" />
-      <Breakpoint file="D:\eugene\ganttmonotracker\TaskManager\GDrive\GDriveUploader.cs" relfile="TaskManager\GDrive\GDriveUploader.cs" line="15" column="1" />
-      <Breakpoint file="D:\eugene\ganttmonotracker\open-webkit-sharp\Source\OpenWebKitSharp\WebKitBrowser.cs" relfile="open-webkit-sharp\Source\OpenWebKitSharp\WebKitBrowser.cs" line="943" column="1" />
-      <Breakpoint file="D:\eugene\ganttmonotracker\open-webkit-sharp\Source\OpenWebKitSharp\WebKitBrowser.cs" relfile="open-webkit-sharp\Source\OpenWebKitSharp\WebKitBrowser.cs" line="973" column="1" />
+      <Breakpoint file="D:\Projects\ganttmonotracker\Sunchronization\GDrive\GDriveUploader.cs" relfile="Sunchronization\GDrive\GDriveUploader.cs" line="15" column="1" />
+      <Breakpoint file="D:\Projects\ganttmonotracker\Sunchronization\GDrive\GDriveUploader.cs" relfile="Sunchronization\GDrive\GDriveUploader.cs" line="48" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation\MainForm.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Sunchronization\GDrive\GDriveManager.cs">
     <Files>
-      <File FileName="GuiPresentation\MainForm.cs" Line="588" Column="5" />
+      <File FileName="GuiPresentation\MainForm.cs" Line="603" Column="19" />
       <File FileName="BrowserPresentation\BrowserForm.cs" Line="15" Column="12" />
       <File FileName="Resources\GanttExample.html" Line="3" Column="1" />
       <File FileName="GuiPresentation\MainForm.glade" Line="476" Column="51" />
       <File FileName="GuiPresentation\ViewActorDialog.glade" Line="18" Column="38" />
+      <File FileName="Sunchronization\GDrive\GDriveManager.cs" Line="63" Column="10" />
+      <File FileName="Sunchronization\GDrive\GDriveUploader.cs" Line="17" Column="45" />
+      <File FileName="Sunchronization\GDrive\GDriveDownloader.cs" Line="16" Column="31" />
+      <File FileName="TaskManager\TaskStorage\StorageRepository.cs" Line="225" Column="1" />
+      <File FileName="C:\Program Files\MSBuild\14.0\bin\Microsoft.Common.CurrentVersion.targets" Line="3803" Column="17" />
+      <File FileName="Sunchronization\GDrive\client_id.json" Line="1" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
