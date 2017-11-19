@@ -168,7 +168,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 		#region Synckronization
 
 		//TODO: Violation of one rensponsibility rule
-		public async Task<bool> BackupAsync(string fileId)
+		public async Task<bool> BackupAsync(string fileId, bool exists)
 		{
 			if (!CheckConnection() || Online == null)
 			{
@@ -180,7 +180,7 @@ namespace GanttTracker.TaskManager.TaskStorage
 			var raw = File.ReadAllBytes(ConnectionString);
 			try
 			{
-				Online.Uploader.Upload(Online.Credentials, raw, fileId);
+				Online.Uploader.Upload(Online.Credentials, raw, fileId, exists);
 				return true;
 			}
 			catch
@@ -215,10 +215,15 @@ namespace GanttTracker.TaskManager.TaskStorage
 			{
 				var onlineStorage = new DataSet();
 				onlineStorage.ReadXml(s, XmlReadMode.Auto);
+				onlineStorage.AcceptChanges();
+				//TODO: merge
+				/*
 				if (Storage != null)
-					Storage.Merge(onlineStorage);
+					Storage.Merge(onlineStorage, true, MissingSchemaAction.AddWithKey);
 				else
 					Storage = onlineStorage;
+					*/
+				Storage = onlineStorage;
 			}
 
 			return true;

@@ -37,7 +37,7 @@ namespace TaskManagerInterface
             set;
         }
 
-        Task<bool> BackupAsync(string fileId);
+        Task<bool> BackupAsync(string fileId, bool exists);
 
         bool CheckConnection();
 

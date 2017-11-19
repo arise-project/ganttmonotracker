@@ -1064,9 +1064,9 @@ namespace GanttTracker.TaskManager
 
 		public async System.Threading.Tasks.Task SyncronizeAsync()
 		{
-			await fRepository.RestoreAsync(Path.GetFileName(fRepository.ConnectionString));
-			await fRepository.BackupAsync(Path.GetFileName(fRepository.ConnectionString));
-            fRepository.Revoke();
+			var exists = await fRepository.RestoreAsync(Path.GetFileName(fRepository.ConnectionString));
+			await fRepository.BackupAsync(Path.GetFileName(fRepository.ConnectionString), exists);
+			//fRepository.Revoke();
         }
 
 		#endregion

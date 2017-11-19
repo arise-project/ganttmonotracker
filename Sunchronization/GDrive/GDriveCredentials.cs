@@ -1,6 +1,4 @@
-﻿using System;
-
-using Google.Apis.Auth.OAuth2;
+﻿using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 
 namespace GanttMonoTracker
