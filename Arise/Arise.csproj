@@ -9,6 +9,7 @@
     <AssemblyName>Arise</AssemblyName>
     <ApplicationVersion>1.0.2191.787</ApplicationVersion>
     <RootNamespace>Arise.Logic</RootNamespace>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System.Data" />
     <Reference Include="System" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataSearch.cs" />
