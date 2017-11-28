@@ -122,8 +122,12 @@ namespace GanttMonoTracker.GuiPresentation
 		: base("Gantt Tracker")
 		{
 			InitializeComponents();
-			var logoWindow = new LogoForm();
-			logoWindow.ShowDialog();
+
+			var r = TrackerCore.Instance.Recent;
+			if (string.IsNullOrEmpty (r) || !File.Exists (r)) {
+				var logoWindow = new LogoForm();
+				logoWindow.ShowDialog();
+			}
 
 			TrackerCore.Instance.Tracker = this;
 
