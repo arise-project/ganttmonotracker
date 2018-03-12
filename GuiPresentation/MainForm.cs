@@ -8,6 +8,8 @@
 //license:GPLv3.0
 //date:4/12/2014
 // created on 08.11.2005 at 23:25
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GanttMonoTracker.GuiPresentation
 {
@@ -118,16 +120,28 @@ namespace GanttMonoTracker.GuiPresentation
 		VBox vbox4;
 		#pragma warning disable 0649
 
+		private string recent;
+
 		public MainForm()
 		: base("Gantt Tracker")
 		{
 			InitializeComponents();
 
 			var r = TrackerCore.Instance.Recent;
-			if (string.IsNullOrEmpty (r) || !File.Exists (r)) {
+			bool foundRecent = false;
+			for (int i = 0; i < r.Count (); i++) {
+				if (File.Exists (r [i])) {
+					foundRecent = true;
+					recent = r [i];
+					break;
+				}
+			}
+			if (!foundRecent) {
 				var logoWindow = new LogoForm();
 				logoWindow.ShowDialog();
 			}
+
+
 
 			TrackerCore.Instance.Tracker = this;
 
@@ -217,9 +231,23 @@ namespace GanttMonoTracker.GuiPresentation
 
 		public void OnRecentProject(object sender, EventArgs args)
 		{
-			var r = TrackerCore.Instance.Recent;
-			if (string.IsNullOrEmpty(r) || !File.Exists(r)) return;
-			selectedFile = r;
+			var r = new List<string>(TrackerCore.Instance.Recent)
+				.Where(f => !string.Equals(f, recent, StringComparison.Ordinal))
+				.Concat(new string[]{recent});
+
+			bool foundRecent = false;
+			foreach(var f in r) {
+				if (File.Exists (f)) {
+					foundRecent = true;
+					recent = f;
+					break;
+				}
+			}
+			if (!foundRecent)
+				return;
+
+			File.WriteAllLines("recent.txt".GetPath(), r);
+			selectedFile = recent;
 			TrackerCore.Instance.State = CoreState.OpenProject;
 			OnFileSelectionResponce(fFileSelection, null);
 		}
@@ -351,8 +379,7 @@ namespace GanttMonoTracker.GuiPresentation
 		[GLib.ConnectBefore]
 		void BindRecentProjects(object o, EventArgs args)
 		{
-			var r = TrackerCore.Instance.Recent;
-			if (!string.IsNullOrWhiteSpace(r))
+			if (TrackerCore.Instance.Recent.Any())
 			{
 				var recentMenu = new Menu();
 
@@ -362,6 +389,7 @@ namespace GanttMonoTracker.GuiPresentation
 				lastItem.Activated += OnRecentProject;
 				//miRecentProject.Submenu.Chi(lastItem);
 				//miRecentProject.Submenu = recentMenu;
+				miRecentProject.Visible = true;
 			}
 			else
 			{
@@ -518,8 +546,14 @@ namespace GanttMonoTracker.GuiPresentation
 					TrackerCore.Instance.ProjectFileName = args == null ? selectedFile : ((FileSelection)sender).Filename;
 
 					TrackerCore.Instance.BindProject();
-					File.WriteAllText("recent.txt".GetPath(), TrackerCore.Instance.ProjectFileName);
-
+					if(!TrackerCore.Instance.Recent.Contains(TrackerCore.Instance.ProjectFileName))
+				    	File.WriteAllLines("recent.txt".GetPath(), 
+						new string[]
+						{
+							TrackerCore.Instance.ProjectFileName
+						}
+						.Concat(TrackerCore.Instance.Recent));
+					
 					//backup file.
 					File.AppendAllText(TrackerCore.Instance.ProjectFileName + ".backup",
 						File.ReadAllText(TrackerCore.Instance.ProjectFileName));

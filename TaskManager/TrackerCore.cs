@@ -44,13 +44,13 @@ namespace GanttTracker
 
 		public IGuiTracker Tracker { get;set; }
 
-		public string Recent 
+		public string[] Recent 
 		{
 			 get
 			{
 				var file = "recent.txt".GetPath ();
 				if (File.Exists (file)) {
-					return File.ReadAllText(file); 
+					return File.ReadAllLines(file); 
 				}
 
 				return null;
