@@ -229,6 +229,7 @@ namespace GanttMonoTracker.GuiPresentation
 			}
 		}
 
+		[GLib.ConnectBefore]
 		public void OnRecentProject(object sender, EventArgs args)
 		{
 			var r = new List<string>(TrackerCore.Instance.Recent)
@@ -317,6 +318,7 @@ namespace GanttMonoTracker.GuiPresentation
 			btnChangeTask.Clicked += OnChangeTaskState;
 			btnSearchTask.Clicked += OnSearchTask;
 			btnGoogleGantt.Clicked += OnGoogleGantt;
+			miRecentProject.Activated += OnRecentProject;
 
 			tvActorTree.HeadersVisible = true;
 			tvActorTree.AppendColumn("Name", new CellRendererText(), "text", 1);
@@ -376,7 +378,6 @@ namespace GanttMonoTracker.GuiPresentation
 			});
 		}
 
-		[GLib.ConnectBefore]
 		void BindRecentProjects(object o, EventArgs args)
 		{
 			if (TrackerCore.Instance.Recent.Any())
@@ -385,8 +386,7 @@ namespace GanttMonoTracker.GuiPresentation
 
 				//TODO: Submenu not visible
 				//TODO: Recent projects should be limited to a range not to last item
-				var lastItem = new MenuItem("test"); //new MenuItem(System.IO.Path.GetFileNameWithoutExtension(r)) { TooltipText = r };
-				lastItem.Activated += OnRecentProject;
+				//var lastItem = new MenuItem("test"); //new MenuItem(System.IO.Path.GetFileNameWithoutExtension(r)) { TooltipText = r };
 				//miRecentProject.Submenu.Chi(lastItem);
 				//miRecentProject.Submenu = recentMenu;
 				miRecentProject.Visible = true;
