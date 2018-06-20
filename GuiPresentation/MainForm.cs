@@ -552,7 +552,7 @@ namespace GanttMonoTracker.GuiPresentation
                     TrackerCore.Instance.ProjectFileName = args == null ? selectedFile : ((FileSelection)sender).Filename;
 
                     TrackerCore.Instance.BindProject();
-                    if (!TrackerCore.Instance.Recent.Contains(TrackerCore.Instance.ProjectFileName))
+                    if (TrackerCore.Instance.Recent != null && !TrackerCore.Instance.Recent.Contains(TrackerCore.Instance.ProjectFileName))
                         File.WriteAllLines("recent.txt".GetPath(),
                         new string[]
                         {
