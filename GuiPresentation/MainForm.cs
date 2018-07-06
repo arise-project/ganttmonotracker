@@ -113,7 +113,7 @@ namespace GanttMonoTracker.GuiPresentation
         VBox vbox4;
 #pragma warning disable 0649
 
-        private string recent;
+        private string recent = string.Empty;
 
         public MainForm()
         : base("Gantt Tracker")
