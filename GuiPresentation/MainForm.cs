@@ -49,8 +49,8 @@ namespace GanttMonoTracker.GuiPresentation
         private readonly TreeStore fActorStore = new TreeStore(typeof(int), typeof(string), typeof(string));
         private FileSelection fFileSelection; // todo : FileChooserWidget
 
-        //                                   id,          status          description,   start time,     end time,      actor,         ,priority
-        TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(int));
+        //                                   id,          status          start time,     end time,      actor,         ,priority,     description
+        TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string), typeof(string), typeof(string), typeof(string), typeof(int), typeof(string));
 
 #pragma warning disable 0649
 
@@ -213,11 +213,11 @@ namespace GanttMonoTracker.GuiPresentation
                     var itemNode = fTaskStore.AppendNode();
                     fTaskStore.SetValue(itemNode, 0, row["Id"]);
                     fTaskStore.SetValue(itemNode, 1, stateName);
-                    fTaskStore.SetValue(itemNode, 2, row["Description"]);
-                    fTaskStore.SetValue(itemNode, 3, ((DateTime)row["StartTime"]).ToShortDateString());
-                    fTaskStore.SetValue(itemNode, 4, ((DateTime)row["EndTime"]).ToShortDateString());
-                    fTaskStore.SetValue(itemNode, 5, actorName);
-                    fTaskStore.SetValue(itemNode, 6, row["Priority"]);
+                    fTaskStore.SetValue(itemNode, 2, ((DateTime)row["StartTime"]).ToShortDateString());
+                    fTaskStore.SetValue(itemNode, 3, ((DateTime)row["EndTime"]).ToShortDateString());
+                    fTaskStore.SetValue(itemNode, 4, actorName);
+                    fTaskStore.SetValue(itemNode, 5, row["Priority"]);
+                    fTaskStore.SetValue(itemNode, 6, row["Description"]);
                 }
             }
             catch (Exception ex)
@@ -336,11 +336,11 @@ namespace GanttMonoTracker.GuiPresentation
             tvTaskTree.HeadersVisible = true;
             tvTaskTree.AppendColumn("Id", new CellRendererText(), "text", 0);
             tvTaskTree.AppendColumn("State", new CellRendererText(), "text", 1);
-            tvTaskTree.AppendColumn("Description", new CellRendererText(), "text", 2);
-            tvTaskTree.AppendColumn("Start Time", new CellRendererText(), "text", 3);
-            tvTaskTree.AppendColumn("End Time", new CellRendererText(), "text", 4);
-            tvTaskTree.AppendColumn("Actor", new CellRendererText(), "text", 5);
-            tvTaskTree.AppendColumn("Priority", new CellRendererText(), "text", 6);
+            tvTaskTree.AppendColumn("Start Time", new CellRendererText(), "text", 2);
+            tvTaskTree.AppendColumn("End Time", new CellRendererText(), "text", 3);
+            tvTaskTree.AppendColumn("Actor", new CellRendererText(), "text", 4);
+            tvTaskTree.AppendColumn("Priority", new CellRendererText(), "text", 5);
+            tvTaskTree.AppendColumn("Description", new CellRendererText(), "text", 6);
 
             tvTaskTree.ButtonPressEvent += HandleTaskButtonPressEvent;
             //todo: use multi row mode
