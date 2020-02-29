@@ -1,5 +1,5 @@
 ﻿//author:Eugene Pirogov
-//email:eugene.intalk@gmail.com
+//email:pirogov.e@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
 // created on 29.11.2005 at 1:21

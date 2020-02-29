@@ -1,5 +1,5 @@
 ﻿//author:Eugene Pirogov
-//email:eugene.intalk@gmail.com
+//email:pirogov.e@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
 // created on 28.11.2005 at 0:58
@@ -54,8 +54,9 @@ namespace GanttTracker.TaskManager.TaskStorage
 					taskTable.Columns.Add("StartTime", typeof(DateTime));
 					taskTable.Columns.Add("EndTime", typeof(DateTime));
 					taskTable.Columns.Add("StateID", typeof(int));
+                    taskTable.Columns.Add("Priority", typeof(int));
 
-					taskStateTable.Columns.Add("ID", typeof(int));
+                    taskStateTable.Columns.Add("ID", typeof(int));
 					taskStateTable.Columns.Add("Name", typeof(string));
 					taskStateTable.Columns.Add("ColorBlue", typeof(byte));
 					taskStateTable.Columns.Add("ColorRed", typeof(byte));
@@ -101,12 +102,12 @@ namespace GanttTracker.TaskManager.TaskStorage
 			EmptyStorage.WriteXmlSchema(string.Format("{0}.xsd", ConnectionString));
 		}
 
-		//TODO: async
-		public void Load()
-		{
-			//TODO: restore validation
-			//TODO: For lazy-loading TableAdapter msdn needed 
-			/*XmlTextReader reader = new XmlTextReader(ConnectionString);
+        //TODO: async
+        public void Load()
+        {
+            //TODO: restore validation
+            //TODO: For lazy-loading TableAdapter msdn needed 
+            /*XmlTextReader reader = new XmlTextReader(ConnectionString);
 			XmlValidatingReader validator = new XmlValidatingReader(reader);
 			validator.ValidationType = ValidationType.Schema; 
 			validator.ValidationEventHandler += new ValidationEventHandler(ValidationHandler);
@@ -122,11 +123,21 @@ namespace GanttTracker.TaskManager.TaskStorage
 			validator.Close();
 			*/
 
-			Storage = new DataSet();
-			Storage.ReadXml(ConnectionString);
-		}
+            Storage = new DataSet();
+            Storage.ReadXml(ConnectionString);
 
-		private void ValidationHandler(object sender, ValidationEventArgs args)
+            MigrateTaskPriority();
+        }
+
+        private void MigrateTaskPriority()
+        {
+            if (Storage.Tables["Task"].Columns.IndexOf("Priority") == -1)
+            {
+                Storage.Tables["Task"].Columns.Add("Priority", typeof(int));
+            }
+        }
+
+        private void ValidationHandler(object sender, ValidationEventArgs args)
 		{
 			throw new ManagementException(ExceptionType.ValidationFailed, string.Format("Validation failed with message {0}", args.Message));
 		}

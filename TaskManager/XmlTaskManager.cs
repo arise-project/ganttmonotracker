@@ -1,5 +1,5 @@
 ﻿//author:Eugene Pirogov
-//email:eugene.intalk@gmail.com
+//email:pirogov.e@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
 // created on 27.11.2005 at 21:21
@@ -81,8 +81,9 @@ namespace GanttTracker.TaskManager
 			values.Add("StartTime",DateTime.Now);
 			values.Add("EndTime",DateTime.Now);
 			values.Add("StateID",DBNull.Value);
-					
-			createTaskCommand.SetParam("Values",values);
+            values.Add("Priority", 10);
+
+            createTaskCommand.SetParam("Values",values);
 			
 			int id = (int)fRepository.ExecuteScalar(createTaskCommand);		
 			 
@@ -125,7 +126,16 @@ namespace GanttTracker.TaskManager
 
 			task.StartTime = (DateTime)taskRow["StartTime"];
 			task.EndTime = (DateTime)taskRow["EndTime"];
-			if (!(taskRow["StateID"] is DBNull))
+            if(taskRow["Priority"] is DBNull)
+            {
+                task.Priority = 10;
+            }
+            else
+            {
+                task.Priority = (int)taskRow["Priority"];
+            }
+
+            if (!(taskRow["StateID"] is DBNull))
 				task.StateID = (int)taskRow["StateID"];		
 			else
 				task.StatePresent = false;
@@ -145,7 +155,8 @@ namespace GanttTracker.TaskManager
 			values.Add("Description", task.Description);			
 			values.Add("StartTime",task.StartTime);
 			values.Add("EndTime",task.EndTime);
-			if (task.StatePresent)
+            values.Add("Priority", task.Priority);
+            if (task.StatePresent)
 				values.Add("StateID",task.StateID);
 					
 			updateTaskCommand.SetParam("Values",values);
@@ -170,8 +181,9 @@ namespace GanttTracker.TaskManager
 			result = result && 	newTask.EndTime == oldTask.EndTime;
 			result = result && 	newTask.StartTime == oldTask.StartTime;
 			result = result && 	newTask.StateID == oldTask.StateID;
-			
-			return result;
+            result = result && newTask.Priority == oldTask.Priority;
+
+            return result;
 		}
 
 		public void DeleteTask(int id)

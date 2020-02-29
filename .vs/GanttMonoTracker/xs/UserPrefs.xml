@@ -1,6 +1,40 @@
-﻿<Properties StartupConfiguration="{991D9B6D-5D35-4FA6-8B0E-48A8FA84EF30}|Default" GitUserInfo="UsingGIT" StartupItem="GanttMonoTracker.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{991D9B6D-5D35-4FA6-8B0E-48A8FA84EF30}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation/MainForm.cs">
+    <Files>
+      <File FileName="GuiPresentation/ViewTaskDialog.cs" Line="60" Column="9" />
+      <File FileName="GuiPresentation/ViewTaskDialog.glade" Line="445" Column="24" />
+      <File FileName="GuiPresentation/MainForm.cs" Line="219" Column="31" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="GanttMonoTracker" expanded="True">
+            <Node name="GanttMonoTracker" expanded="True">
+              <Node name="BrowserPresentation" expanded="True" />
+              <Node name="DrawingPresentation" expanded="True" />
+              <Node name="ExceptionPresentation" expanded="True" />
+              <Node name="GuiPresentation" expanded="True">
+                <Node name="MainForm.cs" selected="True" />
+              </Node>
+              <Node name="interface" expanded="True" />
+              <Node name="Palette" expanded="True" />
+              <Node name="TaskManager" expanded="True">
+                <Node name="TaskStorage" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>spbPriority</Value>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.GanttMonoTracker PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="D:\Projects\ganttmonotracker\Sunchronization\GDrive\GDriveManager.cs" line="46" column="17" />
@@ -17,18 +51,5 @@
       <Breakpoint file="/home/user/Projects/ganttmonotracker/GuiPresentation/MainForm.cs" line="235" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="GuiPresentation/MainForm.cs">
-    <Files>
-      <File FileName="Main.cs" Line="1" Column="1" />
-      <File FileName="Arise/DataSearch.cs" Line="1" Column="1" />
-      <File FileName="GuiPresentation/LogoForm.cs" Line="1" Column="1" />
-      <File FileName="GuiPresentation/MainForm.cs" Line="242" Column="25" />
-      <File FileName="app.config" Line="1" Column="1" />
-      <File FileName="GuiPresentation/ViewTaskDialog.cs" Line="1" Column="1" />
-      <File FileName="TaskManager/TrackerCore.cs" Line="1" Column="1" />
-      <File FileName="GuiPresentation/MainForm.glade" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.GanttMonoTracker PreferredExecutionTarget="MonoDevelop.Default" />
 </Properties>

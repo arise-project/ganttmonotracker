@@ -1,5 +1,5 @@
 ﻿//author:Eugene Pirogov
-//email:eugene.intalk@gmail.com
+//email:pirogov.e@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
 // created on 10.11.2005 at 1:25
@@ -167,6 +167,7 @@ namespace GanttTracker
                 newTask.EndTime = taskView.EndTime;
                 newTask.StartTime = taskView.StartTime;
                 newTask.StateID = taskView.StateID;
+                newTask.Priority = taskView.Priority;
 
                 newTask.Save();
 
@@ -234,6 +235,7 @@ namespace GanttTracker
                 task.EndTime = taskView.EndTime;
                 task.StartTime = taskView.StartTime;
                 task.StateID = taskView.StateID;
+                task.Priority = taskView.Priority;
                 task.Save();
                 Tracker.TaskSource = TaskManager.TaskSource;
                 Tracker.BindTask();

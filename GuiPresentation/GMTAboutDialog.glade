@@ -1,4 +1,4 @@
-<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
+﻿<?xml version="1.0" standalone="no"?> <!--*- mode: xml -*-->
 <!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd">
 
 <glade-interface>
@@ -66,7 +66,7 @@ above, provided that you also meet all of these conditions:
     the Program is not required to print an announcement.)</property>
   <property name="website">http://arise-project.org.ua</property>
   <property name="website_label">http://arise-project.org.ua</property>
-  <property name="authors">(eugene.intalk@gmail.com) no support available.</property>
+  <property name="authors">(pirogov.e@gmail.com) no support available.</property>
   <property name="translator_credits"></property>
 
   <child internal-child="vbox">

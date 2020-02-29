@@ -4,7 +4,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------------------------
 //author:Eugene Pirogov
-//email:eugene.intalk@gmail.com
+//email:pirogov.e@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
 // created on 18.12.2005 at 22:41
@@ -187,6 +187,7 @@ namespace GanttMonoTracker.GuiPresentation
             taskDialog.EndTime = task.EndTime;
             taskDialog.StartTime = task.StartTime;
             taskDialog.Comment = task.Comment;
+            taskDialog.Priority = task.Priority;
             return taskDialog;
         }
 

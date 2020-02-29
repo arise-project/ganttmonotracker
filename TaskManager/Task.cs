@@ -1,5 +1,5 @@
 ﻿//author:Eugene Pirogov
-//email:eugene.intalk@gmail.com
+//email:pirogov.e@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
 // created on 18.11.2005 at 23:03
@@ -101,9 +101,10 @@ namespace GanttTracker.TaskManager
 		public ITaskManager Parent { get;set; }
 
 		public string Comment {	get;set; }
+        public int Priority { get; internal set; }
 
-		//TODO: Copy past should be moved to base class
-		public void BindData()
+        //TODO: Copy past should be moved to base class
+        public void BindData()
 		{
 			Parent.BindTask(this);
 		}

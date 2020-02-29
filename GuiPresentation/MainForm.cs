@@ -4,7 +4,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------------------------
 //author:Eugene Pirogov
-//email:eugene.intalk@gmail.com
+//email:pirogov.e@gmail.com
 //license:GPLv3.0
 //date:4/12/2014
 // created on 08.11.2005 at 23:25
@@ -49,8 +49,8 @@ namespace GanttMonoTracker.GuiPresentation
         private readonly TreeStore fActorStore = new TreeStore(typeof(int), typeof(string), typeof(string));
         private FileSelection fFileSelection; // todo : FileChooserWidget
 
-        //                                   id,          status          description,   start time,     end time,      actor,         
-        TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string));
+        //                                   id,          status          description,   start time,     end time,      actor,         ,priority
+        TreeStore fTaskStore = new TreeStore(typeof(int), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(int));
 
 #pragma warning disable 0649
 
@@ -97,7 +97,7 @@ namespace GanttMonoTracker.GuiPresentation
 
         private string searchTask;
         private string selectedFile;
-        readonly bool[] taskSort = new bool[6];
+        readonly bool[] taskSort = new bool[7];
 
 #pragma warning disable 0649
         /// <summary>
@@ -217,6 +217,7 @@ namespace GanttMonoTracker.GuiPresentation
                     fTaskStore.SetValue(itemNode, 3, ((DateTime)row["StartTime"]).ToShortDateString());
                     fTaskStore.SetValue(itemNode, 4, ((DateTime)row["EndTime"]).ToShortDateString());
                     fTaskStore.SetValue(itemNode, 5, actorName);
+                    fTaskStore.SetValue(itemNode, 6, row["Priority"]);
                 }
             }
             catch (Exception ex)
@@ -339,6 +340,7 @@ namespace GanttMonoTracker.GuiPresentation
             tvTaskTree.AppendColumn("Start Time", new CellRendererText(), "text", 3);
             tvTaskTree.AppendColumn("End Time", new CellRendererText(), "text", 4);
             tvTaskTree.AppendColumn("Actor", new CellRendererText(), "text", 5);
+            tvTaskTree.AppendColumn("Priority", new CellRendererText(), "text", 6);
 
             tvTaskTree.ButtonPressEvent += HandleTaskButtonPressEvent;
             //todo: use multi row mode
@@ -353,7 +355,7 @@ namespace GanttMonoTracker.GuiPresentation
 
             //vbox3.Add(vb);
 
-            for (var i = 2; i < 5; i++)
+            for (var i = 2; i < 6; i++)
             {
                 fTaskStore.SetSortFunc(i, delegate (TreeModel model, TreeIter a, TreeIter b)
                 {
