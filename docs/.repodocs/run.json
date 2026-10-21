@@ -1,0 +1,844 @@
+{
+  "RunId": "ec97198f-6c28-4c8f-939e-c946efffba2a",
+  "Repository": "arise-project/ganttmonotracker",
+  "Branch": "master",
+  "Commit": "45dc6ae0049560c6948c19e6cfa8952044b68b0e",
+  "Solution": "GanttMonoTracker.sln",
+  "OptionsHash": "209ea9a839fa71d5",
+  "SharedWithRun": null,
+  "Options": {
+    "Solution": null,
+    "Sections": [
+      "overview",
+      "architecture",
+      "projects",
+      "features",
+      "api-reference",
+      "diagrams"
+    ],
+    "Audience": "both",
+    "DetailLevel": "standard",
+    "Language": "auto",
+    "DocsFolder": "docs",
+    "ExactApi": true,
+    "IncludeInternal": false,
+    "ImproveReadme": false
+  },
+  "StartedUtc": "2026-10-21T19:01:49.1306911Z",
+  "ElapsedSeconds": 8.8,
+  "LimitMinutes": null,
+  "PlannedPages": 108,
+  "FinishedPages": 108,
+  "StageSeconds": {
+    "Validating": 0.14,
+    "Cloning": 7.13,
+    "Scanning": 0.39,
+    "Indexing": 1.15,
+    "Documenting": 0.56
+  },
+  "Inventory": {
+    "Solutions": 2,
+    "Projects": 2,
+    "CSharpFiles": 82
+  },
+  "Index": {
+    "Projects": 2,
+    "SkippedProjects": [],
+    "Files": 82,
+    "Lines": 8987,
+    "Types": 76,
+    "PublicTypes": 75,
+    "PublicMembers": 589,
+    "Families": 11,
+    "Registrations": 0,
+    "FilesWithSyntaxErrors": 0,
+    "Seconds": 1.11,
+    "TimeBudgetReached": false
+  },
+  "Families": [
+    {
+      "Root": "TaskManagerInterface.IGuiMessageDialog",
+      "Kind": "Interface",
+      "Project": "GanttMonoTracker",
+      "Members": 11,
+      "Label": null,
+      "Summary": null
+    },
+    {
+      "Root": "TaskManagerInterface.IManagerEntity",
+      "Kind": "Interface",
+      "Project": "GanttMonoTracker",
+      "Members": 6,
+      "Label": null,
+      "Summary": null
+    },
+    {
+      "Root": "TaskManagerInterface.IStorageCommand",
+      "Kind": "Interface",
+      "Project": "GanttMonoTracker",
+      "Members": 4,
+      "Label": null,
+      "Summary": null
+    },
+    {
+      "Root": "TaskManagerInterface.IGuiSource",
+      "Kind": "Interface",
+      "Project": "GanttMonoTracker",
+      "Members": 4,
+      "Label": null,
+      "Summary": null
+    },
+    {
+      "Root": "TaskManagerInterface.IStorageManager",
+      "Kind": "Interface",
+      "Project": "GanttMonoTracker",
+      "Members": 3,
+      "Label": null,
+      "Summary": null
+    },
+    {
+      "Root": "TaskManagerInterface.ITaskManager",
+      "Kind": "Interface",
+      "Project": "GanttMonoTracker",
+      "Members": 2,
+      "Label": null,
+      "Summary": null
+    },
+    {
+      "Root": "TaskManagerInterface.ITask",
+      "Kind": "Interface",
+      "Project": "GanttMonoTracker",
+      "Members": 3,
+      "Label": null,
+      "Summary": null
+    },
+    {
+      "Root": "TaskManagerInterface.IGuiCore",
+      "Kind": "Interface",
+      "Project": "GanttMonoTracker",
+      "Members": 2,
+      "Label": null,
+      "Summary": null
+    },
+    {
+      "Root": "TaskManagerInterface.IGuiTracker",
+      "Kind": "Interface",
+      "Project": "GanttMonoTracker",
+      "Members": 2,
+      "Label": null,
+      "Summary": null
+    },
+    {
+      "Root": "TaskManagerInterface.IGuiConnection",
+      "Kind": "Interface",
+      "Project": "GanttMonoTracker",
+      "Members": 2,
+      "Label": null,
+      "Summary": null
+    }
+  ],
+  "Pages": [
+    {
+      "Path": "index.md",
+      "Title": "arise-project/ganttmonotracker",
+      "Kind": "index",
+      "Quality": 2
+    },
+    {
+      "Path": "architecture.md",
+      "Title": "Architecture",
+      "Kind": "architecture",
+      "Quality": 2
+    },
+    {
+      "Path": "projects/index.md",
+      "Title": "Projects",
+      "Kind": "projects",
+      "Quality": 0
+    },
+    {
+      "Path": "projects/Arise.md",
+      "Title": "Arise",
+      "Kind": "project",
+      "Quality": 1
+    },
+    {
+      "Path": "projects/GanttMonoTracker.md",
+      "Title": "GanttMonoTracker",
+      "Kind": "project",
+      "Quality": 2
+    },
+    {
+      "Path": "families/index.md",
+      "Title": "Component families",
+      "Kind": "families",
+      "Quality": 0
+    },
+    {
+      "Path": "families/IGuiMessageDialog.md",
+      "Title": "IGuiMessageDialog",
+      "Kind": "family",
+      "Quality": 1
+    },
+    {
+      "Path": "families/IManagerEntity.md",
+      "Title": "IManagerEntity",
+      "Kind": "family",
+      "Quality": 1
+    },
+    {
+      "Path": "families/IStorageCommand.md",
+      "Title": "IStorageCommand",
+      "Kind": "family",
+      "Quality": 1
+    },
+    {
+      "Path": "families/IGuiSource.md",
+      "Title": "IGuiSource",
+      "Kind": "family",
+      "Quality": 1
+    },
+    {
+      "Path": "families/IStorageManager.md",
+      "Title": "IStorageManager",
+      "Kind": "family",
+      "Quality": 1
+    },
+    {
+      "Path": "families/ITaskManager.md",
+      "Title": "ITaskManager",
+      "Kind": "family",
+      "Quality": 1
+    },
+    {
+      "Path": "families/ITask.md",
+      "Title": "ITask",
+      "Kind": "family",
+      "Quality": 1
+    },
+    {
+      "Path": "families/IGuiCore.md",
+      "Title": "IGuiCore",
+      "Kind": "family",
+      "Quality": 1
+    },
+    {
+      "Path": "families/IGuiTracker.md",
+      "Title": "IGuiTracker",
+      "Kind": "family",
+      "Quality": 1
+    },
+    {
+      "Path": "families/IGuiConnection.md",
+      "Title": "IGuiConnection",
+      "Kind": "family",
+      "Quality": 1
+    },
+    {
+      "Path": "families/IState.md",
+      "Title": "IState",
+      "Kind": "family",
+      "Quality": 1
+    },
+    {
+      "Path": "features.md",
+      "Title": "Features",
+      "Kind": "features",
+      "Quality": 2
+    },
+    {
+      "Path": "api/index.md",
+      "Title": "API reference",
+      "Kind": "api",
+      "Quality": 0
+    },
+    {
+      "Path": "api/Arise.Logic/index.md",
+      "Title": "Arise.Logic",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttMonoTracker/index.md",
+      "Title": "GanttMonoTracker",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttMonoTracker.DrawingPresentation/index.md",
+      "Title": "GanttMonoTracker.DrawingPresentation",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttMonoTracker.ExceptionPresentation/index.md",
+      "Title": "GanttMonoTracker.ExceptionPresentation",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttMonoTracker.GuiPresentation/index.md",
+      "Title": "GanttMonoTracker.GuiPresentation",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttTracker.CommentManager/index.md",
+      "Title": "GanttTracker.CommentManager",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttTracker/index.md",
+      "Title": "GanttTracker",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttTracker.ProjectManager/index.md",
+      "Title": "GanttTracker.ProjectManager",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttTracker.StateManager/index.md",
+      "Title": "GanttTracker.StateManager",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager/index.md",
+      "Title": "GanttTracker.TaskManager",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager.ManagerException/index.md",
+      "Title": "GanttTracker.TaskManager.ManagerException",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager.TaskStorage/index.md",
+      "Title": "GanttTracker.TaskManager.TaskStorage",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/TaskManagerInterface/index.md",
+      "Title": "TaskManagerInterface",
+      "Kind": "namespace",
+      "Quality": 0
+    },
+    {
+      "Path": "api/Arise.Logic/DataSearch.md",
+      "Title": "DataSearch",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/Arise.Logic/IdentityManager.md",
+      "Title": "IdentityManager",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/BrowserForm.md",
+      "Title": "BrowserForm",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/ColorEnum.md",
+      "Title": "ColorEnum",
+      "Kind": "type",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttMonoTracker.DrawingPresentation/AssigmentDiagramm.md",
+      "Title": "AssigmentDiagramm",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.DrawingPresentation/DiagrammFactory.md",
+      "Title": "DiagrammFactory",
+      "Kind": "type",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttMonoTracker.DrawingPresentation/GanttDiagramm.md",
+      "Title": "GanttDiagramm",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.ExceptionPresentation/ExceptionViewDialog.md",
+      "Title": "ExceptionViewDialog",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.ExceptionPresentation/MessageFactory.md",
+      "Title": "MessageFactory",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.ExceptionPresentation/MessageViewDialog.md",
+      "Title": "MessageViewDialog",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/ExceptionType.md",
+      "Title": "ExceptionType",
+      "Kind": "type",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttMonoTracker/FSLocations.md",
+      "Title": "FSLocations",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/GDriveCredentials.md",
+      "Title": "GDriveCredentials",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/GDriveDownloader.md",
+      "Title": "GDriveDownloader",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/GDriveManager.md",
+      "Title": "GDriveManager",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/GDriveUploader.md",
+      "Title": "GDriveUploader",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/GanttDataSetBuilder.md",
+      "Title": "GanttDataSetBuilder",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/GdkPalette.md",
+      "Title": "GdkPalette",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.GuiPresentation/AboutDialog.md",
+      "Title": "AboutDialog",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.GuiPresentation/GuiFactory.md",
+      "Title": "GuiFactory",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.GuiPresentation/LogoForm.md",
+      "Title": "LogoForm",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.GuiPresentation/MainForm.md",
+      "Title": "MainForm",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.GuiPresentation/ViewActorDialog.md",
+      "Title": "ViewActorDialog",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.GuiPresentation/ViewConnectionDialog.md",
+      "Title": "ViewConnectionDialog",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.GuiPresentation/ViewSingleStateDialog.md",
+      "Title": "ViewSingleStateDialog",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.GuiPresentation/ViewStateDialog.md",
+      "Title": "ViewStateDialog",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.GuiPresentation/ViewTaskAssign.md",
+      "Title": "ViewTaskAssign",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker.GuiPresentation/ViewTaskDialog.md",
+      "Title": "ViewTaskDialog",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/HtmlHelpders.md",
+      "Title": "HtmlHelpders",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/IGanttSource.md",
+      "Title": "IGanttSource",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttMonoTracker/IProject.md",
+      "Title": "IProject",
+      "Kind": "type",
+      "Quality": 0
+    },
+    {
+      "Path": "api/GanttMonoTracker/Project.md",
+      "Title": "Project",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.CommentManager/Comment.md",
+      "Title": "Comment",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker/GanttTrackerApp.md",
+      "Title": "GanttTrackerApp",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.ProjectManager/ProjectHistory.md",
+      "Title": "ProjectHistory",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.StateManager/Connection.md",
+      "Title": "Connection",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.StateManager/State.md",
+      "Title": "State",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.StateManager/StateCore.md",
+      "Title": "StateCore",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.StateManager/StateFactory.md",
+      "Title": "StateFactory",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager/Actor.md",
+      "Title": "Actor",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager/EmptyTaskManager.md",
+      "Title": "EmptyTaskManager",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager.ManagerException/ImplementationException.md",
+      "Title": "ImplementationException",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager.ManagerException/KeyNotFoundException-1.md",
+      "Title": "KeyNotFoundException\u003CT\u003E",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager.ManagerException/ManagementException.md",
+      "Title": "ManagementException",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager/ManagerFactory.md",
+      "Title": "ManagerFactory",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager/Task.md",
+      "Title": "Task",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager.TaskStorage/CommandFactory.md",
+      "Title": "CommandFactory",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager.TaskStorage/DeleteCommand.md",
+      "Title": "DeleteCommand",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager.TaskStorage/InsertCommand.md",
+      "Title": "InsertCommand",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager.TaskStorage/SelectCommand.md",
+      "Title": "SelectCommand",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager.TaskStorage/StorageRepository.md",
+      "Title": "StorageRepository",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager.TaskStorage/UpdateCommand.md",
+      "Title": "UpdateCommand",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker.TaskManager/XmlTaskManager.md",
+      "Title": "XmlTaskManager",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/GanttTracker/TrackerCore.md",
+      "Title": "TrackerCore",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/CoreState.md",
+      "Title": "CoreState",
+      "Kind": "type",
+      "Quality": 0
+    },
+    {
+      "Path": "api/TaskManagerInterface/IGuiActorView.md",
+      "Title": "IGuiActorView",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IGuiComment.md",
+      "Title": "IGuiComment",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IGuiConnection.md",
+      "Title": "IGuiConnection",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IGuiCore.md",
+      "Title": "IGuiCore",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IGuiMessageDialog.md",
+      "Title": "IGuiMessageDialog",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IGuiSource.md",
+      "Title": "IGuiSource",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IGuiState.md",
+      "Title": "IGuiState",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IGuiTask.md",
+      "Title": "IGuiTask",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IGuiTracker.md",
+      "Title": "IGuiTracker",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IManagerEntity.md",
+      "Title": "IManagerEntity",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IManagerFactory.md",
+      "Title": "IManagerFactory",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IRepositoryCruid.md",
+      "Title": "IRepositoryCruid",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/ISingleStateView.md",
+      "Title": "ISingleStateView",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IState.md",
+      "Title": "IState",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IStateManager.md",
+      "Title": "IStateManager",
+      "Kind": "type",
+      "Quality": 0
+    },
+    {
+      "Path": "api/TaskManagerInterface/IStorageCommand.md",
+      "Title": "IStorageCommand",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IStorageManager.md",
+      "Title": "IStorageManager",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/IStorageRepository.md",
+      "Title": "IStorageRepository",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/ITask.md",
+      "Title": "ITask",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "api/TaskManagerInterface/ITaskManager.md",
+      "Title": "ITaskManager",
+      "Kind": "type",
+      "Quality": 1
+    },
+    {
+      "Path": "quality.md",
+      "Title": "Quality report",
+      "Kind": "quality",
+      "Quality": 0
+    }
+  ],
+  "PendingSections": [],
+  "TypePagesCapped": 0,
+  "BrokenLinks": [],
+  "Checkpoints": 0,
+  "Ai": {
+    "Planned": 30,
+    "FromCache": 27,
+    "Generated": 3,
+    "Repaired": 0,
+    "Rejected": 0,
+    "Failed": 0,
+    "Cancelled": 0,
+    "ToolCalls": 2,
+    "NotStarted": 0,
+    "PromptTokens": 12196,
+    "CompletionTokens": 3279,
+    "Seconds": 41.4,
+    "BudgetReached": false,
+    "Model": "gpt-oss",
+    "Finished": 30,
+    "TranslationPlanned": 0,
+    "TranslationFinished": 0,
+    "ExplanationsPlanned": 30,
+    "ExplanationsFinished": 30,
+    "CacheHitRate": 0.9
+  },
+  "Grounding": {
+    "Jobs": 3,
+    "NamesChecked": 19,
+    "UnknownFound": 5,
+    "FixedByRepair": 0,
+    "SentencesRemoved": 7,
+    "ItemsRemoved": 1,
+    "ErrorRateBeforeRepair": 0.2631578947368421,
+    "ErrorRateAfterRepair": 0.2631578947368421
+  },
+  "DiagramProblems": [],
+  "Translation": null,
+  "Exports": null,
+  "Stack": ".NET",
+  "Languages": {
+    "C#": 82
+  },
+  "Delivery": {
+    "Branch": "arise/repodocs/45dc6ae",
+    "PullRequestUrl": "https://github.com/arise-project/ganttmonotracker/pull/5",
+    "PullRequestNumber": 5,
+    "Status": "draft",
+    "Folder": "docs",
+    "Commits": 1,
+    "KeptHandWritten": [],
+    "Superseded": [],
+    "Error": null
+  }
+}

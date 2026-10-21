@@ -1,0 +1,41 @@
+[
+  {
+    "Job": "family:T:TaskManagerInterface.IStorageCommand",
+    "Kind": "family",
+    "NamesChecked": 4,
+    "UnknownBeforeRepair": [
+      "DataSet",
+      "EntityName",
+      "Rules",
+      "Values",
+      "Hashtable"
+    ],
+    "UnknownAfterRepair": [
+      "DataSet",
+      "EntityName",
+      "Rules",
+      "Values",
+      "Hashtable"
+    ],
+    "SentencesRemoved": 7,
+    "ItemsRemoved": 1
+  },
+  {
+    "Job": "architecture",
+    "Kind": "architecture",
+    "NamesChecked": 15,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "features",
+    "Kind": "features",
+    "NamesChecked": 0,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  }
+]
