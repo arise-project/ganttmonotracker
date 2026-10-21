@@ -5,15 +5,15 @@ Interface [`IStorageCommand`](../api/TaskManagerInterface/IStorageCommand.md) in
 
 ```mermaid
 flowchart BT
-  t842[/"IStorageCommand"/]
+  t854[/"IStorageCommand"/]
   t634["DeleteCommand"]
   t644["InsertCommand"]
   t654["SelectCommand"]
-  t686["UpdateCommand"]
-  t634 -.-> t842
-  t644 -.-> t842
-  t654 -.-> t842
-  t686 -.-> t842
+  t664["UpdateCommand"]
+  t634 -.-> t854
+  t644 -.-> t854
+  t654 -.-> t854
+  t664 -.-> t854
 ```
 
 ## Types

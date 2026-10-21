@@ -13,10 +13,6 @@ public interface IGuiTask : ITask, IGuiMessageDialog
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md), [`ITask`](../../families/ITask.md)
 
-**In the [IGuiMessageDialog family](../../families/IGuiMessageDialog.md):** interface extending [`IGuiMessageDialog`](IGuiMessageDialog.md) for task‑focused dialogs Use it when defining a new task view dialog
-
-**In the [ITask family](../../families/ITask.md):** Extends [`ITask`](ITask.md) with UI‑specific contract (`Priority` and inherits [`IGuiMessageDialog`](IGuiMessageDialog.md)). It does not provide implementation, only adds read‑only UI data. Use it when Use when a component only needs to display task information (e.g., dialogs, trackers) without modifying persistence state.
-
 ## Properties
 
 ### Priority

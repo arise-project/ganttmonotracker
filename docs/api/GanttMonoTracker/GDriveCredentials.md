@@ -7,27 +7,6 @@ Namespace: [`GanttMonoTracker`](index.md) · Project: [GanttMonoTracker](../../p
 public class GDriveCredentials
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Holds the OAuth client identifiers and credential object required to access Google Drive APIs.
-
-**Responsibilities**
-
-- Store client ID and secret.
-- Initialize the default Drive scopes.
-
-**Key members**
-
-- `GDriveCredentials(string CLIENT_ID, string CLIENT_SECRET)`: Constructs the object and sets default Drive scopes.
-- `CLIENT_ID`: Gets or sets the Google API client identifier.
-- `CLIENT_SECRET`: Gets or sets the Google API client secret.
-- `Credential`: Gets or sets the `UserCredential` obtained after authentication.
-- `Scopes`: Gets or sets the array of OAuth scopes for Drive access.
-
-**Works with:** `UserCredential`, `DriveService`
-
 ## Constructors
 
 ### GDriveCredentials constructor

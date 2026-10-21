@@ -7,25 +7,6 @@ Namespace: [`GanttTracker.StateManager`](index.md) · Project: [GanttMonoTracker
 public static class StateFactory
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Factory class that creates task state objects using a parent manager instance.
-
-**Responsibilities**
-
-- Validate that a parent manager is set
-- Delegate state creation to the parent manager
-- Expose the parent manager for configuration
-
-**Key members**
-
-- `CreateTaskState`: Returns a new task state by calling `Parent.CreateTaskState()`
-- `Parent`: Holds the [`ITaskManager`](../TaskManagerInterface/ITaskManager.md) instance used to create states
-
-**Works with:** [`IManagerEntity`](../TaskManagerInterface/IManagerEntity.md), [`ITaskManager`](../TaskManagerInterface/ITaskManager.md), [`State`](State.md), [`ManagementException`](../GanttTracker.TaskManager.ManagerException/ManagementException.md), [`ExceptionType`](../GanttMonoTracker/ExceptionType.md)
-
 ## Properties
 
 ### Parent

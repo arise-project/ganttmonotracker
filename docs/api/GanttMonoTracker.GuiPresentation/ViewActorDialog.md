@@ -11,8 +11,6 @@ public class ViewActorDialog : IGuiActorView
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md)
 
-**In the [IGuiMessageDialog family](../../families/IGuiMessageDialog.md):** implements [`IGuiActorView`](../TaskManagerInterface/IGuiActorView.md); presents actor‑specific details and actions Use it when showing or editing actor information
-
 ## Constructors
 
 ### ViewActorDialog constructor

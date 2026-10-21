@@ -8,7 +8,7 @@
 | Type | |
 |---|---|
 | [`AboutDialog`](AboutDialog.md) |  |
-| [`GuiFactory`](GuiFactory.md) | *AI:* GuiFactory is a static factory that creates all GUI dialog and view objects used by the GanttMonoTracker application, centralising construction and initial configuration. |
+| [`GuiFactory`](GuiFactory.md) |  |
 | [`LogoForm`](LogoForm.md) |  |
 | [`MainForm`](MainForm.md) |  |
 | [`ViewActorDialog`](ViewActorDialog.md) |  |

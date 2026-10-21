@@ -7,30 +7,6 @@ Namespace: [`GanttMonoTracker`](index.md) · Project: [GanttMonoTracker](../../p
 public interface IGanttSource
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Defines the contract for a Gantt chart data source, exposing mutable and static datasets and view options.
-
-**Responsibilities**
-
-- Refresh the underlying data
-- Expose the current mutable DataSet
-- Expose a static read‑only DataSet
-- Control visibility of the current date line
-- Toggle read‑only mode
-
-**Key members**
-
-- `Refresh`: Reloads or recomputes the source data
-- `DateNowVisible`: Gets or sets whether the current date marker is shown
-- `ReadOnly`: Gets or sets whether the source can be edited
-- `Source`: Gets or sets the primary mutable DataSet
-- `StaticSource`: Gets or sets the secondary static DataSet
-
-**Works with:** `DataSet`
-
 **Derived:** [`GanttDiagramm`](../GanttMonoTracker.DrawingPresentation/GanttDiagramm.md)
 
 ## Properties

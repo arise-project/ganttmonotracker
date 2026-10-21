@@ -7,4 +7,4 @@
 
 | Type | |
 |---|---|
-| [`ProjectHistory`](ProjectHistory.md) | *AI:* Provides a singleton store for project paths and names, allowing the application to persist and restore the list of recent projects. |
+| [`ProjectHistory`](ProjectHistory.md) |  |

@@ -7,28 +7,6 @@ Namespace: [`GanttTracker.ProjectManager`](index.md) · Project: [GanttMonoTrack
 public class ProjectHistory
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Provides a singleton store for project paths and names, allowing the application to persist and restore the list of recent projects.
-
-**Responsibilities**
-
-- Maintain a `Hashtable` of project path‑to‑name mappings.
-- Load project entries from an XML file via `OpenProject`.
-- Write the current project entries to an XML file via `SaveProject`.
-- Expose a globally accessible instance through `Instance`.
-
-**Key members**
-
-- `OpenProject`: Reads an XML file and populates `Projects` with path and name attributes.
-- `SaveProject`: Serializes the contents of `Projects` to an XML file.
-- `Instance`: Provides lazy‑initialized singleton access to the [`ProjectHistory`](ProjectHistory.md) object.
-- `Projects`: Public property that holds the collection of project entries.
-
-**Works with:** `XmlDocument`, `XmlElement`, `StreamWriter`, `StreamReader`, `Hashtable`
-
 ## Properties
 
 ### Instance

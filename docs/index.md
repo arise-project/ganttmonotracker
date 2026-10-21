@@ -3,37 +3,7 @@
 
 Documentation of [arise-project/ganttmonotracker](https://github.com/arise-project/ganttmonotracker) at commit [`45dc6ae00495`](https://github.com/arise-project/ganttmonotracker/tree/45dc6ae0049560c6948c19e6cfa8952044b68b0e) (branch `master`).
 
-> **Coverage:** generated from the code itself (types, members, XML docs, project and inheritance graphs). AI explanations: 29 of 30 written; the rest did not fit in this run's time. Run it again to continue: everything finished is kept and not redone.
-
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Gantt Mono Tracker is a cross‑platform GTK# desktop application built on Mono/.NET that lets users create, edit, and track tasks using interactive Gantt diagrams, with optional Google Drive cloud storage.
-
-### Key concepts
-
-- **Arise**: Core library that supplies data‑search utilities and user‑identity management used by the tracker and other applications.
-- **GanttMonoTracker**: Main application that provides the UI for task management, Gantt rendering, and integrates the core services.
-- **ITaskManager**: Defines create, update, and delete operations for [`Task`](api/GanttTracker.TaskManager/Task.md) objects.
-- **IGuiMessageDialog**: Abstraction for showing modal information, warning, and error dialogs to the user.
-- **IStorageCommand**: Encapsulates a storage operation such as add, remove, or update that can be executed against an [`IStorageRepository`](api/TaskManagerInterface/IStorageRepository.md).
-- **IGuiCore**: Core GUI contract that coordinates views, dialogs, and user interaction across the application.
-- **GanttDiagramm**: Renders the visual Gantt chart based on a collection of [`Task`](api/GanttTracker.TaskManager/Task.md) instances.
-- **Task**: Domain model representing a work item with start/end dates, resources, and dependencies.
-- **ManagementException**: Custom exception used in manager layers to signal business‑logic errors.
-- **IStorageRepository**: Interface for persisting and retrieving [`Task`](api/GanttTracker.TaskManager/Task.md) data from various back‑ends.
-- **CoreState**: Holds shared application state such as selected task and zoom level.
-- **GDriveManager**: Provides Google Drive integration for uploading and downloading Gantt data files.
-- **MainForm**: Entry UI form that wires [`IGuiCore`](api/TaskManagerInterface/IGuiCore.md), [`ITaskManager`](api/TaskManagerInterface/ITaskManager.md), and other services together.
-
-### How it fits together
-
-The solution consists of two projects: `Arise`, which supplies reusable core services, and `GanttMonoTracker`, which references `Arise` and implements UI contracts ([`IGuiCore`](api/TaskManagerInterface/IGuiCore.md), [`IGuiMessageDialog`](api/TaskManagerInterface/IGuiMessageDialog.md)) and business contracts ([`ITaskManager`](api/TaskManagerInterface/ITaskManager.md), [`IStorageManager`](api/TaskManagerInterface/IStorageManager.md)). UI forms like [`MainForm`](api/GanttMonoTracker.GuiPresentation/MainForm.md) use these contracts to interact with the task model, while [`IStorageRepository`](api/TaskManagerInterface/IStorageRepository.md) and [`IStorageCommand`](api/TaskManagerInterface/IStorageCommand.md) handle persistence. Optional cloud sync is provided by [`GDriveManager`](api/GanttMonoTracker/GDriveManager.md).
-
-### Where to start
-
-Open the `GanttMonoTracker` project, start with [`MainForm`](api/GanttMonoTracker.GuiPresentation/MainForm.md) to see the UI bootstrap, then follow the flow to [`ITaskManager`](api/TaskManagerInterface/ITaskManager.md) and [`IGuiCore`](api/TaskManagerInterface/IGuiCore.md) to understand task handling and rendering via [`GanttDiagramm`](api/GanttMonoTracker.DrawingPresentation/GanttDiagramm.md).
+> **Coverage:** generated from the code itself (types, members, XML docs, project and inheritance graphs). AI-written explanations are not included in this run.
 
 ## About
 
@@ -84,3 +54,7 @@ arise-project.org.ua
 | [`IGuiCore`](families/IGuiCore.md) | 2 | GanttMonoTracker |  |
 | [`IGuiTracker`](families/IGuiTracker.md) | 2 | GanttMonoTracker |  |
 | [`IGuiConnection`](families/IGuiConnection.md) | 2 | GanttMonoTracker |  |
+
+## Not written yet
+
+These requested sections are written by AI and did not fit in this run: features. Run the documentation again to continue.

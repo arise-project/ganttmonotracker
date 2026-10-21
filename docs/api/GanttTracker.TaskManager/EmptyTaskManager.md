@@ -11,10 +11,6 @@ public class EmptyTaskManager : ITaskManager
 
 **Component family:** [`IStorageManager`](../../families/IStorageManager.md), [`ITaskManager`](../../families/ITaskManager.md)
 
-**In the [IStorageManager family](../../families/IStorageManager.md):** Provides a no‑op implementation that returns empty datasets and throws [`ManagementException`](../GanttTracker.TaskManager.ManagerException/ManagementException.md) for all mutating operations; useful for unit tests or scenarios where storage is intentionally disabled. Use it when When you need a lightweight stub that satisfies the interface without accessing a database or file system.
-
-**In the [ITaskManager family](../../families/ITaskManager.md):** uses an in‑memory `EmptyStorage` repository, returns pre‑filled empty datasets, and throws [`ManagementException`](../GanttTracker.TaskManager.ManagerException/ManagementException.md) for most mutating operations Use it when running in a test, demo, or offline scenario where no persistent storage should be accessed
-
 ## Constructors
 
 ### EmptyTaskManager constructor

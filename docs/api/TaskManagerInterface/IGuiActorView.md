@@ -13,8 +13,6 @@ public interface IGuiActorView : IGuiMessageDialog
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md)
 
-**In the [IGuiMessageDialog family](../../families/IGuiMessageDialog.md):** interface extending [`IGuiMessageDialog`](IGuiMessageDialog.md) for actor‑focused dialogs Use it when defining a new actor view dialog
-
 ## Properties
 
 ### ActorEmail

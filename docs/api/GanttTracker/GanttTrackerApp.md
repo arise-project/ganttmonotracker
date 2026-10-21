@@ -7,28 +7,6 @@ Namespace: [`GanttTracker`](index.md) · Project: [GanttMonoTracker](../../proje
 public class GanttTrackerApp
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Provides the entry point and startup logic for the GanttMonoTracker application, handling initialization, global error handling, and single‑instance enforcement.
-
-**Responsibilities**
-
-- Configure unhandled exception handling for the AppDomain
-- Enforce single‑instance execution based on configuration
-- Initialize the UI framework via Application.Init
-- Create and display the main UI form
-- Delegate command‑line arguments to Init
-
-**Key members**
-
-- `Init`: Sets up global error handling, checks single‑instance setting, initializes the UI framework, and creates the main form
-- `Main`: Application entry point that calls Init with command‑line arguments
-- `GanttTrackerApp()`: Default constructor (currently empty)
-
-**Works with:** `AppDomain`, `UnhandledExceptionEventArgs`, `ConfigurationManager`, `Process`, `Assembly`, `Path`, `Application`, `UnhandledExceptionHandler`, `ExceptionManager`, [`MainForm`](../GanttMonoTracker.GuiPresentation/MainForm.md)
-
 ## Constructors
 
 ### GanttTrackerApp constructor

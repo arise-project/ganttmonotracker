@@ -11,8 +11,6 @@ public class Actor : IManagerEntity
 
 **Component family:** [`IManagerEntity`](../../families/IManagerEntity.md)
 
-**In the [IManagerEntity family](../../families/IManagerEntity.md):** represents a resource/person; typically contains personal data (not shown) and participates in task assignment; otherwise follows the same [`IManagerEntity`](../TaskManagerInterface/IManagerEntity.md) contract. Use it when you need to assign a task to a user or resource.
-
 ## Constructors
 
 ### Actor constructor

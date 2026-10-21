@@ -11,8 +11,6 @@ public class ViewConnectionDialog : IGuiConnection
 
 **Component family:** [`IGuiConnection`](../../families/IGuiConnection.md)
 
-**In the [IGuiConnection family](../../families/IGuiConnection.md):** Implements [`IGuiConnection`](../TaskManagerInterface/IGuiConnection.md) as a dialog UI; contains Glade widgets, builds a modal window, and wires UI events to populate the contract fields. Use it when When a user must create or edit a connection through a graphical dialog.
-
 ## Constructors
 
 ### ViewConnectionDialog constructor

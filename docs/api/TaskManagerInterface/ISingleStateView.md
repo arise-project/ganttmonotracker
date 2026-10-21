@@ -7,21 +7,6 @@ Namespace: [`TaskManagerInterface`](index.md) · Project: [GanttMonoTracker](../
 public interface ISingleStateView
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Defines a view that represents a single named state in the task manager UI.
-
-**Responsibilities**
-
-- Expose the name of the state
-- Allow the name to be read and modified
-
-**Key members**
-
-- `Name`: Name of the state represented by the view
-
 ## Properties
 
 ### Name

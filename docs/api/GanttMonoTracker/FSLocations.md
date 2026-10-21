@@ -7,21 +7,6 @@ Namespace: [`GanttMonoTracker`](index.md) · Project: [GanttMonoTracker](../../p
 public static class FSLocations
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Computes a full file system path for a filename relative to the executing assembly.
-
-**Responsibilities**
-
-- Determine the directory of the running assembly
-- Combine that directory with the supplied filename
-
-**Key members**
-
-- `GetPath`: Extension method that returns `Path.Combine` of the assembly location and the filename
-
 ## Methods
 
 ### GetPath

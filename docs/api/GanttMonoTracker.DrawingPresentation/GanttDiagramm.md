@@ -11,8 +11,6 @@ public sealed class GanttDiagramm : Gtk.DrawingArea, IGuiSource, IGanttSource, I
 
 **Component family:** [`IGuiSource`](../../families/IGuiSource.md)
 
-**In the [IGuiSource family](../../families/IGuiSource.md):** Implements [`IGanttSource`](../GanttMonoTracker/IGanttSource.md) in addition to [`IGuiSource`](../TaskManagerInterface/IGuiSource.md), adds read‑only handling, static source fallback, and disposes drawing resources; draws a full Gantt chart. Use it when You need a visual Gantt chart that can be refreshed, toggles read‑only mode, or uses a static data source.
-
 ## Constructors
 
 ### GanttDiagramm constructor

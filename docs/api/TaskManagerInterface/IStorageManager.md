@@ -11,8 +11,6 @@ public interface IStorageManager
 
 **Component family:** [`IStorageManager`](../../families/IStorageManager.md)
 
-**Family contract** ([IStorageManager family](../../families/IStorageManager.md)): [`IStorageManager`](IStorageManager.md) guarantees that a storage component can persist changes (`Save`) and apply updates via a supplied [`IStorageRepository`](IStorageRepository.md). It serves as the minimal contract for any data‑backed manager, allowing higher‑level managers to focus on domain operations while delegating persistence concerns.
-
 ## Methods
 
 ### Save

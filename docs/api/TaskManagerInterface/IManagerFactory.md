@@ -7,22 +7,6 @@ Namespace: [`TaskManagerInterface`](index.md) · Project: [GanttMonoTracker](../
 public interface IManagerFactory
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Interface that defines a contract for factories producing [`ITaskManager`](ITaskManager.md) instances.
-
-**Responsibilities**
-
-- Expose a method to create an [`ITaskManager`](ITaskManager.md)
-
-**Key members**
-
-- `Create`: Creates and returns an [`ITaskManager`](ITaskManager.md) for the given file name
-
-**Works with:** [`ITaskManager`](ITaskManager.md)
-
 **Derived:** [`ManagerFactory`](../GanttTracker.TaskManager/ManagerFactory.md)
 
 ## Methods

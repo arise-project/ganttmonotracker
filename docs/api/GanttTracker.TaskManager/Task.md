@@ -11,10 +11,6 @@ public class Task : IManagerEntity, ITask
 
 **Component family:** [`IManagerEntity`](../../families/IManagerEntity.md), [`ITask`](../../families/ITask.md)
 
-**In the [IManagerEntity family](../../families/IManagerEntity.md):** holds scheduling data (start/end, estimated time) and links to an [`Actor`](Actor.md) and a [`State`](../GanttTracker.StateManager/State.md); `IsNew` is computed from `Id`, and `Save/Delete` delegate to the parent manager’s task methods. Use it when you need a work item that can be scheduled, assigned and tracked.
-
-**In the [ITask family](../../families/ITask.md):** Implements [`ITask`](../TaskManagerInterface/ITask.md) and adds management‑specific members (Id, IsNew, isUpdated, Parent, Comment, Priority, EstimatedTime) plus persistence methods (BindData, Save, Delete). It also validates actor and state presence. Use it when Use when you need a full domain entity that can be stored, updated, or deleted by an [`ITaskManager`](../TaskManagerInterface/ITaskManager.md).
-
 ## Constructors
 
 ### Task constructor

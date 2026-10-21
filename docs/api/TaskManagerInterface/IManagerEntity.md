@@ -11,8 +11,6 @@ public interface IManagerEntity
 
 **Component family:** [`IManagerEntity`](../../families/IManagerEntity.md)
 
-**Family contract** ([IManagerEntity family](../../families/IManagerEntity.md)): [`IManagerEntity`](IManagerEntity.md) defines the minimal contract for any persistable domain object in the GanttMonoTracker model: a unique `Id`, flags `IsNew` and `isUpdated`, a reference to its owning [`ITaskManager`](ITaskManager.md) (`Parent`), and the lifecycle operations `BindData()`, `Save()` and `Delete()`. The family exists so the task manager can treat projects, tasks, comments, states, actors and connections uniformly when loading, saving or deleting them.
-
 ## Properties
 
 ### Id

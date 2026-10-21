@@ -7,32 +7,6 @@ Namespace: [`GanttMonoTracker.GuiPresentation`](index.md) · Project: [GanttMono
 public static class GuiFactory
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-GuiFactory is a static factory that creates all GUI dialog and view objects used by the GanttMonoTracker application, centralising construction and initial configuration.
-
-**Responsibilities**
-
-- Instantiate dialog and view objects with required parent window
-- Validate the provided IGuiCore before use
-- Populate dialogs with data from TaskManager (actors, states, assignments)
-- Set dialog titles, IDs and other UI properties
-- Return ready‑to‑use IGuiActorView, IGuiTask or dialog instances
-
-**Key members**
-
-- `CreateAboutDialog`: Creates an AboutDialog owned by the given parent window
-- `CreateActorView`: Creates an IGuiActorView; overload optionally binds a task manager, actor and task
-- `CreateConnectionView`: Creates a ViewConnectionDialog with a DataSet that supplies task state information
-- `CreateSingleStateView`: Creates a ViewSingleStateDialog; overload optionally pre‑populates it with a State object
-- `CreateStateView`: Creates a ViewStateDialog linked to the supplied IGuiCore
-- `CreateTaskAssign`: Creates a ViewTaskAssign for assigning a task to an actor, configuring actor source and title
-- `CreateTaskView`: Creates an IGuiTask view for a task; overload optionally targets a specific task ID and binds its state
-
-**Works with:** [`AboutDialog`](AboutDialog.md), `Window`, [`IGuiActorView`](../TaskManagerInterface/IGuiActorView.md), [`ITaskManager`](../TaskManagerInterface/ITaskManager.md), [`Actor`](../GanttTracker.TaskManager/Actor.md), [`ViewConnectionDialog`](ViewConnectionDialog.md), `DataSet`, [`ViewSingleStateDialog`](ViewSingleStateDialog.md), [`State`](../GanttTracker.StateManager/State.md), [`ViewStateDialog`](ViewStateDialog.md), [`IGuiCore`](../TaskManagerInterface/IGuiCore.md), [`ViewTaskAssign`](ViewTaskAssign.md), [`IGuiTask`](../TaskManagerInterface/IGuiTask.md), [`Task`](../GanttTracker.TaskManager/Task.md), [`ViewTaskDialog`](ViewTaskDialog.md)
-
 ## Methods
 
 ### CreateAboutDialog

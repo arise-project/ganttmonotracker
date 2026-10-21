@@ -11,8 +11,6 @@ public class StateCore : IGuiCore, IStateManager
 
 **Component family:** [`IGuiCore`](../../families/IGuiCore.md)
 
-**In the [IGuiCore family](../../families/IGuiCore.md):** Implements both [`IGuiCore`](../TaskManagerInterface/IGuiCore.md) and [`IStateManager`](../TaskManagerInterface/IStateManager.md); it is constructed with an existing [`IGuiCore`](../TaskManagerInterface/IGuiCore.md) and a GUI state view, and focuses on creating/editing task states, delegating storage to the passed core. Use it when Use when a separate core is required for state‑management dialogs or when you need a dedicated [`IStateManager`](../TaskManagerInterface/IStateManager.md) that reuses the existing task and storage managers.
-
 ## Constructors
 
 ### StateCore constructor

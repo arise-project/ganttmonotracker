@@ -7,25 +7,6 @@ Namespace: [`GanttTracker.TaskManager.ManagerException`](index.md) · Project: [
 public class ManagementException : Exception
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Represents a domain‑specific error raised by the task manager when an operation is not permitted.
-
-**Responsibilities**
-
-- Encapsulate the error type via the [`ExceptionType`](../GanttMonoTracker/ExceptionType.md) property.
-- Provide default and custom error messages.
-
-**Key members**
-
-- `ManagementException(ExceptionType type)`: Constructs the exception with a default message.
-- `ManagementException(ExceptionType type, string message)`: Constructs the exception with a caller‑provided message.
-- `Type`: Gets the [`ExceptionType`](../GanttMonoTracker/ExceptionType.md) that categorises the error.
-
-**Works with:** [`ExceptionType`](../GanttMonoTracker/ExceptionType.md), `Exception`
-
 ## Constructors
 
 ### ManagementException constructor

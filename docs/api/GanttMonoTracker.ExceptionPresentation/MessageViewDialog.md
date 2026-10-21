@@ -11,8 +11,6 @@ public class MessageViewDialog : IGuiMessageDialog
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md)
 
-**In the [IGuiMessageDialog family](../../families/IGuiMessageDialog.md):** generic message box with simple text content Use it when showing informational or warning messages
-
 ## Constructors
 
 ### MessageViewDialog constructor

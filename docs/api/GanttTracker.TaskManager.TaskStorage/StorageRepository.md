@@ -7,30 +7,6 @@ Namespace: [`GanttTracker.TaskManager.TaskStorage`](index.md) · Project: [Gantt
 public class StorageRepository : IStorageRepository
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-[`StorageRepository`](StorageRepository.md) provides a concrete implementation of [`IStorageRepository`](../TaskManagerInterface/IStorageRepository.md) that manages a local `DataSet` representing task data and synchronizes it with Google Drive storage.
-
-**Responsibilities**
-
-- Create and initialize the in‑memory storage schema
-- Load and save the `DataSet` to a database connection
-- Execute commands against the storage via [`IStorageCommand`](../TaskManagerInterface/IStorageCommand.md)
-- Backup, restore, and merge the storage with files on Google Drive
-- Expose the current `Storage` and an empty template via properties
-
-**Key members**
-
-- `StorageRepository(string connectionString, IRepositoryCruid commandFactory)`: Constructs the repository with a DB connection string and a command factory
-- `BackupAsync(string fileId, bool exists)`: Uploads the current `Storage` to Google Drive as a backup
-- `MergeAsync(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate)`: Downloads a remote dataset, compares dates, and merges the newer data into the local `Storage`
-- `RestoreAsync(string fileId)`: Downloads a remote dataset and replaces the local `Storage` with it
-- `CheckConnection()`: Verifies that the Google Drive client (`Online`) is reachable
-
-**Works with:** [`IStorageRepository`](../TaskManagerInterface/IStorageRepository.md), [`IRepositoryCruid`](../TaskManagerInterface/IRepositoryCruid.md), [`GDriveManager`](../GanttMonoTracker/GDriveManager.md), [`IStorageCommand`](../TaskManagerInterface/IStorageCommand.md), `DataSet`, `DataTable`
-
 **Inherits / implements:** [`IStorageRepository`](../TaskManagerInterface/IStorageRepository.md)
 
 ## Constructors

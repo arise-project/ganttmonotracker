@@ -8,7 +8,7 @@
 | Type | |
 |---|---|
 | [`IGuiActorView`](IGuiActorView.md) |  |
-| [`IGuiComment`](IGuiComment.md) | *AI:* Represents a UI comment linked to a specific entry in the task manager. |
+| [`IGuiComment`](IGuiComment.md) |  |
 | [`IGuiConnection`](IGuiConnection.md) |  |
 | [`IGuiCore`](IGuiCore.md) |  |
 | [`IGuiMessageDialog`](IGuiMessageDialog.md) |  |
@@ -17,14 +17,14 @@
 | [`IGuiTask`](IGuiTask.md) |  |
 | [`IGuiTracker`](IGuiTracker.md) |  |
 | [`IManagerEntity`](IManagerEntity.md) |  |
-| [`IManagerFactory`](IManagerFactory.md) | *AI:* Interface that defines a contract for factories producing [`ITaskManager`](ITaskManager.md) instances. |
-| [`IRepositoryCruid`](IRepositoryCruid.md) | *AI:* Defines a contract for creating storage commands for basic CRUD operations and for setting the underlying repository. |
-| [`ISingleStateView`](ISingleStateView.md) | *AI:* Defines a view that represents a single named state in the task manager UI. |
+| [`IManagerFactory`](IManagerFactory.md) |  |
+| [`IRepositoryCruid`](IRepositoryCruid.md) |  |
+| [`ISingleStateView`](ISingleStateView.md) |  |
 | [`IState`](IState.md) |  |
 | [`IStateManager`](IStateManager.md) |  |
 | [`IStorageCommand`](IStorageCommand.md) |  |
 | [`IStorageManager`](IStorageManager.md) |  |
-| [`IStorageRepository`](IStorageRepository.md) | *AI:* Defines the contract for persisting, retrieving, and managing storage data used by the task manager. |
+| [`IStorageRepository`](IStorageRepository.md) |  |
 | [`ITask`](ITask.md) |  |
 | [`ITaskManager`](ITaskManager.md) |  |
 

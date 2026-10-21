@@ -7,27 +7,6 @@ Namespace: [`TaskManagerInterface`](index.md) · Project: [GanttMonoTracker](../
 public interface IRepositoryCruid
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Defines a contract for creating storage commands for basic CRUD operations and for setting the underlying repository.
-
-**Responsibilities**
-
-- Expose methods to obtain delete, insert, select, and update commands
-- Allow injection of an [`IStorageRepository`](IStorageRepository.md) implementation
-
-**Key members**
-
-- `GetDeleteCommand`: Creates an [`IStorageCommand`](IStorageCommand.md) that deletes records for a given entity
-- `GetInsertCommand`: Creates an [`IStorageCommand`](IStorageCommand.md) that inserts records for a given entity
-- `GetSelectCommand`: Creates an [`IStorageCommand`](IStorageCommand.md) that selects records for a given entity
-- `GetUpdateCommand`: Creates an [`IStorageCommand`](IStorageCommand.md) that updates records for a given entity
-- `SetRepository`: Assigns the [`IStorageRepository`](IStorageRepository.md) used by the command implementations
-
-**Works with:** [`IStorageCommand`](IStorageCommand.md), [`IStorageRepository`](IStorageRepository.md)
-
 **Derived:** [`CommandFactory`](../GanttTracker.TaskManager.TaskStorage/CommandFactory.md)
 
 ## Methods

@@ -11,8 +11,6 @@ public interface IGuiConnection
 
 **Component family:** [`IGuiConnection`](../../families/IGuiConnection.md)
 
-**Family contract** ([IGuiConnection family](../../families/IGuiConnection.md)): [`IGuiConnection`](IGuiConnection.md) defines a data contract for UI elements that represent a connection between tasks: it exposes identifiers (`MappingID`, `StateID`), a display `Name`, a `TaskStateSource` data set, and two lifecycle methods `BindStateIn` and `BindStateOut` that let the UI bind its input and output state controls.
-
 ## Properties
 
 ### MappingID

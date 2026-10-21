@@ -11,8 +11,6 @@ public class Project : IManagerEntity, IProject
 
 **Component family:** [`IManagerEntity`](../../families/IManagerEntity.md)
 
-**In the [IManagerEntity family](../../families/IManagerEntity.md):**  Use it when you need to create, load or delete an entire project hierarchy.
-
 ## Constructors
 
 ### Project constructor

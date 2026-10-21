@@ -7,23 +7,6 @@ Namespace: [`Arise.Logic`](index.md) · Project: [Arise](../../projects/Arise.md
 public class DataSearch
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Provides a utility to filter rows of a `DataTable` based on a regular‑expression search string.
-
-**Responsibilities**
-
-- Clone the source table structure
-- Iterate rows and columns to test each cell
-- Add matching rows to a new table
-- Return the filtered table
-
-**Key members**
-
-- `GetFilteredTable`: Creates a new `DataTable` containing only rows where any cell matches the supplied regex
-
 ## Methods
 
 ### GetFilteredTable

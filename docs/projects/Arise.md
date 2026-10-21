@@ -8,25 +8,6 @@
 | Assembly | `Arise` |
 | Root namespace | `Arise.Logic` |
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-The Arise library provides core logic for searching data and managing user identities. It is used by applications such as GanttMonoTracker when they need to query data sets or handle authentication and authorization tasks.
-
-**Responsibilities**
-
-- Execute complex data queries
-- Maintain identity records
-- Validate authentication tokens
-- Provide reusable search utilities
-- Expose identity management APIs
-
-**Key types**
-
-- [`DataSearch`](../api/Arise.Logic/DataSearch.md): Executes data queries and returns results
-- [`IdentityManager`](../api/Arise.Logic/IdentityManager.md): Handles creation, validation, and lifecycle of user identities
-
 ## Used by
 
 - [GanttMonoTracker](GanttMonoTracker.md)

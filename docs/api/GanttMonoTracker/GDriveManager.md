@@ -7,31 +7,6 @@ Namespace: [`GanttMonoTracker`](index.md) · Project: [GanttMonoTracker](../../p
 public class GDriveManager
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-GDriveManager encapsulates Google Drive authentication and provides ready‑to‑use uploader and downloader components for the GanttMonoTracker application.
-
-**Responsibilities**
-
-- Authorize the application with Google Drive using offline access
-- Store and expose the obtained [`GDriveCredentials`](GDriveCredentials.md)
-- Expose a [`GDriveUploader`](GDriveUploader.md) instance for file uploads
-- Expose a [`GDriveDownloader`](GDriveDownloader.md) instance for file downloads
-- Revoke the OAuth token when no longer needed
-
-**Key members**
-
-- `AuthorizeAsync`: Performs OAuth flow, loads client secrets, and obtains a credential token
-- `Revoke`: Revokes the current OAuth token
-- `GDriveManager`: Constructor that initializes `Uploader` and `Downloader`
-- `Credentials`: Property holding the [`GDriveCredentials`](GDriveCredentials.md) with the active token
-- `Downloader`: Property exposing a [`GDriveDownloader`](GDriveDownloader.md) for download operations
-- `Uploader`: Property exposing a [`GDriveUploader`](GDriveUploader.md) for upload operations
-
-**Works with:** [`GDriveCredentials`](GDriveCredentials.md), [`GDriveDownloader`](GDriveDownloader.md), [`GDriveUploader`](GDriveUploader.md)
-
 ## Constructors
 
 ### GDriveManager constructor

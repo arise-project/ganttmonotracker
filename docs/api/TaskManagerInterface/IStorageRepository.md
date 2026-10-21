@@ -7,33 +7,6 @@ Namespace: [`TaskManagerInterface`](index.md) · Project: [GanttMonoTracker](../
 public interface IStorageRepository
 ```
 
-## Overview
-
-*Written by AI from the code at this commit. Check important details against the source.*
-
-Defines the contract for persisting, retrieving, and managing storage data used by the task manager.
-
-**Responsibilities**
-
-- Execute commands against the underlying storage.
-- Provide asynchronous backup, restore, and merge operations.
-- Expose connection and storage state.
-
-**Key members**
-
-- `BackupAsync(string fileId, bool exists)`: Asynchronously backs up a storage file.
-- `RestoreAsync(string fileId)`: Asynchronously restores a storage file.
-- `MergeAsync(string fileId, DateTime currentDate, Func<DataSet, DateTime> readDate)`: Asynchronously merges remote data with local storage.
-- `ExecuteDataSet(IStorageCommand command)`: Runs a command that returns a `DataSet`.
-- `ExecuteNonQuery(IStorageCommand command)`: Runs a command that does not return data.
-- `ExecuteScalar(IStorageCommand command)`: Runs a command that returns a single value.
-- `CommandFactory`: Gets or sets the [`IRepositoryCruid`](IRepositoryCruid.md) used to create storage commands.
-- `ConnectionString`: Gets or sets the database connection string.
-- `Storage`: Gets or sets the current `DataSet` representing stored data.
-- `EmptyStorage`: Provides a read‑only empty `DataSet` template.
-
-**Works with:** [`IStorageCommand`](IStorageCommand.md), [`IRepositoryCruid`](IRepositoryCruid.md), `DataSet`, [`Task`](../GanttTracker.TaskManager/Task.md), `Func<DataSet, DateTime>`, `DateTime`
-
 **Derived:** [`StorageRepository`](../GanttTracker.TaskManager.TaskStorage/StorageRepository.md)
 
 ## Properties

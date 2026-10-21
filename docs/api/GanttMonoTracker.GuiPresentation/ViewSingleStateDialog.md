@@ -11,10 +11,6 @@ public class ViewSingleStateDialog : IState, IGuiMessageDialog, IDisposable
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md), [`IState`](../../families/IState.md)
 
-**In the [IGuiMessageDialog family](../../families/IGuiMessageDialog.md):** edits or creates a single state; exposes color pickers and name entry Use it when creating or editing one state
-
-**In the [IState family](../../families/IState.md):** Provides a GUI dialog, implements [`IGuiMessageDialog`](../TaskManagerInterface/IGuiMessageDialog.md) and `IDisposable`, stores color values via UI widgets, and is used for creating or editing a state through user interaction. Use it when When a state must be presented or edited in the graphical interface.
-
 ## Constructors
 
 ### ViewSingleStateDialog constructor
