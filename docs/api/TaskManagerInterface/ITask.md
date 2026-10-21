@@ -11,6 +11,8 @@ public interface ITask
 
 **Component family:** [`ITask`](../../families/ITask.md)
 
+**Family contract** ([ITask family](../../families/ITask.md)): The [`ITask`](ITask.md) interface defines the minimal data contract for a scheduled work item: identifiers for actor and state, a description, and start/end timestamps. It exists so that core logic (e.g., managers, persistence, UI) can operate on any concrete task representation without depending on a specific class.
+
 ## Properties
 
 ### ActorID

@@ -11,6 +11,8 @@ public interface IGuiTracker
 
 **Component family:** [`IGuiTracker`](../../families/IGuiTracker.md)
 
+**Family contract** ([IGuiTracker family](../../families/IGuiTracker.md)): [`IGuiTracker`](IGuiTracker.md) defines the contract for UI components that expose three data sources—actors, states, and tasks—and provide methods to bind each source to the visual controls. The family exists so the application can present the same data model through different windows or dialogs without duplicating binding logic.
+
 ## Properties
 
 ### ActorSource

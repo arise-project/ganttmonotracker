@@ -9,6 +9,6 @@
 |---|---|
 | [`Actor`](Actor.md) |  |
 | [`EmptyTaskManager`](EmptyTaskManager.md) |  |
-| [`ManagerFactory`](ManagerFactory.md) |  |
+| [`ManagerFactory`](ManagerFactory.md) | *AI:* Factory that creates an appropriate [`ITaskManager`](../TaskManagerInterface/ITaskManager.md) implementation based on the current [`CoreState`](../TaskManagerInterface/CoreState.md). |
 | [`Task`](Task.md) |  |
 | [`XmlTaskManager`](XmlTaskManager.md) |  |

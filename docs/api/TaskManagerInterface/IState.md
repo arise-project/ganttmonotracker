@@ -11,6 +11,8 @@ public interface IState
 
 **Component family:** [`IState`](../../families/IState.md)
 
+**Family contract** ([IState family](../../families/IState.md)): [`IState`](IState.md) defines the data contract for a state entity: color components, name, mapping information, connection management, and basic lifecycle methods. The family exists to separate UI‑focused state handling from core domain state objects while sharing the same contract.
+
 ## Properties
 
 ### ColorBlue

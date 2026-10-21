@@ -11,6 +11,8 @@ public class SelectCommand : IStorageCommand
 
 **Component family:** [`IStorageCommand`](../../families/IStorageCommand.md)
 
+**In the [IStorageCommand family](../../families/IStorageCommand.md):**  Use it when need to retrieve rows matching criteria
+
 ## Constructors
 
 ### SelectCommand constructor

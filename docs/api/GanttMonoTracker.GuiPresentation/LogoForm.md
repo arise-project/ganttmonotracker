@@ -11,6 +11,8 @@ public class LogoForm : IGuiMessageDialog
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md)
 
+**In the [IGuiMessageDialog family](../../families/IGuiMessageDialog.md):** shows only a logo image, no interactive controls Use it when presenting a splash or branding screen
+
 ## Constructors
 
 ### LogoForm constructor

@@ -7,6 +7,25 @@ Namespace: [`GanttTracker.TaskManager.ManagerException`](index.md) · Project: [
 public class KeyNotFoundException<T> : Exception
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+Signals that a specific key of type `T` could not be located in a collection used by the task manager.
+
+**Responsibilities**
+
+- Store the missing key for diagnostic purposes.
+- Expose a clear error message.
+
+**Key members**
+
+- `KeyNotFoundException(T key)`: Creates the exception with a generated message based on the key.
+- `KeyNotFoundException(string message, T key)`: Creates the exception with a custom message.
+- `Key`: Gets or sets the missing key value.
+
+**Works with:** `Exception`, `T`
+
 ## Constructors
 
 ### KeyNotFoundException&lt;T&gt; constructor

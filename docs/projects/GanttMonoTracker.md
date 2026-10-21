@@ -8,6 +8,51 @@
 | Assembly | `GanttMonoTracker` |
 | Root namespace | `GanttMonoTracker` |
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+GanttMonoTracker delivers a graphical Gantt chart and task‑management UI for .NET desktop applications. Use it when you need to display, edit, and synchronize tasks and schedules, optionally persisting data to Google Drive.
+
+**Responsibilities**
+
+- Render Gantt and assignment diagrams in GTK drawing areas
+- Interact with task storage through IStorageManager and IStorageRepository
+- Present modal dialogs and messages via IGuiMessageDialog implementations
+- Coordinate application state with IStateManager
+- Handle Google Drive authentication, upload and download of task data
+
+**Key types**
+
+- [`ITaskManager`](../api/TaskManagerInterface/ITaskManager.md): Defines operations for managing tasks and extends IStorageManager
+- [`Task`](../api/GanttTracker.TaskManager/Task.md): Concrete task entity implementing IManagerEntity and ITask
+- [`GanttDiagramm`](../api/GanttMonoTracker.DrawingPresentation/GanttDiagramm.md): GTK drawing area that renders the Gantt chart and implements IGuiSource, IGanttSource
+- [`AssigmentDiagramm`](../api/GanttMonoTracker.DrawingPresentation/AssigmentDiagramm.md): GTK drawing area for assignment visualization, implements IGuiSource
+- [`IGuiMessageDialog`](../api/TaskManagerInterface/IGuiMessageDialog.md): Interface for modal dialogs, disposable after use
+- [`IStorageRepository`](../api/TaskManagerInterface/IStorageRepository.md): Contract for persisting, retrieving, and managing task data
+- [`IStateManager`](../api/TaskManagerInterface/IStateManager.md): Manages application state transitions and persistence
+- [`ManagementException`](../api/GanttTracker.TaskManager.ManagerException/ManagementException.md): Domain‑specific error thrown by the task manager for invalid operations
+- [`KeyNotFoundException<T>`](../api/GanttTracker.TaskManager.ManagerException/KeyNotFoundException-1.md): Indicates a missing key of type T in a task‑manager collection
+- [`GDriveCredentials`](../api/GanttMonoTracker/GDriveCredentials.md): Holds OAuth client IDs and credential object for Google Drive access
+- [`IRepositoryCruid`](../api/TaskManagerInterface/IRepositoryCruid.md): Defines creation of CRUD storage commands and repository assignment
+- [`CommandFactory`](../api/GanttTracker.TaskManager.TaskStorage/CommandFactory.md): Builds concrete storage command objects using a supplied repository
+- [`StorageRepository`](../api/GanttTracker.TaskManager.TaskStorage/StorageRepository.md): Concrete IStorageRepository implementation that uses a DataSet and syncs with Google Drive
+- [`BrowserForm`](../api/GanttMonoTracker/BrowserForm.md): WinForms form hosting a WebBrowser control for embedded HTML examples
+- [`GDriveDownloader`](../api/GanttMonoTracker/GDriveDownloader.md): Downloads files from Google Drive using provided credentials
+- [`GDriveManager`](../api/GanttMonoTracker/GDriveManager.md): Encapsulates Google Drive authentication and provides uploader and downloader components
+- [`GDriveUploader`](../api/GanttMonoTracker/GDriveUploader.md): Uploads raw XML data to Google Drive, creating or updating a file
+- [`IGanttSource`](../api/GanttMonoTracker/IGanttSource.md): Contract for a Gantt chart data source exposing datasets and view options
+- [`ManagerFactory`](../api/GanttTracker.TaskManager/ManagerFactory.md): Creates an appropriate ITaskManager implementation based on the current CoreState
+- [`IManagerFactory`](../api/TaskManagerInterface/IManagerFactory.md): Factory interface for producing ITaskManager instances
+- [`MessageFactory`](../api/GanttMonoTracker.ExceptionPresentation/MessageFactory.md): Creates concrete IGuiMessageDialog implementations for error and informational messages
+- [`FSLocations`](../api/GanttMonoTracker/FSLocations.md): Computes full file‑system paths relative to the executing assembly
+- [`GanttDataSetBuilder`](../api/GanttMonoTracker/GanttDataSetBuilder.md): Builds an in‑memory DataSet with tables and columns required by the tracker
+- [`GdkPalette`](../api/GanttMonoTracker/GdkPalette.md): Provides static helpers to create and dispose a GDK graphics context with predefined colors
+- [`GuiFactory`](../api/GanttMonoTracker.GuiPresentation/GuiFactory.md): Static factory that creates all GUI dialogs and view objects used by the application
+- [`HtmlHelpders`](../api/GanttMonoTracker/HtmlHelpders.md): Converts a DataTable into an HTML table string for display or export
+
+GanttMonoTracker depends on the Arise project for shared utilities and core services needed for storage, state management, and UI components.
+
 ## Depends on
 
 - [Arise](Arise.md)

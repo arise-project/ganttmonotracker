@@ -13,6 +13,8 @@ public interface IGuiState : IGuiSource
 
 **Component family:** [`IGuiSource`](../../families/IGuiSource.md)
 
+**In the [IGuiSource family](../../families/IGuiSource.md):** Is an interface that extends [`IGuiSource`](IGuiSource.md); adds state‑specific members (not shown) for dialogs that manage core state objects. Use it when You are defining a new dialog or component that must expose both a data set and additional state‑management capabilities.
+
 ## Methods
 
 ### BindConnections

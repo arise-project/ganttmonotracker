@@ -11,6 +11,8 @@ public interface IStorageCommand
 
 **Component family:** [`IStorageCommand`](../../families/IStorageCommand.md)
 
+**Family contract** ([IStorageCommand family](../../families/IStorageCommand.md)): [`IStorageCommand`](IStorageCommand.md) defines a small command contract: callers set named parameters, can query their presence, and invoke `Execute` which performs the operation after `CheckParams` validates required keys.
+
 ## Methods
 
 ### CheckParams

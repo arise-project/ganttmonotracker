@@ -11,6 +11,8 @@ public class DeleteCommand : IStorageCommand
 
 **Component family:** [`IStorageCommand`](../../families/IStorageCommand.md)
 
+**In the [IStorageCommand family](../../families/IStorageCommand.md):**  Use it when need to remove rows from a table based on filter rules
+
 ## Constructors
 
 ### DeleteCommand constructor

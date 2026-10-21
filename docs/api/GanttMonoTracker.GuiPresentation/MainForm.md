@@ -11,6 +11,8 @@ public class MainForm : Gtk.Window, IGuiTracker
 
 **Component family:** [`IGuiTracker`](../../families/IGuiTracker.md)
 
+**In the [IGuiTracker family](../../families/IGuiTracker.md):**  Use it when Use for the primary, always‑visible interface that manages the full project lifecycle.
+
 ## Constructors
 
 ### MainForm constructor

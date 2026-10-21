@@ -7,6 +7,23 @@ Namespace: [`GanttMonoTracker.ExceptionPresentation`](index.md) · Project: [Gan
 public static class MessageFactory
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+Creates concrete implementations of [`IGuiMessageDialog`](../TaskManagerInterface/IGuiMessageDialog.md) for error and informational messages.
+
+**Responsibilities**
+
+- Wrap an `Exception` in an [`ExceptionViewDialog`](ExceptionViewDialog.md)
+- Wrap a plain string in a [`MessageViewDialog`](MessageViewDialog.md)
+- Set appropriate dialog titles
+
+**Key members**
+
+- `CreateErrorDialog`: Instantiates an [`ExceptionViewDialog`](ExceptionViewDialog.md) for a given exception and parent window
+- `CreateMessageDialog`: Instantiates a [`MessageViewDialog`](MessageViewDialog.md) for a given message and parent window
+
 ## Methods
 
 ### CreateErrorDialog

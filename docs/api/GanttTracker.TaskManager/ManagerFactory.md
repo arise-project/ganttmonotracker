@@ -7,6 +7,25 @@ Namespace: [`GanttTracker.TaskManager`](index.md) · Project: [GanttMonoTracker]
 public class ManagerFactory : IManagerFactory
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+Factory that creates an appropriate [`ITaskManager`](../TaskManagerInterface/ITaskManager.md) implementation based on the current [`CoreState`](../TaskManagerInterface/CoreState.md).
+
+**Responsibilities**
+
+- Store the supplied [`CoreState`](../TaskManagerInterface/CoreState.md)
+- Select the correct manager creation path (empty, new, or existing project)
+- Return the created [`ITaskManager`](../TaskManagerInterface/ITaskManager.md) instance
+
+**Key members**
+
+- `Create`: Creates an [`ITaskManager`](../TaskManagerInterface/ITaskManager.md) according to the stored state
+- `ManagerFactory`: Constructor that captures the [`CoreState`](../TaskManagerInterface/CoreState.md)
+
+**Works with:** [`ITaskManager`](../TaskManagerInterface/ITaskManager.md), [`CoreState`](../TaskManagerInterface/CoreState.md), [`IManagerFactory`](../TaskManagerInterface/IManagerFactory.md)
+
 **Inherits / implements:** [`IManagerFactory`](../TaskManagerInterface/IManagerFactory.md)
 
 ## Constructors

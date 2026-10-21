@@ -7,6 +7,6 @@
 
 | Type | |
 |---|---|
-| [`ImplementationException`](ImplementationException.md) |  |
-| [`KeyNotFoundException<T>`](KeyNotFoundException-1.md) |  |
-| [`ManagementException`](ManagementException.md) |  |
+| [`ImplementationException`](ImplementationException.md) | *AI:* Custom exception type that implements `IManagerException` and provides a unique identifier for each instance. |
+| [`KeyNotFoundException<T>`](KeyNotFoundException-1.md) | *AI:* Signals that a specific key of type `T` could not be located in a collection used by the task manager. |
+| [`ManagementException`](ManagementException.md) | *AI:* Represents a domain‑specific error raised by the task manager when an operation is not permitted. |

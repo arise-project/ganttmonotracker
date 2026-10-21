@@ -11,6 +11,8 @@ public class InsertCommand : IStorageCommand
 
 **Component family:** [`IStorageCommand`](../../families/IStorageCommand.md)
 
+**In the [IStorageCommand family](../../families/IStorageCommand.md):**  Use it when need to add a new record to a table
+
 ## Constructors
 
 ### InsertCommand constructor

@@ -7,6 +7,28 @@ Namespace: [`Arise.Logic`](index.md) · Project: [Arise](../../projects/Arise.md
 public class IdentityManager
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+Provides a singleton service that generates sequential integer identities for runtime objects such as `Type` and `DataTable` instances, enabling unique identification across the application.
+
+**Responsibilities**
+
+- Generate a new identity for a given `Type` using `CreateObjectIdentity`
+- Generate a new identity for a `DataTable` using `CreateTableIdentity`
+- Generate a new identity for a `Type` using `CreateTypeIdentity`
+- Expose a globally accessible singleton via the `Instance` property
+
+**Key members**
+
+- `CreateObjectIdentity`: Creates or increments an integer identity for a specific `Type`
+- `CreateTableIdentity`: Creates an integer identity for a `DataTable` that contains an "ID" column
+- `CreateTypeIdentity`: Creates an integer identity for a `Type` (implementation not shown)
+- `Instance`: Provides lazy‑initialized singleton access to the [`IdentityManager`](IdentityManager.md)
+
+**Works with:** `` `Type` ``, `` `DataTable` ``
+
 ## Properties
 
 ### Instance

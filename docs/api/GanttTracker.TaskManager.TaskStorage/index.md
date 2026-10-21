@@ -7,9 +7,9 @@
 
 | Type | |
 |---|---|
-| [`CommandFactory`](CommandFactory.md) |  |
+| [`CommandFactory`](CommandFactory.md) | *AI:* Concrete implementation of [`IRepositoryCruid`](../TaskManagerInterface/IRepositoryCruid.md) that builds specific storage command objects using a supplied repository. |
 | [`DeleteCommand`](DeleteCommand.md) |  |
 | [`InsertCommand`](InsertCommand.md) |  |
 | [`SelectCommand`](SelectCommand.md) |  |
-| [`StorageRepository`](StorageRepository.md) |  |
+| [`StorageRepository`](StorageRepository.md) | *AI:* [`StorageRepository`](StorageRepository.md) provides a concrete implementation of [`IStorageRepository`](../TaskManagerInterface/IStorageRepository.md) that manages a local `DataSet` representing task data and synchronizes it with Google Drive storage. |
 | [`UpdateCommand`](UpdateCommand.md) |  |

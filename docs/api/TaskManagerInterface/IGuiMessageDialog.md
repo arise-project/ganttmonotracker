@@ -11,6 +11,8 @@ public interface IGuiMessageDialog : IDisposable
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md)
 
+**Family contract** ([IGuiMessageDialog family](../../families/IGuiMessageDialog.md)): [`IGuiMessageDialog`](IGuiMessageDialog.md) guarantees a disposable dialog with a mutable `Title` and a `ShowDialog()` method that returns the dialog result. The family exists to provide concrete UI dialogs for different domain objects (exceptions, messages, states, tasks, actors, etc.) while sharing the same lifecycle and basic contract.
+
 ## Properties
 
 ### Title

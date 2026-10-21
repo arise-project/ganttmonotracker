@@ -11,6 +11,10 @@ public class Connection : IGuiConnection, IManagerEntity
 
 **Component family:** [`IGuiConnection`](../../families/IGuiConnection.md), [`IManagerEntity`](../../families/IManagerEntity.md)
 
+**In the [IGuiConnection family](../../families/IGuiConnection.md):** Implements [`IGuiConnection`](../TaskManagerInterface/IGuiConnection.md) as a plain data entity used by the state manager; adds persistence members (`Id`, `IsNew`, `isUpdated`) and implements [`IManagerEntity`](../TaskManagerInterface/IManagerEntity.md) for CRUD operations. Use it when When the application needs a non‑UI representation of a connection for storage, synchronization, or business‑logic processing.
+
+**In the [IManagerEntity family](../../families/IManagerEntity.md):** models a relationship between two [`IManagerEntity`](../TaskManagerInterface/IManagerEntity.md) instances (e.g., linking a task to a state); its payload is the target entity and a descriptive name; it does not carry its own business data beyond the link. Use it when you need an explicit edge in the Gantt graph separate from the built‑in state connections.
+
 ## Constructors
 
 ### Connection constructor

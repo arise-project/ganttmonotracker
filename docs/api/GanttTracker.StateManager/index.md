@@ -10,4 +10,4 @@
 | [`Connection`](Connection.md) |  |
 | [`State`](State.md) |  |
 | [`StateCore`](StateCore.md) |  |
-| [`StateFactory`](StateFactory.md) |  |
+| [`StateFactory`](StateFactory.md) | *AI:* Factory class that creates task state objects using a parent manager instance. |

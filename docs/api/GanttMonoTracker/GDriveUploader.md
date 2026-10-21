@@ -7,6 +7,26 @@ Namespace: [`GanttMonoTracker`](index.md) · Project: [GanttMonoTracker](../../p
 public class GDriveUploader
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+Uploads raw XML data to Google Drive, creating a new file or updating an existing one.
+
+**Responsibilities**
+
+- Create a DriveService using provided credentials
+- Build file metadata for the upload
+- Update the file when it already exists
+- Create a new file when it does not exist
+
+**Key members**
+
+- `Upload`: Performs the create-or-update upload operation
+- `GDriveUploader`: Default constructor, prepares the instance
+
+**Works with:** [`GDriveCredentials`](GDriveCredentials.md)
+
 ## Constructors
 
 ### GDriveUploader constructor

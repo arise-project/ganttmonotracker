@@ -7,6 +7,23 @@ Namespace: [`GanttMonoTracker`](index.md) · Project: [GanttMonoTracker](../../p
 public class GanttDataSetBuilder
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+Constructs an in‑memory `DataSet` with the tables and columns required by the Gantt tracker.
+
+**Responsibilities**
+
+- Create a `DataSet` named "Track"
+- Add tables for tasks, actors, states, and state connections
+- Define columns and data types for each table
+
+**Key members**
+
+- `Create`: Static method that builds and returns the pre‑configured `DataSet`
+- `GanttDataSetBuilder`: Public constructor, currently does no custom initialization
+
 ## Constructors
 
 ### GanttDataSetBuilder constructor

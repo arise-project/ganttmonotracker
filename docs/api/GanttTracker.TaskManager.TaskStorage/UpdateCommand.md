@@ -11,6 +11,8 @@ public class UpdateCommand : IStorageCommand
 
 **Component family:** [`IStorageCommand`](../../families/IStorageCommand.md)
 
+**In the [IStorageCommand family](../../families/IStorageCommand.md):**  Use it when need to modify existing rows according to filter rules
+
 ## Constructors
 
 ### UpdateCommand constructor

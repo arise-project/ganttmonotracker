@@ -8,17 +8,27 @@ How far this documentation of `arise-project/ganttmonotracker` at `45dc6ae00495`
 | | |
 |---|---:|
 | Pages | 108 |
-| … from the code only | 108 |
-| … with AI drafts | 0 |
-| … refined by AI | 0 |
-
-Not written yet: features.
+| … from the code only | 23 |
+| … with AI drafts | 81 |
+| … refined by AI | 4 |
+| AI explanations written | 30 of 30 (100 %) |
+| … reused from earlier runs | 27 |
 
 ## Grounding
 
-No AI text in this run: every page is generated from the code itself.
+Every name the AI wrote as code (in backticks, or as a key type or member) was checked against the index of this commit. An unknown name got one repair turn that offered the closest real symbols; what was still unknown after it was cut out with its sentence.
+
+| | |
+|---|---:|
+| Names checked | 19 |
+| Unknown names found | 5 (26.3 %) |
+| … fixed by the repair | 0 |
+| … cut out (none of them is in the docs) | 5 |
+| Sentences removed / list items removed | 7 / 1 |
 
 ## Checks
 
 - Links between pages: all resolve.
 - Diagrams: all pass the Mermaid check.
+
+*Model `gpt-oss`, 15,475 tokens, AI time 41 s; run time 0.1 min.*

@@ -8,5 +8,5 @@
 | Type | |
 |---|---|
 | [`ExceptionViewDialog`](ExceptionViewDialog.md) |  |
-| [`MessageFactory`](MessageFactory.md) |  |
+| [`MessageFactory`](MessageFactory.md) | *AI:* Creates concrete implementations of [`IGuiMessageDialog`](../TaskManagerInterface/IGuiMessageDialog.md) for error and informational messages. |
 | [`MessageViewDialog`](MessageViewDialog.md) |  |

@@ -11,6 +11,8 @@ public interface IGuiCore
 
 **Component family:** [`IGuiCore`](../../families/IGuiCore.md)
 
+**Family contract** ([IGuiCore family](../../families/IGuiCore.md)): IGuiCore defines the minimal contract for a GUI core: it must expose the current [`CoreState`](CoreState.md), a [`IStateManager`](IStateManager.md) to manipulate states, a [`IStorageManager`](IStorageManager.md) to persist data, and a [`ITaskManager`](ITaskManager.md) to handle tasks. The family exists to provide concrete cores for different concerns – one for overall project tracking and another for state‑specific management – while sharing the same public API.
+
 ## Properties
 
 ### State
