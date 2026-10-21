@@ -13,6 +13,8 @@ public interface ITaskManager : IStorageManager
 
 **Component family:** [`IStorageManager`](../../families/IStorageManager.md), [`ITaskManager`](../../families/ITaskManager.md)
 
+**Family contract** ([ITaskManager family](../../families/ITaskManager.md)): [`ITaskManager`](ITaskManager.md) defines the contract for task‑related storage: it exposes datasets for actors, tasks, states, and Gantt ranges, and provides methods to create, retrieve, bind, check updates, and delete entities. The family exists to supply interchangeable storage back‑ends (real database or stub) while keeping the rest of the application agnostic of the source.
+
 ## Properties
 
 ### ActorSource

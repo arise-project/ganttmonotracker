@@ -7,6 +7,25 @@ Namespace: [`GanttMonoTracker`](index.md) · Project: [GanttMonoTracker](../../p
 public static class HtmlHelpders
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+Converts a `DataTable` into a simple HTML table string for display or export.
+
+**Responsibilities**
+
+- Check for empty tables and return an empty string
+- Build HTML markup with table headers from column names
+- Populate rows with cell values
+- Wrap the markup in basic HTML document tags
+
+**Key members**
+
+- `ToHTMLTable`: Generates an HTML string representing the supplied `DataTable`
+
+**Works with:** `DataTable`, `DataColumn`, `DataRow`, `StringBuilder`, `Guid`
+
 ## Methods
 
 ### ToHTMLTable

@@ -7,6 +7,22 @@ Namespace: [`GanttMonoTracker`](index.md) · Project: [GanttMonoTracker](../../p
 public class BrowserForm : Form
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+WinForms form that hosts a `WebBrowser` control displaying an embedded HTML example.
+
+**Responsibilities**
+
+- Create a panel that fills the form
+- Add a `WebBrowser` control to the panel
+- Load an embedded HTML resource into the browser on form load
+
+**Key members**
+
+- `BrowserForm`: Constructor that builds the UI layout, wires size‑change refresh, and loads the HTML resource
+
 ## Constructors
 
 ### BrowserForm constructor

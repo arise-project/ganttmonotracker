@@ -7,5 +7,5 @@
 
 | Type | |
 |---|---|
-| [`DataSearch`](DataSearch.md) |  |
-| [`IdentityManager`](IdentityManager.md) |  |
+| [`DataSearch`](DataSearch.md) | *AI:* Provides a utility to filter rows of a `DataTable` based on a regular‑expression search string. |
+| [`IdentityManager`](IdentityManager.md) | *AI:* Provides a singleton service that generates sequential integer identities for runtime objects such as `Type` and `DataTable` instances, enabling unique identification across the application. |

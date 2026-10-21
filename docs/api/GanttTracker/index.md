@@ -7,5 +7,5 @@
 
 | Type | |
 |---|---|
-| [`GanttTrackerApp`](GanttTrackerApp.md) |  |
+| [`GanttTrackerApp`](GanttTrackerApp.md) | *AI:* Provides the entry point and startup logic for the GanttMonoTracker application, handling initialization, global error handling, and single‑instance enforcement. |
 | [`TrackerCore`](TrackerCore.md) |  |

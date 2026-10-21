@@ -11,6 +11,10 @@ public class State : IState, IManagerEntity
 
 **Component family:** [`IManagerEntity`](../../families/IManagerEntity.md), [`IState`](../../families/IState.md)
 
+**In the [IManagerEntity family](../../families/IManagerEntity.md):**  Use it when you need a workflow step that can be linked to other steps.
+
+**In the [IState family](../../families/IState.md):** Is a pure domain model, implements [`IManagerEntity`](../TaskManagerInterface/IManagerEntity.md), stores data in plain properties, validates mapping access, and manages connections without any UI code. Use it when When a state is needed for business logic, persistence, or task‑manager operations.
+
 ## Constructors
 
 ### State constructor

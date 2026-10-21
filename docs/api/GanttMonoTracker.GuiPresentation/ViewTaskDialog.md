@@ -11,6 +11,12 @@ public class ViewTaskDialog : IGuiTask, IGuiTracker
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md), [`IGuiTracker`](../../families/IGuiTracker.md), [`ITask`](../../families/ITask.md)
 
+**In the [IGuiMessageDialog family](../../families/IGuiMessageDialog.md):** implements [`IGuiTask`](../TaskManagerInterface/IGuiTask.md); presents task‑specific details and actions Use it when showing or editing task information
+
+**In the [IGuiTracker family](../../families/IGuiTracker.md):** Implements [`IGuiTracker`](../TaskManagerInterface/IGuiTracker.md) in a modal dialog; binds data to combo boxes, calendars, and text fields for editing a single task. Use it when Use when a user needs to view or edit details of one task without leaving the main window.
+
+**In the [ITask family](../../families/ITask.md):** Concrete class that implements [`IGuiTask`](../TaskManagerInterface/IGuiTask.md) and [`IGuiTracker`](../TaskManagerInterface/IGuiTracker.md); supplies GTK# widgets, loads a Glade UI file, and maps UI controls to the [`ITask`](../TaskManagerInterface/ITask.md) properties. It does not contain persistence logic. Use it when Use when you need a dialog window that lets the user view or edit a task in the graphical interface.
+
 ## Constructors
 
 ### ViewTaskDialog constructor

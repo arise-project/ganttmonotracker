@@ -7,6 +7,26 @@ Namespace: [`GanttMonoTracker`](index.md) · Project: [GanttMonoTracker](../../p
 public static class GdkPalette
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+Provides static helpers to create and dispose a GDK graphics context (GC) with predefined colors for drawing operations.
+
+**Responsibilities**
+
+- Create a new `Gdk.GC` for a given `Drawable` and [`ColorEnum`](ColorEnum.md)
+- Dispose the previously created `Gdk.GC`
+- Expose the current `Gdk.GC` through a property
+
+**Key members**
+
+- `DestroyColor`: Releases the current `Gdk.GC` if it exists
+- `InitColor`: Creates a new `Gdk.GC` for the supplied `Drawable` using a color mapped from [`ColorEnum`](ColorEnum.md) and stores it in `CurrentGC`
+- `CurrentGC`: Gets or sets the active `Gdk.GC` instance
+
+**Works with:** `Gdk.GC`, `Drawable`, [`ColorEnum`](ColorEnum.md)
+
 ## Properties
 
 ### CurrentGC

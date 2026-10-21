@@ -7,6 +7,26 @@ Namespace: [`TaskManagerInterface`](index.md) · Project: [GanttMonoTracker](../
 public interface IGuiComment
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+Represents a UI comment linked to a specific entry in the task manager.
+
+**Responsibilities**
+
+- Identify the entry the comment refers to
+- Indicate whether the referenced entry exists
+- Record the comment timestamp
+- Store the comment text
+
+**Key members**
+
+- `CommentedEntryID`: ID of the entry the comment is attached to
+- `CommentedEntryPresent`: Flag indicating if the referenced entry is still present
+- `Date`: Date and time when the comment was created
+- `Description`: Text content of the comment
+
 ## Properties
 
 ### CommentedEntryID

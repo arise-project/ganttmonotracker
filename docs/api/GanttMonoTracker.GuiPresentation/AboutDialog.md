@@ -11,6 +11,8 @@ public class AboutDialog : IGuiMessageDialog, IDisposable
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md)
 
+**In the [IGuiMessageDialog family](../../families/IGuiMessageDialog.md):** static about information (app name, version, credits) Use it when displaying application about screen
+
 ## Constructors
 
 ### AboutDialog constructor

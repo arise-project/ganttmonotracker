@@ -11,6 +11,8 @@ public sealed class AssigmentDiagramm : Gtk.DrawingArea, IGuiSource
 
 **Component family:** [`IGuiSource`](../../families/IGuiSource.md)
 
+**In the [IGuiSource family](../../families/IGuiSource.md):** Implements only [`IGuiSource`](../TaskManagerInterface/IGuiSource.md); pulls assignment data from `TrackerCore.Instance.TaskManager.AssigmentSource` and draws a simpler assignment timeline. Use it when You need a lightweight assignment view without the extra Gantt‑specific features.
+
 ## Constructors
 
 ### AssigmentDiagramm constructor

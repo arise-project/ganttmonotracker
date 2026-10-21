@@ -7,6 +7,25 @@ Namespace: [`GanttMonoTracker`](index.md) · Project: [GanttMonoTracker](../../p
 public class GDriveDownloader
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+Provides a method to download a file from Google Drive using supplied credentials.
+
+**Responsibilities**
+
+- Create a `DriveService` with the given credentials
+- Locate a file by name in the Drive file list
+- Download the file content into a byte array
+
+**Key members**
+
+- `Download`: Downloads the specified file and returns its bytes, or null if not found
+- `GDriveDownloader`: Parameter‑less constructor
+
+**Works with:** [`GDriveCredentials`](GDriveCredentials.md), `DriveService`, `BaseClientService.Initializer`, `File`
+
 ## Constructors
 
 ### GDriveDownloader constructor

@@ -11,6 +11,8 @@ public class ExceptionViewDialog : IGuiMessageDialog
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md)
 
+**In the [IGuiMessageDialog family](../../families/IGuiMessageDialog.md):** displays exception details and stack trace; specialized for error reporting Use it when showing an exception to the user
+
 ## Constructors
 
 ### ExceptionViewDialog constructor

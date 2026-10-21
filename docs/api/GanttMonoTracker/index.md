@@ -7,22 +7,22 @@
 
 | Type | |
 |---|---|
-| [`BrowserForm`](BrowserForm.md) |  |
-| [`FSLocations`](FSLocations.md) |  |
-| [`GDriveCredentials`](GDriveCredentials.md) |  |
-| [`GDriveDownloader`](GDriveDownloader.md) |  |
-| [`GDriveManager`](GDriveManager.md) |  |
-| [`GDriveUploader`](GDriveUploader.md) |  |
-| [`GanttDataSetBuilder`](GanttDataSetBuilder.md) |  |
-| [`GdkPalette`](GdkPalette.md) |  |
-| [`HtmlHelpders`](HtmlHelpders.md) |  |
+| [`BrowserForm`](BrowserForm.md) | *AI:* WinForms form that hosts a `WebBrowser` control displaying an embedded HTML example. |
+| [`FSLocations`](FSLocations.md) | *AI:* Computes a full file system path for a filename relative to the executing assembly. |
+| [`GDriveCredentials`](GDriveCredentials.md) | *AI:* Holds the OAuth client identifiers and credential object required to access Google Drive APIs. |
+| [`GDriveDownloader`](GDriveDownloader.md) | *AI:* Provides a method to download a file from Google Drive using supplied credentials. |
+| [`GDriveManager`](GDriveManager.md) | *AI:* GDriveManager encapsulates Google Drive authentication and provides ready‑to‑use uploader and downloader components for the GanttMonoTracker application. |
+| [`GDriveUploader`](GDriveUploader.md) | *AI:* Uploads raw XML data to Google Drive, creating a new file or updating an existing one. |
+| [`GanttDataSetBuilder`](GanttDataSetBuilder.md) | *AI:* Constructs an in‑memory `DataSet` with the tables and columns required by the Gantt tracker. |
+| [`GdkPalette`](GdkPalette.md) | *AI:* Provides static helpers to create and dispose a GDK graphics context (GC) with predefined colors for drawing operations. |
+| [`HtmlHelpders`](HtmlHelpders.md) | *AI:* Converts a `DataTable` into a simple HTML table string for display or export. |
 | [`Project`](Project.md) |  |
 
 ## Interfaces
 
 | Type | |
 |---|---|
-| [`IGanttSource`](IGanttSource.md) |  |
+| [`IGanttSource`](IGanttSource.md) | *AI:* Defines the contract for a Gantt chart data source, exposing mutable and static datasets and view options. |
 | [`IProject`](IProject.md) |  |
 
 ## Enums

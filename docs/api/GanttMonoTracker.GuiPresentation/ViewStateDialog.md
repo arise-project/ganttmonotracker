@@ -11,6 +11,10 @@ public class ViewStateDialog : IGuiState, IGuiMessageDialog, IDisposable
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md), [`IGuiSource`](../../families/IGuiSource.md)
 
+**In the [IGuiMessageDialog family](../../families/IGuiMessageDialog.md):** lists multiple states, manages connections between states, provides bulk edit UI Use it when browsing or editing a collection of states
+
+**In the [IGuiSource family](../../families/IGuiSource.md):** Implements [`IGuiState`](../TaskManagerInterface/IGuiState.md) (which extends [`IGuiSource`](../TaskManagerInterface/IGuiSource.md)) and [`IGuiMessageDialog`](../TaskManagerInterface/IGuiMessageDialog.md); provides a full dialog UI with many widgets for editing states, not a drawing area. Use it when You need a modal dialog for creating, editing, or searching task states rather than a chart.
+
 ## Constructors
 
 ### ViewStateDialog constructor

@@ -11,6 +11,8 @@ public class ViewTaskAssign : IGuiMessageDialog, IDisposable
 
 **Component family:** [`IGuiMessageDialog`](../../families/IGuiMessageDialog.md)
 
+**In the [IGuiMessageDialog family](../../families/IGuiMessageDialog.md):** assigns an actor to a task; includes actor combo box and comment field Use it when assigning or re‑assigning a task to an actor
+
 ## Constructors
 
 ### ViewTaskAssign constructor

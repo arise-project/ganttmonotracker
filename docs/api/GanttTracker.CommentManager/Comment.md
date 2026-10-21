@@ -11,6 +11,8 @@ public class Comment : ICommentView, IManagerEntity
 
 **Component family:** [`IManagerEntity`](../../families/IManagerEntity.md)
 
+**In the [IManagerEntity family](../../families/IManagerEntity.md):** stores free‑form text attached to any other [`IManagerEntity`](../TaskManagerInterface/IManagerEntity.md); it tracks the commented entity via `CommentedEntity`/`CommentedEntryID` and sets `IsNew` based on constructor usage. Use it when you need user notes linked to a task, state, project, etc.
+
 ## Constructors
 
 ### Comment constructor

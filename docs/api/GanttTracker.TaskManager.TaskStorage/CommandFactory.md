@@ -7,6 +7,28 @@ Namespace: [`GanttTracker.TaskManager.TaskStorage`](index.md) · Project: [Gantt
 public class CommandFactory : IRepositoryCruid
 ```
 
+## Overview
+
+*Written by AI from the code at this commit. Check important details against the source.*
+
+Concrete implementation of [`IRepositoryCruid`](../TaskManagerInterface/IRepositoryCruid.md) that builds specific storage command objects using a supplied repository.
+
+**Responsibilities**
+
+- Instantiate [`DeleteCommand`](DeleteCommand.md), [`InsertCommand`](InsertCommand.md), [`SelectCommand`](SelectCommand.md), and [`UpdateCommand`](UpdateCommand.md) objects
+- Store a reference to an [`IStorageRepository`](../TaskManagerInterface/IStorageRepository.md) for command construction
+
+**Key members**
+
+- `GetDeleteCommand`: Returns a new [`DeleteCommand`](DeleteCommand.md) bound to the current repository
+- `GetInsertCommand`: Returns a new [`InsertCommand`](InsertCommand.md) bound to the current repository
+- `GetSelectCommand`: Returns a new [`SelectCommand`](SelectCommand.md) bound to the current repository
+- `GetUpdateCommand`: Returns a new [`UpdateCommand`](UpdateCommand.md) bound to the current repository
+- `SetRepository`: Sets the [`IStorageRepository`](../TaskManagerInterface/IStorageRepository.md) (`daler`) used by the factory
+- `CommandFactory`: Constructor that creates an empty factory; repository must be set via `SetRepository`
+
+**Works with:** [`IRepositoryCruid`](../TaskManagerInterface/IRepositoryCruid.md), [`IStorageCommand`](../TaskManagerInterface/IStorageCommand.md), [`IStorageRepository`](../TaskManagerInterface/IStorageRepository.md), [`DeleteCommand`](DeleteCommand.md), [`InsertCommand`](InsertCommand.md), [`SelectCommand`](SelectCommand.md), [`UpdateCommand`](UpdateCommand.md)
+
 **Inherits / implements:** [`IRepositoryCruid`](../TaskManagerInterface/IRepositoryCruid.md)
 
 ## Constructors

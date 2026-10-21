@@ -11,6 +11,8 @@ public interface IGuiSource
 
 **Component family:** [`IGuiSource`](../../families/IGuiSource.md)
 
+**Family contract** ([IGuiSource family](../../families/IGuiSource.md)): This contract enables the tracker core to inject task or assignment data into visual widgets without knowing their concrete types.
+
 ## Properties
 
 ### Source

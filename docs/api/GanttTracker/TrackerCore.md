@@ -11,6 +11,8 @@ public class TrackerCore : IGuiCore
 
 **Component family:** [`IGuiCore`](../../families/IGuiCore.md)
 
+**In the [IGuiCore family](../../families/IGuiCore.md):** Acts as a singleton that owns the main window, recent‑file handling, and binds the project (creates the [`ITaskManager`](../TaskManagerInterface/ITaskManager.md) via [`ManagerFactory`](../GanttTracker.TaskManager/ManagerFactory.md)). It also exposes an [`IGuiTracker`](../TaskManagerInterface/IGuiTracker.md) for task/actor UI. Use it when Use when the application needs the primary tracking UI, project loading/saving, and a single shared core instance.
+
 ## Properties
 
 ### AssigmentPresentation

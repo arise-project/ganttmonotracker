@@ -1,0 +1,295 @@
+[
+  {
+    "Job": "project:Arise/Arise.csproj",
+    "Kind": "project",
+    "NamesChecked": 2,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "project:GanttMonoTracker.csproj",
+    "Kind": "project",
+    "NamesChecked": 6,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "type:T:GanttTracker.TaskManager.TaskStorage.StorageRepository",
+    "Kind": "type",
+    "NamesChecked": 18,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "family:T:TaskManagerInterface.IState",
+    "Kind": "family",
+    "NamesChecked": 5,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "overview",
+    "Kind": "overview",
+    "NamesChecked": 11,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "type:T:GanttMonoTracker.GDriveManager",
+    "Kind": "type",
+    "NamesChecked": 9,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "family:T:TaskManagerInterface.IGuiTracker",
+    "Kind": "family",
+    "NamesChecked": 4,
+    "UnknownBeforeRepair": [
+      "TreeStore",
+      "DataSet"
+    ],
+    "UnknownAfterRepair": [
+      "TreeStore",
+      "DataSet"
+    ],
+    "SentencesRemoved": 2,
+    "ItemsRemoved": 1
+  },
+  {
+    "Job": "types:T:TaskManagerInterface.IRepositoryCruid,T:GanttTracker.TaskManager.TaskStorage.CommandFactory,T:GanttMonoTracker.BrowserForm,T:GanttMonoTracker.GDriveDownloader",
+    "Kind": "type-batch",
+    "NamesChecked": 10,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "type:T:GanttMonoTracker.GuiPresentation.GuiFactory",
+    "Kind": "type",
+    "NamesChecked": 21,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "family:T:TaskManagerInterface.IGuiConnection",
+    "Kind": "family",
+    "NamesChecked": 12,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "family:T:TaskManagerInterface.IGuiCore",
+    "Kind": "family",
+    "NamesChecked": 10,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "type:T:Arise.Logic.IdentityManager",
+    "Kind": "type",
+    "NamesChecked": 7,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "types:T:GanttTracker.TaskManager.ManagerException.ManagementException,T:GanttTracker.TaskManager.ManagerException.KeyNotFoundException\u00601,T:TaskManagerInterface.IStorageRepository,T:GanttMonoTracker.GDriveCredentials",
+    "Kind": "type-batch",
+    "NamesChecked": 4,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "type:T:GanttTracker.ProjectManager.ProjectHistory",
+    "Kind": "type",
+    "NamesChecked": 10,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "type:T:GanttTracker.GanttTrackerApp",
+    "Kind": "type",
+    "NamesChecked": 13,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "family:T:TaskManagerInterface.ITaskManager",
+    "Kind": "family",
+    "NamesChecked": 7,
+    "UnknownBeforeRepair": [
+      "connectionString"
+    ],
+    "UnknownAfterRepair": [
+      "connectionString"
+    ],
+    "SentencesRemoved": 1,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "types:T:TaskManagerInterface.IGuiComment,T:TaskManagerInterface.ISingleStateView",
+    "Kind": "type-batch",
+    "NamesChecked": 0,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "family:T:TaskManagerInterface.ITask",
+    "Kind": "family",
+    "NamesChecked": 10,
+    "UnknownBeforeRepair": [
+      "isInit"
+    ],
+    "UnknownAfterRepair": [
+      "isInit"
+    ],
+    "SentencesRemoved": 1,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "types:T:GanttMonoTracker.GDriveUploader,T:GanttMonoTracker.IGanttSource,T:GanttTracker.TaskManager.ManagerFactory,T:TaskManagerInterface.IManagerFactory",
+    "Kind": "type-batch",
+    "NamesChecked": 2,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "types:T:Arise.Logic.DataSearch,T:GanttMonoTracker.ExceptionPresentation.MessageFactory,T:GanttMonoTracker.FSLocations,T:GanttMonoTracker.GanttDataSetBuilder",
+    "Kind": "type-batch",
+    "NamesChecked": 7,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "family:T:TaskManagerInterface.IStorageManager",
+    "Kind": "family",
+    "NamesChecked": 10,
+    "UnknownBeforeRepair": [
+      "connectionString"
+    ],
+    "UnknownAfterRepair": [
+      "connectionString"
+    ],
+    "SentencesRemoved": 1,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "family:T:TaskManagerInterface.IGuiSource",
+    "Kind": "family",
+    "NamesChecked": 13,
+    "UnknownBeforeRepair": [
+      "DataSet",
+      "Gtk",
+      "DrawingArea"
+    ],
+    "UnknownAfterRepair": [
+      "DataSet",
+      "Gtk",
+      "DrawingArea"
+    ],
+    "SentencesRemoved": 2,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "types:T:GanttMonoTracker.GdkPalette,T:GanttMonoTracker.HtmlHelpders,T:GanttTracker.StateManager.StateFactory,T:GanttTracker.TaskManager.ManagerException.ImplementationException",
+    "Kind": "type-batch",
+    "NamesChecked": 10,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "family:T:TaskManagerInterface.IGuiMessageDialog",
+    "Kind": "family",
+    "NamesChecked": 5,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "family:T:TaskManagerInterface.IManagerEntity",
+    "Kind": "family",
+    "NamesChecked": 14,
+    "UnknownBeforeRepair": [
+      "NotImplementedException",
+      "Hashtable"
+    ],
+    "UnknownAfterRepair": [
+      "NotImplementedException",
+      "Hashtable"
+    ],
+    "SentencesRemoved": 2,
+    "ItemsRemoved": 1
+  },
+  {
+    "Job": "overview-refine",
+    "Kind": "overview-refine",
+    "NamesChecked": 11,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "architecture",
+    "Kind": "architecture",
+    "NamesChecked": 13,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "project-refine:GanttMonoTracker.csproj",
+    "Kind": "project-refine",
+    "NamesChecked": 25,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  },
+  {
+    "Job": "features",
+    "Kind": "features",
+    "NamesChecked": 19,
+    "UnknownBeforeRepair": [],
+    "UnknownAfterRepair": [],
+    "SentencesRemoved": 0,
+    "ItemsRemoved": 0
+  }
+]

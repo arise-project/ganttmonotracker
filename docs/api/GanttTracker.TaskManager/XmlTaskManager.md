@@ -11,6 +11,10 @@ public class XmlTaskManager : ITaskManager
 
 **Component family:** [`IStorageManager`](../../families/IStorageManager.md), [`ITaskManager`](../../families/ITaskManager.md)
 
+**In the [IStorageManager family](../../families/IStorageManager.md):** Creates a real [`StorageRepository`](../GanttTracker.TaskManager.TaskStorage/StorageRepository.md) using a connection string, validates the connection, loads data, and implements full CRUD operations on tasks, actors, and states. Use it when When the application must persist and retrieve actual Gantt data from an XML‑backed storage layer.
+
+**In the [ITaskManager family](../../families/ITaskManager.md):** uses a [`StorageRepository`](../GanttTracker.TaskManager.TaskStorage/StorageRepository.md) backed by a connection string, loads data from persistent storage, and implements full CRUD operations; setters on datasets are prohibited Use it when a live database is available and the application needs persistent task data
+
 ## Constructors
 
 ### XmlTaskManager constructor
